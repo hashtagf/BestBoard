@@ -1,0 +1,18 @@
+#ButtonAdd {
+  position: fixed;
+  bottom: 20px;
+  /*margin-left: -150px;*/
+  right: 40px;
+}
+
+.border-10 {
+  border-top-width: 10px !important;
+}
+
+.widgetCard {
+  height: 320px !important;
+}
+
+.widgetImage {
+  height: 350px !important;
+}
