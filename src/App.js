@@ -12,12 +12,15 @@ class App extends Component {
 
     return (
       <div className="App">
-        <PageMenu/>
-        <div id="content">
-          <Hamburger/>
-          <h1>HOME</h1>
-          <Test/>
-          <Add/>
+        <div className="wrapper">
+          <PageMenu/>
+          <div id="content">
+          
+            <Hamburger/>
+            <h1>HOME</h1>
+            <Test/>
+            <Add/>
+          </div>
         </div>
       </div>
     )

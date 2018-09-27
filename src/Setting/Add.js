@@ -16,7 +16,7 @@ class Add extends Component {
         <div>
             <div className="circleMenu">+</div>
             <div className="menu">
-                <h1>MENU</h1>
+                
             </div>
         </div>
     )

@@ -12,7 +12,7 @@ class Page extends Component {
     }
   render() {
     return (
-        <div>
+        <div className="wrapper">
 
         <nav id="sidebar">
         <div className="sidebar-header">
@@ -51,6 +51,8 @@ class Page extends Component {
         <li><a href="https://bootstrapious.com/p/bootstrap-sidebar" className="article">Back to the article</a></li>
         </ul>
     </nav>
+
+
     </div>
     )
   }
