@@ -1,0 +1,21 @@
+
+.navbar {
+    padding: 15px 10px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0;
+}

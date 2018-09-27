@@ -18,12 +18,12 @@ class App extends Component {
     return (
       <div className="App">
         <div className="wrapper">
-          <PageMenu callback={this.clickSetting}/>
+          <PageMenu callback={this.clickSetting} value={this.state.set}/>
           <div id="content">
           
             <Hamburger/>
             <h1>HOME</h1>
-            <Test/>
+            <Test set={this.state.set}/>
             
             {(this.state.set)?<Add/>:''}
           </div>

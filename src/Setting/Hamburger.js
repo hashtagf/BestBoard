@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-//import './PageMenu.css'
+import './Hamburger.css'
 
 class Page extends Component {
 
@@ -7,7 +7,7 @@ class Page extends Component {
     return (
       <div>
             <nav className="navbar navbar-default">
-      <div className="container-fluid">
+      <div className="container-fluid pl-0">
         <div className="navbar-header">
           <button type="button" id="sidebarCollapse" className="navbar-btn">
               <span></span>

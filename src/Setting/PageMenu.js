@@ -5,6 +5,7 @@ class Page extends Component {
     constructor (props) {
         super(props);
         this.state = {
+            set: this.props.value
         }
     }
     componentDidMount() {
@@ -17,8 +18,8 @@ class Page extends Component {
     }
     handleClick = (e) => {
         e.preventDefault();
-        this.props.callback(true);
-        console.log('The link was clicked.');
+        this.props.callback(!this.props.value);
+        //console.log(this.props.value);
     }
   render() {
     return (
@@ -26,7 +27,7 @@ class Page extends Component {
 
             <nav id="sidebar">
                 <div className="sidebar-header">
-                    <h3>BreadBoard</h3>
+                    <h3>BestBoard</h3>
                     <p className="text-white-50">Dashboard for IoT</p>
                 </div>
 
@@ -36,12 +37,36 @@ class Page extends Component {
                         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">pages</a>
                         <ul className="collapse list-unstyled" id="pageSubmenu">
                             <li><a href="">Page 1</a></li>
-                            <li><a href="">Page 2</a></li>
-                            <li><a href="">Page 3</a></li>
+                            <li><a href="">+</a></li>
                         </ul>
                     </li>
                 </ul>
-
+                <ul className="list-unstyled components">
+                    <li>
+                        <a>Datasource</a>
+                        <ul className="list-unstyled" >
+                            <li><a href="">Netpie</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul className="list-unstyled components">
+                    <li>
+                        <a>color</a>
+                        <ul className="list-inline">
+                            <li className="list-inline-item">
+                                <div className="rounded-circle colorset-1 coloroption"></div>
+                            </li>
+                            <li className="list-inline-item">
+                                <div className="rounded-circle colorset-2 coloroption"></div>
+                            </li>
+                            <li className="list-inline-item">
+                                <div className="rounded-circle colorset-3 coloroption"></div>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                </ul>
+                
                 <ul className="list-unstyled CTAs">
                     <li><a className="article" onClick={this.handleClick}>Setting</a></li>
                 </ul>
