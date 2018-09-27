@@ -8,22 +8,33 @@ import Hamburger from './Setting/Hamburger'
 //import Muuri from 'muuri'
 
 class App extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+        set: false,
+    }
+  }
   render() {
-
     return (
       <div className="App">
         <div className="wrapper">
-          <PageMenu/>
+          <PageMenu callback={this.clickSetting}/>
           <div id="content">
           
             <Hamburger/>
             <h1>HOME</h1>
             <Test/>
-            <Add/>
+            
+            {(this.state.set)?<Add/>:''}
           </div>
         </div>
       </div>
     )
+  }
+  clickSetting = (flag) => {
+    this.setState({
+      set: flag
+    })
   }
 }
 

@@ -6,6 +6,8 @@ class Page extends Component {
   render() {
     return (
       <div>
+            <nav className="navbar navbar-default">
+      <div className="container-fluid">
         <div className="navbar-header">
           <button type="button" id="sidebarCollapse" className="navbar-btn">
               <span></span>
@@ -13,6 +15,9 @@ class Page extends Component {
               <span></span>
           </button>
         </div>
+
+        </div>
+        </nav>
       </div>  
     )
   }
