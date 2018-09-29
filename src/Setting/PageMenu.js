@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import './PageMenu.css'
+import Settingmenu from './Settingmenu'
 var $ = require("jquery");
 class Page extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            set: this.props.value
+            addPage: false,
+            pages: ['page 1'],
+            inputName: ''
         }
     }
     componentDidMount() {
@@ -18,10 +21,49 @@ class Page extends Component {
     }
     handleClick = (e) => {
         e.preventDefault();
-        this.props.callback(!this.props.value);
+        this.props.callback(!this.props.mode);
         //console.log(this.props.value);
     }
+    handleClickAdditem = (e) => {
+        e.preventDefault();
+        this.setState({
+            addPage: true
+        })
+    }
+    savePage = (e) => {
+        e.preventDefault();
+        let tem = this.state.pages
+        tem.push(this.state.inputName)
+        this.setState({
+            pages: tem,
+            addPage: false,
+            inputName: ''
+        })
+    }
+    handleChange(e) {
+        this.setState({ inputName: e.target.value });
+    }
   render() {
+    let addPage = <a onClick={this.handleClickAdditem}>+</a>
+    if (this.state.addPage) {
+        addPage = <div className="input-group addpage">
+            <input type="text" className="form-control addpage text-light border-0  rounded-0 " placeholder="new page" aria-label="new page" onChange={ this.handleChange.bind(this) } aria-describedby="button-addon2"/>
+            <div className="input-group-append">
+              <button className="btn rounded-0 text-light bg-transparent" type="button" id="button-addon2" onClick={this.savePage}>
+                <i className="fas fa-save"></i>
+              </button>
+            </div>
+        </div>
+    }
+    console.log(this.state.pages)
+    let listPage = []
+    for (let i = 0; i < this.state.pages.length; i++) {
+        listPage.push(<li><a>
+        {
+          this.state.pages[i]
+        }
+        </a></li>)
+    }
     return (
         <div className="wrapper">
 
@@ -32,43 +74,17 @@ class Page extends Component {
                 </div>
 
                 <ul className="list-unstyled components">
-                    
                     <li className="active">
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">pages</a>
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
                         <ul className="collapse list-unstyled" id="pageSubmenu">
-                            <li><a href="">Page 1</a></li>
-                            <li><a href="">+</a></li>
+                            {listPage}
+                            <li>{addPage}</li>
                         </ul>
                     </li>
                 </ul>
-                <ul className="list-unstyled components">
-                    <li>
-                        <a>Datasource</a>
-                        <ul className="list-unstyled" >
-                            <li><a href="">Netpie</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul className="list-unstyled components">
-                    <li>
-                        <a>color</a>
-                        <ul className="list-inline">
-                            <li className="list-inline-item">
-                                <div className="rounded-circle colorset-1 coloroption"></div>
-                            </li>
-                            <li className="list-inline-item">
-                                <div className="rounded-circle colorset-2 coloroption"></div>
-                            </li>
-                            <li className="list-inline-item">
-                                <div className="rounded-circle colorset-3 coloroption"></div>
-                            </li>
-                            
-                        </ul>
-                    </li>
-                </ul>
-                
+                {(this.props.mode)?<Settingmenu/>:''}
                 <ul className="list-unstyled CTAs">
-                    <li><a className="article" onClick={this.handleClick}>Setting</a></li>
+                    <li><a className="article" onClick={this.handleClick}>{(this.props.mode)?'Done':'Setting'}</a></li>
                 </ul>
             </nav>
         </div>

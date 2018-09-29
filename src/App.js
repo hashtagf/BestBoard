@@ -11,21 +11,22 @@ class App extends Component {
   constructor (props) {
     super(props);
     this.state = {
-        set: false,
+        mode: false,
+        pages: ['page 1']
     }
   }
   render() {
     return (
       <div className="App">
         <div className="wrapper">
-          <PageMenu callback={this.clickSetting} value={this.state.set}/>
+          <PageMenu callback={this.clickSetting} mode={this.state.mode}/>
           <div id="content">
           
             <Hamburger/>
             <h1>HOME</h1>
-            <Test set={this.state.set}/>
+            <Test mode={this.state.mode}/>
             
-            {(this.state.set)?<Add/>:''}
+            {(this.state.mode)?<Add/>:''}
           </div>
         </div>
       </div>
@@ -33,7 +34,7 @@ class App extends Component {
   }
   clickSetting = (flag) => {
     this.setState({
-      set: flag
+      mode: flag
     })
   }
 }

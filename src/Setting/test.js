@@ -9,9 +9,9 @@ class test extends Component {
     grid = new Muuri('.grid', {
       dragEnabled: true,
       dragContainer: document.body,
-      itemClass: 'col-4',
+      itemClass: 'col-md-4',
       dragStartPredicate: (item,event) => {
-        return this.props.set
+        return this.props.mode
       },
       dragSort: function () {
         return [grid]
@@ -24,14 +24,6 @@ class test extends Component {
   }
   componentWillReceiveProps (nextProps) {
     console.log(nextProps)
-    /* grid = new Muuri('.grid', {
-      dragEnabled: nextProps.set,
-      dragContainer: document.body,
-      itemClass: 'col-4',
-      dragSort: function () {
-        return [grid]
-      }
-    }) */
   }
 
   render() {

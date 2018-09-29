@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Hamburger.css'
 
-class Page extends Component {
+class Hamburger extends Component {
 
   render() {
     return (
@@ -23,4 +23,4 @@ class Page extends Component {
   }
 }
 
-export default Page
+export default Hamburger

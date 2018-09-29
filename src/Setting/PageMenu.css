@@ -38,6 +38,8 @@
     padding: 10px;
     font-size: 1.1em;
     display: block;
+    color: #fff;
+    text-decoration: none;
 }
 #sidebar ul li a:hover {
     color: #7386D5;
@@ -197,4 +199,8 @@ a.article, a.article:hover {
     background: -ms-linear-gradient(-45deg, rgba(209,255,82,1) 0%, rgba(145,240,56,1) 100%);
     background: linear-gradient(135deg, rgba(209,255,82,1) 0%, rgba(145,240,56,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d1ff52', endColorstr='#91f038', GradientType=1 );
+}
+
+.form-control.addpage {
+    background: #6170b6;
 }
