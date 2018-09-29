@@ -7,7 +7,7 @@ class Page extends Component {
         super(props);
         this.state = {
             addPage: false,
-            pages: ['page 1'],
+            pages: [{name:'page 1'}],
             inputName: ''
         }
     }
@@ -22,7 +22,6 @@ class Page extends Component {
     handleClick = (e) => {
         e.preventDefault();
         this.props.callback(!this.props.mode);
-        //console.log(this.props.value);
     }
     handleClickAdditem = (e) => {
         e.preventDefault();
@@ -33,7 +32,7 @@ class Page extends Component {
     savePage = (e) => {
         e.preventDefault();
         let tem = this.state.pages
-        tem.push(this.state.inputName)
+        tem.push({name: this.state.inputName})
         this.setState({
             pages: tem,
             addPage: false,
@@ -55,12 +54,11 @@ class Page extends Component {
             </div>
         </div>
     }
-    console.log(this.state.pages)
     let listPage = []
     for (let i = 0; i < this.state.pages.length; i++) {
         listPage.push(<li><a>
         {
-          this.state.pages[i]
+          this.state.pages[i].name
         }
         </a></li>)
     }
@@ -82,7 +80,7 @@ class Page extends Component {
                         </ul>
                     </li>
                 </ul>
-                {(this.props.mode)?<Settingmenu/>:''}
+                {(this.props.mode)?<Settingmenu colorId={this.props.colorId}/>:''}
                 <ul className="list-unstyled CTAs">
                     <li><a className="article" onClick={this.handleClick}>{(this.props.mode)?'Done':'Setting'}</a></li>
                 </ul>

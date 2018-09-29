@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
+import './App.scss'
 import Test from './Setting/test'
 import Add from './Setting/Add'
 import PageMenu from './Setting/PageMenu'
@@ -12,21 +13,23 @@ class App extends Component {
     super(props);
     this.state = {
         mode: false,
-        pages: ['page 1']
+        pages: [{name:'page 1'}],
+        colorId: 0
     }
   }
   render() {
+    //document.documentElement.style.setProperty("--themeBG", "#000000");
     return (
       <div className="App">
         <div className="wrapper">
-          <PageMenu callback={this.clickSetting} mode={this.state.mode}/>
+          <PageMenu callback={this.clickSetting} mode={this.state.mode} colorId={this.state.colorId}/>
           <div id="content">
           
             <Hamburger/>
             <h1>HOME</h1>
             <Test mode={this.state.mode}/>
             
-            {(this.state.mode)?<Add/>:''}
+            {(this.state.mode)?'<Add/>':''}
           </div>
         </div>
       </div>

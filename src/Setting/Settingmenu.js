@@ -1,7 +1,43 @@
 import React, { Component } from 'react'
-
+import './Settingmenu.css'
 class Settingmenu extends Component {
-    componentDidMount() {      
+    constructor (props) {
+        super(props);
+        this.state = {
+            colorSet: [
+                {
+                    name: 'native',
+                    colors: ['#303E4D','#2C3849','#6698C8','#FFFFFF','#4A5664','#FFFFFF','#94E864','#78AF8F'] 
+                },
+                {
+                    name: 'clean',
+                    colors: ['#F8F8FA','#FFFFFF','#CAD1D9','#FFFFFF','#FFFFFF','#383F45','#60D156','#FF8669'] 
+                },
+                {
+                    name: 'farm',
+                    colors: ['#0D7E83','#076570','#F79F66','#FFFFFF','#D37C71','#FFFFFF','#F79F66','#F15340'] 
+                },
+            ]
+        }
+    }
+    componentDidMount() {
+        this.setColor(this.props.colorId)
+    }
+    setColor = (id) => {
+        var i = 0
+        var colorSet = this.state.colorSet[id].colors
+        document.documentElement.style.setProperty("--themeBG", colorSet[i++]);
+        document.documentElement.style.setProperty("--themeBGHover", colorSet[i++]);
+        document.documentElement.style.setProperty("--activeItem", colorSet[i++]);
+        document.documentElement.style.setProperty("--activeItemText", colorSet[i++]);
+        document.documentElement.style.setProperty("--hoverItem", colorSet[i++]);
+        document.documentElement.style.setProperty("--textColor", colorSet[i++]);
+        document.documentElement.style.setProperty("--activePresence", colorSet[i++]);
+        document.documentElement.style.setProperty("--mentionBadge", colorSet[i++]);
+    } 
+    handleClick = (id) => {
+        //e.preventDefault();
+        this.setColor(id)
     }
   render() {
     return (
@@ -16,18 +52,13 @@ class Settingmenu extends Component {
                 </ul>
                 <ul className="list-unstyled components">
                     <li>
-                        <a>color</a>
+                        <a>Color</a>
                         <ul className="list-inline">
-                            <li className="list-inline-item">
-                                <div className="rounded-circle colorset-1 coloroption"></div>
+                        {this.state.colorSet.map((colors,i) => (
+                            <li className="list-inline-item" onClick={this.handleClick.bind(this,i)}>
+                                <div className="rounded-circle coloroption" id={'colorset-'+(i+1)}></div>{colors.name}
                             </li>
-                            <li className="list-inline-item">
-                                <div className="rounded-circle colorset-2 coloroption"></div>
-                            </li>
-                            <li className="list-inline-item">
-                                <div className="rounded-circle colorset-3 coloroption"></div>
-                            </li>
-                            
+                        ))} 
                         </ul>
                     </li>
                 </ul>

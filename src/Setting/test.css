@@ -1,3 +1,5 @@
+@import '/_variable';
+
 .grid {
     position: relative;
   }
@@ -18,12 +20,12 @@
   }
   .item-content {
     position: relative;
-    border: 1px solid #F44336;
+    border: 1px solid var(--mentionBadge);
     border-radius: 3px;
     font-size: 25px;
-    color: #F44336;
+    color: var(--mentionBadge);
   }
   .item.muuri-item-dragging .item-content,
   .item.muuri-item-releasing .item-content {
-    background: #FFCDD2;
+    background: var(--activePresence);
   }
