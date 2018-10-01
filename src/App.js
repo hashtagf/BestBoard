@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import './App.scss'
 import Test from './Setting/test'
-import Add from './Setting/Add'
+//import Add from './Setting/Add'
 import PageMenu from './Setting/PageMenu'
 import Hamburger from './Setting/Hamburger'
 //var $ = require("jquery");

@@ -1,10 +1,27 @@
 @import '_variable';
 
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: var(--themeBGHover);
   color: var(--textColor)
   //background: $main;
 }
+a {
+  cursor: pointer;
+}
+
+.bg-dark {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+#content {
+    padding: 20px;
+    min-height: 100vh;
+    min-width: 100vw;
+    transition: all 0.3s;
+}
+

@@ -1,9 +1,6 @@
 @import 'src/_variable';
 .editbtn {
-    color: var(--hoverItem);
-    &:hover {
-        color: var(--activePresence);
-    }
+    color: var(--textColor);
 }
 .second {
     color: var(--hoverItem);
