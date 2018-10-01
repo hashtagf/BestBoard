@@ -1,4 +1,4 @@
-@import '/_variable';
+@import 'src/_variable';
 
 .wrapper {
     display: flex;
@@ -41,10 +41,21 @@
     display: block;
     color: var(--textColor);
     text-decoration: none;
+    &.second {
+        color: var(--hoverItem);
+    }
+    .editbtn {
+        display: none;
+    }
 }
+
 #sidebar ul li a:hover {
     color: var(--textColor);
     background: var(--hoverItem);
+    .editbtn {
+        display: inline;
+        color: var(--themeBGHover);
+    }
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
@@ -58,16 +69,17 @@ a[data-toggle="collapse"] {
 }
 
 a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
-    content: '\f107';
+    content: '\f078';
     display: block;
     position: absolute;
     right: 20px;
-    font-family: 'FontAwesome';
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: 900;
     /* font-family: 'Glyphicons Halflings'; */
     font-size: 0.6em;
 }
 a[aria-expanded="true"]::before {
-    content: '\f106';
+    content: '\f077';
 }
 
 

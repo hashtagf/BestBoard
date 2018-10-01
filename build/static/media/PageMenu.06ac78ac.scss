@@ -1,0 +1,119 @@
+@import 'src/_variable';
+
+.wrapper {
+    display: flex;
+    align-items: stretch;
+    perspective: 1500px;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: var(--themeBG);
+    color: var(--textColor);
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+    transform-origin: bottom left;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+    transform: rotateY(100deg);
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: var(--hoverItem);
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--themeBGHover);
+}
+
+#sidebar ul p {
+    color: var(--textColor);
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+    color: var(--textColor);
+    text-decoration: none;
+    &.second {
+        color: var(--hoverItem);
+    }
+    .editbtn {
+        display: none;
+    }
+}
+
+#sidebar ul li a:hover {
+    color: var(--textColor);
+    background: var(--hoverItem);
+    .editbtn {
+        display: inline;
+        color: var(--themeBGHover);
+    }
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: var(--textColor);
+    background: var(--activeItem);
+}
+
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+    content: '\f078';
+    display: block;
+    position: absolute;
+    right: 20px;
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: 900;
+    /* font-family: 'Glyphicons Halflings'; */
+    font-size: 0.6em;
+}
+a[aria-expanded="true"]::before {
+    content: '\f077';
+}
+
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: var(--themeBG);
+}
+
+ul.CTAs {
+    padding: 20px;
+}
+
+ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+a.download {
+    background: #fff;
+    color: var(--activePresence);
+}
+
+a.article, a.article:hover {
+    background: var(--activePresence) !important;
+    color: var(--textColor) !important;
+}
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+.form-control.addpage {
+    background: var(--hoverItem);
+}

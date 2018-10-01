@@ -1,0 +1,10 @@
+@import 'src/_variable';
+.editbtn {
+    color: var(--hoverItem);
+    &:hover {
+        color: var(--activePresence);
+    }
+}
+.second {
+    color: var(--hoverItem);
+}
