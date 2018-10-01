@@ -80,7 +80,7 @@ class Page extends Component {
                 </div>
                         <div className="col-sm-2">
                         <i className="fas fa-pen-square editbtn mr-1" onClick={()=>this.editPage(i)}></i>
-                        <i class="fas fa-minus-square editbtn" onClick={()=>this.deletePage(i)}></i>
+                        <i className="fas fa-minus-square editbtn" onClick={()=>this.deletePage(i)}></i>
                         </div>
                         </div>
                 </a>

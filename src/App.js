@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+//import mobx from './store/test'
 import './App.css'
 import './App.scss'
 import Test from './Setting/test'

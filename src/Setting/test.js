@@ -9,7 +9,7 @@ class test extends Component {
     grid = new Muuri('.grid', {
       dragEnabled: true,
       dragContainer: document.body,
-      itemClass: 'col-md-4',
+      itemClass: 'col-md-3',
       dragStartPredicate: (item,event) => {
         return this.props.mode
       },

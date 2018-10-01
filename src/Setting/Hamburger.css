@@ -31,7 +31,7 @@
     height: 2px;
     margin: 0 auto;
     display: block;
-    background: var(--activeItem);
+    background: var(--textColor);
     transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
     transition-delay: 0.2s;
 }

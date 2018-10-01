@@ -7,15 +7,15 @@ class Settingmenu extends Component {
             colorSet: [
                 {
                     name: 'native',
-                    colors: ['#303E4D','#2C3849','#6698C8','#FFFFFF','#4A5664','#FFFFFF','#94E864','#78AF8F'] 
+                    colors: ['#2C3849','#303E4D','#6698C8','#FFFFFF','#2e3946','#4A5664','#4A5664','#FFFFFF','#FFFFFF','#94E864','#78AF8F'] 
                 },
                 {
                     name: 'clean',
-                    colors: ['#F8F8FA','#FFFFFF','#CAD1D9','#FFFFFF','#FFFFFF','#383F45','#60D156','#FF8669'] 
+                    colors: ['#FFFFFF','#F8F8FA','#e6e6e6','#FFFFFF','#ececec','#f5f5f5','#cfcfcf','#383F45','#4c555e','#FF8669','#FF8669'] 
                 },
                 {
                     name: 'farm',
-                    colors: ['#0D7E83','#076570','#F79F66','#FFFFFF','#D37C71','#FFFFFF','#F79F66','#F15340'] 
+                    colors: ['#0D7E83','#076570','#D37C71','#FFFFFF','#096f7a','#076570','#D37C71','#FFFFFF','#FFFFFF','#F79F66','#F15340'] 
                 },
             ]
         }
@@ -30,8 +30,11 @@ class Settingmenu extends Component {
         document.documentElement.style.setProperty("--themeBGHover", colorSet[i++]);
         document.documentElement.style.setProperty("--activeItem", colorSet[i++]);
         document.documentElement.style.setProperty("--activeItemText", colorSet[i++]);
+        document.documentElement.style.setProperty("--borderItem", colorSet[i++]);
+        document.documentElement.style.setProperty("--titleItem", colorSet[i++]);
         document.documentElement.style.setProperty("--hoverItem", colorSet[i++]);
         document.documentElement.style.setProperty("--textColor", colorSet[i++]);
+        document.documentElement.style.setProperty("--textMute", colorSet[i++]);
         document.documentElement.style.setProperty("--activePresence", colorSet[i++]);
         document.documentElement.style.setProperty("--mentionBadge", colorSet[i++]);
     } 

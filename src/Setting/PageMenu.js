@@ -23,7 +23,7 @@ class Page extends Component {
             <nav id="sidebar">
                 <div className="sidebar-header">
                     <h3>BestBoard</h3>
-                    <p className="text-white-50">Dashboard for IoT</p>
+                    <p className="">Dashboard for IoT</p>
                 </div>
                 <Pagelist/>
                 {(this.props.mode)?<Settingmenu colorId={this.props.colorId}/>:''}
