@@ -4,6 +4,7 @@ class Settingmenu extends Component {
     constructor (props) {
         super(props);
         this.state = {
+            colorId: this.props.colorId,
             colorSet: [
                 {
                     name: 'native',
@@ -12,6 +13,18 @@ class Settingmenu extends Component {
                 {
                     name: 'clean',
                     colors: ['#FFFFFF','#F8F8FA','#e6e6e6','#FFFFFF','#ececec','#f5f5f5','#cfcfcf','#383F45','#4c555e','#FF8669','#FF8669'] 
+                },
+                {
+                    name: 'farm',
+                    colors: ['#0D7E83','#076570','#D37C71','#FFFFFF','#096f7a','#076570','#D37C71','#FFFFFF','#FFFFFF','#F79F66','#F15340'] 
+                },
+                {
+                    name: 'farm',
+                    colors: ['#0D7E83','#076570','#D37C71','#FFFFFF','#096f7a','#076570','#D37C71','#FFFFFF','#FFFFFF','#F79F66','#F15340'] 
+                },
+                {
+                    name: 'farm',
+                    colors: ['#0D7E83','#076570','#D37C71','#FFFFFF','#096f7a','#076570','#D37C71','#FFFFFF','#FFFFFF','#F79F66','#F15340'] 
                 },
                 {
                     name: 'farm',
@@ -41,6 +54,9 @@ class Settingmenu extends Component {
     handleClick = (id) => {
         //e.preventDefault();
         this.setColor(id)
+        this.setState({
+            colorId: id
+        })
     }
   render() {
     return (
@@ -59,7 +75,7 @@ class Settingmenu extends Component {
                         <ul className="list-inline">
                         {this.state.colorSet.map((colors,i) => (
                             <li className="list-inline-item" onClick={this.handleClick.bind(this,i)}>
-                                <div className="rounded-circle coloroption" id={'colorset-'+(i+1)}></div>{colors.name}
+                                <div className={(this.state.colorId===i)?'rounded-circle coloroption border-active':'rounded-circle coloroption'} id={'colorset-'+(i+1)}></div>
                             </li>
                         ))} 
                         </ul>

@@ -4,6 +4,9 @@
     width:25px;
     height: 25px;
 }
+.border-active {
+    border: var(--activePresence) solid 3px;
+}
 ul.list-inline {
  padding: 20px;
 }

@@ -51,13 +51,13 @@
         color: var(--textColor);
     }
 }
-
-#sidebar ul li.active > a, a[aria-expanded="true"] {
+//#sidebar ul li.active > a, a[aria-expanded="true"] {
+#sidebar ul li.active > a {
     color: var(--textColor);
     background: var(--activeItem);
 }
 
-
+//collapse
 a[data-toggle="collapse"] {
     position: relative;
 }
@@ -109,5 +109,6 @@ a.article, a.article:hover {
 ----------------------------------------------------- */
 
 .form-control.addpage {
+    color: var(--textColor);
     background: var(--hoverItem);
 }
