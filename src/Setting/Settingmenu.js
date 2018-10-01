@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Settingmenu.css'
+import './Settingmenu.scss'
 class Settingmenu extends Component {
     constructor (props) {
         super(props);
@@ -20,15 +20,15 @@ class Settingmenu extends Component {
                 },
                 {
                     name: 'farm',
-                    colors: ['#0D7E83','#076570','#D37C71','#FFFFFF','#096f7a','#076570','#D37C71','#FFFFFF','#FFFFFF','#F79F66','#F15340'] 
+                    colors: ['#084278','#f5f3f3','#0BB1EF','#66666A','#f5f3f3','#e7e4e4','#d7d7e2','#66666A','#66666A','#00A9EE','#0BB1EF'] 
                 },
                 {
                     name: 'farm',
-                    colors: ['#0D7E83','#076570','#D37C71','#FFFFFF','#096f7a','#076570','#D37C71','#FFFFFF','#FFFFFF','#F79F66','#F15340'] 
+                    colors: ['#e7eaef','#dadfe9','#01a398','#FFFFFF','#e7eaef','#45959e','#79c476','#0d3340','#0d3340','#79c476','#78AF8F'] 
                 },
                 {
                     name: 'farm',
-                    colors: ['#0D7E83','#076570','#D37C71','#FFFFFF','#096f7a','#076570','#D37C71','#FFFFFF','#FFFFFF','#F79F66','#F15340'] 
+                    colors: ['#1F313F','#355263','#FDD24E','#FEFEFE','#1a2833','#536c7a','#557486','#FEFEFE','#FEFEFE','#FDD24E','#fad976'] 
                 },
             ]
         }
@@ -37,6 +37,7 @@ class Settingmenu extends Component {
         this.setColor(this.props.colorId)
     }
     setColor = (id) => {
+        //id = 2
         var i = 0
         var colorSet = this.state.colorSet[id].colors
         document.documentElement.style.setProperty("--themeBG", colorSet[i++]);
