@@ -1,13 +1,17 @@
 import React from 'react'
-import axios from 'axios'
 import WidgetStore from '../../store/WidgetStore'
+import Microgear from '../../store/Microgear'
 
 class CardBox extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       value: 0,
-      previousValue: 0
+      previousValue: 0,
+      store: {
+        topic: "",
+        msg: ""
+      }
     }
   }
 
@@ -16,21 +20,32 @@ class CardBox extends React.Component {
     WidgetStore.delWidgetToDB(widgetId)
   }
 
-  componentDidMount() {
-    axios.get('http://localhost:5582/netpie/' + this.props.payload.value).then(function (res) {
-      const data = res.data[0].payload.split(",")
+  componentWillMount() {
+    const microgear = Microgear.microgear
+    microgear.on('closed', () => console.log('Close'))
+    microgear.on('message', this.onMessage.bind(this))
+  }
+
+  onMessage(topic, msg) {
+    const payload = this.props.payload
+    if (payload.value === topic) {
       this.setState({
-        value: data[0]
+        store: {
+          topic: topic + "",
+          msg: msg + ""
+        }
       })
-      console.log(data)
-    }.bind(this))
+      this.setState({
+        value: this.state.store.msg.split(",")[0],
+        previousValue: this.state.value
+      })
+    }
   }
 
 
   render() {
     const payload = this.props.payload
     const state = this.state
-
     let arrow = 'up text-success'
     if (state.value - state.previousValue >= 0) arrow = 'up text-success'
     else arrow = 'down text-danger'
@@ -46,7 +61,6 @@ class CardBox extends React.Component {
             </div>
             <div className="row">
               <div className="col-6 text-right">
-
                 <h2>{parseFloat(state.value).toFixed(2)}</h2>
               </div>
               <div className="col-2 text-left pt-4">

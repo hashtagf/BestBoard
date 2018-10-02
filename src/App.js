@@ -2,35 +2,31 @@ import React, { Component } from 'react'
 //import mobx from './store/test'
 import './App.css'
 import './App.scss'
-import Test from './Setting/test'
-//import Add from './Setting/Add'
-import PageMenu from './Setting/PageMenu'
-import Hamburger from './Setting/Hamburger'
-//var $ = require("jquery");
-//import Muuri from 'muuri'
+import ButtonAdd from './FormWidgets/ButtonAdd'
+import PageMenu from './Sidebar/Sidebar'
+import Hamburger from './Sidebar/Hamburger'
+import Routing from './routes'
 
 class App extends Component {
   constructor (props) {
     super(props);
     this.state = {
         mode: false,
-        pages: [{name:'page 1'}],
         colorId: 0
     }
   }
   render() {
+    const mode = this.state.mode
     //document.documentElement.style.setProperty("--themeBG", "#000000");
     return (
       <div className="App">
         <div className="wrapper">
-          <PageMenu callback={this.clickSetting} mode={this.state.mode} colorId={this.state.colorId}/>
+          <PageMenu callback={this.clickSetting} mode={mode} colorId={this.state.colorId}/>
           <div id="content">
-          
             <Hamburger/>
-            <h1>HOME</h1>
-            <Test mode={this.state.mode}/>
-            
-            {(this.state.mode)?'<Add/>':''}
+            <h1>BestBoard Framework</h1>
+            <Routing mode={mode} />
+            {(mode)?<ButtonAdd/>:''}
           </div>
         </div>
       </div>

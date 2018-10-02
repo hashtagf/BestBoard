@@ -1,5 +1,5 @@
 import React from 'react'
-import WidgetStore from '../../store/WidgetStore'
+// import WidgetStore from '../../store/WidgetStore'
 
 class FormCardBox extends React.Component {
   constructor(props) {
@@ -10,14 +10,14 @@ class FormCardBox extends React.Component {
       unit: '',
       icon: '',
       status: true,
-      machineId: this.props.machineId
+      // boardId: this.props.boardId
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
 
   handlePayload(e) {
     this.setState({
-        [e.target.name]: e.target.value
+      [e.target.name]: e.target.value
     })
   }
 
@@ -30,8 +30,8 @@ class FormCardBox extends React.Component {
       unit: this.state.unit,
       icon: this.state.icon
     }
-    console.log(payload)
-    WidgetStore.addWidgetToDB(this.props.machineId, payload)
+    
+    // WidgetStore.addWidgetToDB(this.props.machineId, payload)
     this.setState({
       title: 'Card Box',
       value: 0,
@@ -44,76 +44,74 @@ class FormCardBox extends React.Component {
     const payload = this.state
     return (
       <div className="FormCardBox container">
-        <form>
-          <div className="form-group row">
-            <label htmlFor="title" className="col-3 col-form-label">
-              Title :
-          </label>
-            <div className="col-9">
-              <input
-                name="title"
-                type="text"
-                className="form-control"
-                value={payload.title}
-                onChange={this.handlePayload}
-              />
-            </div>
+        <div className="form-group row">
+          <label htmlFor="title" className="col-3 col-form-label">
+            Title :
+            </label>
+          <div className="col-9">
+            <input
+              name="title"
+              type="text"
+              className="form-control"
+              value={payload.title}
+              onChange={this.handlePayload}
+            />
           </div>
-          <div className="form-group row">
-            <label htmlFor="value" className="col-3 col-form-label">
-              Value :
+        </div>
+        <div className="form-group row">
+          <label htmlFor="value" className="col-3 col-form-label">
+            Value :
           </label>
-            <div className="col-9">
-              <input
-                name="value"
-                type="text"
-                className="form-control"
-                value={payload.value}
-                onChange={this.handlePayload}
-              />
-            </div>
+          <div className="col-9">
+            <input
+              name="value"
+              type="text"
+              className="form-control"
+              value={payload.value}
+              onChange={this.handlePayload}
+            />
           </div>
-          <div className="form-group row">
-            <label htmlFor="unit" className="col-3 col-form-label">
-              Unit :
+        </div>
+        <div className="form-group row">
+          <label htmlFor="unit" className="col-3 col-form-label">
+            Unit :
           </label>
-            <div className="col-9">
-              <input
-                name="unit"
-                type="text"
-                className="form-control"
-                value={payload.unit}
-                onChange={this.handlePayload}
-              />
-            </div>
+          <div className="col-9">
+            <input
+              name="unit"
+              type="text"
+              className="form-control"
+              value={payload.unit}
+              onChange={this.handlePayload}
+            />
           </div>
-          <div className="form-group row">
-            <label htmlFor="unit" className="col-3 col-form-label">
-              Icon :
+        </div>
+        <div className="form-group row">
+          <label htmlFor="unit" className="col-3 col-form-label">
+            Icon :
           </label>
-            <div className="col-9">
-              <input
-                name="icon"
-                type="text"
-                className="form-control"
-                value={payload.icon}
-                onChange={this.handlePayload}
-                placeholder="fontAwesome :: thermometer-half"
-              />
-            </div>
+          <div className="col-9">
+            <input
+              name="icon"
+              type="text"
+              className="form-control"
+              value={payload.icon}
+              onChange={this.handlePayload}
+              placeholder="fontAwesome :: thermometer-half"
+            />
           </div>
-          <div className="row justify-content-end">
-            <div className="col-3">
-              <button type="submit"
-                className="btn btn-secondary btn-block"
-                onClick={this.handleSubmit.bind(this)}
-                data-dismiss="modal" aria-label="Close"
-              >
-                Add
+        </div>
+        <div className="row justify-content-end">
+          <div className="col-3">
+            <button type="submit"
+              className="btn btn-secondary btn-block"
+              onClick={this.handleSubmit.bind(this)}
+              data-dismiss="modal" aria-label="Close"
+            >
+              Add
               </button>
-            </div>
           </div>
-        </form>
+        </div>
       </div>
     )
   }

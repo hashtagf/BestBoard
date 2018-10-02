@@ -1,11 +1,8 @@
 @import '/_variable';
 
-*{
-    box-sizing:border-box;
-  }
   .circleMenu{
     cursor: pointer;
-    /* display:flex; */
+    display:flex; 
     
     justify-content:center!important;
     border-radius:50%;
@@ -20,30 +17,16 @@
     border: 2px solid #555;
     transition:0.3s;
   }
-  .menu{
-    transition:0.3s;
-    position:absolute;
-    top:0;
-    left:-23%;
-    width:20%;
-    height:100%;
-    background-color:white;
-    border:5px solid gray;
-  }
-  .menuKoniec{
-    transition:0.3s;
-    left:-4px;
-    top:0;
-  }
+
   .circleAnimate{
     transform: rotate(405deg);
   }
-  h1{
-    font-family:arial;
-    text-align:center;
-    font-size:50px;
-  }
+
   .circleMenu:hover{
     background-color:#7386D5;
     color:white;
   }
+  .ModalCreate {
+    background-color: var(--themeBg)
+  }
+  

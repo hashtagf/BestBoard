@@ -27,7 +27,6 @@ class test extends Component {
 
   render() {
     return (
-
       <div className='grid'>
         <div className="item my-2">
           <div className="item-content">
