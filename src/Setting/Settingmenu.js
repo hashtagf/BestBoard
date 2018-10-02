@@ -67,7 +67,7 @@ class Settingmenu extends Component {
                         <a>Datasource</a>
                         <ul className="list-unstyled" >
                             <li><a href="">Netpie</a></li>
-                            <li><a className="second"><i className="fas fa-plus-square"></i> new page</a></li>
+                            <li><a className="second"><i className="fas fa-plus-square"></i> new source</a></li>
                         </ul>
                     </li>
                 </ul>
