@@ -152,10 +152,10 @@ class Page extends Component {
         lspage =
             <li className={(this.state.selectPage === index) ? 'active' : ''}><span onClick={() => this.handleClickpage(index, page.id)}>
               <div className="row">
-                <div className="col-sm-9">
+                <div className="col-8 col-sm-10 text-truncate">
                   {page.name}
                 </div>
-                <div className="col-sm-2 editmenu px-0">
+                <div className="col-2 col-sm-2 editmenu px-0">
                   <i className="fas fa-pen-square editbtn mr-1" onClick={() => this.clickEdit(index)}></i>
                   <i className="fas fa-minus-square editbtn" onClick={() => this.deletePage(page.id)}></i>
                 </div>

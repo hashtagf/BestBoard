@@ -9,14 +9,14 @@ class NETPIEMicrogear {
   @observable microgear = null
 
   createDatasource() {
-    if (this.APPID != null) {
+    if (this.APPID != null && this.microgear === null) {
       this.microgear = MicroGear.create({
         key: this.KEY,
         secret: this.SECRET,
         alias: 'DataSource'
       })
-      this.microgear.on('connected', () => this.microgear.subscribe(this.SUBSCRIBED))
       this.microgear.connect(this.APPID)
+      this.microgear.on('connected', () => this.microgear.subscribe(this.SUBSCRIBED))
     }
   }
 }

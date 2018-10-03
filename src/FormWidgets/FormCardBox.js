@@ -107,7 +107,7 @@ class FormCardBox extends React.Component {
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="button"
-              className="btn btn-primary"
+              className="btn btn-primary border-0"
               onClick={this.handleSubmit.bind(this)}
               data-dismiss="modal" aria-label="Close"
             ><i className="fas fa-plus-square"></i> Add widget</button>

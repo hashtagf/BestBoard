@@ -1,6 +1,6 @@
 import React from 'react'
 import WidgetStore from '../store/WidgetStore'
-import Microgear from '../store/Microgear'
+import NETPIEMicrogear from '../store/Microgear'
 
 class CardBox extends React.Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class CardBox extends React.Component {
   }
 
   componentWillMount() {
-    const microgear = Microgear.microgear
+    const microgear = NETPIEMicrogear.microgear
     microgear.on('closed', () => console.log('Close'))
     microgear.on('message', this.onMessage.bind(this))
   }
@@ -50,8 +50,8 @@ class CardBox extends React.Component {
     if (state.value - state.previousValue >= 0) arrow = 'up text-success'
     else arrow = 'down text-danger'
     return (
-      <div className="CardBox col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3">
-        <div className="card border-primary shadow rounded-0 border-10 widgetCard">
+      <div className="CardBox col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3 item">
+        <div className="card border-primary shadow rounded-0 border-10 widgetCard item-content">
           <h5 className="card-header">{payload.title}</h5>
           <div className="card-body ">
             <div className="row pb-2">

@@ -5,6 +5,7 @@ import socketIOClient from 'socket.io-client'
 import Muuri from 'muuri'
 import axios from 'axios'
 import WidgetStore from '../store/WidgetStore'
+import NETPIEMicrogear from '../store/Microgear'
 
 let server = 'http://172.18.6.7:5582'
 const socket = socketIOClient(server)
@@ -19,9 +20,13 @@ class Main extends Component {
     }
   }
 
-  componentDidMount() {
-    this.createMuuri()
+  componentWillMount() {
+    NETPIEMicrogear.createDatasource()
     this.response()
+  }
+
+  componentDidMount() {
+    
   }
 
   response = () => {
@@ -33,24 +38,24 @@ class Main extends Component {
   }
 
   getWidgets() {
-    let widgets = []
     axios.get(server + '/widget/' + Store.currentId).then((res) => {
+      WidgetStore.widgets = []
       res.data.map((widget) =>
-        widgets.push(widget)
+        WidgetStore.pushWidgets(widget)
       )
-      WidgetStore.widgets = widgets
       this.setState({
         listWidgets: WidgetStore.listWidgets
       })
-      
+      this.createMuuri()
     })
   }
 
   createMuuri() {
     grid = new Muuri('.grid', {
+      items: '.item',
       dragEnabled: true,
       dragContainer: document.body,
-      itemClass: 'col-md-3',
+      itemClass: 'col-3',
       dragStartPredicate: (item, event) => {
         return Store.mode
       },
@@ -65,15 +70,16 @@ class Main extends Component {
 
   componentWillUnmount() {
     console.log('UnMount')
+    grid.destroy()
     grid = null
     this.setState({
-      widgets: []
+      listWidgets: []
     })
   }
 
   render() {
     const listWidgets = this.state.listWidgets
-    console.log(listWidgets)
+    console.log('GRID :', grid)
     return (
       <div className='grid'>
         {listWidgets}
@@ -81,5 +87,6 @@ class Main extends Component {
     )
   }
 }
+
 
 export default Main

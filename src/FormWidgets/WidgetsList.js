@@ -1,6 +1,6 @@
 import React from 'react'
 import FormCardBox from './FormCardBox'
-
+import './WidgetsList.css'
 class WidgetsList extends React.Component {
 
   constructor(props) {
@@ -12,13 +12,17 @@ class WidgetsList extends React.Component {
           img: "https://i.stack.imgur.com/k7Nit.png"
         },
         {
+          name: "Gauge",
+          img: "https://i.stack.imgur.com/k7Nit.png"
+        },
+        {
           name: "progress",
           img: "https://image.opencart.com/cache/583c1e869b365-resize-710x380.jpg"
         },
         {
           name: "graph",
           img: "https://www.excel-easy.com/examples/images/line-chart/line-chart.png"
-        },
+        }
       ],
       selectType: 0
     }
@@ -46,7 +50,7 @@ class WidgetsList extends React.Component {
     })
     return (
       <div className="row">
-        <div className="col-3">
+        <div className="col-3 border-right listWidgets " data-spy="scroll" id="scrollbar-style">
           {listWidget}
         </div>
         <div className="col-9">

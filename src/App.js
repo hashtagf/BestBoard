@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-//import mobx from './store/test'
 import './App.css'
 import ButtonAdd from './FormWidgets/ButtonAdd'
 import PageMenu from './Sidebar/Sidebar'
@@ -23,7 +22,7 @@ class App extends Component {
           <PageMenu callback={this.clickSetting} mode={mode} colorId={this.state.colorId}/>
           <div id="content">
             <Hamburger/>
-            <h1>BestBoard Framework</h1>
+            
             <Routing />
             {(mode)?<ButtonAdd/>:''}
           </div>

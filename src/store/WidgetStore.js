@@ -13,11 +13,16 @@ import List from '../Widgets/List'
 
 class WidgetStore {
   @observable widgets = []
-  @observable listWidgets = this.ListWidgets()
+  @observable listWidgets = []
   @observable server = 'http://172.18.6.7:5582'
 
+  pushWidgets(payload) {
+    this.widgets.push(payload)
+    this.listWidgets = this.showWidgets()
+  }
+
   createWidget(boardId, payload) {
-    axios.post(this.server + '/widget',{
+    axios.post(this.server + '/widget', {
       boardId: boardId,
       widget: payload
     }).then((res) => {
@@ -25,7 +30,7 @@ class WidgetStore {
     })
   }
 
-  ListWidgets() {
+  showWidgets() {
     return this.widgets.map((widget) => {
       switch (widget.widget.typeWidget) {
         case 'Gauge':

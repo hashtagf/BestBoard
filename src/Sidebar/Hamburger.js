@@ -14,8 +14,10 @@ class Hamburger extends Component {
                 <span></span>
                 <span></span>
               </button>
+              
             </div>
-
+            <div className="navbar-brand my-auto">BestBoard Framework</div>
+            <div><i className="fas fa-bell"></i></div>
           </div>
         </nav>
       </div>
