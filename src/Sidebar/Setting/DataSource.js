@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 //import './Settingmenu.css'
 class DataSource extends Component {
   constructor(props) {
@@ -8,12 +9,14 @@ class DataSource extends Component {
   }
   render() {
     return (
+
           <li>
             <a>Datasource</a>
             <ul className="list-unstyled" >
               <li><a href="">Netpie</a></li>
-              <li><a className="second"><i className="fas fa-plus-square"></i> new source</a></li>
+              <li><a className="second" data-toggle="modal" data-target=".ModalCreateSource"><i className="fas fa-plus-square"></i> new source</a></li>
             </ul>
+            
           </li>
     )
   }

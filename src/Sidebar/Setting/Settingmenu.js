@@ -18,6 +18,7 @@ class Settingmenu extends Component {
         <ul className="list-unstyled components">
           <ColorSetting colorId={this.props.colorId}/>
         </ul>
+        
       </div>
     )
   }

@@ -23,7 +23,8 @@ a {
 #content {
   padding: 20px;
   min-height: 100vh;
-  min-width: 100%; 
+  /* min-width: 100%; */
+  width: auto;
   transition: all 0.3s;
 }
 .btn-primary {

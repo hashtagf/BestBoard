@@ -3,28 +3,24 @@
   .circleMenu{
     cursor: pointer;
     display:flex; 
-    
     justify-content:center!important;
     border-radius:50%;
-    height:70px;
-    width:70px;
-    background-color:white;
-    position:absolute;
+    height:60px;
+    width:60px;
+    background-color:var(--activeItem);
+    position: fixed;
     bottom:20px;
     right:20px;
     font-size:40px;
-    color:#555;
-    border: 2px solid #555;
+    color:var(--textColor);
     transition:0.3s;
-  }
-
-  .circleAnimate{
-    transform: rotate(405deg);
+    border-top: 1px solid transparent;
   }
 
   .circleMenu:hover{
-    background-color:#7386D5;
-    color:white;
+    background-color:transparent;
+    border: var(--activeItem) solid 2px;
+    color:var(--textColor);
   }
   .ModalCreate {
     background-color: var(--themeBg)

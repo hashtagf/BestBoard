@@ -16,7 +16,7 @@ class Hamburger extends Component {
               </button>
               
             </div>
-            <div className="navbar-brand my-auto">BestBoard Framework</div>
+            <div className="navbar-brand my-auto text-truncate">BestBoard</div>
             <div><i className="fas fa-bell"></i></div>
           </div>
         </nav>
