@@ -1,5 +1,5 @@
 import React from 'react'
-import WidgetStore from '../../store/WidgetStore'
+import WidgetStore from '../store/WidgetStore'
 import ReactSpeedometer from "react-d3-speedometer"
 
 class Gauge extends React.Component {

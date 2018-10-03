@@ -1,4 +1,4 @@
-@import 'src/_variable';
+@import '../_variable.css';
 
 #sidebar {
     min-width: 250px;
@@ -51,7 +51,6 @@
         color: var(--textColor);
     }
 }
-//#sidebar ul li.active > a, a[aria-expanded="true"] {
 #sidebar ul li.active > a {
     color: var(--textColor);
     background: var(--activeItem);

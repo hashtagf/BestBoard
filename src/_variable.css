@@ -1,4 +1,4 @@
-$themeBG: #303E4D;
+/* $themeBG: #303E4D;
 $themeBGHover: #2C3849;
 $activeItem: #6698C8;
 $activeItemText: #FFFFFF;
@@ -7,7 +7,7 @@ $textColor: #FFFFFF;
 $activePresence: #94E864;
 $mentionBadge: #78AF8F;
 //colors: ['#F8F8FA','#FFFFFF','#CAD1D9','#FFFFFF','#FFFFFF','#383F45','#60D156','#FF8669'] 
-//colors: ['#0D7E83','#076570','#F79F66','#FFFFFF','#D37C71','#FFFFFF','#F79F66','#F15340'] 
+//colors: ['#0D7E83','#076570','#F79F66','#FFFFFF','#D37C71','#FFFFFF','#F79F66','#F15340']  */
 
 :root {
     --themeBG: #2C3849;

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Line } from 'rc-progress'
-import WidgetStore from '../../store/WidgetStore'
+import WidgetStore from '../store/WidgetStore'
 
 class ProgressBar extends React.Component {
   delWidget() {

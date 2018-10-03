@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 //import mobx from './store/test'
 import './App.css'
-import './App.scss'
 import ButtonAdd from './FormWidgets/ButtonAdd'
 import PageMenu from './Sidebar/Sidebar'
 import Hamburger from './Sidebar/Hamburger'
 import Routing from './routes'
-
+import Store from './store/Store'
 class App extends Component {
   constructor (props) {
     super(props);
@@ -25,7 +24,7 @@ class App extends Component {
           <div id="content">
             <Hamburger/>
             <h1>BestBoard Framework</h1>
-            <Routing mode={mode} />
+            <Routing />
             {(mode)?<ButtonAdd/>:''}
           </div>
         </div>
@@ -36,6 +35,7 @@ class App extends Component {
     this.setState({
       mode: flag
     })
+    Store.mode = flag
   }
 }
 

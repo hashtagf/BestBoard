@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Sidebar.scss'
+import './Sidebar.css'
 import Settingmenu from './Setting/Settingmenu'
 import Pagelist from './Pagelist'
 var $ = require("jquery");

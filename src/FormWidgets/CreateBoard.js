@@ -1,9 +1,11 @@
 import React from 'react'
 import WidgetsList from './WidgetsList'
+
 class CreateMachine extends React.Component {
+
   render() {
     return (
-      <div className="modal fade" data-backdrop="false" tabIndex="-1" role="dialog" aria-hidden="false" >
+      <div className="modal fade ModalCreate" data-backdrop="false" tabIndex="-1" role="dialog" aria-hidden="false" >
         <div className="modal-dialog modal-lg">
           <div className="modal-content text-dark">
             <div className="modal-header">
@@ -14,10 +16,6 @@ class CreateMachine extends React.Component {
             </div>
             <div className="modal-body">
               <WidgetsList />
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" className="btn btn-primary"><i className="fas fa-plus-square"></i> add widget</button>
             </div>
           </div>
         </div>

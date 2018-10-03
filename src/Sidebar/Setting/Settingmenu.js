@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Settingmenu.scss'
+import './Settingmenu.css'
 import DataSource from './DataSource.js'
 import ColorSetting from './ColorSetting.js'
 class Settingmenu extends Component {

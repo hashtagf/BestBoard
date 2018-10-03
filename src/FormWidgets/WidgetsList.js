@@ -3,17 +3,6 @@ import FormCardBox from './FormCardBox'
 
 class WidgetsList extends React.Component {
 
-  addMachine = () => {
-    let payload = {
-      machineName: this.state.machineName,
-      machineType: this.state.machineType
-    }
-    this.setState({
-      machineName: '',
-      machineType: 'A'
-    })
-  }
-
   constructor(props) {
     super(props)
     this.state = {
@@ -35,7 +24,6 @@ class WidgetsList extends React.Component {
     }
   }
   selectWidget(e) {
-    console.log(e.target.name)
     this.setState({
       selectType: e.target.name
     })
@@ -71,7 +59,7 @@ class WidgetsList extends React.Component {
 
 class SelectType extends React.Component {
   render() {
-    const {selectType, boardId} = this.props
+    const {selectType} = this.props
     switch (selectType) {
       case 'CardBox':
         return <FormCardBox />

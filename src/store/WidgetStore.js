@@ -1,49 +1,31 @@
 import React from 'react'
 import axios from 'axios'
 import { observable } from 'mobx'
-import Gauge from '../components/Widgets/Gauge'
-import Progress from '../components/Widgets/Progress'
-import CardBox from '../components/Widgets/CardBox'
-import GaugeSpeed from '../components/Widgets/GaugeSpeed'
-import ProgressBar from '../components/Widgets/ProgressBar'
-import Text from '../components/Widgets/Text'
-import Image from '../components/Widgets/Image'
-import Chart from '../components/Widgets/Chart'
-import List from '../components/Widgets/List'
-
-let server = "http://172.18.6.7:5582/widget"
+import Gauge from '../Widgets/Gauge'
+import Progress from '../Widgets/Progress'
+import CardBox from '../Widgets/CardBox'
+import GaugeSpeed from '../Widgets/GaugeSpeed'
+import ProgressBar from '../Widgets/ProgressBar'
+import Text from '../Widgets/Text'
+import Image from '../Widgets/Image'
+import Chart from '../Widgets/Chart'
+import List from '../Widgets/List'
 
 class WidgetStore {
   @observable widgets = []
-  @observable listWidgets = this.showWidgets()
-  @observable getWidgets = true
+  @observable listWidgets = this.ListWidgets()
+  @observable server = 'http://172.18.6.7:5582'
 
-  addWidgets(payload) {
-    this.widgets.push(payload)
-    this.listWidgets = this.showWidgets()
-  }
-
-  addWidgetToDB(_id, payload) {
-    this.widgets = []
-    axios.post(server + '/', {
-      machineId: _id,
+  createWidget(boardId, payload) {
+    axios.post(this.server + '/widget',{
+      boardId: boardId,
       widget: payload
-    }).then(function (res) {
+    }).then((res) => {
       console.log(res)
-    }).catch(function (err) {
-      console.log(err)
     })
   }
 
-  delWidgetToDB(widgetId) {
-    axios.delete(server + '/' + widgetId).then(function (res) {
-      console.log(res)
-    }).catch(function (err) {
-      console.log(err)
-    })
-  }
-
-  showWidgets() {
+  ListWidgets() {
     return this.widgets.map((widget) => {
       switch (widget.widget.typeWidget) {
         case 'Gauge':

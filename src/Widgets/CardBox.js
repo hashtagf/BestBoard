@@ -1,6 +1,6 @@
 import React from 'react'
-import WidgetStore from '../../store/WidgetStore'
-import Microgear from '../../store/Microgear'
+import WidgetStore from '../store/WidgetStore'
+import Microgear from '../store/Microgear'
 
 class CardBox extends React.Component {
   constructor(props) {

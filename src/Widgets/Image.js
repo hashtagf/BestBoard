@@ -1,5 +1,5 @@
 import React from 'react'
-import WidgetStore from '../../store/WidgetStore'
+import WidgetStore from '../store/WidgetStore'
 
 class Image extends React.Component {
   delWidget() {

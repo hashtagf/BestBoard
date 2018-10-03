@@ -1,6 +1,6 @@
 import React from 'react'
 import CanvasGauge from 'react-canvas-gauge'
-import WidgetStore from '../../store/WidgetStore'
+import WidgetStore from '../store/WidgetStore'
 
 class Progress extends React.Component {
   delWidget() {

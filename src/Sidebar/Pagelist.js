@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import './Pagelist.scss'
+import './Pagelist.css'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Store from '../store/Store'
 import socketIOClient from 'socket.io-client'
 
 let server = 'http://172.18.6.7:5582'
@@ -109,10 +110,11 @@ class Page extends Component {
     })
   }
 
-  handleClickpage = (index) => {
+  handleClickpage = (index, pageId) => {
     this.setState({
       selectPage: index
     })
+    Store.currentId = pageId
   }
 
   render() {
@@ -148,7 +150,7 @@ class Page extends Component {
       }
       if (editPage !== index) {
         lspage =
-            <li className={(this.state.selectPage === index) ? 'active' : ''}><span onClick={() => this.handleClickpage(index)}>
+            <li className={(this.state.selectPage === index) ? 'active' : ''}><span onClick={() => this.handleClickpage(index, page.id)}>
               <div className="row">
                 <div className="col-sm-9">
                   {page.name}
@@ -175,7 +177,7 @@ class Page extends Component {
             </div>
           </div>
       }
-      return <Link to={'/' + page.id} key={page.id}>{lspage}</Link>
+      return <Link to={'/board/' + page.id} key={page.id} >{lspage}</Link>
     })
     return (
       <ul className="list-unstyled components">

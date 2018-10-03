@@ -1,5 +1,6 @@
 import React from 'react'
-// import WidgetStore from '../../store/WidgetStore'
+import WidgetStore from '../store/WidgetStore'
+import Store from '../store/Store'
 
 class FormCardBox extends React.Component {
   constructor(props) {
@@ -30,8 +31,8 @@ class FormCardBox extends React.Component {
       unit: this.state.unit,
       icon: this.state.icon
     }
-    
-    // WidgetStore.addWidgetToDB(this.props.machineId, payload)
+    console.log(payload)
+    WidgetStore.createWidget(Store.currentId, payload)
     this.setState({
       title: 'Card Box',
       value: 0,
@@ -40,6 +41,7 @@ class FormCardBox extends React.Component {
       status: true
     })
   }
+
   render() {
     const payload = this.state
     return (
@@ -102,14 +104,13 @@ class FormCardBox extends React.Component {
           </div>
         </div>
         <div className="row justify-content-end">
-          <div className="col-3">
-            <button type="submit"
-              className="btn btn-secondary btn-block"
+          <div className="modal-footer">
+            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button"
+              className="btn btn-primary"
               onClick={this.handleSubmit.bind(this)}
               data-dismiss="modal" aria-label="Close"
-            >
-              Add
-              </button>
+            ><i className="fas fa-plus-square"></i> Add widget</button>
           </div>
         </div>
       </div>

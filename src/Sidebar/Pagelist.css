@@ -1,4 +1,4 @@
-@import 'src/_variable';
+@import '../_variable.css';
 .editbtn {
     color: var(--textColor);
 }

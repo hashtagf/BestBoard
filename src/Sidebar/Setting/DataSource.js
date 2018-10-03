@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-//import './Settingmenu.scss'
+//import './Settingmenu.css'
 class DataSource extends Component {
   constructor(props) {
     super(props)
