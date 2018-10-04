@@ -13,6 +13,7 @@
     "microgear": "^0.8.1",
     "mobx": "4.1.1",
     "mobx-react": "5.0.0",
+    "moment": "^2.22.2",
     "muuri": "^0.7.1",
     "rc-progress": "^2.2.6",
     "react": "^16.2.0",

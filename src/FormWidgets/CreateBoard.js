@@ -1,7 +1,7 @@
 import React from 'react'
 import WidgetsList from './WidgetsList'
 
-class CreateMachine extends React.Component {
+class CreateBoard extends React.Component {
 
   render() {
     return (
@@ -24,4 +24,4 @@ class CreateMachine extends React.Component {
   }
 }
 
-export default CreateMachine
+export default CreateBoard

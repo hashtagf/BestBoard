@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './Sidebar.css'
 import Settingmenu from './Setting/Settingmenu'
 import Pagelist from './Pagelist'
-var $ = require("jquery");
+const $ = require("jquery");
 class Page extends Component {
   componentDidMount() {
     $(document).ready(function () {

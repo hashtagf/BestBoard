@@ -1,6 +1,7 @@
 @import '/_variable';
 .listwid:hover {
     background-color: #f1f1f1;
+    box-sizing: border-box;
 }
 .listWidgets {
     min-width: 100px;

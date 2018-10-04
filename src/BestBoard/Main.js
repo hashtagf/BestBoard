@@ -6,10 +6,9 @@ import Muuri from 'muuri'
 import axios from 'axios'
 import WidgetStore from '../store/WidgetStore'
 import NETPIEMicrogear from '../store/Microgear'
-
+//const $ = require("jquery");
 let server = 'http://172.18.6.7:5582'
 const socket = socketIOClient(server)
-
 var grid = null
 
 class Main extends Component {
@@ -23,10 +22,11 @@ class Main extends Component {
   componentWillMount() {
     NETPIEMicrogear.createDatasource()
     this.response()
+
   }
 
   componentDidMount() {
-    
+
   }
 
   response = () => {
@@ -56,8 +56,11 @@ class Main extends Component {
       dragEnabled: true,
       dragContainer: document.body,
       itemClass: 'col-3',
-      dragStartPredicate: (item, event) => {
-        return Store.mode
+      dragStartPredicate: {
+        distance: 5,
+        handle: (item, event) => {
+          return Store.mode
+        }
       },
       dragSort: function () {
         return [grid]
@@ -81,9 +84,15 @@ class Main extends Component {
     const listWidgets = this.state.listWidgets
     console.log('GRID :', grid)
     return (
+
+
       <div className='grid'>
+
         {listWidgets}
+
       </div>
+
+
     )
   }
 }
