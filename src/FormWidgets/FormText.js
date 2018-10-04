@@ -1,6 +1,5 @@
 import React from 'react'
 import WidgetStore from '../../store/WidgetStore'
-
 class FormText extends React.Component {
   constructor(props) {
     super(props)

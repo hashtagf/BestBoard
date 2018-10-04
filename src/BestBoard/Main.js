@@ -1,7 +1,6 @@
-import React, {
-  Component
-} from 'react'
+import React, { Component} from 'react'
 import './Main.css'
+import LocalStore from '../store/LocalStore'
 import Store from '../store/Store'
 import socketIOClient from 'socket.io-client'
 import Muuri from 'muuri'
@@ -10,6 +9,8 @@ import WidgetStore from '../store/WidgetStore'
 //const $ = require("jquery");
 let server = 'http://172.18.6.7:5582'
 const socket = socketIOClient(server)
+let connect = socket.connected
+
 var grid = null
 
 class Main extends Component {
@@ -21,13 +22,22 @@ class Main extends Component {
   }
 
   componentWillMount() {
-    this.response()
+    if (connect) this.response()
+    else this.loadLocal()
   }
 
   componentDidMount() {
 
   }
-
+  loadLocal = () => {
+    this.setState({
+      listWidgets: LocalStore.local.listWidgets
+    })
+    LocalStore.local.listWidgets.map((widget) =>
+      WidgetStore.pushWidgets(widget)
+    )
+    //this.createMuuri()
+  }
   response = () => {
     this.getWidgets()
     socket.on('update-widget', (msg) => {

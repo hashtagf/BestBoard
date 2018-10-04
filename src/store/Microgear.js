@@ -10,6 +10,7 @@ class NETPIEMicrogear {
   @observable microgear = []
 
   createDatasource(datasources) {
+    console.log(datasources)
     datasources.forEach(datasource => {
       this.microgear[datasource._id] = MicroGear.create({
         key: datasource.datasource.key,

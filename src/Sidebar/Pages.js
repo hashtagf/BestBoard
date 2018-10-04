@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-import './Pagelist.css'
+import './Pages.css'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Store from '../store/Store'
+import LocalStore from '../store/LocalStore'
 import socketIOClient from 'socket.io-client'
 
 let server = 'http://172.18.6.7:5582'
 const socket = socketIOClient(server)
-
+let connect = socket.connected
 class Page extends Component {
   constructor(props) {
     super(props);
@@ -21,9 +22,14 @@ class Page extends Component {
   }
 
   componentWillMount() {
-    this.response()
+    if (connect) this.response()
+    else this.loadLocal()
   }
-
+  loadLocal = () => {
+    this.setState({
+      pages: LocalStore.local.pages
+    })
+  }
   response = () => {
     this.getBoard()
     socket.on('update-board', (msg) => {
@@ -116,7 +122,7 @@ class Page extends Component {
     Store.currentId = pageId
   }
 
-  render() {
+  render () {
     let listPage = []
     const {pages, editPage} = this.state
     let lspage
@@ -192,6 +198,8 @@ class Page extends Component {
     )
   }
 }
+class Pageslist extends Component{
 
+}
 
 export default Page

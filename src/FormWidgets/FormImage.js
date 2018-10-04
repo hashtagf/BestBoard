@@ -1,6 +1,6 @@
 import React from 'react'
 import WidgetStore from '../../store/WidgetStore'
-
+import FormInput from './Input/FormInputBasic'
 class FormImage extends React.Component {
   constructor(props) {
     super(props)
@@ -52,20 +52,7 @@ class FormImage extends React.Component {
     return (
       <div className="FormProgressBar container">
         <form >
-          <div className="form-group row">
-            <label htmlFor="title" className="col-3 col-form-label">
-              Title :
-          </label>
-            <div className="col-9">
-              <input
-                name="title"
-                type="text"
-                className="form-control"
-                value={payload.title}
-                onChange={this.handlePayload}
-              />
-            </div>
-          </div>
+          <FormInput callback={this.handlePayload} values={this.state} />
           <div className="form-group row">
             <label htmlFor="file" className="col-3 col-form-label">
               File :

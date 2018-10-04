@@ -1,6 +1,4 @@
-import React, {
-  Component
-} from 'react'
+import React, { Component } from 'react'
 class ColorSetting extends Component {
   constructor(props) {
     super(props)

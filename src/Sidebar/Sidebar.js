@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Sidebar.css'
 import Settingmenu from './Setting/Settingmenu'
-import Pagelist from './Pagelist'
+import Pagelist from './Pages'
 import Store from '../store/Store'
 const $ = require("jquery")
 

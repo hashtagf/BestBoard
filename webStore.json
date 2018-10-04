@@ -1,0 +1,38 @@
+{
+    "datasources": {
+        "01": {
+            "typeDatasource": "NETPIE",
+            "name": "name",
+            "appID": "state.appID",
+            "key": "state.key",
+            "secret": "hg",
+            "topic": "/#",
+            "jsOnconnect": "",
+            "jsOncreated": ""
+        }
+    },
+    "microgear": {
+    },
+    "listWidgets": {},
+    "pages": {
+        "01":{
+            "name": "boardName"
+        }
+    },
+    "widgets": {
+        "01": {
+            "boardId": "01",
+            "widget": {
+                "01":{
+                    "typeWidget": "CardBox",
+                    "title": "title",
+                    "value": "",
+                    "datasource": "01",
+                    "unit": "",
+                    "icon": ""
+                }
+            }
+        }
+
+    }
+}

@@ -27,7 +27,8 @@ class JsInput extends React.Component {
       error: error
     })
     if(error!==null) codeStr = ''
-    this.props.callback(e,codeStr)
+    e.target.value = codeStr
+    this.props.callback(e)
   }
   
   processScrirt () {

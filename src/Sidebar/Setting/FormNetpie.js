@@ -1,19 +1,19 @@
 
 import React, { Component } from 'react'
-import JsInput from '../../FormWidgets/JsInput'
+import JsInput from '../../FormWidgets/Input/JsInput'
 import DatasourceStore from '../../store/DatasourceStore'
 
 class FormSource extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: 'NETPIE Microgear',
-      appID: '',
-      key: '',
-      secret: '',
-      topic: '/#',
-      jsOnconnect: '',
-      jsOncreated: ''
+      name: 'NETPIE Microgear'|| this.props.name,
+      appID: '' || this.props.appID,
+      key: '' || this.props.key,
+      secret: '' || this.props.secret,
+      topic: '/#' || this.props.topic,
+      jsOnconnect: '' || this.props.jsOnconnect,
+      jsOncreated: '' || this.props.jsOnconnect
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -23,7 +23,6 @@ class FormSource extends Component {
       [e.target.name]: e.target.value
     })
   }
-
   handleSubmit(e) {
     e.preventDefault()
     const state = this.state
@@ -48,11 +47,6 @@ class FormSource extends Component {
     })
     DatasourceStore.createDatasource(payload)
   }
-  inputJs = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
   render() {
     return (
       <div>
@@ -75,21 +69,21 @@ class FormSource extends Component {
         </div>
         <div className="form-group">
           <label htmlFor="topic">Subscribed Topics</label>
-          <input type="text" className="form-control" id="topic" name="topic" placeholder="Enter Topics" onChange={this.handleChange}/>
+          <input type="text" className="form-control" id="topic" name="topic" placeholder="Enter Topics" value={this.state.topic} onChange={this.handleChange}/>
         </div>
         <details open="">
           <summary>Advance</summary>
           <div className="form-group my-1">
             <label htmlFor="jsOncreated">Oncreated Action</label>
-            <JsInput name={"jsOncreated"} callback={this.inputJs}/>
+            <JsInput name={"jsOncreated"} callback={this.handleChange}/>
             <small>Java script code to run after a datasource is created.</small>
             <label htmlFor="jsOnconnect">Onconnected Action</label>
-            <JsInput name={"jsOnconnect"} callback={this.inputJs}/>
+            <JsInput name={"jsOnconnect"} callback={this.handleChange}/>
             <small>Java script code to run after a datasource is created.</small>
           </div>
           
         </details>
-        <button type="submit" onClick={this.handleSubmit.bind(this)} className="btn btn-primary">Save</button>
+        <button type="submit" onClick={this.handleSubmit.bind(this)} className="btn btn-primary" aria-hidden="true">Save</button>
       </div>
     )
   }

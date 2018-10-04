@@ -68,7 +68,7 @@ class SelectType extends React.Component {
       case 'CardBox':
         return <FormCardBox />
       default:
-        return <h1>Error</h1>
+        return <h1>Please select widget</h1>
     }
   }
 }

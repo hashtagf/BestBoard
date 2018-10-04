@@ -2,7 +2,8 @@ import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import Store from '../store/Store'
 import DatasourceStore from '../store/DatasourceStore'
-
+import FormInputBasic from './Input/FormInputBasic'
+import InputText from './Input/InputText'
 class FormCardBox extends React.Component {
   constructor(props) {
     super(props)
@@ -22,6 +23,7 @@ class FormCardBox extends React.Component {
     this.setState({
       [e.target.name]: e.target.value
     })
+    console.log(e.target.name,e.target.value)
   }
 
   handleSubmit(e) {
@@ -47,62 +49,17 @@ class FormCardBox extends React.Component {
   }
 
   render() {
-    const payload = this.state
+    const state = this.state
+    let obj = {
+      title: state.title,
+      listDatasources: state.listDatasources,
+      value: state.value
+    }
     return (
       <div className="FormCardBox container">
-        <div className="form-group row">
-          <label htmlFor="title" className="col-3 col-form-label">
-            Title :
-            </label>
-          <div className="col-9">
-            <input
-              name="title"
-              type="text"
-              className="form-control"
-              value={payload.title}
-              onChange={this.handlePayload}
-            />
-          </div>
-        </div>
-        <div className="form-group row">
-          <label htmlFor="datasource" className="col-3 col-form-label">
-            Datasource :
-          </label>
-          <div className="col-9">
-            <select className="custom-select">
-            {payload.listDatasources}
-            </select>
-          </div>
-        </div>
-        <div className="form-group row">
-          <label htmlFor="value" className="col-3 col-form-label">
-            Value :
-          </label>
-          <div className="col-9">
-            <input
-              name="value"
-              type="text"
-              className="form-control"
-              value={payload.value}
-              onChange={this.handlePayload}
-              placeholder="Topic :: /room/temp"
-            />
-          </div>
-        </div>
-        <div className="form-group row">
-          <label htmlFor="unit" className="col-3 col-form-label">
-            Unit :
-          </label>
-          <div className="col-9">
-            <input
-              name="unit"
-              type="text"
-              className="form-control"
-              value={payload.unit}
-              onChange={this.handlePayload}
-            />
-          </div>
-        </div>
+        <FormInputBasic callback={this.handlePayload} values={this.state} />
+        <InputText callback={this.handlePayload} title="Unit" name="unit" value={this.state.unit}/>
+
         <div className="form-group row">
           <label htmlFor="unit" className="col-3 col-form-label">
             Icon :
@@ -112,7 +69,7 @@ class FormCardBox extends React.Component {
               name="icon"
               type="text"
               className="form-control"
-              value={payload.icon}
+              value={state.icon}
               onChange={this.handlePayload}
               placeholder="fontAwesome :: thermometer-half"
             />

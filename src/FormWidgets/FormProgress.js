@@ -1,5 +1,7 @@
 import React from 'react'
 import WidgetStore from '../../store/WidgetStore'
+import FormInput from './Input/FormInputBasic'
+import InputText from './Input/InputText'
 
 class FormProgress extends React.Component {
   constructor(props) {
@@ -58,35 +60,11 @@ class FormProgress extends React.Component {
     return (
       <div className="FormProgress container">
         <form>
-          <div className="form-group row">
-            <label htmlFor="title" className="col-3 col-form-label">
-              Title :
-          </label>
-            <div className="col-9">
-              <input
-                name="title"
-                type="text"
-                className="form-control"
-                value={payload.title}
-                onChange={this.handlePayload}
-              />
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="value" className="col-3 col-form-label">
-              Value :
-          </label>
-            <div className="col-9">
-              <input
-                name="value"
-                type="text"
-                className="form-control"
-                value={payload.value}
-                onChange={this.handlePayload}
-              />
-            </div>
-          </div>
-          <div className="form-group row">
+          <FormInput callback={this.handlePayload} values={this.state} />
+          <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit}/>
+          <InputText callback={this.handlePayload} title="Min Value" name="minvalue" value={payload.minvalue}/>
+          <InputText callback={this.handlePayload} title="Max Value" name="maxvalue" value={payload.maxvalue}/>
+          {/* <div className="form-group row">
             <label htmlFor="unit" className="col-3 col-form-label">
               Unit :
           </label>
@@ -127,7 +105,7 @@ class FormProgress extends React.Component {
                 onChange={this.handlePayload}
               />
             </div>
-          </div>
+          </div> */}
           <div className="form-group row">
             <label htmlFor="setColor" className="col-3 col-form-label">
               set Color :

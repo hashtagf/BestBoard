@@ -1,5 +1,7 @@
 import React from 'react'
 import WidgetStore from '../../store/WidgetStore'
+import FormInput from './Input/FormInputBasic'
+import InputText from './Input/InputText'
 
 class FormProgress extends React.Component {
   constructor(props) {
@@ -55,35 +57,10 @@ class FormProgress extends React.Component {
     return (
       <div className="FormProgressBar container">
         <form>
-          <div className="form-group row">
-            <label htmlFor="title" className="col-3 col-form-label">
-              Title :
-          </label>
-            <div className="col-9">
-              <input
-                name="title"
-                type="text"
-                className="form-control"
-                value={payload.title}
-                onChange={this.handlePayload}
-              />
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="percent" className="col-3 col-form-label">
-              Value :
-          </label>
-            <div className="col-9">
-              <input
-                name="percent"
-                type="text"
-                className="form-control"
-                value={payload.percent}
-                onChange={this.handlePayload}
-              />
-            </div>
-          </div>
-          <div className="form-group row">
+          <FormInput callback={this.handlePayload} values={this.state} />
+          <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit}/>
+
+          {/* <div className="form-group row">
             <label htmlFor="unit" className="col-3 col-form-label">
               Unit :
           </label>
@@ -96,7 +73,7 @@ class FormProgress extends React.Component {
                 onChange={this.handlePayload}
               />
             </div>
-          </div>
+          </div> */}
           <div className="form-group row">
             <label htmlFor="strokeColor" className="col-3 col-form-label">
               Stroke Color :

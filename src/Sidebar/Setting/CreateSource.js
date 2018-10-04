@@ -6,7 +6,7 @@ class CreateSource extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      type: 'netpie'
+      type: 'netpie' || this.props.type
     }
   }
   handleChange (e) {
