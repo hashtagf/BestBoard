@@ -9,7 +9,7 @@
     height:70px;
     width:70px;
     background-color:white;
-    position:absolute;
+    position: fixed;
     bottom:20px;
     right:20px;
     font-size:40px;
