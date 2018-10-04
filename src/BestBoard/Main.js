@@ -7,7 +7,6 @@ import socketIOClient from 'socket.io-client'
 import Muuri from 'muuri'
 import axios from 'axios'
 import WidgetStore from '../store/WidgetStore'
-import NETPIEMicrogear from '../store/Microgear'
 //const $ = require("jquery");
 let server = 'http://172.18.6.7:5582'
 const socket = socketIOClient(server)
@@ -22,9 +21,7 @@ class Main extends Component {
   }
 
   componentWillMount() {
-    NETPIEMicrogear.createDatasource()
     this.response()
-
   }
 
   componentDidMount() {

@@ -64,3 +64,16 @@ ul.list-inline {
     background: linear-gradient(135deg, #fdd24e 7%,#fdd24e 39%,#fdd24e 39%,#557486 51%,#1b2a49 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdd24e', endColorstr='#1b2a49',GradientType=1 );
 }
+.tail {
+    
+}
+.statusSource {
+    width: 10px;
+    height: 10px;
+}
+#online {
+    background: var(--activePresence);
+}
+#offline {
+    background: var(--titleItem);
+}

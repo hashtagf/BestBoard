@@ -1,5 +1,7 @@
 import { observable } from 'mobx'
 import axios from 'axios'
+import React from 'react'
+import ListDatasource from './ListDatasource'
 
 class DatasourceStore {
   @observable datasources = null
@@ -22,6 +24,12 @@ class DatasourceStore {
   deleteDatasource(datasourceId) {
     axios.delete(this.server + '/datasource/' + datasourceId).then((res) => 
       console.log(res)
+    )
+  }
+
+  listsDatasources() {
+    return this.datasources.map((datasource) => 
+      <ListDatasource key={datasource._id} datasource={datasource}/>
     )
   }
 }

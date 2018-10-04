@@ -1,17 +1,19 @@
 import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import Store from '../store/Store'
+import DatasourceStore from '../store/DatasourceStore'
 
 class FormCardBox extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       title: 'Card Box',
-      value: 0,
+      value: '',
+      datasource: '',
       unit: '',
       icon: '',
       status: true,
-      // boardId: this.props.boardId
+      listDatasources: DatasourceStore.listsDatasources()
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
@@ -28,14 +30,16 @@ class FormCardBox extends React.Component {
       typeWidget: 'CardBox',
       title: this.state.title,
       value: this.state.value,
+      datasource: this.state.datasource,
       unit: this.state.unit,
       icon: this.state.icon
     }
     console.log(payload)
     WidgetStore.createWidget(Store.currentId, payload)
     this.setState({
-      title: 'Card Box',
-      value: 0,
+      title: null || 'Card Box',
+      value: '',
+      datasource: '',
       unit: '',
       icon: '',
       status: true
@@ -61,6 +65,16 @@ class FormCardBox extends React.Component {
           </div>
         </div>
         <div className="form-group row">
+          <label htmlFor="datasource" className="col-3 col-form-label">
+            Datasource :
+          </label>
+          <div className="col-9">
+            <select className="custom-select">
+            {payload.listDatasources}
+            </select>
+          </div>
+        </div>
+        <div className="form-group row">
           <label htmlFor="value" className="col-3 col-form-label">
             Value :
           </label>
@@ -71,6 +85,7 @@ class FormCardBox extends React.Component {
               className="form-control"
               value={payload.value}
               onChange={this.handlePayload}
+              placeholder="Topic :: /room/temp"
             />
           </div>
         </div>
@@ -117,5 +132,6 @@ class FormCardBox extends React.Component {
     )
   }
 }
+
 
 export default FormCardBox

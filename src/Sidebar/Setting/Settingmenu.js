@@ -9,9 +9,11 @@ class Settingmenu extends Component {
       colorId: this.props.colorId,
     }
   }
+
   render() {
+    const mode = this.props.mode
     return (
-      <div>
+      <div className={(mode)? 'false': 'd-none'}>
         <ul className="list-unstyled components">
           <DataSource/>
         </ul>

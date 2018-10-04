@@ -9,8 +9,8 @@ class CardBox extends React.Component {
       value: 0,
       previousValue: 0,
       store: {
-        topic: "",
-        msg: ""
+        topic: '',
+        msg: ''
       }
     }
   }
@@ -22,7 +22,6 @@ class CardBox extends React.Component {
 
   componentWillMount() {
     const microgear = NETPIEMicrogear.microgear
-    microgear.on('closed', () => console.log('Close'))
     microgear.on('message', this.onMessage.bind(this))
   }
 
@@ -50,8 +49,8 @@ class CardBox extends React.Component {
     if (state.value - state.previousValue >= 0) arrow = 'up text-success'
     else arrow = 'down text-danger'
     return (
-      <div className="CardBox col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3 border-0 item">
-        <div className="card border-primary shadow rounded-0 border-10 widgetCard item-content">
+      <div className="CardBox col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3 item">
+        <div className="card rounded-0 border-10 widgetCard item-content">
           <h5 className="card-header">{payload.title}</h5>
           <div className="card-body ">
             <div className="row pb-2">

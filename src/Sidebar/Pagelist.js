@@ -149,7 +149,7 @@ class Page extends Component {
       }
       if (editPage !== index) {
         lspage =
-          <Link to={'/board/' + page.id} onClick={() => this.handleClickpage(page.id)} className={(this.state.selectPage === page.id) ? 'active' : ''}>
+          <Link to={'/board/' + page.id} onClick={() => this.handleClickpage(page.id)} key={page.id} className={(this.state.selectPage === page.id) ? 'active' : ''}>
             <li>
               <div className="row">
                 <div className="col-8 col-sm-10 text-truncate">

@@ -61,7 +61,6 @@ class ColorSetting extends Component {
   }
   render() {
     return (
-      <ul className="list-unstyled components" >
         <li>
           <a> Color </a>
           <ul className="list-inline" > {this.state.colorSet.map((colors, i) => (
@@ -74,7 +73,6 @@ class ColorSetting extends Component {
           ))}
           </ul>
         </li>
-      </ul>
     )
   }
 }
