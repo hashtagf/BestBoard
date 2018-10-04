@@ -1,10 +1,13 @@
+
 import React, { Component } from 'react'
-//import './Settingmenu.css'
+import JsInput from '../../FormWidgets/JsInput'
+import DatasourceStore from '../../store/DatasourceStore'
+
 class FormSource extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: 'netpie',
+      name: 'NETPIE Microgear',
       appID: '',
       key: '',
       secret: '',
@@ -14,10 +17,41 @@ class FormSource extends Component {
     }
     this.handleChange = this.handleChange.bind(this)
   }
+
   handleChange (e) {
     this.setState({
       [e.target.name]: e.target.value
-  })
+    })
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+    const state = this.state
+    let payload = {
+      typeDatasource: 'NETPIE',
+      name: state.name,
+      appID: state.appID,
+      key: state.key,
+      secret: state.secret,
+      topic: state.topic,
+      jsOnconnect: state.jsOnconnect,
+      jsOncreated: state.jsOncreated
+    }
+    this.setState({
+      name: 'NETPIE Microgear',
+      appID: '',
+      key: '',
+      secret: '',
+      topic: '/#',
+      jsOnconnect: '',
+      jsOncreated: ''
+    })
+    DatasourceStore.createDatasource(payload)
+  }
+  inputJs = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
   render() {
     return (
@@ -37,7 +71,7 @@ class FormSource extends Component {
         </div>
         <div className="form-group">
           <label htmlFor="secret">Secret *</label>
-          <input type="password" className="form-control" id="secret" name="secret" placeholder="Enter Secret" onChange={this.handleChange}/>
+          <input type="password" className="form-control" id="secret" name="secret" placeholder="Enter Secret" onChange={this.handleChange} required/>
         </div>
         <div className="form-group">
           <label htmlFor="topic">Subscribed Topics</label>
@@ -45,17 +79,17 @@ class FormSource extends Component {
         </div>
         <details open="">
           <summary>Advance</summary>
-          <div className="form-group">
+          <div className="form-group my-1">
             <label htmlFor="jsOncreated">Oncreated Action</label>
-            <input type="text" className="form-control" id="jsOncreated" name="jsOncreated" placeholder="Enter Java script" onChange={this.handleChange}/>
+            <JsInput name={"jsOncreated"} callback={this.inputJs}/>
             <small>Java script code to run after a datasource is created.</small>
             <label htmlFor="jsOnconnect">Onconnected Action</label>
-            <input type="text" className="form-control" id="jsOnconnect" name="jsOnconnect" placeholder="Enter Java script" onChange={this.handleChange}/>
+            <JsInput name={"jsOnconnect"} callback={this.inputJs}/>
             <small>Java script code to run after a datasource is created.</small>
           </div>
           
         </details>
-        <button type="submit" className="btn btn-primary">Save</button>
+        <button type="submit" onClick={this.handleSubmit.bind(this)} className="btn btn-primary">Save</button>
       </div>
     )
   }

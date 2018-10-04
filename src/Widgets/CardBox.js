@@ -17,7 +17,7 @@ class CardBox extends React.Component {
 
   delWidget() {
     const widgetId = this.props.widgetId
-    WidgetStore.delWidgetToDB(widgetId)
+    WidgetStore.deleteWidget(widgetId)
   }
 
   componentWillMount() {
@@ -50,7 +50,7 @@ class CardBox extends React.Component {
     if (state.value - state.previousValue >= 0) arrow = 'up text-success'
     else arrow = 'down text-danger'
     return (
-      <div className="CardBox col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3 item">
+      <div className="CardBox col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3 border-0 item">
         <div className="card border-primary shadow rounded-0 border-10 widgetCard item-content">
           <h5 className="card-header">{payload.title}</h5>
           <div className="card-body ">

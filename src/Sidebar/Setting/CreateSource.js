@@ -31,7 +31,7 @@ class CreateSource extends Component {
                   <label htmlFor="type">Type</label>
                   <select className="form-control" id="type" onChange={this.handleChange.bind(this)}>
                     <option value="netpie">Netpie Microgear</option>
-                    <option value="mqtt">MQTT</option>
+                    <option value="localhostMongodb">Localhost MongoDB</option>
                   </select>
                 </div>
                 <FormSource type={this.state.type}/>
@@ -47,7 +47,7 @@ class FormSource extends Component {
   render () {
     switch (this.props.type) {
       case 'netpie': return <FormNetpie/>
-      case 'mqtt': return <FormMqtt/>
+      case 'localhostMongodb': return <FormMqtt/>
       default: return "please select"
     }
   }

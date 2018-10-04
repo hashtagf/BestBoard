@@ -23,8 +23,9 @@
     border: 1px solid var(--mentionBadge);
     border-radius: 3px;
     font-size: 25px;
-    color: var(--mentionBadge);
-    background-color: var(--themeBGHover);
+    color: var(--textColor);
+    
+    background-color: var(--titleItem);
   }
   .item.muuri-item-dragging .item-content,
   .item.muuri-item-releasing .item-content {

@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: false,
+      mode: Store.mode,
       colorId: 0
     }
   }
@@ -20,11 +20,10 @@ class App extends Component {
     return (
       <div className="App">
         <div className="wrapper">
-          <Sidebar callback={this.clickSetting} mode={mode} colorId={this.state.colorId} />
+          <Sidebar clickSetting={this.clickSetting} colorId={this.state.colorId} />
           <div id="content">
             <Hamburger />
             <Routing />
-            
           </div>
           
         </div>

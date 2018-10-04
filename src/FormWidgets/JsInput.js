@@ -1,52 +1,43 @@
+/* eslint no-eval: 0 */
 import React from 'react'
-import WidgetStore from '../../store/WidgetStore'
 
 class JsInput extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      text: '',
+      code: '',
+      error: null
     }
-    this.handlePayload = this.handlePayload.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
-  handlePayload(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+  handleChange(e) {
+    let codeStr =e.target.value
+    let error = null
 
-  handleSubmit(e) {
-    e.preventDefault()
-    let payload = {
-      typeWidget: 'Text',
-      title: this.state.title,
-      text: this.state.text
+    try {
+      eval(codeStr)
     }
-    console.log(payload)
-    WidgetStore.addWidgetToDB(this.props.machineId, payload)
+    catch (err) {
+      error = err
+      console.log(err)
+    }
     this.setState({
-      title: 'Text',
-      text: ''
+      code: codeStr,
+      error: error
     })
+    if(error!==null) codeStr = ''
+    this.props.callback(e,codeStr)
   }
-
+  
   processScrirt () {
 
   }
   render() {
-    const payload = this.state
+    const name = this.props.name
     return (
-      <div className="FormProgressBar container">
-        <form>
-          <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Java sricpt</span>
-            </div>
-            <textarea class="form-control" aria-label="With textarea" name="text" onChange={this.handlePayload}></textarea>
-          </div>
-        </form>
-        {}
+      <div>
+        <input type="text" className={(this.state.error===null)?'form-control is-valid':'form-control is-invalid'} id={name} name={name} placeholder="Enter Java script" onChange={this.handleChange}/>
       </div>
     )
   }

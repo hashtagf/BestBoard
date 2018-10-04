@@ -80,7 +80,6 @@ class Page extends Component {
         addPage: false,
         inputName: '',
         editPage: null,
-        selectPage: tem.length - 1
       })
     }
   }
@@ -110,9 +109,9 @@ class Page extends Component {
     })
   }
 
-  handleClickpage = (index, pageId) => {
+  handleClickpage = (pageId) => {
     this.setState({
-      selectPage: index
+      selectPage: pageId
     })
     Store.currentId = pageId
   }
@@ -150,7 +149,8 @@ class Page extends Component {
       }
       if (editPage !== index) {
         lspage =
-            <li className={(this.state.selectPage === index) ? 'active' : ''}><span onClick={() => this.handleClickpage(index, page.id)}>
+          <Link to={'/board/' + page.id} onClick={() => this.handleClickpage(page.id)} className={(this.state.selectPage === page.id) ? 'active' : ''}>
+            <li>
               <div className="row">
                 <div className="col-8 col-sm-10 text-truncate">
                   {page.name}
@@ -160,8 +160,8 @@ class Page extends Component {
                   <i className="fas fa-minus-square editbtn" onClick={() => this.deletePage(page.id)}></i>
                 </div>
               </div>
-            </span>
           </li>
+          </Link>
       } else {
         lspage =
           <div className="input-group addpage">
@@ -177,7 +177,7 @@ class Page extends Component {
             </div>
           </div>
       }
-      return <Link to={'/board/' + page.id} key={page.id} >{lspage}</Link>
+      return lspage
     })
     return (
       <ul className="list-unstyled components">

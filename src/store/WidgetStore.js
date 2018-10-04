@@ -30,6 +30,18 @@ class WidgetStore {
     })
   }
 
+  updateWidget(widgetId, payload) {
+    axios.put(this.server + '/widget/' + widgetId, payload).then((res) => 
+      console.log(res)
+    )
+  }
+
+  deleteWidget(widgetId) {
+    axios.delete(this.server + '/widget/' + widgetId).then((res) => 
+      console.log(res)
+    )
+  }
+
   showWidgets() {
     return this.widgets.map((widget) => {
       switch (widget.widget.typeWidget) {

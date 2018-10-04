@@ -35,28 +35,27 @@
     display: block;
     color: var(--textColor);
     text-decoration: none;
-    &.second {
-        color: var(--hoverItem);
-    }
-    .editbtn {
-        display: none;
-    }
 }
+#sidebar ul li .editmenu{
+        display: none;
+}
+li {
 
-#sidebar ul li a:hover {
+}
+#sidebar ul a:hover {
     color: var(--textColor);
     background: var(--hoverItem);
-    .editbtn {
-        display: inline;
-        color: var(--textColor);
-    }
 }
-#sidebar ul li.active > a {
+#sidebar ul a :hover > .editmenu {
+    display: inline;
+    color: var(--textColor);
+}
+#sidebar ul a.active{
     color: var(--textColor);
     background: var(--activeItem);
 }
 
-//collapse
+
 a[data-toggle="collapse"] {
     position: relative;
 }

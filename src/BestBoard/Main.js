@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import React, {
+  Component
+} from 'react'
 import './Main.css'
 import Store from '../store/Store'
 import socketIOClient from 'socket.io-client'
@@ -56,9 +58,8 @@ class Main extends Component {
       dragEnabled: true,
       dragContainer: document.body,
       itemClass: 'col-3',
-      dragStartPredicate: {
-        distance: 5,
-        handle: (item, event) => {
+      dragStartPredicate: (item, e) => {
+        if (e.distance > 10) {
           return Store.mode
         }
       },
@@ -72,9 +73,7 @@ class Main extends Component {
   }
 
   componentWillUnmount() {
-    console.log('UnMount')
-    grid.destroy()
-    grid = null
+    grid.destroy(true)
     this.setState({
       listWidgets: []
     })
@@ -82,17 +81,10 @@ class Main extends Component {
 
   render() {
     const listWidgets = this.state.listWidgets
-    console.log('GRID :', grid)
-    return (
-
-
-      <div className='grid'>
-
-        {listWidgets}
-
+    return ( 
+      <div className = 'grid'> 
+      {listWidgets} 
       </div>
-
-
     )
   }
 }

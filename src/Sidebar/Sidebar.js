@@ -2,8 +2,16 @@ import React, { Component } from 'react'
 import './Sidebar.css'
 import Settingmenu from './Setting/Settingmenu'
 import Pagelist from './Pagelist'
-const $ = require("jquery");
+import Store from '../store/Store'
+const $ = require("jquery")
+
 class Page extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      mode: Store.mode
+    }
+  }
   componentDidMount() {
     $(document).ready(function () {
       $("#sidebarCollapse").on("click", function () {
@@ -14,9 +22,13 @@ class Page extends Component {
   }
   handleClick = (e) => {
     e.preventDefault();
-    this.props.callback(!this.props.mode);
+    this.props.clickSetting(!Store.mode)
+    this.setState({
+      mode: Store.mode
+    })
   }
   render() {
+    const mode = this.state.mode
     return (
       <div className="wrapper">
         <nav id="sidebar">
@@ -25,9 +37,9 @@ class Page extends Component {
             <p className="">Dashboard for IoT</p>
           </div>
           <Pagelist />
-          {(this.props.mode) ? <Settingmenu colorId={this.props.colorId} /> : ''}
+          {(mode) ? <Settingmenu colorId={this.props.colorId} /> : ''}
           <ul className="list-unstyled CTAs">
-            <li><a className="article" onClick={this.handleClick}>{(this.props.mode) ? 'Done' : 'Setting'}</a></li>
+            <li><a className="article" onClick={this.handleClick}>{(mode) ? 'Done' : 'Setting'}</a></li>
           </ul>
         </nav>
       </div>
