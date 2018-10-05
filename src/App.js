@@ -3,8 +3,6 @@ import './App.css'
 import ButtonAdd from './FormWidgets/ButtonAdd'
 import Sidebar from './Sidebar/Sidebar'
 import Hamburger from './Sidebar/Hamburger'
-import CreateSource from './Sidebar/Setting/CreateSource'
-
 import Routing from './routes'
 import Store from './store/Store'
 class App extends Component {
@@ -28,7 +26,6 @@ class App extends Component {
           
         </div>
         {(mode) ? <ButtonAdd /> : ''}
-        <CreateSource />
       </div>
     )
   }

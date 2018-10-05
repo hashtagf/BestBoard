@@ -8,7 +8,7 @@ import socketIOClient from 'socket.io-client'
 
 let server = 'http://172.18.6.7:5582'
 const socket = socketIOClient(server)
-let connect = socket.connected
+let connect = true
 class Page extends Component {
   constructor(props) {
     super(props);
@@ -158,12 +158,12 @@ class Page extends Component {
           <Link to={'/board/' + page.id} onClick={() => this.handleClickpage(page.id)} key={page.id} className={(this.state.selectPage === page.id) ? 'active' : ''}>
             <li>
               <div className="row">
-                <div className="col-8 col-sm-10 text-truncate">
+                <div className="col-10 col-sm-10 text-truncate">
                   {page.name}
                 </div>
                 <div className="col-2 col-sm-2 editmenu px-0">
                   <i className="fas fa-pen-square editbtn mr-1" onClick={() => this.clickEdit(index)}></i>
-                  <i className="fas fa-minus-square editbtn" onClick={() => this.deletePage(page.id)}></i>
+                  <i className="fas fa-minus-square editbtn del" onClick={() => this.deletePage(page.id)}></i>
                 </div>
               </div>
           </li>
@@ -197,9 +197,6 @@ class Page extends Component {
       </ul>
     )
   }
-}
-class Pageslist extends Component{
-
 }
 
 export default Page

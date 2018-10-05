@@ -5,3 +5,6 @@
 .second {
     color: var(--hoverItem);
 }
+.editbtn.del {
+    color: #ce4e4e;
+  }

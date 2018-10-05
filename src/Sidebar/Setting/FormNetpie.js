@@ -7,34 +7,55 @@ class FormSource extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: 'NETPIE Microgear'|| this.props.name,
-      appID: '' || this.props.appID,
-      key: '' || this.props.key,
-      secret: '' || this.props.secret,
-      topic: '/#' || this.props.topic,
-      jsOnconnect: '' || this.props.jsOnconnect,
-      jsOncreated: '' || this.props.jsOnconnect
+      name: 'NETPIE Microgear',
+      appID: '',
+      key: '',
+      secret: '',
+      topic: '/#',
+      jsOnconnect: '',
+      jsOncreated: '',
+      _id: ''
     }
-    this.handleChange = this.handleChange.bind(this)
+    //this.handleChange = this.handleChange.bind(this)
+    
   }
-
-  handleChange (e) {
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.values !== undefined) {
+      var props = nextProps.values.datasource
+      this.setState({
+        _id: nextProps.values._id,
+        typeDatasource: props.typeDatasource,
+        name: props.name,
+        appID: props.appID,
+        key: props.key,
+        secret: props.secret,
+        topic: props.topic,
+        jsOnconnect: props.jsOnconnect,
+        jsOncreated: props.jsOncreated
+      })
+    }
+  }
+  handleChange = (e) =>{
     this.setState({
       [e.target.name]: e.target.value
     })
   }
-  handleSubmit(e) {
+  handleNew = (e)=> {
     e.preventDefault()
     const state = this.state
-    let payload = {
-      typeDatasource: 'NETPIE',
-      name: state.name,
-      appID: state.appID,
-      key: state.key,
-      secret: state.secret,
-      topic: state.topic,
-      jsOnconnect: state.jsOnconnect,
-      jsOncreated: state.jsOncreated
+    if (state.appID&&state.key&&state.secret){
+      let payload = {
+        typeDatasource: 'NETPIE',
+        name: state.name,
+        appID: state.appID,
+        key: state.key,
+        secret: state.secret,
+        topic: state.topic,
+        jsOnconnect: state.jsOnconnect,
+        jsOncreated: state.jsOncreated
+      }
+
+      DatasourceStore.createDatasource(payload)
     }
     this.setState({
       name: 'NETPIE Microgear',
@@ -45,47 +66,96 @@ class FormSource extends Component {
       jsOnconnect: '',
       jsOncreated: ''
     })
-    DatasourceStore.createDatasource(payload)
+  }
+  handleEdit=(e)=> {
+    e.preventDefault()
+    const state = this.state
+    if (state.appID&&state.key&&state.secret){
+      let payload = {
+        typeDatasource: 'NETPIE',
+        name: state.name,
+        appID: state.appID,
+        key: state.key,
+        secret: state.secret,
+        topic: state.topic,
+        jsOnconnect: state.jsOnconnect,
+        jsOncreated: state.jsOncreated
+      }
+      DatasourceStore.updateDatasource(state._id, payload)
+    }
+    this.setState({
+      name: 'NETPIE Microgear',
+      appID: '',
+      key: '',
+      secret: '',
+      topic: '/#',
+      jsOnconnect: '',
+      jsOncreated: ''
+    })
   }
   render() {
+    var values = this.state
+    var _id = null
+    if (this.props.values !== undefined) {
+      var props = this.props.values.datasource
+      _id = this.props.values._id
+      values = {
+        appID: props.appID,
+        key: props.key,
+        name: props.name,
+        secret: props.secret,
+        topic: props.topic,
+        typeDatasource: props.typeDatasource
+      }
+    }
     return (
       <div>
         <div className="form-group">
           <label htmlFor="name">Name</label>
-          <input type="text" className="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Enter name" onChange={this.handleChange}/>
+          <input type="text" className="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Enter name" onChange={this.handleChange} defaultValue={values.name}/>
         </div>
         <div className="form-group">
           <label htmlFor="appID">App ID *</label>
-          <input type="text" className="form-control" id="appID" name="appID" aria-describedby="emailHelp" placeholder="Enter App ID" onChange={this.handleChange}/>
+          <input type="text" className="form-control" id="appID" name="appID" aria-describedby="emailHelp" placeholder="Enter App ID" onChange={this.handleChange} defaultValue={values.appID}/>
           <small id="emailHelp" className="form-text text-muted">NETPIE App name obtained from <a href="https://netpie.io/app">https://netpie.io/app</a></small>
         </div>
         <div className="form-group">
           <label htmlFor="key">Key *</label>
-          <input type="text" className="form-control" id="key" name="key" aria-describedby="emailHelp" placeholder="Enter Key" onChange={this.handleChange}/>
+          <input type="text" className="form-control" id="key" name="key" aria-describedby="emailHelp" placeholder="Enter Key" onChange={this.handleChange} defaultValue={values.key}/>
         </div>
         <div className="form-group">
           <label htmlFor="secret">Secret *</label>
-          <input type="password" className="form-control" id="secret" name="secret" placeholder="Enter Secret" onChange={this.handleChange} required/>
+          <input type="password" className="form-control" id="secret" name="secret" placeholder="Enter Secret" onChange={this.handleChange} defaultValue={values.secret}/>
         </div>
         <div className="form-group">
           <label htmlFor="topic">Subscribed Topics</label>
-          <input type="text" className="form-control" id="topic" name="topic" placeholder="Enter Topics" value={this.state.topic} onChange={this.handleChange}/>
+          <input type="text" className="form-control" id="topic" name="topic" placeholder="Enter Topics" value={this.state.topic} onChange={this.handleChange} defaultValue={values.topic}/>
         </div>
         <details open="">
           <summary>Advance</summary>
           <div className="form-group my-1">
             <label htmlFor="jsOncreated">Oncreated Action</label>
-            <JsInput name={"jsOncreated"} callback={this.handleChange}/>
+            <JsInput name={"jsOncreated"} callback={this.handleChange} defaultValue={values.jsOncreated}/>
             <small>Java script code to run after a datasource is created.</small>
             <label htmlFor="jsOnconnect">Onconnected Action</label>
-            <JsInput name={"jsOnconnect"} callback={this.handleChange}/>
+            <JsInput name={"jsOnconnect"} callback={this.handleChange} defaultValue={values.jsOnconnect}/>
             <small>Java script code to run after a datasource is created.</small>
           </div>
           
         </details>
-        <button type="submit" onClick={this.handleSubmit.bind(this)} className="btn btn-primary" aria-hidden="true">Save</button>
+        <Buttonform _id={_id} edit={this.handleEdit} new={this.handleNew}/>
+
       </div>
     )
+  }
+}
+class Buttonform extends Component {
+  render () {
+    if (this.props._id) {
+      return <button type="submit" onClick={this.props.edit} className="btn btn-primary" data-dismiss="modal" aria-label="Close" aria-hidden={true}>Edit</button>
+    }
+    return <button type="submit" onClick={this.props.new} className="btn btn-primary" data-dismiss="modal" aria-label="Close" aria-hidden={true}>Save</button>
+
   }
 }
 

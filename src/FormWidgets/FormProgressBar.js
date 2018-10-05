@@ -1,6 +1,6 @@
 import React from 'react'
 import WidgetStore from '../../store/WidgetStore'
-import FormInput from './Input/FormInputBasic'
+import FormInputBasic from './Input/FormInputBasic'
 import InputText from './Input/InputText'
 
 class FormProgress extends React.Component {
@@ -57,7 +57,7 @@ class FormProgress extends React.Component {
     return (
       <div className="FormProgressBar container">
         <form>
-          <FormInput callback={this.handlePayload} values={this.state} />
+          <FormInputBasic callback={this.handlePayload} values={this.state} />
           <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit}/>
 
           {/* <div className="form-group row">

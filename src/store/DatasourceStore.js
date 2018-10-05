@@ -2,7 +2,7 @@ import { observable } from 'mobx'
 import axios from 'axios'
 import React from 'react'
 import ListDatasource from './ListDatasource'
-import NETPIEMicrogear from './Microgear'
+//import NETPIEMicrogear from './Microgear'
 import LocalStore from './LocalStore'
 class DatasourceStore {
   @observable datasources = null
@@ -18,15 +18,15 @@ class DatasourceStore {
       _id: LocalStore.local.datasources.length,
       datasource: payload
     }
-    LocalStore.local.datasources.push(obj)
-    NETPIEMicrogear.createDatasource(LocalStore.local.datasources)
-    console.log(LocalStore.local.datasources)
+    LocalStore.local.datasources.peek(obj)
+    // NETPIEMicrogear.createMicrogear(LocalStore.local.datasources)
   }
 
   updateDatasource(datasourceId, payload) {
-    axios.put(this.server + '/datasource/' + datasourceId, payload).then((res) => 
+    axios.put(this.server + '/datasource/' + datasourceId, {datasource : payload}).then((res) => 
       console.log(res)
     )
+    console.log(payload)
     LocalStore.local.datasources[datasourceId] = payload
   }
 

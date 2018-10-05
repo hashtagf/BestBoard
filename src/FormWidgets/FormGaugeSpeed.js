@@ -1,6 +1,6 @@
 import React from 'react'
 import WidgetStore from '../../store/WidgetStore'
-import FormInput from './Input/FormInputBasic'
+import FormInputBasic from './Input/FormInputBasic'
 import InputText from './Input/InputText'
 
 class FormGaugeSpeed extends React.Component {
@@ -64,7 +64,7 @@ class FormGaugeSpeed extends React.Component {
     return (
       <div className="FormGuage container">
         <form>
-          <FormInput callback={this.handlePayload} values={this.state} />
+          <FormInputBasic callback={this.handlePayload} values={this.state} />
           <InputText callback={this.handlePayload} title="Min Value" name="minvalue" value={payload.minvalue}/>
           <InputText callback={this.handlePayload} title="Max Value" name="maxvalue" value={payload.maxvalue}/>
           {/* <div className="form-group row">

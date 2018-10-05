@@ -8,10 +8,6 @@ class CardBox extends React.Component {
     this.state = {
       value: 0,
       previousValue: 0,
-      store: {
-        topic: '',
-        msg: ''
-      }
     }
   }
 
@@ -21,21 +17,17 @@ class CardBox extends React.Component {
   }
 
   componentWillMount() {
-    const microgear = NETPIEMicrogear.microgear
+    const payload = this.props.payload
+    const microgear = NETPIEMicrogear.microgear[payload.datasource]
     microgear.on('message', this.onMessage.bind(this))
   }
 
   onMessage(topic, msg) {
     const payload = this.props.payload
+    const strMsg = msg + ''
     if (payload.value === topic) {
       this.setState({
-        store: {
-          topic: topic + "",
-          msg: msg + ""
-        }
-      })
-      this.setState({
-        value: this.state.store.msg.split(",")[0],
+        value: strMsg.split(payload.filter)[payload.filterIndex],
         previousValue: this.state.value
       })
     }

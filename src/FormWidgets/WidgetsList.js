@@ -1,5 +1,6 @@
 import React from 'react'
 import FormCardBox from './FormCardBox'
+import FormGauge from './FormGauge'
 import './WidgetsList.css'
 class WidgetsList extends React.Component {
 
@@ -27,11 +28,19 @@ class WidgetsList extends React.Component {
       selectType: 0
     }
   }
+
   selectWidget(e) {
     this.setState({
       selectType: e.target.name
     })
   }
+
+  componentWillUnMount() {
+    this.setState({
+      selectType: 0
+    })
+  }
+
   render() {
     // const boardId = this.props.match.params.boardId
     let listWidget = this.state.widgets.map((widget, index) => {
@@ -67,6 +76,8 @@ class SelectType extends React.Component {
     switch (selectType) {
       case 'CardBox':
         return <FormCardBox />
+      case 'Gauge' : 
+        return <FormGauge />
       default:
         return <h1>Please select widget</h1>
     }

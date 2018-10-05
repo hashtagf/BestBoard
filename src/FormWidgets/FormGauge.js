@@ -1,6 +1,6 @@
 import React from 'react'
-import WidgetStore from '../../store/WidgetStore'
-import FormInput from './Input/FormInputBasic'
+import WidgetStore from '../store/WidgetStore'
+import FormInputBasic from './Input/FormInputBasic'
 import InputText from './Input/InputText'
 class FormGauge extends React.Component {
   constructor(props) {
@@ -15,14 +15,17 @@ class FormGauge extends React.Component {
       theme: 'light',
       mode: 'gauge',
       enableAnimation: true,
-      machineId: this.props.machineId
+      datasource: '',
+      filter: '',
+      filterIndex: 0,
+      boardId: this.props.boardId
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
 
   handlePayload(e) {
     this.setState({
-        [e.target.name]: e.target.value
+      [e.target.name]: e.target.value
     })
   }
 
@@ -38,10 +41,12 @@ class FormGauge extends React.Component {
       setColor: this.state.setColor,
       theme: this.state.theme,
       mode: this.state.mode,
-      enableAnimation: this.state.enableAnimation
+      enableAnimation: this.state.enableAnimation,
+      datasource: this.state.datasource,
+      filter: this.state.filter,
+      filterIndex: this.state.filterIndex
     }
-    console.log(payload)
-    WidgetStore.addWidgetToDB(this.props.machineId, payload)
+    WidgetStore.createWidget(this.props.boardId, payload)
     this.setState({
       title: 'Gauge',
       value: 0,
@@ -51,7 +56,10 @@ class FormGauge extends React.Component {
       setColor: '',
       theme: 'light',
       mode: 'gauge',
-      enableAnimation: true
+      enableAnimation: true,
+      datasource: '',
+      filter: '',
+      filterIndex: 0
     })
   }
   render() {
@@ -59,61 +67,18 @@ class FormGauge extends React.Component {
     return (
       <div className="FormGuage container">
         <form>
-          <FormInput callback={this.handlePayload} values={payload} />
-          <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit}/>
-          <InputText callback={this.handlePayload} title="Min Value" name="minvalue" value={payload.minvalue}/>
-          <InputText callback={this.handlePayload} title="Max Value" name="maxvalue" value={payload.maxvalue}/>
-          {/* <div className="form-group row">
-            <label htmlFor="minvalue" className="col-3 col-form-label">
-              Min Value :
-          </label>
-            <div className="col-9">
-              <input
-                name="minvalue"
-                type="text"
-                className="form-control"
-                value={payload.minvalue}
-                onChange={this.handlePayload}
-              />
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="maxvalue" className="col-3 col-form-label">
-              Max Value :
-          </label>
-            <div className="col-9">
-              <input
-                name="maxvalue"
-                type="text"
-                className="form-control"
-                value={payload.maxvalue}
-                onChange={this.handlePayload}
-              />
-            </div>
-          </div> */}
-          <div className="form-group row">
-            <label htmlFor="setColor" className="col-3 col-form-label">
-              set Color :
-          </label>
-            <div className="col-9">
-              <textarea
-                name="setColor"
-                type="textarea"
-                className="form-control"
-                value={payload.setColor}
-                onChange={this.handlePayload}
-              />
-            </div>
-          </div>
+          <FormInputBasic callback={this.handlePayload} values={payload} />
+          <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit} />
+          <InputText callback={this.handlePayload} title="Min Value" name="minvalue" value={payload.minvalue} />
+          <InputText callback={this.handlePayload} title="Max Value" name="maxvalue" value={payload.maxvalue} />
           <div className="row justify-content-end">
-            <div className="col-3">
-              <button type="submit"
-                className="btn btn-secondary btn-block"
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button"
+                className="btn btn-primary border-0"
                 onClick={this.handleSubmit.bind(this)}
                 data-dismiss="modal" aria-label="Close"
-              >
-                Add
-              </button>
+              ><i className="fas fa-plus-square"></i> Add widget</button>
             </div>
           </div>
         </form>
