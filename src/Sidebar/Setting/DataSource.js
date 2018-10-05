@@ -8,7 +8,7 @@ import CreateSource from './CreateSource'
 import EditSource from './EditSource'
 let server = 'http://172.18.6.7:5582'
 const socket = socketIOClient(server)
-let connect = true
+
 let status = []
 
 class DataSource extends Component {
@@ -27,12 +27,17 @@ class DataSource extends Component {
           topic: "/#",
           typeDatasource: "NETPIE"
         }
-      }
+      },
+      connect: false
     }
   }
-
-  componentDidMount() {
-    if (connect) {
+  componentWillMount () {
+    this.setState({
+      connect: socket.connected
+    })
+  }
+  componentDidMount () {
+    if (this.state.connect) {
       this.getDatasource()
       this.response()
     }
@@ -109,7 +114,7 @@ class ListDataSources extends Component {
     DataSourceStore.deleteDatasource(sourceId)
   }
 
-  checkOnline(id) {
+  checkOnline=(id)=> {
     if (id) {
       NETPIEMicrogear.microgear[id].on('connected', () => {
         status[id] = true

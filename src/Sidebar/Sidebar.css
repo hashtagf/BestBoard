@@ -1,56 +1,62 @@
 @import '../_variable.css';
 
-#sidebar {
+.sidebar {
     min-width: 250px;
     max-width: 250px;
     background: var(--themeBGHover);
     color: var(--textColor);
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
+    max-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
-#sidebar.active {
+.sidebar.active {
     margin-left: -250px;
     transform: rotateY(100deg);
 }
 
-#sidebar .sidebar-header {
+.sidebar .sidebar-header {
     padding: 20px;
     background: var(--titleItem);
 }
 
-#sidebar ul.components {
+.sidebar ul.components {
     padding-bottom: 20px;
     border-bottom: 1px solid var(--borderItem);
 }
 
-#sidebar ul p {
+.sidebar ul p {
     color: var(--textColor);
     padding: 0px 10px;
 }
 
-#sidebar ul li a {
+.sidebar ul li a {
     padding: 10px;
     font-size: 1.1em;
     display: block;
     color: var(--textColor);
     text-decoration: none;
 }
-#sidebar ul li .editmenu{
+.sidebar ul li .editmenu{
         display: none;
 }
 li {
 
 }
-#sidebar ul a:hover {
+.sidebar ul a:hover {
     color: var(--textColor);
     background: var(--hoverItem);
 }
-#sidebar ul a :hover > .editmenu {
+.sidebar ul a:hover #offline{
+    background: var(--textColor);
+}
+.sidebar ul a:hover .editmenu {
     display: inline;
     color: var(--textColor);
 }
-#sidebar ul a.active{
+.sidebar ul a.active{
     color: var(--textColor);
     background: var(--activeItem);
 }

@@ -14,11 +14,8 @@ class DatasourceStore {
     }).then((res) => 
       console.log(res)
     )
-    var obj = {
-      _id: LocalStore.local.datasources.length,
-      datasource: payload
-    }
-    LocalStore.local.datasources.peek(obj)
+    LocalStore.insertDataSource(payload)
+    console.log(LocalStore.local.datasources)
     // NETPIEMicrogear.createMicrogear(LocalStore.local.datasources)
   }
 
@@ -26,8 +23,8 @@ class DatasourceStore {
     axios.put(this.server + '/datasource/' + datasourceId, {datasource : payload}).then((res) => 
       console.log(res)
     )
-    console.log(payload)
-    LocalStore.local.datasources[datasourceId] = payload
+    LocalStore.updateDataSource(datasourceId,payload)
+    console.log(LocalStore.local.datasources)
   }
 
   deleteDatasource(datasourceId) {

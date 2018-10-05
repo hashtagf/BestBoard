@@ -5,8 +5,18 @@
 }
 .listWidgets {
     min-width: 100px;
-    overflow-y: scroll;
-    height: 50vh;
+    overflow-y: auto;
+    min-height: 100%;
 }
-.addwid {
+@media screen and (max-width: 575px) {
+    .listWidgets {
+        min-width: 100%;
+        overflow-x: auto;
+        max-height: 100px;
+        margin-bottom: 10px 
+    }
+    .listwid {
+        display: inline-block;
+        max-width: 33%;
+    }
 }

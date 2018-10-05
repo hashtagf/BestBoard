@@ -113,7 +113,7 @@ class FormInputBasic extends React.Component {
             />
           </div>
           <div className="col-7">
-            <div class="btn-group" role="group" aria-label="First group">
+            <div className="btn-group" role="group" aria-label="First group">
               <ButtonIndex selectIndex={selectOption.body.split(values.filter)} handleChange={handleChange} />
             </div>
           </div>

@@ -15,7 +15,7 @@ class Page extends Component {
   componentDidMount() {
     $(document).ready(function () {
       $("#sidebarCollapse").on("click", function () {
-        $("#sidebar").toggleClass("active");
+        $(".sidebar").toggleClass("active");
         $(this).toggleClass("active");
       });
     });
@@ -31,7 +31,7 @@ class Page extends Component {
     const mode = this.state.mode
     return (
       <div className="wrapper">
-        <nav id="sidebar">
+        <nav className="sidebar" id="scrollbar-style" data-spy="scroll">
           <div className="sidebar-header">
             <a href="/">
               <h3>BestBoard</h3>

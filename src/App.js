@@ -23,9 +23,9 @@ class App extends Component {
             <Hamburger />
             <Routing />
           </div>
-          
+          {(mode) ? <ButtonAdd /> : ''}
         </div>
-        {(mode) ? <ButtonAdd /> : ''}
+        
       </div>
     )
   }

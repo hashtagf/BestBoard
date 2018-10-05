@@ -13,7 +13,9 @@
   outline: none !important;
   border: none;
 }
-
+.navbar-brand {
+  max-width: 50%;
+}
 .line {
   width: 100%;
   height: 1px;
@@ -59,12 +61,12 @@
     MEDIAQUERIES
 ----------------------------------------------------- */
 @media (max-width: 768px) {
-  #sidebar {
+  .sidebar {
     margin-left: -250px;
     transform: rotateY(90deg);
   }
 
-  #sidebar.active {
+  .sidebar.active {
     margin-left: 0;
     transform: none;
   }

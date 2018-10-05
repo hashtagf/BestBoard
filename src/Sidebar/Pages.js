@@ -8,7 +8,7 @@ import socketIOClient from 'socket.io-client'
 
 let server = 'http://172.18.6.7:5582'
 const socket = socketIOClient(server)
-let connect = true
+//let connect = true
 class Page extends Component {
   constructor(props) {
     super(props);
@@ -17,12 +17,17 @@ class Page extends Component {
       pages: [],
       inputName: '',
       editPage: null,
-      selectPage: 0
+      selectPage: 0,
+      connect: false
     }
   }
-
-  componentWillMount() {
-    if (connect) this.response()
+  componentWillMount () {
+    this.setState({
+      connect: socket.connected
+    })
+  }
+  componentDidMount() {
+    if (this.state.connect) this.response()
     else this.loadLocal()
   }
   loadLocal = () => {
@@ -75,11 +80,15 @@ class Page extends Component {
         axios.post( server + '/board/', payload ).then((res) => {
           console.log(res)
         })
+        LocalStore.insertPage(this.state.inputName)
+        console.log(LocalStore.local.pages)
       }
       else {
         axios.put( server + '/board/' + pageId, payload).then((res) => {
           console.log(res)
         })
+        LocalStore.updatePage(index,pageId,this.state.inputName)
+        console.log(LocalStore.local.pages)
       }
       this.setState({
         pages: tem,
@@ -113,6 +122,7 @@ class Page extends Component {
     axios.delete( server + '/board/' + pageId).then((res) => {
       console.log(res)
     })
+    LocalStore.deletePage(pageId)
   }
 
   handleClickpage = (pageId) => {
@@ -170,7 +180,7 @@ class Page extends Component {
           </Link>
       } else {
         lspage =
-          <div className="input-group addpage">
+          <div className="input-group addpage" key={index}>
             <input type="text" className="form-control addpage border-0 rounded-0 " 
               value={this.state.inputName} 
               onBlur={() => this.savePage(index, page.id)} 
@@ -188,8 +198,8 @@ class Page extends Component {
     return (
       <ul className="list-unstyled components">
         <li>
-          <a href="#pageSubmenu" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">Pages</a>
-          <ul className="collapse list-unstyled" id="pageSubmenu">
+          <a href="#pageSubmenu" data-toggle="collapse" aria-haspopup="true" aria-expanded="true">Pages</a>
+          <ul className="collapse list-unstyled show" id="pageSubmenu">
             {listPage}
             <li>{addPage}</li>
           </ul>

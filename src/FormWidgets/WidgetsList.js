@@ -59,10 +59,12 @@ class WidgetsList extends React.Component {
     })
     return (
       <div className="row">
-        <div className="col-3 border-right listWidgets " data-spy="scroll" id="scrollbar-style">
+        <div className="col-sm-3 col-12 border-right listWidgets " data-spy="scroll" id="scrollbar-style">
+          <p><strong>Widget</strong></p>
           {listWidget}
         </div>
-        <div className="col-9">
+        <div className="col-sm-9 col-12">
+          <strong>Form</strong>
           <SelectType selectType={this.state.selectType} />
         </div>
       </div>

@@ -54,7 +54,6 @@ class FormSource extends Component {
         jsOnconnect: state.jsOnconnect,
         jsOncreated: state.jsOncreated
       }
-
       DatasourceStore.createDatasource(payload)
     }
     this.setState({

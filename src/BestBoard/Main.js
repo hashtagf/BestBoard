@@ -9,7 +9,6 @@ import WidgetStore from '../store/WidgetStore'
 //const $ = require("jquery");
 let server = 'http://172.18.6.7:5582'
 const socket = socketIOClient(server)
-let connect = true
 
 var grid = null
 
@@ -17,17 +16,18 @@ class Main extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      listWidgets: []
+      listWidgets: [],
+      connect: false
     }
   }
-
-  componentWillMount() {
-    if (connect) this.response()
-    else this.loadLocal()
+  componentWillMount () {
+    this.setState({
+      connect: socket.connected
+    })
   }
-
   componentDidMount() {
-
+    if (this.state.connect) this.response()
+    else this.loadLocal()
   }
   loadLocal = () => {
     this.setState({

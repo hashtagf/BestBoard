@@ -16,7 +16,7 @@ class CreateSource extends Component {
   }
   render() {
     return (
-      <div className="modal fade ModalCreateSource" data-backdrop="false" tabIndex="-1" role="dialog" aria-hidden="false" >
+      <div className="modal fade ModalCreateSource" data-backdrop="false" tabIndex="-1" role="dialog" id="scrollbar-style" aria-hidden="false" >
         <div className="modal-dialog modal-lg">
           <div className="modal-content text-dark">
             <div className="modal-header">
