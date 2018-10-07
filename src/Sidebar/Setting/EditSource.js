@@ -9,12 +9,10 @@ class EditSource extends Component {
       type: 'NETPIE' || this.props.values.datasource.typeDatasource
     }
   }
-  handleChange (e) {
+  handleChange = (e) => {
     this.setState({
       type: e.target.value
     })
-  }
-  componentWillMount () {
   }
   render() {
     var props = this.props.values
@@ -23,7 +21,7 @@ class EditSource extends Component {
         <div className="modal-dialog modal-lg">
           <div className="modal-content text-dark">
             <div className="modal-header">
-              <h5 className="modal-title">Edit {props.datasource.name} source </h5>
+              <h5 className="modal-title">{(props.datasource.name)?"Edit " + props.datasource.name:"New"} source </h5>
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>

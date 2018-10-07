@@ -1,5 +1,7 @@
 import { observable } from 'mobx'
-
+//import socketIOClient from 'socket.io-client'
+//let server = 'http://172.18.6.7:5582'
+//const socket = socketIOClient(server)
 class LocalStore {
   @observable local = {
     datasources: [
@@ -32,29 +34,27 @@ class LocalStore {
     ],
     microgear: [
     ],
-    listWidgets: [],
     pages: [
         {
             id: 0,
             name: "BoardName"
         }
     ],
-    widgets: [
-        /* {
-            boardId: "01",
-            widget: {
-                _01:{
-                    typeWidget: "CardBox",
-                    title: "title",
-                    value: "",
-                    datasource: "01",
-                    unit: "",
-                    icon: ""
-                }
+    widgets: {
+        0: {
+            boardId: 0,
+            widget:{
+                datasource: "",
+                filter: "/",
+                filterIndex: 0,
+                icon: "p",
+                title: "Card Box",
+                typeWidget: "CardBox",
+                unit: "p",
+                value: ""
             }
-        } */
-
-    ]
+        } 
+    }
   }
   insertPage (name) {
     this.local.pages.push({
@@ -84,6 +84,13 @@ class LocalStore {
         datasource: payload
     }
   }
+  insertWidget (id, payload) {
+    this.local.widgets[id] = {
+        boardId: id,
+        widget: payload
+    }
+  }
+
 }
 
 export default new LocalStore()

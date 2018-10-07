@@ -6,7 +6,7 @@ class NETPIEMicrogear {
 
   @observable microgear = []
 
-  createMicrogear(datasources) {
+  createMicrogear (datasources) {
     datasources.forEach((datasource,index) => {
       if (datasource.datasource.appID&&datasource.datasource.key&&datasource.datasource.secret) {
         this.microgear[datasource._id] = MicroGear.create({

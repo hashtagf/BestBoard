@@ -4,9 +4,10 @@ import LocalStore from '../../store/LocalStore'
 import socketIOClient from 'socket.io-client'
 import axios from 'axios'
 import NETPIEMicrogear from '../../store/Microgear'
-import CreateSource from './CreateSource'
 import EditSource from './EditSource'
 let server = 'http://172.18.6.7:5582'
+server = 'http://localhost:5582'
+
 const socket = socketIOClient(server)
 
 let status = []
@@ -16,7 +17,6 @@ class DataSource extends Component {
     super(props)
     this.state = {
       datasources: [],
-      createState: false,
       editSource: {
         _id: "",
         datasource: {
@@ -28,7 +28,7 @@ class DataSource extends Component {
           typeDatasource: "NETPIE"
         }
       },
-      connect: false
+      connect: true
     }
   }
   componentWillMount () {
@@ -47,8 +47,8 @@ class DataSource extends Component {
     this.setState({
       datasources: LocalStore.local.datasources
     })
-    NETPIEMicrogear.createMicrogear(LocalStore.local.datasources)
     DataSourceStore.datasources = LocalStore.local.datasources
+    NETPIEMicrogear.createMicrogear(LocalStore.local.datasources)
   }
   response = () => {
     socket.on('update-datasource', (msg) => {
@@ -67,15 +67,24 @@ class DataSource extends Component {
       })
     })
   }
-
   componentWillUnMount() {
     this.setState({
       datasources: []
     })
   }
-  handleClick = (e) => {
+  handleNew = (e) => {
     this.setState({
-      createState: !this.state.createState
+      editSource: {
+        _id: "",
+        datasource: {
+          appID: "",
+          key: "",
+          name: "",
+          secret: "",
+          topic: "/#",
+          typeDatasource: "NETPIE"
+        }
+      }
     })
   }
   callback = (obj,e) => {
@@ -87,17 +96,20 @@ class DataSource extends Component {
   render() {
     const datasources = this.state.datasources
     return (
+      <div>
       <li>
         <a>Datasource</a>
         <ul className="list-unstyled" >
           <ListDataSources datasources={datasources} callback={this.callback}/>
-          <li><a className="second" data-toggle="modal" data-target=".ModalCreateSource" onClick={this.handleClick}><i className="fas fa-plus-square"></i> new source</a></li>
+          <li><a className="second" data-toggle="modal" data-target=".ModalEditSource" onClick={this.handleNew}><i className="fas fa-plus-square"></i> new source</a></li>
         </ul>
         
-        <CreateSource/>
-        <EditSource values={this.state.editSource} />
+       
         
       </li>
+      <EditSource values={this.state.editSource} />
+      </div>
+
     )
   }
 }

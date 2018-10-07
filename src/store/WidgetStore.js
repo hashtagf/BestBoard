@@ -10,6 +10,7 @@ import Text from '../Widgets/Text'
 import Image from '../Widgets/Image'
 import Chart from '../Widgets/Chart'
 import List from '../Widgets/List'
+import LocalStore from './LocalStore'
 
 class WidgetStore {
   @observable widgets = []
@@ -28,6 +29,7 @@ class WidgetStore {
     }).then((res) => {
       console.log(res)
     })
+    LocalStore.insertWidget(boardId, payload)
   }
 
   updateWidget(widgetId, payload) {

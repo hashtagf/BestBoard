@@ -20,7 +20,7 @@ class FormSource extends Component {
     
   }
   componentWillReceiveProps (nextProps) {
-    if (nextProps.values !== undefined) {
+    if (nextProps.values !== undefined|| nextProps.values._id==='') {
       var props = nextProps.values.datasource
       this.setState({
         _id: nextProps.values._id,
@@ -128,7 +128,7 @@ class FormSource extends Component {
         </div>
         <div className="form-group">
           <label htmlFor="topic">Subscribed Topics</label>
-          <input type="text" className="form-control" id="topic" name="topic" placeholder="Enter Topics" value={this.state.topic} onChange={this.handleChange} defaultValue={values.topic}/>
+          <input type="text" className="form-control" id="topic" name="topic" placeholder="Enter Topics" onChange={this.handleChange} defaultValue={values.topic}/>
         </div>
         <details open="">
           <summary>Advance</summary>

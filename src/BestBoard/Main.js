@@ -17,26 +17,23 @@ class Main extends Component {
     super(props)
     this.state = {
       listWidgets: [],
-      connect: false
+      connect: true
     }
   }
   componentWillMount () {
-    this.setState({
-      connect: socket.connected
-    })
   }
-  componentDidMount() {
+  componentDidMount () {
     if (this.state.connect) this.response()
     else this.loadLocal()
   }
   loadLocal = () => {
     this.setState({
-      listWidgets: LocalStore.local.listWidgets
+      listWidgets: LocalStore.local.widgets
     })
-    LocalStore.local.listWidgets.map((widget) =>
+    LocalStore.local.widgets[Store.currentId].map((widget) =>
       WidgetStore.pushWidgets(widget)
     )
-    //this.createMuuri()
+    this.createMuuri()
   }
   response = () => {
     this.getWidgets()
@@ -46,7 +43,7 @@ class Main extends Component {
     })
   }
 
-  getWidgets() {
+  getWidgets () {
     axios.get(server + '/widget/' + Store.currentId).then((res) => {
       WidgetStore.widgets = []
       res.data.map((widget) =>
@@ -59,7 +56,7 @@ class Main extends Component {
     })
   }
 
-  createMuuri() {
+  createMuuri () {
     grid = new Muuri('.grid', {
       items: '.item',
       dragEnabled: true,

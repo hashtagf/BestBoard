@@ -7,6 +7,7 @@ import LocalStore from '../store/LocalStore'
 import socketIOClient from 'socket.io-client'
 
 let server = 'http://172.18.6.7:5582'
+
 const socket = socketIOClient(server)
 //let connect = true
 class Page extends Component {
@@ -18,13 +19,11 @@ class Page extends Component {
       inputName: '',
       editPage: null,
       selectPage: 0,
-      connect: false
+      connect: true
     }
   }
   componentWillMount () {
-    this.setState({
-      connect: socket.connected
-    })
+
   }
   componentDidMount() {
     if (this.state.connect) this.response()

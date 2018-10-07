@@ -38,8 +38,9 @@ class FormCardBox extends React.Component {
       unit: this.state.unit,
       icon: this.state.icon
     }
-    console.log(payload)
+    console.log(Store.currentId,payload)
     WidgetStore.createWidget(Store.currentId, payload)
+    
     this.setState({
       title: 'Card Box',
       datasource: '',
