@@ -141,7 +141,7 @@ class ListDataSources extends Component {
               <div className="col-2 col-sm-2 px-0 tail">
                 <div className="row tail">
                   <div className="col-6 px-0 py-auto">
-                    {this.checkOnline(source._id)}
+                  {this.checkOnline(source._id)}
                     <div className="statusSource rounded-circle mt-1" id={(this.state.status[source._id]) ? 'online' : 'offline'}></div>
                   </div>
                   <div className="col-6 px-0 py-auto">

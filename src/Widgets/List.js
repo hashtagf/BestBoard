@@ -43,7 +43,7 @@ class Lists extends React.Component {
 
   delWidget() {
     const widgetId = this.props.widgetId
-    WidgetStore.delWidgetToDB(widgetId)
+    WidgetStore.deleteWidget(widgetId)
   }
 
   render() {
