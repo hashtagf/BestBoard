@@ -31,11 +31,6 @@ class DataSource extends Component {
       connect: true
     }
   }
-  componentWillMount () {
-    this.setState({
-      connect: socket.connected
-    })
-  }
   componentDidMount () {
     if (this.state.connect) {
       this.getDatasource()
@@ -53,8 +48,8 @@ class DataSource extends Component {
   response = () => {
     socket.on('update-datasource', (msg) => {
       console.log('update-datasorce', msg)
-      // window.location.reload()
-      return this.getDatasource()
+      this.getDatasource()
+      return false
     })
   }
 
@@ -102,10 +97,7 @@ class DataSource extends Component {
         <ul className="list-unstyled" >
           <ListDataSources datasources={datasources} callback={this.callback}/>
           <li><a className="second" data-toggle="modal" data-target=".ModalEditSource" onClick={this.handleNew}><i className="fas fa-plus-square"></i> new source</a></li>
-        </ul>
-        
-       
-        
+        </ul>   
       </li>
       <EditSource values={this.state.editSource} />
       </div>
@@ -150,6 +142,7 @@ class ListDataSources extends Component {
                 <div className="row tail">
                   <div className="col-6 px-0 py-auto">
                     {this.checkOnline(source._id)}
+                    {console.log(this.state.status[source._id])}
                     <div className="statusSource rounded-circle mt-1" id={(this.state.status[source._id]) ? 'online' : 'offline'}></div>
                   </div>
                   <div className="col-6 px-0 py-auto">

@@ -1,0 +1,4 @@
+sudo rm -rf node_modules
+rm package-log.json
+npm cache clear -force
+npm install
