@@ -13,37 +13,34 @@ class Gauge extends React.Component {
   }
 
   componentWillMount() {
-    const microgear = Microgear.microgear
+    const payload = this.props.payload
+    const microgear = Microgear.microgear[payload.datasource]
     microgear.on('closed', () => console.log('Close'))
     microgear.on('message', this.onMessage.bind(this))
   }
 
   onMessage(topic, msg) {
     const payload = this.props.payload
+    const strMsg = msg + ''
     if (payload.value === topic) {
       this.setState({
-        store: {
-          topic: topic + "",
-          msg: msg + ""
-        }
-      })
-      this.setState({
-        value: this.state.store.msg.split(",")[0]
+        value: strMsg.split(payload.filter)[payload.filterIndex],
+        previousValue: this.state.value
       })
     }
   }
 
   delWidget() {
     const widgetId = this.props.widgetId
-    WidgetStore.delWidgetToDB(widgetId)
+    WidgetStore.deleteWidget(widgetId)
   }
 
   render() {
     const payload = this.props.payload
     const value = this.state.value
     return (
-      <div className="Guage col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3">
-        <div className="card border-success shadow rounded-0 border-10 widgetCard">
+      <div className="item Guage col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3">
+        <div className="item-content card border-success shadow rounded-0 border-10 widgetCard">
           <h5 className="card-header">{payload.title}</h5>
           <div className="card-body">
             <CanvasGauge

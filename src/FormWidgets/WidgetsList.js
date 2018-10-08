@@ -1,7 +1,14 @@
 import React from 'react'
+import './WidgetsList.css'
 import FormCardBox from './FormCardBox'
 import FormGauge from './FormGauge'
-import './WidgetsList.css'
+import FormGaugeSpeed from './FormGaugeSpeed'
+import FormImage from './FormImage'
+import FormProgress from './FormProgress'
+import FormProgressBar from './FormProgressBar'
+import FormText from './FormText'
+import FormList from './FormList'
+import FormChart from './FormChart'
 class WidgetsList extends React.Component {
 
   constructor(props) {
@@ -17,11 +24,31 @@ class WidgetsList extends React.Component {
           img: "https://i.stack.imgur.com/k7Nit.png"
         },
         {
-          name: "progress",
+          name: "ProgressBar",
           img: "https://image.opencart.com/cache/583c1e869b365-resize-710x380.jpg"
         },
         {
-          name: "graph",
+          name: "Progress",
+          img: "https://www.excel-easy.com/examples/images/line-chart/line-chart.png"
+        },
+        {
+          name: "GaugeSpeed",
+          img: "https://i.stack.imgur.com/k7Nit.png"
+        },
+        {
+          name: "Image",
+          img: "https://i.stack.imgur.com/k7Nit.png"
+        },
+        {
+          name: "Chart",
+          img: "https://image.opencart.com/cache/583c1e869b365-resize-710x380.jpg"
+        },
+        {
+          name: "List",
+          img: "https://www.excel-easy.com/examples/images/line-chart/line-chart.png"
+        },
+        {
+          name: "Text",
           img: "https://www.excel-easy.com/examples/images/line-chart/line-chart.png"
         }
       ],
@@ -53,7 +80,7 @@ class WidgetsList extends React.Component {
             onClick={this.selectWidget.bind(this)}
           />
           <figcaption className="figure-caption text-center">{widget.name}</figcaption>
-          
+
         </div>
       return tmp
     })
@@ -74,12 +101,26 @@ class WidgetsList extends React.Component {
 
 class SelectType extends React.Component {
   render() {
-    const {selectType} = this.props
+    const { selectType } = this.props
     switch (selectType) {
       case 'CardBox':
         return <FormCardBox />
-      case 'Gauge' : 
+      case 'Gauge':
         return <FormGauge />
+      case 'GaugeSpeed':
+        return <FormGaugeSpeed />
+      case 'Image':
+        return <FormImage />
+      case 'ProgressBar':
+        return <FormProgressBar />
+      case 'Progress':
+        return <FormProgress />
+      case 'Text':
+        return <FormText />
+      case 'List':
+        return <FormList />
+      case 'Chart':
+        return <FormChart />
       default:
         return <h1>Please select widget</h1>
     }

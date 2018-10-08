@@ -20,8 +20,6 @@ class Main extends Component {
       connect: true
     }
   }
-  componentWillMount () {
-  }
   componentDidMount () {
     if (this.state.connect) this.response()
     else this.loadLocal()
@@ -30,9 +28,7 @@ class Main extends Component {
     this.setState({
       listWidgets: LocalStore.local.widgets
     })
-    LocalStore.local.widgets[Store.currentId].map((widget) =>
-      WidgetStore.pushWidgets(widget)
-    )
+    WidgetStore.showWidgets(LocalStore.local.widgets[Store.currentId])
     this.createMuuri()
   }
   response = () => {
@@ -41,16 +37,16 @@ class Main extends Component {
       console.log('update-widget', msg)
       this.getWidgets()
     })
+    socket.on('error', function(exception) {
+      console.log('SOCKET ERROR', exception)
+      socket.destroy()
+    })
   }
 
   getWidgets () {
     axios.get(server + '/widget/' + Store.currentId).then((res) => {
-      WidgetStore.widgets = []
-      res.data.map((widget) =>
-        WidgetStore.pushWidgets(widget)
-      )
       this.setState({
-        listWidgets: WidgetStore.listWidgets
+        listWidgets: WidgetStore.showWidgets(res.data)
       })
       this.createMuuri()
     })
@@ -78,16 +74,13 @@ class Main extends Component {
 
   componentWillUnmount() {
     grid.destroy(true)
-    this.setState({
-      listWidgets: []
-    })
   }
 
   render() {
     const listWidgets = this.state.listWidgets
     return ( 
       <div className = 'grid'> 
-      {listWidgets} 
+        {listWidgets} 
       </div>
     )
   }

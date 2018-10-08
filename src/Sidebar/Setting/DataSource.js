@@ -22,7 +22,7 @@ class DataSource extends Component {
         datasource: {
           appID: "",
           key: "",
-          name: "",
+          name: "NETPIE Microgear",
           secret: "",
           topic: "/#",
           typeDatasource: "NETPIE"
@@ -49,11 +49,14 @@ class DataSource extends Component {
     socket.on('update-datasource', (msg) => {
       console.log('update-datasorce', msg)
       this.getDatasource()
-      return false
+    })
+    socket.on('error', function(exception) {
+      console.log('SOCKET ERROR', exception)
+      socket.destroy()
     })
   }
 
-  getDatasource = () => {
+  getDatasource() {
     axios.get(server + '/datasource/').then((res) => {
       DataSourceStore.datasources = res.data
       NETPIEMicrogear.createMicrogear(res.data)
@@ -62,11 +65,7 @@ class DataSource extends Component {
       })
     })
   }
-  componentWillUnMount() {
-    this.setState({
-      datasources: []
-    })
-  }
+ 
   handleNew = (e) => {
     this.setState({
       editSource: {
@@ -74,7 +73,7 @@ class DataSource extends Component {
         datasource: {
           appID: "",
           key: "",
-          name: "",
+          name: "NETPIE Microgear",
           secret: "",
           topic: "/#",
           typeDatasource: "NETPIE"
@@ -88,6 +87,7 @@ class DataSource extends Component {
     })
 
   }
+
   render() {
     const datasources = this.state.datasources
     return (
@@ -142,7 +142,6 @@ class ListDataSources extends Component {
                 <div className="row tail">
                   <div className="col-6 px-0 py-auto">
                     {this.checkOnline(source._id)}
-                    {console.log(this.state.status[source._id])}
                     <div className="statusSource rounded-circle mt-1" id={(this.state.status[source._id]) ? 'online' : 'offline'}></div>
                   </div>
                   <div className="col-6 px-0 py-auto">

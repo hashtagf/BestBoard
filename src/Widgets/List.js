@@ -1,6 +1,6 @@
 import React from 'react'
 import WidgetStore from '../store/WidgetStore'
-import Microgear from '../store/Microgear'
+import NETPIEMicrogear from '../store/Microgear'
 
 class Lists extends React.Component {
   constructor(props) {
@@ -15,8 +15,8 @@ class Lists extends React.Component {
   }
 
   componentWillMount() {
-    const microgear = Microgear.microgear
-    microgear.on('closed', () => console.log('Close'))
+    const payload = this.props.payload
+    const microgear = NETPIEMicrogear.microgear[payload.datasource]
     microgear.on('message', this.onMessage.bind(this))
   }
 
@@ -27,7 +27,7 @@ class Lists extends React.Component {
       let data = this.state.data
       data.push({
         text: payload.text,
-        value: strMsg.split(",")[0],
+        value: strMsg.split(payload.filter)[payload.filterIndex],
         unit: payload.unit,
         timestamp: Date.now()
       })
@@ -54,8 +54,8 @@ class Lists extends React.Component {
       <List key={index} payload={payload} icon={icon} />
     )
     return (
-      <div className="Progress col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3">
-        <div className="card border-info shadow rounded-0 border-10 widgetCard">
+      <div className="item List col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3">
+        <div className="item-content card border-info shadow rounded-0 border-10 widgetCard">
           <h5 className="card-header">{payload.title}</h5>
           <div className="card-body m-0 p-0">
             <ul className="list-group" data-spy="scroll">

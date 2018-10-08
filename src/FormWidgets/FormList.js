@@ -4,19 +4,15 @@ import FormInputBasic from './Input/FormInputBasic'
 import InputText from './Input/InputText'
 import Store from '../store/Store'
 
-class FormProgress extends React.Component {
+class FormList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: 'Progress',
-      value: 0,
+      title: 'List',
+      value: '',
+      text: '',
       unit: '',
-      minvalue: '0',
-      maxvalue: '100',
-      setColor: '',
-      theme: 'light',
-      mode: 'progress',
-      enableAnimation: true,
+      icon: '',
       datasource: '',
       filter: '',
       filterIndex: 0
@@ -33,31 +29,23 @@ class FormProgress extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     let payload = {
-      typeWidget: 'Progress',
+      typeWidget: 'List',
       title: this.state.title,
       value: this.state.value,
+      text: this.state.text,
       unit: this.state.unit,
-      minvalue: this.state.minvalue,
-      maxvalue: this.state.maxvalue,
-      setColor: this.state.setColor,
-      theme: this.state.theme,
-      mode: this.state.mode,
-      enableAnimation: this.state.enableAnimation,
+      icon: this.state.icon,
       datasource: this.state.datasource,
       filter: this.state.filter,
       filterIndex: this.state.filterIndex
     }
     WidgetStore.createWidget(Store.currentId, payload)
     this.setState({
-      title: 'Progress',
-      value: 0,
+      title: 'Text',
+      value: '',
+      text: '',
       unit: '',
-      minvalue: '0',
-      maxvalue: '100',
-      setColor: '',
-      theme: 'light',
-      mode: 'progress',
-      enableAnimation: true,
+      icon: '',
       datasource: '',
       filter: '',
       filterIndex: 0
@@ -66,12 +54,20 @@ class FormProgress extends React.Component {
   render() {
     const payload = this.state
     return (
-      <div className="FormProgress container">
+      <div className="FormList container">
         <form>
           <FormInputBasic callback={this.handlePayload} values={payload} />
+          <InputText callback={this.handlePayload} title="Icon" name="icon" value={payload.icon} />
+          <InputText callback={this.handlePayload} title="Text" name="text" value={payload.text} />
           <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit} />
-          <InputText callback={this.handlePayload} title="Min Value" name="minvalue" value={payload.minvalue} />
-          <InputText callback={this.handlePayload} title="Max Value" name="maxvalue" value={payload.maxvalue} />
+          <div className="form-group row">
+            <label htmlFor="exampleList" className="col-3 col-form-label">
+              Example List :
+          </label>
+            <div className="col-9 text-secondary">
+              {this.state.text + ' <Value> ' + this.state.unit}
+            </div>
+          </div>
           <div className="row justify-content-end">
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -88,4 +84,4 @@ class FormProgress extends React.Component {
   }
 }
 
-export default FormProgress
+export default FormList

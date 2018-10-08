@@ -11,8 +11,8 @@ class Progress extends React.Component {
   render() {
     const payload = this.props.payload
     return (
-      <div className="Progress col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3">
-        <div className="card border-info shadow rounded-0 border-10 widgetCard">
+      <div className="item Progress col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3">
+        <div className="item-content card border-info shadow rounded-0 border-10 widgetCard">
           <h5 className="card-header">{payload.title}</h5>
           <div className="card-body">
             <CanvasGauge

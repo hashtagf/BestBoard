@@ -2,6 +2,8 @@ import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import FormInputBasic from './Input/FormInputBasic'
 import InputText from './Input/InputText'
+import Store from '../store/Store'
+
 class FormGauge extends React.Component {
   constructor(props) {
     super(props)
@@ -17,8 +19,7 @@ class FormGauge extends React.Component {
       enableAnimation: true,
       datasource: '',
       filter: '',
-      filterIndex: 0,
-      boardId: this.props.boardId
+      filterIndex: 0
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
@@ -46,7 +47,7 @@ class FormGauge extends React.Component {
       filter: this.state.filter,
       filterIndex: this.state.filterIndex
     }
-    WidgetStore.createWidget(this.props.boardId, payload)
+    WidgetStore.createWidget(Store.currentId, payload)
     this.setState({
       title: 'Gauge',
       value: 0,

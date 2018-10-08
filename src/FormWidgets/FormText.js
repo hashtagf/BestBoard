@@ -1,12 +1,13 @@
 import React from 'react'
-import WidgetStore from '../../store/WidgetStore'
+import WidgetStore from '../store/WidgetStore'
+import Store from '../store/Store'
+
 class FormText extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       title: 'Text',
       text: '',
-      machineId: this.props.machineId
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
@@ -24,8 +25,7 @@ class FormText extends React.Component {
       title: this.state.title,
       text: this.state.text
     }
-    console.log(payload)
-    WidgetStore.addWidgetToDB(this.props.machineId, payload)
+    WidgetStore.createWidget(Store.currentId, payload)
     this.setState({
       title: 'Text',
       text: ''
@@ -65,14 +65,13 @@ class FormText extends React.Component {
             </div>
           </div>
           <div className="row justify-content-end">
-            <div className="col-3">
-              <button type="submit"
-                className="btn btn-secondary btn-block"
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button"
+                className="btn btn-primary border-0"
                 onClick={this.handleSubmit.bind(this)}
                 data-dismiss="modal" aria-label="Close"
-              >
-                Add
-              </button>
+              ><i className="fas fa-plus-square"></i> Add widget</button>
             </div>
           </div>
         </form>

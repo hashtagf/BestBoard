@@ -16,11 +16,10 @@ class FormSource extends Component {
       jsOncreated: '',
       _id: ''
     }
-    //this.handleChange = this.handleChange.bind(this)
     
   }
   componentWillReceiveProps (nextProps) {
-    if (nextProps.values !== undefined|| nextProps.values._id==='') {
+    if (nextProps.values !== undefined || nextProps.values._id === '') {
       var props = nextProps.values.datasource
       this.setState({
         _id: nextProps.values._id,
@@ -92,52 +91,81 @@ class FormSource extends Component {
       jsOncreated: ''
     })
   }
-  render() {
+  render() { 
     var values = this.state
-    var _id = null
-    if (this.props.values !== undefined) {
-      var props = this.props.values.datasource
-      _id = this.props.values._id
-      values = {
-        appID: props.appID,
-        key: props.key,
-        name: props.name,
-        secret: props.secret,
-        topic: props.topic,
-        typeDatasource: props.typeDatasource
-      }
-    }
+    var _id = this.props.values._id
+    // if (this.props.values !== undefined) {
+    //   var props = this.props.values.datasource
+    //   _id = this.props.values._id
+    //   values = {
+    //     appID: props.appID,
+    //     key: props.key,
+    //     name: props.name,
+    //     secret: props.secret,
+    //     topic: props.topic,
+    //     typeDatasource: props.typeDatasource
+    //   }
+    // }
     return (
       <div>
         <div className="form-group">
           <label htmlFor="name">Name</label>
-          <input type="text" className="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Enter name" onChange={this.handleChange} defaultValue={values.name}/>
+          <input type="text" 
+            className="form-control" 
+            id="name" name="name" 
+            aria-describedby="emailHelp" 
+            placeholder="Enter name" 
+            onChange={this.handleChange} 
+            value={values.name}
+            />
         </div>
         <div className="form-group">
           <label htmlFor="appID">App ID *</label>
-          <input type="text" className="form-control" id="appID" name="appID" aria-describedby="emailHelp" placeholder="Enter App ID" onChange={this.handleChange} defaultValue={values.appID}/>
+          <input type="text" 
+            className="form-control" 
+            id="appID" name="appID" 
+            aria-describedby="emailHelp" 
+            placeholder="Enter App ID" 
+            onChange={this.handleChange} 
+            value={values.appID}/>
           <small id="emailHelp" className="form-text text-muted">NETPIE App name obtained from <a href="https://netpie.io/app">https://netpie.io/app</a></small>
         </div>
         <div className="form-group">
           <label htmlFor="key">Key *</label>
-          <input type="text" className="form-control" id="key" name="key" aria-describedby="emailHelp" placeholder="Enter Key" onChange={this.handleChange} defaultValue={values.key}/>
+          <input type="text" 
+            className="form-control" 
+            id="key" name="key" 
+            aria-describedby="emailHelp" 
+            placeholder="Enter Key" 
+            onChange={this.handleChange} 
+            value={values.key}/>
         </div>
         <div className="form-group">
           <label htmlFor="secret">Secret *</label>
-          <input type="password" className="form-control" id="secret" name="secret" placeholder="Enter Secret" onChange={this.handleChange} defaultValue={values.secret}/>
+          <input type="password" 
+            className="form-control" 
+            id="secret" name="secret" 
+            placeholder="Enter Secret" 
+            onChange={this.handleChange} 
+            value={values.secret}/>
         </div>
         <div className="form-group">
           <label htmlFor="topic">Subscribed Topics</label>
-          <input type="text" className="form-control" id="topic" name="topic" placeholder="Enter Topics" onChange={this.handleChange} defaultValue={values.topic}/>
+          <input type="text" 
+            className="form-control" 
+            id="topic" name="topic" 
+            placeholder="Enter Topics" 
+            onChange={this.handleChange} 
+            value={values.topic}/>
         </div>
         <details open="">
           <summary>Advance</summary>
           <div className="form-group my-1">
             <label htmlFor="jsOncreated">Oncreated Action</label>
-            <JsInput name={"jsOncreated"} callback={this.handleChange} defaultValue={values.jsOncreated}/>
+            <JsInput name={"jsOncreated"} callback={this.handleChange} value={values.jsOncreated}/>
             <small>Java script code to run after a datasource is created.</small>
             <label htmlFor="jsOnconnect">Onconnected Action</label>
-            <JsInput name={"jsOnconnect"} callback={this.handleChange} defaultValue={values.jsOnconnect}/>
+            <JsInput name={"jsOnconnect"} callback={this.handleChange} value={values.jsOnconnect}/>
             <small>Java script code to run after a datasource is created.</small>
           </div>
           

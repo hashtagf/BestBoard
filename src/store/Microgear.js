@@ -5,6 +5,7 @@ import MicroGear from 'microgear'
 class NETPIEMicrogear {
 
   @observable microgear = []
+  @observable checkConnect = []
 
   createMicrogear (datasources) {
     datasources.forEach((datasource,index) => {
@@ -14,7 +15,10 @@ class NETPIEMicrogear {
           secret: datasource.datasource.secret,
           alias: datasource.datasource.name
         })
-        this.microgear[datasource._id].connect(datasource.datasource.appID)
+        if (!this.checkConnect[datasource._id]) {
+          this.checkConnect[datasource._id] = true
+          this.microgear[datasource._id].connect(datasource.datasource.appID)
+        }
         eval(datasource.datasource.jsOncreated)
         this.microgear[datasource._id].on('connected', () => {
           this.microgear[datasource._id].subscribe(datasource.datasource.topic)

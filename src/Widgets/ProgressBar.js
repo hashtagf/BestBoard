@@ -11,8 +11,8 @@ class ProgressBar extends React.Component {
   render() {
     const payload = this.props.payload
     return (
-      <div className="ProgressBar col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3">
-        <div className="card border-warning shadow rounded-0 border-10 widgetCard">
+      <div className="item ProgressBar col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3">
+        <div className="item-content card border-warning shadow rounded-0 border-10 widgetCard">
           <h5 className="card-header">{payload.title}</h5>
           <div className="card-body">
             <h6 className="pt-5">{payload.title} : {payload.percent} {payload.unit}</h6>

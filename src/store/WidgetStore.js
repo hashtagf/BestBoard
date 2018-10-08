@@ -14,7 +14,7 @@ import LocalStore from './LocalStore'
 
 class WidgetStore {
   @observable widgets = []
-  @observable listWidgets = []
+  // @observable listWidgets = []
   @observable server = 'http://172.18.6.7:5582'
 
   pushWidgets(payload) {
@@ -44,8 +44,8 @@ class WidgetStore {
     )
   }
 
-  showWidgets() {
-    return this.widgets.map((widget) => {
+  showWidgets(widgets) {
+    var listWidgets = widgets.map((widget) => {
       switch (widget.widget.typeWidget) {
         case 'Gauge':
           return <Gauge key={widget._id} payload={widget.widget} widgetId={widget._id} />
@@ -69,6 +69,8 @@ class WidgetStore {
           return <h2>Error</h2>
       }
     })
+    return listWidgets
+
   }
 }
 

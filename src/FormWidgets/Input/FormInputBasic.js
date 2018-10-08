@@ -1,7 +1,7 @@
 import React from 'react'
 import NETPIEMicrogear from '../../store/Microgear'
 import DatasourceStore from '../../store/DatasourceStore'
-import Select from 'react-select'
+import Creatable from 'react-select/lib/Creatable'
 class FormInputBasic extends React.Component {
   constructor(props) {
     super(props)
@@ -37,12 +37,11 @@ class FormInputBasic extends React.Component {
         if (!this.state.checkTopic[topic]) {
           checkTopic[topic] = true
           topics[count++] = {
-            value: topic,
             label: topic,
-            body: body + ''
+            value: body + '',
           }
           this.setState({
-            topic: topics,
+            topics: topics,
             checkTopic: checkTopic
           })
         }
@@ -51,9 +50,9 @@ class FormInputBasic extends React.Component {
     this.props.callback(e)
   }
 
-  handleSelected = (selectOption) => {
+  handleSelected = (selectOption, e) => {
     this.setState({ selectOption })
-    this.props.values.value = selectOption.value
+    this.props.values.value = selectOption.label
     console.log(selectOption)
   }
 
@@ -61,6 +60,7 @@ class FormInputBasic extends React.Component {
     const handleChange = this.props.callback
     let values = this.props.values
     let { selectOption, listDatasources } = this.state
+    if (selectOption.value === null) selectOption.value = ''
     return (
       <div>
         <div className="form-group row">
@@ -92,16 +92,16 @@ class FormInputBasic extends React.Component {
             Value :
           </label>
           <div className="col-9">
-            <Select
+            <Creatable
               value={selectOption}
               onChange={this.handleSelected}
-              options={this.state.topic}
+              options={this.state.topics}
             />
           </div>
         </div>
         <div className="form-group row">
           <label htmlFor="filter" className="col-3 col-form-label">
-            Filter :
+            Filter Symbol :
           </label>
           <div className="col-2">
             <input
@@ -113,9 +113,11 @@ class FormInputBasic extends React.Component {
             />
           </div>
           <div className="col-7">
-            <div className="btn-group" role="group" aria-label="First group">
-              <ButtonIndex selectIndex={selectOption.body.split(values.filter)} handleChange={handleChange} />
-            </div>
+            <ButtonIndex selectOption={selectOption}
+              handleChange={handleChange}
+              filterIndex={values.filterIndex}
+              filter={values.filter}
+            />
           </div>
         </div>
       </div>
@@ -124,22 +126,60 @@ class FormInputBasic extends React.Component {
 }
 
 class ButtonIndex extends React.Component {
+
   render() {
-    const selectIndex = this.props.selectIndex
-    const handleChange = this.props.handleChange
-    return (selectIndex.map((val, index) =>
-      <button
-        key={index}
-        type="button"
-        className={"btn btn-secondary active"}
-        name="filterIndex"
-        onClick={handleChange}
-        value={index}
-      >
-        {val}
-      </button>
-    )
-    )
+    const { filter, filterIndex, handleChange, selectOption } = this.props
+    if (selectOption.__isNew__) {
+      return (
+        <div className="form-group row">
+          <label htmlFor="filter" className="col-5 col-form-label">
+            Array Index :
+          </label>
+          <div className="col-7">
+            <input type="number"
+              className="form-control"
+              name="filterIndex"
+              value={filterIndex}
+              onChange={handleChange}
+              min={0}
+              placeholder="Index of Array Split"
+            />
+          </div>
+        </div>
+      )
+    }
+    else if (selectOption.value !== undefined) {
+      return (
+        <div className="Index">
+          Example Data ( select Index ) : <br />
+          <div className="btn-group btn-group-toggle" data-toggle="buttons">
+            {(selectOption.value.split(filter).map((val, index) =>
+              <button
+                key={index}
+                type="radio"
+                className="btn btn-secondary"
+                name="filterIndex"
+                onClick={handleChange}
+                value={index}
+              >
+                {val}
+              </button>
+              // <label key={index} class={"btn btn-secondary"}>
+              //   <input type="radio"
+              //     name="filterIndex"
+              //     id={index}
+              //     className="btn btn-secondary"
+              //     onClick={handleChange}
+              //     value={index}
+              //     autoComplete="off"
+              //   /> {val}
+              // </label>
+            )
+            )}
+          </div>
+        </div>
+      )
+    } else return <h4>Index Array</h4>
   }
 }
 

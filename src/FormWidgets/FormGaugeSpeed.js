@@ -1,7 +1,8 @@
 import React from 'react'
-import WidgetStore from '../../store/WidgetStore'
+import WidgetStore from '../store/WidgetStore'
 import FormInputBasic from './Input/FormInputBasic'
 import InputText from './Input/InputText'
+import Store from '../store/Store' 
 
 class FormGaugeSpeed extends React.Component {
   constructor(props) {
@@ -18,14 +19,16 @@ class FormGaugeSpeed extends React.Component {
       startColor: '#00ee00',
       endColor: '#ff0000',
       textColor: '#000000',
-      machineId: this.props.machineId
+      datasource: '',
+      filter: '',
+      filterIndex: 0
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
 
   handlePayload(e) {
     this.setState({
-        [e.target.name]: e.target.value
+      [e.target.name]: e.target.value
     })
   }
 
@@ -41,10 +44,12 @@ class FormGaugeSpeed extends React.Component {
       segments: this.state.segments,
       startColor: this.state.startColor,
       endColor: this.state.endColor,
-      textColor: this.state.textColor
+      textColor: this.state.textColor,
+      datasource: this.state.datasource,
+      filter: this.state.filter,
+      filterIndex: this.state.filterIndex
     }
-    console.log(payload)
-    WidgetStore.addWidgetToDB(this.props.machineId, payload)
+    WidgetStore.createWidget(Store.currentId, payload)
     this.setState({
       title: 'Gauge Speed',
       value: 0,
@@ -56,113 +61,34 @@ class FormGaugeSpeed extends React.Component {
       segments: 3,
       startColor: '#00ee00',
       endColor: '#ff0000',
-      textColor: '#000000'
+      textColor: '#000000',
+      datasource: '',
+      filter: '',
+      filterIndex: 0
     })
   }
   render() {
     const payload = this.state
     return (
       <div className="FormGuage container">
-        <form>
-          <FormInputBasic callback={this.handlePayload} values={this.state} />
-          <InputText callback={this.handlePayload} title="Min Value" name="minvalue" value={payload.minvalue}/>
-          <InputText callback={this.handlePayload} title="Max Value" name="maxvalue" value={payload.maxvalue}/>
-          {/* <div className="form-group row">
-            <label htmlFor="minvalue" className="col-3 col-form-label">
-              Min Value :
-          </label>
-            <div className="col-9">
-              <input
-                name="minvalue"
-                type="text"
-                className="form-control"
-                value={payload.minValue}
-                onChange={this.handlePayload}
-              />
-            </div>
+        <FormInputBasic callback={this.handlePayload} values={payload} />
+        <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit} />
+        <InputText callback={this.handlePayload} title="Min Value" name="minvalue" value={payload.minvalue} />
+        <InputText callback={this.handlePayload} title="Max Value" name="maxvalue" value={payload.maxvalue} />
+        <InputText callback={this.handlePayload} title="Segments" name="segments" value={payload.segments} />
+        <InputText callback={this.handlePayload} title="End Color" name="startColor" value={payload.startColor} />
+        <InputText callback={this.handlePayload} title="Start Color" name="endColor" value={payload.endColor} />
+        <InputText callback={this.handlePayload} title="Text Color" name="textColor" value={payload.textColor} />
+        <div className="row justify-content-end">
+          <div className="modal-footer">
+            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button"
+              className="btn btn-primary border-0"
+              onClick={this.handleSubmit.bind(this)}
+              data-dismiss="modal" aria-label="Close"
+            ><i className="fas fa-plus-square"></i> Add widget</button>
           </div>
-          <div className="form-group row">
-            <label htmlFor="maxvalue" className="col-3 col-form-label">
-              Max Value :
-          </label>
-            <div className="col-9">
-              <input
-                name="maxvalue"
-                type="text"
-                className="form-control"
-                value={payload.maxValue}
-                onChange={this.handlePayload}
-              />
-            </div>
-          </div> */}
-          <div className="form-group row">
-            <label htmlFor="segments" className="col-3 col-form-label">
-              Segments :
-          </label>
-            <div className="col-9">
-              <input
-                name="segments"
-                type="text"
-                className="form-control"
-                value={payload.segments}
-                onChange={this.handlePayload}
-              />
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="startColor" className="col-3 col-form-label">
-              Start Color :
-          </label>
-            <div className="col-9">
-              <input
-                name="startColor"
-                type="text"
-                className="form-control"
-                value={payload.startColor}
-                onChange={this.handlePayload}
-              />
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="endColor" className="col-3 col-form-label">
-              End Color :
-          </label>
-            <div className="col-9">
-              <input
-                name="endColor"
-                type="text"
-                className="form-control"
-                value={payload.endColor}
-                onChange={this.handlePayload}
-              />
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="textColor" className="col-3 col-form-label">
-              Text Color :
-          </label>
-            <div className="col-9">
-              <input
-                name="textColor"
-                type="text"
-                className="form-control"
-                value={payload.textColor}
-                onChange={this.handlePayload}
-              />
-            </div>
-          </div>
-          <div className="row justify-content-end">
-            <div className="col-3">
-              <button type="submit"
-                className="btn btn-secondary btn-block"
-                onClick={this.handleSubmit.bind(this)}
-                data-dismiss="modal" aria-label="Close"
-              >
-                Add
-              </button>
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
     )
   }

@@ -1,21 +1,11 @@
 import React from 'react'
 
 class InputText extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-    }
-    this.handleChange = this.handleChange.bind(this)
-  }
-
-  handleChange(e) {
-    this.props.callback(e)
-  }
-
   render() {
     const handleChange = this.props.callback
     let value = this.props.value
     let name = this.props.name
+    let placeholder = this.props.placeholder
     return (
       <div>
           <div className="form-group row">
@@ -29,6 +19,7 @@ class InputText extends React.Component {
                 className="form-control"
                 value={value}
                 onChange={handleChange}
+                placeholder={placeholder}
               />
             </div>
           </div>
