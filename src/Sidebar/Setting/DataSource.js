@@ -5,10 +5,8 @@ import socketIOClient from 'socket.io-client'
 import axios from 'axios'
 import NETPIEMicrogear from '../../store/Microgear'
 import EditSource from './EditSource'
-let server = 'http://172.18.6.7:5582'
-// server = 'http://localhost:5582'
-
-const socket = socketIOClient(server)
+import config from '../../config'
+const socket = socketIOClient(config.server)
 
 let status = []
 
@@ -30,6 +28,8 @@ class DataSource extends Component {
       },
       connect: true
     }
+  }
+  componentWillMount () {
   }
   componentDidMount () {
     if (this.state.connect) {
@@ -57,7 +57,7 @@ class DataSource extends Component {
   }
 
   getDatasource() {
-    axios.get(server + '/datasource/').then((res) => {
+    axios.get(config.server + '/datasource/').then((res) => {
       DataSourceStore.datasources = res.data
       NETPIEMicrogear.createMicrogear(res.data)
       this.setState({

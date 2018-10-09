@@ -95,7 +95,7 @@ class WidgetsList extends React.Component {
           <p><strong>Widget</strong></p>
           {listWidget}
         </div>
-        <div className="col-sm-9 col-12">
+        <div className="col-sm-9 col-12 formWidget" id="scrollbar-style">
           <strong>Form</strong>
           <SelectType selectType={this.state.selectType} />
         </div>

@@ -12,6 +12,7 @@ import Chart from '../Widgets/Chart'
 import List from '../Widgets/List'
 import Button from '../Widgets/Button'
 import LocalStore from './LocalStore'
+import config from '../config.js'
 
 class WidgetStore {
   @observable widgets = []
@@ -24,7 +25,7 @@ class WidgetStore {
   }
 
   createWidget(boardId, payload) {
-    axios.post(this.server + '/widget', {
+    axios.post(config.server + '/widget', {
       boardId: boardId,
       widget: payload
     }).then((res) => {
@@ -34,13 +35,13 @@ class WidgetStore {
   }
 
   updateWidget(widgetId, payload) {
-    axios.put(this.server + '/widget/' + widgetId, payload).then((res) =>
+    axios.put(config.server + '/widget/' + widgetId, payload).then((res) =>
       console.log(res)
     )
   }
 
   deleteWidget(widgetId) {
-    axios.delete(this.server + '/widget/' + widgetId).then((res) =>
+    axios.delete(config.server + '/widget/' + widgetId).then((res) =>
       console.log(res)
     )
   }

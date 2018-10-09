@@ -6,10 +6,8 @@ import socketIOClient from 'socket.io-client'
 import Muuri from 'muuri'
 import axios from 'axios'
 import WidgetStore from '../store/WidgetStore'
-//const $ = require("jquery");
-let server = 'http://172.18.6.7:5582'
-// server = 'http://localhost:5582'
-const socket = socketIOClient(server)
+import config from '../config'
+const socket = socketIOClient(config.server)
 
 var grid = null
 
@@ -20,6 +18,8 @@ class Main extends Component {
       listWidgets: [],
       connect: true
     }
+  }
+  componentWillMount () {
   }
   componentDidMount () {
     if (this.state.connect) this.response()
@@ -45,7 +45,7 @@ class Main extends Component {
   }
 
   getWidgets () {
-    axios.get(server + '/widget/' + Store.currentId).then((res) => {
+    axios.get(config.server + '/widget/' + Store.currentId).then((res) => {
       this.setState({
         listWidgets: WidgetStore.showWidgets(res.data)
       })

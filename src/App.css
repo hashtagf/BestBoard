@@ -22,11 +22,12 @@ a {
 
 #content {
   padding: 20px;
-  min-height: 100vh;
+  max-height: 100vh;
   width: 100%;
   /* width: auto; */
   transition: all 0.3s;
   z-index:-1;
+  overflow-y: auto;
 }
 .btn-primary {
   background-color: var(--activePresence);

@@ -2,6 +2,7 @@ import { observable } from 'mobx'
 import axios from 'axios'
 import React from 'react'
 import ListDatasource from './ListDatasource'
+import config from '../config.js'
 //import NETPIEMicrogear from './Microgear'
 // import LocalStore from './LocalStore'
 class DatasourceStore {
@@ -9,7 +10,7 @@ class DatasourceStore {
   @observable server = 'http://172.18.6.7:5582'
 
   createDatasource (payload) {
-    axios.post(this.server + '/datasource/', {
+    axios.post(config.server + '/datasource/', {
       datasource: payload
     }).then((res) => 
       console.log(res)
@@ -19,14 +20,14 @@ class DatasourceStore {
   }
 
   updateDatasource (datasourceId, payload) {
-    axios.put(this.server + '/datasource/' + datasourceId, {datasource : payload}).then((res) => 
+    axios.put(config.server + '/datasource/' + datasourceId, {datasource : payload}).then((res) => 
       console.log(res)
     )
     // LocalStore.updateDataSource(datasourceId,payload)
   }
 
   deleteDatasource (datasourceId) {
-    axios.delete(this.server + '/datasource/' + datasourceId).then((res) => 
+    axios.delete(config.server + '/datasource/' + datasourceId).then((res) => 
       console.log(res)
     )
     // LocalStore.local.datasources.splice(datasourceId,1)

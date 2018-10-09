@@ -1,7 +1,6 @@
 import { observable } from 'mobx'
 //import socketIOClient from 'socket.io-client'
-//let server = 'http://172.18.6.7:5582'
-//const socket = socketIOClient(server)
+
 class LocalStore {
   @observable local = {
     datasources: [
@@ -69,7 +68,7 @@ class LocalStore {
     }
   }
   deletePage(index) {
-    this.local.pages.splice(index, 1)
+    this.local.pages.peek(index, 1)
     console.log(this.local.pages)
   }
   insertDataSource(payload) {
