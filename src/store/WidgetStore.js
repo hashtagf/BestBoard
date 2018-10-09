@@ -10,6 +10,7 @@ import Text from '../Widgets/Text'
 import Image from '../Widgets/Image'
 import Chart from '../Widgets/Chart'
 import List from '../Widgets/List'
+import Button from '../Widgets/Button'
 import LocalStore from './LocalStore'
 
 class WidgetStore {
@@ -33,13 +34,13 @@ class WidgetStore {
   }
 
   updateWidget(widgetId, payload) {
-    axios.put(this.server + '/widget/' + widgetId, payload).then((res) => 
+    axios.put(this.server + '/widget/' + widgetId, payload).then((res) =>
       console.log(res)
     )
   }
 
   deleteWidget(widgetId) {
-    axios.delete(this.server + '/widget/' + widgetId).then((res) => 
+    axios.delete(this.server + '/widget/' + widgetId).then((res) =>
       console.log(res)
     )
   }
@@ -65,8 +66,10 @@ class WidgetStore {
           return <Chart key={widget._id} payload={widget.widget} widgetId={widget._id} />
         case 'List':
           return <List key={widget._id} payload={widget.widget} widgetId={widget._id} />
+        case 'Button':
+          return <Button key={widget._id} payload={widget.widget} widgetId={widget._id} />
         default:
-          return <h2>Error</h2>
+          return <h2 key={widget._id} className="item"><span className="item-content">Coming Soon Widgets</span></h2>
       }
     })
     return listWidgets

@@ -10,7 +10,7 @@ class FormChart extends React.Component {
       title: 'Chart',
       feedID: '',
       feedAPI: '',
-      value: 0,
+      value: '',
       type: 'monotone',
       stroke: '#8884d8',
       fillOpacity: 1,

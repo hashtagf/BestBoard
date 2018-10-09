@@ -2,6 +2,7 @@ import React from 'react'
 import NETPIEMicrogear from '../../store/Microgear'
 import DatasourceStore from '../../store/DatasourceStore'
 import Creatable from 'react-select/lib/Creatable'
+
 class FormInputBasic extends React.Component {
   constructor(props) {
     super(props)
@@ -19,16 +20,12 @@ class FormInputBasic extends React.Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  componentWillMount() {
-
-  }
 
   handleChange(e) {
     var { topics, checkTopic, count } = this.state
-    console.log(e.target)
     if (e.target.name === 'datasource') {
       this.setState({
-        topic: [],
+        topics: [],
         count: 0,
         checkTopic: []
       })
@@ -42,7 +39,7 @@ class FormInputBasic extends React.Component {
           }
           this.setState({
             topics: topics,
-            checkTopic: checkTopic
+            checkTopic: checkTopic,
           })
         }
       })
@@ -50,10 +47,9 @@ class FormInputBasic extends React.Component {
     this.props.callback(e)
   }
 
-  handleSelected = (selectOption, e) => {
+  handleSelected = (selectOption) => {
     this.setState({ selectOption })
     this.props.values.value = selectOption.label
-    console.log(selectOption)
   }
 
   render() {
@@ -82,7 +78,7 @@ class FormInputBasic extends React.Component {
             Datasource :
           </label>
           <div className="col-9">
-            <select className="custom-select" name="datasource" onBlur={this.handleChange}>
+            <select className="custom-select"  name="datasource" onBlur={this.handleChange}>
               {listDatasources}
             </select>
           </div>

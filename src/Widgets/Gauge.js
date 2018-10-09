@@ -40,7 +40,7 @@ class Gauge extends React.Component {
     const value = this.state.value
     return (
       <div className="item Guage col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3">
-        <div className="item-content card border-success shadow rounded-0 border-10 widgetCard">
+        <div className="item-content card border-success shadow rounded-0 widgetCard">
           <h5 className="card-header">{payload.title}</h5>
           <div className="card-body">
             <CanvasGauge

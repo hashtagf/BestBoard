@@ -55,7 +55,7 @@ class Lists extends React.Component {
     )
     return (
       <div className="item List col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3">
-        <div className="item-content card border-info shadow rounded-0 border-10 widgetCard">
+        <div className="item-content card border-info shadow rounded-0 widgetCard">
           <h5 className="card-header">{payload.title}</h5>
           <div className="card-body m-0 p-0">
             <ul className="list-group" data-spy="scroll">

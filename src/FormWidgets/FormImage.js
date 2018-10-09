@@ -1,6 +1,6 @@
 import React from 'react'
 import WidgetStore from '../store/WidgetStore'
-import FormInputBasic from './Input/FormInputBasic'
+import InputText from './Input/InputText'
 import Store from '../store/Store'
 
 class FormImage extends React.Component {
@@ -8,10 +8,7 @@ class FormImage extends React.Component {
     super(props)
     this.state = {
       title: 'Image',
-      file: 'empty',
-      datasource: '',
-      filter: '',
-      filterIndex: 0
+      file: 'empty'
     }
     this.handlePayload = this.handlePayload.bind(this)
     this.handleFile = this.handleFile.bind(this)
@@ -42,18 +39,12 @@ class FormImage extends React.Component {
     let payload = {
       typeWidget: 'Image',
       title: this.state.title,
-      file: this.state.file,
-      datasource: this.state.datasource,
-      filter: this.state.filter,
-      filterIndex: this.state.filterIndex
+      file: this.state.file
     }
     WidgetStore.createWidget(Store.currentId, payload)
     this.setState({
       title: 'Image',
-      file: 'empty',
-      datasource: '',
-      filter: '',
-      filterIndex: 0
+      file: 'empty'
     })
     document.getElementById('b64').src = ''
   }
@@ -62,7 +53,11 @@ class FormImage extends React.Component {
     return (
       <div className="FormProgressBar container">
         <form >
-          <FormInputBasic callback={this.handlePayload} values={payload} />
+        <InputText
+            callback={this.handlePayload}
+            title="Title"
+            name="title"
+            value={payload.title} />
           <div className="form-group row">
             <label htmlFor="file" className="col-3 col-form-label">
               File :

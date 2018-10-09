@@ -7,7 +7,7 @@ import LocalStore from '../store/LocalStore'
 import socketIOClient from 'socket.io-client'
 
 let server = 'http://172.18.6.7:5582'
-
+// server = 'http://localhost:5582'
 const socket = socketIOClient(server)
 
 class Page extends Component {

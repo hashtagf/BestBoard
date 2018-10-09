@@ -73,8 +73,8 @@ class FormGaugeSpeed extends React.Component {
       <div className="FormGuage container">
         <FormInputBasic callback={this.handlePayload} values={payload} />
         <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit} />
-        <InputText callback={this.handlePayload} title="Min Value" name="minvalue" value={payload.minvalue} />
-        <InputText callback={this.handlePayload} title="Max Value" name="maxvalue" value={payload.maxvalue} />
+        <InputText callback={this.handlePayload} title="Min Value" name="minvalue" value={payload.minValue} />
+        <InputText callback={this.handlePayload} title="Max Value" name="maxvalue" value={payload.maxValue} />
         <InputText callback={this.handlePayload} title="Segments" name="segments" value={payload.segments} />
         <InputText callback={this.handlePayload} title="End Color" name="startColor" value={payload.startColor} />
         <InputText callback={this.handlePayload} title="Start Color" name="endColor" value={payload.endColor} />

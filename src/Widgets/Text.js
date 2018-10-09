@@ -11,7 +11,7 @@ class Text extends React.Component {
     const payload = this.props.payload
     return (
       <div className="item Text col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3">
-        <div className="item-content card border-white shadow rounded-0 border-10 widgetCard">
+        <div className="item-content card border-white shadow rounded-0 widgetCard">
           <h5 className="card-header">{payload.title}</h5>
           <div className="card-body">
             <textarea name="text"
@@ -21,7 +21,6 @@ class Text extends React.Component {
               className="form-control"
               defaultValue={payload.text}
             />
-
           </div>
           <div className="card-footer text-right">
             <a href="/#" data-toggle="modal" data-target=".ModalCreate"><i className="fas fa-cog text-dark mr-3"></i></a>

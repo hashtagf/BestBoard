@@ -9,7 +9,7 @@ class FormProgress extends React.Component {
     super(props)
     this.state = {
       title: 'Progress Bar',
-      percent: 0,
+      value: 0,
       unit: '',
       strokeWidth: '8',
       trailWidth: '8',
@@ -34,7 +34,7 @@ class FormProgress extends React.Component {
     let payload = {
       typeWidget: 'ProgressBar',
       title: this.state.title,
-      percent: this.state.percent,
+      value: this.state.value,
       unit: this.state.unit,
       strokeWidth: this.state.strokeWidth,
       trailWidth: this.state.trailWidth,
@@ -48,7 +48,7 @@ class FormProgress extends React.Component {
     WidgetStore.createWidget(Store.currentId, payload)
     this.setState({
       title: 'Progress Bar',
-      percent: 0,
+      value: 0,
       unit: '',
       strokeWidth: '8',
       trailWidth: '8',

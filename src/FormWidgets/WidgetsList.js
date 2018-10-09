@@ -9,6 +9,7 @@ import FormProgressBar from './FormProgressBar'
 import FormText from './FormText'
 import FormList from './FormList'
 import FormChart from './FormChart'
+import FormButton from './FormButton'
 class WidgetsList extends React.Component {
 
   constructor(props) {
@@ -49,6 +50,10 @@ class WidgetsList extends React.Component {
         },
         {
           name: "Text",
+          img: "https://www.excel-easy.com/examples/images/line-chart/line-chart.png"
+        },
+        {
+          name: "Button",
           img: "https://www.excel-easy.com/examples/images/line-chart/line-chart.png"
         }
       ],
@@ -121,6 +126,8 @@ class SelectType extends React.Component {
         return <FormList />
       case 'Chart':
         return <FormChart />
+      case 'Button':
+        return <FormButton />
       default:
         return <h1>Please select widget</h1>
     }

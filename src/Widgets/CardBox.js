@@ -42,7 +42,7 @@ class CardBox extends React.Component {
     else arrow = 'down text-danger'
     return (
       <div className="item CardBox col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3">
-        <div className="item-content card rounded-0 border-10 widgetCard">
+        <div className="item-content card rounded-0 widgetCard">
           <h5 className="card-header">{payload.title}</h5>
           <div className="card-body ">
             <div className="row pb-2">

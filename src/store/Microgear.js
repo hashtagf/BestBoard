@@ -7,9 +7,9 @@ class NETPIEMicrogear {
   @observable microgear = []
   @observable checkConnect = []
 
-  createMicrogear (datasources) {
-    datasources.forEach((datasource,index) => {
-      if (datasource.datasource.appID&&datasource.datasource.key&&datasource.datasource.secret) {
+  createMicrogear(datasources) {
+    datasources.forEach((datasource, index) => {
+      if (datasource.datasource.appID && datasource.datasource.key && datasource.datasource.secret) {
         this.microgear[datasource._id] = MicroGear.create({
           key: datasource.datasource.key,
           secret: datasource.datasource.secret,
@@ -25,18 +25,39 @@ class NETPIEMicrogear {
           console.log('Connect NETPIE..', datasource.datasource.name)
           eval(datasource.datasource.jsOnconnect)
         })
-        this.microgear[datasource._id].on("error", function(err) {
-          console.log("Error: " + err )
+        this.microgear[datasource._id].on("error", function (err) {
+          console.log("Error: " + err)
         })
-        this.microgear[datasource._id].on("closed", function() {
+        this.microgear[datasource._id].on("closed", function () {
           console.log("Closed")
         })
-        
+
       }
-      else datasources.splice(index,1)
+      else datasources.splice(index, 1)
     })
   }
-     
+
+  updateMicrogear(datasourceId, datasource) {
+    this.microgear[datasourceId] = MicroGear.create({
+      key: datasource.key,
+      secret: datasource.secret,
+      alias: datasource.name
+    })
+    this.microgear[datasourceId].connect(datasource.appID)
+    eval(datasource.jsOncreated)
+    this.microgear[datasourceId].on('connected', () => {
+      this.microgear[datasourceId].subscribe(datasource.topic)
+      console.log('Connect NETPIE..', datasource.name)
+      eval(datasource.jsOnconnect)
+    })
+    this.microgear[datasourceId].on("error", function (err) {
+      console.log("Error: " + err)
+    })
+    this.microgear[datasourceId].on("closed", function () {
+      console.log("Closed")
+    })
+  }
+
 }
 
 

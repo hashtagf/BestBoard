@@ -6,7 +6,7 @@ import axios from 'axios'
 import NETPIEMicrogear from '../../store/Microgear'
 import EditSource from './EditSource'
 let server = 'http://172.18.6.7:5582'
-server = 'http://localhost:5582'
+// server = 'http://localhost:5582'
 
 const socket = socketIOClient(server)
 
@@ -119,7 +119,7 @@ class ListDataSources extends Component {
   }
 
   checkOnline=(id)=> {
-    if (id) {
+    if (!status[id]) {
       NETPIEMicrogear.microgear[id].on('connected', () => {
         status[id] = true
         this.setState({
@@ -141,7 +141,7 @@ class ListDataSources extends Component {
               <div className="col-2 col-sm-2 px-0 tail">
                 <div className="row tail">
                   <div className="col-6 px-0 py-auto">
-                  {this.checkOnline(source._id)}
+                  {(!status[source.id])?this.checkOnline(source._id):''}
                     <div className="statusSource rounded-circle mt-1" id={(this.state.status[source._id]) ? 'online' : 'offline'}></div>
                   </div>
                   <div className="col-6 px-0 py-auto">
@@ -150,7 +150,6 @@ class ListDataSources extends Component {
                     </span>
                   </div>
                 </div>
-                
               </div>
             </div>
           </a>

@@ -70,7 +70,7 @@ class Chart extends React.Component {
     const payload = this.props.payload
     return (
       <div className="item Chart col-xl-9 col-lg-9 col-md-12 col-sm-12 text-body mb-3">
-        <div className="item-content card border-success shadow rounded-0 border-10 widgetChart">
+        <div className="item-content card border-success shadow rounded-0 widgetChart">
           <h5 className="card-header">{payload.title}</h5>
           <div className="card-body">
             <div className="btn-group mb-2" role="group" aria-label="DayMonthYear">

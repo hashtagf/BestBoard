@@ -11,7 +11,7 @@ class Image extends React.Component {
     const payload = this.props.payload
     return (
       <div className="item Image col-xl-6 col-lg-6 col-md-9 col-sm-12 text-body mb-3">
-        <div className="item-content card border-primary shadow rounded-0 border-10">
+        <div className="item-content card border-primary shadow rounded-0">
           <h5 className="card-header">{payload.title}</h5>
           <div className="card-body ">
             <img src={payload.file} className="img-fluid img-thumbnail widgetImage" alt="base64"/>
