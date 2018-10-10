@@ -13,8 +13,8 @@ class Image extends React.Component {
     const payload = this.props.payload
     return (
       <div className="item Image col-xl-6 col-lg-6 col-md-9 col-12 text-body mb-3">
-        <div className="item-content card border-primary shadow rounded-0">
-        <HeaderCard title={payload.title} del={this.delWidget.bind(this)}/>
+        <div className="item-content card shadow rounded-0 border-0">
+        <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)}/>
           <div className="card-body ">
             <img src={payload.file} className="img-fluid img-thumbnail widgetImage" alt="base64"/>
           </div>

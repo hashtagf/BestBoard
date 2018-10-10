@@ -11,6 +11,7 @@ import FormList from './FormList'
 import FormChart from './FormChart'
 import FormButton from './FormButton'
 import FormToggle from './FormToggle'
+
 class WidgetsList extends React.Component {
 
   constructor(props) {
@@ -61,84 +62,102 @@ class WidgetsList extends React.Component {
           name: "Toggle",
           img: "https://i.stack.imgur.com/k7Nit.png"
         },
-      ],
-      selectType: 0
+      ]
     }
   }
+  render() {
+    // const boardId = this.props.match.params.boardId
+    let listWidget = this.state.widgets.map((widget, index) => {
+      var tmp =
+        <div key={index} className={(this.state.selectType === widget.name) ? 'listwid active rounded p-2' : 'listwid rounded p-2'}>
+          <img className="img-thumbnail"
+            src={widget.img}
+            name={widget.name}
+            alt=""
+            onClick={this.props.selectWidget}
+          />
+          <figcaption className="figure-caption text-center">{widget.name}</figcaption>
+        </div>
+      return tmp
+    })
+    return (
+        <div className="col-sm-3 col-12 border-right listWidgets " data-spy="scroll" id="scrollbar-style">
+          <p><strong>Widget</strong></p>
+          {listWidget}
+        </div>
+    )
+  }
+}
 
-  selectWidget(e) {
+class EditWidget extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectType: "CardBox"
+    }
+  }
+  selectWidget=(e)=> {
     this.setState({
       selectType: e.target.name
     })
   }
-
   componentWillUnMount() {
     this.setState({
       selectType: 0
     })
   }
-
+  componentWillReceiveProps (nextProps) {
+    let editWidget = nextProps.editWidget
+    if (editWidget.typeWidget) {
+      this.setState({
+        selectType: editWidget.typeWidget
+      })
+    }
+  }
   render() {
-    // const boardId = this.props.match.params.boardId
-    let listWidget = this.state.widgets.map((widget, index) => {
-      var tmp =
-        <div key={index} className={(this.state.selectType === widget.name) ? 'listwid border border-2 border-primary p-1' : 'listwid p-1'}>
-          <img className="img-thumbnail"
-            src={widget.img}
-            name={widget.name}
-            alt=""
-            onClick={this.selectWidget.bind(this)}
-          />
-          <figcaption className="figure-caption text-center">{widget.name}</figcaption>
-
-        </div>
-      return tmp
-    })
+    let editWidget = this.props.editWidget
     return (
-      <div className="row">
-        <div className="col-sm-3 col-12 border-right listWidgets " data-spy="scroll" id="scrollbar-style">
-          <p><strong>Widget</strong></p>
-          {listWidget}
-        </div>
-        <div className="col-sm-9 col-12 formWidget" id="scrollbar-style">
-          <strong>Form</strong>
-          <SelectType selectType={this.state.selectType} />
-        </div>
+    <div className="row">
+      {(editWidget.typeWidget)?'':<WidgetsList selectWidget={this.selectWidget}/>}
+      <div className="col-sm-9 col-12 formWidget" id="scrollbar-style">
+        <strong>Form</strong>
+        <SelectType selectType={this.state.selectType} editWidget={editWidget}/>
       </div>
+    </div>
     )
   }
 }
-
 class SelectType extends React.Component {
   render() {
+    let editWidget = this.props.editWidget
     const { selectType } = this.props
     switch (selectType) {
       case 'CardBox':
-        return <FormCardBox />
+        return <FormCardBox editWidget={editWidget}/>
       case 'Gauge':
-        return <FormGauge />
+        return <FormGauge editWidget={editWidget}/>
       case 'GaugeSpeed':
-        return <FormGaugeSpeed />
+        return <FormGaugeSpeed editWidget={editWidget}/>
       case 'Image':
-        return <FormImage />
+        return <FormImage editWidget={editWidget}/>
       case 'ProgressBar':
-        return <FormProgressBar />
+        return <FormProgressBar editWidget={editWidget}/>
       case 'Progress':
-        return <FormProgress />
+        return <FormProgress editWidget={editWidget}/>
       case 'Text':
-        return <FormText />
+        return <FormText editWidget={editWidget}/>
       case 'List':
-        return <FormList />
+        return <FormList editWidget={editWidget}/>
       case 'Chart':
-        return <FormChart />
+        return <FormChart editWidget={editWidget}/>
       case 'Button':
-        return <FormButton />
+        return <FormButton editWidget={editWidget}/>
       case 'Toggle':
-        return <FormToggle />
+        return <FormToggle editWidget={editWidget}/>
       default:
         return <h1>Please select widget</h1>
     }
   }
 }
 
-export default WidgetsList
+export default EditWidget

@@ -7,18 +7,35 @@ class FormCardBox extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: 'Card Box',
-      value: '',
-      datasource: '',
-      filter:'',
-      filterIndex: 0,
-      unit: '',
-      icon: '',
-      status: true
+      form: {
+        title: 'Card Box',
+        value: '',
+        datasource: '',
+        filter:'',
+        filterIndex: 0,
+        unit: '',
+        icon: '',
+        status: true
+      }
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
+  componentWillReceiveProps (nextProps) {
+    let editWidget = nextProps.editWidget
+    if (editWidget.typeWidget) {
+      this.setState({
+        title: editWidget.title,
+        value: editWidget.value,
+        datasource: editWidget.datasource,
+        filter: editWidget.filter,
+        filterIndex: editWidget.filterIndex,
+        unit: editWidget.unit,
+        icon: editWidget.icon,
+        status: editWidget.status
+      })
 
+    }
+  }
   handlePayload(e) {
     this.setState({
       [e.target.name]: e.target.value

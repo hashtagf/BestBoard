@@ -73,8 +73,8 @@ class Chart extends React.Component {
     const payload = this.props.payload
     return (
       <div className="item Chart col-xl-9 col-lg-9 col-md-12 col-12 text-body mb-3">
-        <div className="item-content card shadow rounded-0 widgetChart">
-          <HeaderCard title={payload.title} del={this.delWidget.bind(this)}/>
+        <div className="item-content card shadow rounded-0 widgetChart border-0">
+        <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)}/>
           <div className="card-body">
             <div className="btn-group mb-2" role="group" aria-label="DayMonthYear">
               <button type="button"
@@ -143,8 +143,6 @@ class Chart extends React.Component {
                   fill={payload.fill} />
               </AreaChart>
             </ResponsiveContainer>
-          </div>
-          <div className="card-footer text-right">
           </div>
         </div>
       </div>

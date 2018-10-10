@@ -43,7 +43,7 @@ class Gauge extends React.Component {
     return (
       <div className="item GaugeSpeed col-xl-3 col-lg-4 col-md-6 col-12 text-body mb-3">
         <div className="item-content card border-secondary shadow rounded-0 widgetCard">
-          <HeaderCard title={payload.title} del={this.delWidget.bind(this)}/>
+        <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)}/>
           <div className="card-body">
             <ReactSpeedometer
               value={parseFloat(value)}

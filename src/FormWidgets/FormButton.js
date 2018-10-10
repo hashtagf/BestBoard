@@ -8,16 +8,31 @@ class FormButton extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: 'Button',
-      label: 'Click',
-      datasource: '',
-      type: 'chat',
-      tpa: '',
-      value: '',
+      form: {
+        title: 'Button',
+        label: 'Click',
+        datasource: '',
+        type: 'chat',
+        tpa: '',
+        value: '',
+      },
+
       listDatasources: DatasourceStore.listsDatasources()
     }
   }
-
+  componentWillReceiveProps (nextProps) {
+    let editWidget = nextProps.editWidget
+    if (editWidget.typeWidget) {
+      this.setState({
+        title: editWidget.title,
+        label: editWidget.label,
+        datasource: editWidget.datasource,
+        type: editWidget.type,
+        tpa: editWidget.tpa,
+        value: editWidget.value
+      })
+    }
+  }
   handlePayload = (e) => {
     this.setState({
       [e.target.name]: e.target.value

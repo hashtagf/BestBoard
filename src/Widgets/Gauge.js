@@ -43,8 +43,8 @@ class Gauge extends React.Component {
     const value = this.state.value
     return (
       <div className="item Guage col-xl-3 col-lg-4 col-md-6 col-12 text-body mb-3">
-        <div className="item-content card border-success shadow rounded-0 widgetCard">
-        <HeaderCard title={payload.title}/>
+        <div className="item-content card border-success shadow rounded-0 widgetCard border-0">
+        <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)}/>
           <div className="card-body">
             <CanvasGauge
               value={parseInt(value, 10)}

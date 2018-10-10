@@ -9,6 +9,12 @@
     max-height: 65vh;
     overflow-x: hidden;
 }
+.listwid.active {
+    background-color: var(--activeItem);
+}
+.listwid.active .figure-caption {
+    color: #f1f1f1;
+}
 .formWidget {
     overflow-y: auto;
     max-height: 65vh;

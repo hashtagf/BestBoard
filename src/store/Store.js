@@ -9,6 +9,8 @@ class Store {
   setCurrentId (payload) {
     this.currentId = payload
   }
+  @observable editWidget = {
+  }
 }
 
 export default new Store()
