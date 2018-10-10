@@ -113,7 +113,7 @@ class FormToggle extends React.Component {
           </div>
         </div>
         <TypeMicrogear payload={payload} handlePayload={this.handlePayload} />
-
+        
         <div className="row justify-content-end">
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
