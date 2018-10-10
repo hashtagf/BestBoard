@@ -53,7 +53,7 @@ class FormImage extends React.Component {
     return (
       <div className="FormProgressBar container">
         <form >
-        <InputText
+          <InputText
             callback={this.handlePayload}
             title="Title"
             name="title"
@@ -61,19 +61,25 @@ class FormImage extends React.Component {
           <div className="form-group row">
             <label htmlFor="file" className="col-3 col-form-label">
               File :
-          </label>
+            </label>
             <div className="col-9">
-              <input id="uploadImg"
-                name="path"
-                type="file"
-                className="form-control-file"
-                onChange={this.handleFile}
-              />
+              <div className="input-group">
+                <div className="custom-file">
+                  <input id="uploadImg"
+                    aria-describedby="uploadImg"
+                    name="path"
+                    type="file"
+                    className="custom-file-input"
+                    onChange={this.handleFile}
+                  />
+                  <label className="custom-file-label" for="uploadImg">Choose file</label>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="row mb-3">
+          <div className="row mb-2 text-center">
             <div className="col-12">
-              <img src="" id="b64" height={250} alt="" />
+              <img src="" className="img-thumbnail" id="b64" height={250} alt="" />
             </div>
           </div>
           <div className="row justify-content-end">

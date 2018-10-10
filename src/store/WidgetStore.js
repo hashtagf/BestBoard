@@ -11,6 +11,7 @@ import Image from '../Widgets/Image'
 import Chart from '../Widgets/Chart'
 import List from '../Widgets/List'
 import Button from '../Widgets/Button'
+import Toggle from '../Widgets/Toggle'
 import LocalStore from './LocalStore'
 import Store from './Store'
 
@@ -68,6 +69,8 @@ class WidgetStore {
           return <List key={widget._id} payload={widget.widget} widgetId={widget._id} />
         case 'Button':
           return <Button key={widget._id} payload={widget.widget} widgetId={widget._id} />
+        case 'Toggle':
+          return <Toggle key={widget._id} payload={widget.widget} widgetId={widget._id} />
         default:
           return <h2 key={widget._id} className="item"><span className="item-content">Coming Soon Widgets</span></h2>
       }

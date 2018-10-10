@@ -113,6 +113,7 @@ class FormToggle extends React.Component {
           </div>
         </div>
         <TypeMicrogear payload={payload} handlePayload={this.handlePayload} />
+
         <div className="row justify-content-end">
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -140,28 +141,28 @@ class TypeMicrogear extends React.Component {
             <h6>OnToggle ON Action</h6>
             <InputText callback={handlePayload}
               title="Alias"
-              name="tpa"
+              name="tpaOn"
               value={tpaOn}
               placeholder="Name Alias (Gearname)"
             />
             <InputText
               callback={handlePayload}
               title="Value"
-              name="value"
+              name="valueOn"
               value={valueOn}
             />
              <hr/>
             <h6>OnToggle OFF Action</h6>
             <InputText callback={handlePayload}
               title="Alias"
-              name="tpa"
+              name="tpaOff"
               value={tpaOff}
               placeholder="Name Alias (Gearname)"
             />
             <InputText
               callback={handlePayload}
               title="Value"
-              name="value"
+              name="valueOff"
               value={valueOff}
             />
           </span>
@@ -174,14 +175,14 @@ class TypeMicrogear extends React.Component {
             <InputText
               callback={handlePayload}
               title="Topic"
-              name="tpa"
+              name="tpaOn"
               value={tpaOn}
               placeholder="Topic :: led/state/"
             />
             <InputText
               callback={handlePayload}
               title="Value"
-              name="value"
+              name="valueOn"
               value={valueOn}
             />
             <hr/>
@@ -189,14 +190,14 @@ class TypeMicrogear extends React.Component {
             <InputText
               callback={handlePayload}
               title="Topic"
-              name="tpa"
+              name="tpaOff"
               value={tpaOff}
               placeholder="Topic :: led/state/"
             />
             <InputText
               callback={handlePayload}
               title="Value"
-              name="value"
+              name="valueOff"
               value={valueOff}
             />
           </span>
