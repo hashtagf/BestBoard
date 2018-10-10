@@ -4,16 +4,22 @@ import Store from '../store/Store'
 import InputText from './Input/InputText'
 import DatasourceStore from '../store/DatasourceStore'
 
-class FormButton extends React.Component {
+class FormToggle extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: 'Button',
-      label: 'Click',
+      title: 'Toggle',
+      labelOn: 'ON',
+      labelOff: 'OFF',
       datasource: '',
+      toggleState: '',
+      toggleValue: 1,
       type: 'chat',
-      tpa: '',
-      value: '',
+      tpaOn: '',
+      valueOn: '',
+      tpaOff: '',
+      valueOff: '',
+      onCreated: '',
       listDatasources: DatasourceStore.listsDatasources()
     }
   }
@@ -27,21 +33,32 @@ class FormButton extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     let payload = {
-      typeWidget: 'Button',
+      typeWidget: 'Toggle',
       title: this.state.title,
-      label: this.state.label,
+      labelOn: this.state.labelOn,
+      labelOff: this.state.labelOff,
       datasource: this.state.datasource,
+      toggleState: this.state.toggleState,
+      toggleValue: this.state.toggleValue,
       type: this.state.type,
-      tpa: this.state.tpa,
-      value: this.state.value
+      tpaOn: this.state.tpaOn,
+      valueOn: this.state.valueOn,
+      tpaOff: this.state.tpaOff,
+      valueOff: this.state.valueOff,
+      onCreated: this.state.onCreated
     }
     this.setState({
-      title: 'Button',
-      label: 'Click',
+      title: 'Toggle',
+      labelOn: 'ON',
+      labelOff: 'OFF',
       datasource: '',
+      toggleState: '',
+      toggleValue: 1,
       type: 'chat',
-      tpa: '',
-      value: ''
+      tpaOn: '',
+      valueOn: '',
+      tpaOff: '',
+      valueOff: ''
     })
     WidgetStore.createWidget(Store.currentId, payload)
   }
@@ -51,9 +68,8 @@ class FormButton extends React.Component {
     return (
       <div className="FormButton container">
         <InputText callback={this.handlePayload} title="Title" name="title" value={payload.title} />
-        <InputText callback={this.handlePayload} title="Label Button" name="label" value={payload.label} />
-        <hr />
-        <h6>OnClick Action</h6>
+        <InputText callback={this.handlePayload} title="Label ON" name="labelOn" value={payload.labelOn} />
+        <InputText callback={this.handlePayload} title="Label OFF" name="labelOff" value={payload.labelOff} />
         <div className="form-group row">
           <label htmlFor="datasource" className="col-3 col-form-label">
             Datasource :
@@ -62,6 +78,27 @@ class FormButton extends React.Component {
             <select className="custom-select" name="datasource" onBlur={this.handlePayload}>
               {payload.listDatasources}
             </select>
+          </div>
+        </div>
+        <div className="form-group row">
+          <label htmlFor="datasource" className="col-3 col-form-label">
+            Toggle State :
+          </label>
+          <div className="col-6">
+            <input type="text" name="toggleState"
+              className="form-control"
+              onChange={this.handlePayload}
+              value={payload.toggleState}
+              placeholder='Topic :: /led/state'
+            />
+          </div>
+          <div className="col-3">
+            <input type="text" name="toggleValue" 
+              className="form-control"
+              onChange={this.handlePayload} 
+              value={payload.toggleValue} 
+              placeholder='Value check State'  
+            />
           </div>
         </div>
         <div className="form-group row">
@@ -93,41 +130,74 @@ class FormButton extends React.Component {
 
 class TypeMicrogear extends React.Component {
   render() {
-    const { tpa, type, value } = this.props.payload
+    const { type ,tpaOn, tpaOff, valueOn, valueOff } = this.props.payload
     const handlePayload = this.props.handlePayload
     switch (type) {
       case 'chat':
         return (
           <span>
+            <hr/>
+            <h6>OnToggle ON Action</h6>
             <InputText callback={handlePayload}
               title="Alias"
               name="tpa"
-              value={tpa}
+              value={tpaOn}
               placeholder="Name Alias (Gearname)"
             />
             <InputText
               callback={handlePayload}
               title="Value"
               name="value"
-              value={value}
+              value={valueOn}
+            />
+             <hr/>
+            <h6>OnToggle OFF Action</h6>
+            <InputText callback={handlePayload}
+              title="Alias"
+              name="tpa"
+              value={tpaOff}
+              placeholder="Name Alias (Gearname)"
+            />
+            <InputText
+              callback={handlePayload}
+              title="Value"
+              name="value"
+              value={valueOff}
             />
           </span>
         )
       case 'publish':
         return (
           <span>
+            <hr/>
+            <h6>OnToggle ON Action</h6>
             <InputText
               callback={handlePayload}
               title="Topic"
               name="tpa"
-              value={tpa}
-              placeholder="Topic :: room/temp/"
+              value={tpaOn}
+              placeholder="Topic :: led/state/"
             />
             <InputText
               callback={handlePayload}
               title="Value"
               name="value"
-              value={value}
+              value={valueOn}
+            />
+            <hr/>
+            <h6>OnToggle OFF Action</h6>
+            <InputText
+              callback={handlePayload}
+              title="Topic"
+              name="tpa"
+              value={tpaOff}
+              placeholder="Topic :: led/state/"
+            />
+            <InputText
+              callback={handlePayload}
+              title="Value"
+              name="value"
+              value={valueOff}
             />
           </span>
         )
@@ -137,5 +207,5 @@ class TypeMicrogear extends React.Component {
 }
 
 
-export default FormButton
+export default FormToggle
 

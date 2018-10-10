@@ -1,7 +1,7 @@
 import React from 'react'
 import CanvasGauge from 'react-canvas-gauge'
 import WidgetStore from '../store/WidgetStore'
-import Microgear from '../store/Microgear'
+import NETPIEMicrogear from '../store/Microgear'
 
 class Gauge extends React.Component {
 
@@ -12,20 +12,21 @@ class Gauge extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const payload = this.props.payload
-    const microgear = Microgear.microgear[payload.datasource]
-    microgear.on('closed', () => console.log('Close'))
-    microgear.on('message', this.onMessage.bind(this))
+    if (NETPIEMicrogear.statusOnline[payload.datasource]) {
+      const microgear = NETPIEMicrogear.microgear[payload.datasource]
+      microgear.on('message', this.onMessage.bind(this))
+    } else console.log('error : not Connect datasource !!')
   }
 
   onMessage(topic, msg) {
     const payload = this.props.payload
     const strMsg = msg + ''
+    const value = strMsg.split(payload.filter)[payload.filterIndex]
     if (payload.value === topic) {
       this.setState({
-        value: strMsg.split(payload.filter)[payload.filterIndex],
-        previousValue: this.state.value
+        value: value
       })
     }
   }

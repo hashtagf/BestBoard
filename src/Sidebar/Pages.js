@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 import Store from '../store/Store'
 import LocalStore from '../store/LocalStore'
 import socketIOClient from 'socket.io-client'
-import config from '../config'
-const socket = socketIOClient(config.server)
+
+const socket = socketIOClient(Store.server)
 
 class Page extends Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class Page extends Component {
 
   getBoard = () => {
     let pages = []
-    axios.get(config.server + '/board/').then((res) => {
+    axios.get(Store.server + '/board/').then((res) => {
       res.data.map((board) =>
         pages.push({
           id: board._id,
@@ -73,14 +73,14 @@ class Page extends Component {
         boardName: this.state.inputName
       }
       if (index === -1) {
-        axios.post( config.server + '/board/', payload ).then((res) => {
+        axios.post( Store.server + '/board/', payload ).then((res) => {
           console.log(res)
         })
         LocalStore.insertPage(this.state.inputName)
         console.log(LocalStore.local.pages)
       }
       else {
-        axios.put( config.server + '/board/' + pageId, payload).then((res) => {
+        axios.put( Store.server + '/board/' + pageId, payload).then((res) => {
           console.log(res)
         })
         LocalStore.updatePage(index,pageId,this.state.inputName)
@@ -115,7 +115,7 @@ class Page extends Component {
   }
 
   deletePage = (pageId) => {
-    axios.delete( config.server + '/board/' + pageId).then((res) => {
+    axios.delete( Store.server + '/board/' + pageId).then((res) => {
       console.log(res)
     })
     LocalStore.deletePage(pageId)

@@ -6,6 +6,7 @@ class NETPIEMicrogear {
 
   @observable microgear = []
   @observable checkConnect = []
+  @observable statusOnline = []
 
   createMicrogear(datasources) {
     datasources.forEach((datasource, index) => {
@@ -23,6 +24,7 @@ class NETPIEMicrogear {
         this.microgear[datasource._id].on('connected', () => {
           this.microgear[datasource._id].subscribe(datasource.datasource.topic)
           console.log('Connect NETPIE..', datasource.datasource.name)
+          this.statusOnline[datasource._id] = true
           eval(datasource.datasource.jsOnconnect)
         })
         this.microgear[datasource._id].on("error", function (err) {

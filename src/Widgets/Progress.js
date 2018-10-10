@@ -16,10 +16,12 @@ class Progress extends React.Component {
     WidgetStore.deleteWidget(widgetId)
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const payload = this.props.payload
-    const microgear = NETPIEMicrogear.microgear[payload.datasource]
-    microgear.on('message', this.onMessage.bind(this))
+    if (NETPIEMicrogear.statusOnline[payload.datasource]) {
+      const microgear = NETPIEMicrogear.microgear[payload.datasource]
+      microgear.on('message', this.onMessage.bind(this))
+    } else console.log('error : not Connect datasource !!')
   }
 
   onMessage(topic, msg) {

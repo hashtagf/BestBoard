@@ -5,10 +5,9 @@ import socketIOClient from 'socket.io-client'
 import axios from 'axios'
 import NETPIEMicrogear from '../../store/Microgear'
 import EditSource from './EditSource'
-import config from '../../config'
-const socket = socketIOClient(config.server)
+import Store from '../../store/Store'
 
-let status = []
+const socket = socketIOClient(Store.server)
 
 class DataSource extends Component {
   constructor(props) {
@@ -57,7 +56,7 @@ class DataSource extends Component {
   }
 
   getDatasource() {
-    axios.get(config.server + '/datasource/').then((res) => {
+    axios.get(Store.server + '/datasource/').then((res) => {
       DataSourceStore.datasources = res.data
       NETPIEMicrogear.createMicrogear(res.data)
       this.setState({
@@ -118,16 +117,6 @@ class ListDataSources extends Component {
     DataSourceStore.deleteDatasource(sourceId)
   }
 
-  checkOnline=(id)=> {
-    if (!status[id]) {
-      NETPIEMicrogear.microgear[id].on('connected', () => {
-        status[id] = true
-        this.setState({
-          status: status
-        })
-      })
-    }
-  }
   render() {
     let datasources = this.props.datasources
     return (
@@ -141,8 +130,7 @@ class ListDataSources extends Component {
               <div className="col-2 col-sm-2 px-0 tail">
                 <div className="row tail">
                   <div className="col-6 px-0 py-auto">
-                  {(!status[source.id])?this.checkOnline(source._id):''}
-                    <div className="statusSource rounded-circle mt-1" id={(this.state.status[source._id]) ? 'online' : 'offline'}></div>
+                    <div className="statusSource rounded-circle mt-1" id={(NETPIEMicrogear.statusOnline[source._id]) ? 'online' : 'offline'}></div>
                   </div>
                   <div className="col-6 px-0 py-auto">
                     <span className="editmenu">

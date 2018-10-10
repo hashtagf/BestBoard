@@ -6,9 +6,8 @@ import socketIOClient from 'socket.io-client'
 import Muuri from 'muuri'
 import axios from 'axios'
 import WidgetStore from '../store/WidgetStore'
-import config from '../config'
-const socket = socketIOClient(config.server)
 
+const socket = socketIOClient(Store.server)
 var grid = null
 
 class Main extends Component {
@@ -18,8 +17,6 @@ class Main extends Component {
       listWidgets: [],
       connect: true
     }
-  }
-  componentWillMount () {
   }
   componentDidMount () {
     if (this.state.connect) this.response()
@@ -45,9 +42,10 @@ class Main extends Component {
   }
 
   getWidgets () {
-    axios.get(config.server + '/widget/' + Store.currentId).then((res) => {
+    axios.get(Store.server + '/widget/' + Store.currentId).then((res) => {
+      let tmp = WidgetStore.showWidgets(res.data)
       this.setState({
-        listWidgets: WidgetStore.showWidgets(res.data)
+        listWidgets: tmp
       })
       this.createMuuri()
     })
@@ -86,6 +84,5 @@ class Main extends Component {
     )
   }
 }
-
 
 export default Main

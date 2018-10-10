@@ -10,6 +10,7 @@ import FormText from './FormText'
 import FormList from './FormList'
 import FormChart from './FormChart'
 import FormButton from './FormButton'
+import FormToggle from './FormToggle'
 class WidgetsList extends React.Component {
 
   constructor(props) {
@@ -55,7 +56,11 @@ class WidgetsList extends React.Component {
         {
           name: "Button",
           img: "https://www.excel-easy.com/examples/images/line-chart/line-chart.png"
-        }
+        },
+        {
+          name: "Toggle",
+          img: "https://i.stack.imgur.com/k7Nit.png"
+        },
       ],
       selectType: 0
     }
@@ -128,6 +133,8 @@ class SelectType extends React.Component {
         return <FormChart />
       case 'Button':
         return <FormButton />
+      case 'Toggle':
+        return <FormToggle />
       default:
         return <h1>Please select widget</h1>
     }
