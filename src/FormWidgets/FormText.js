@@ -1,13 +1,20 @@
 import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import Store from '../store/Store'
+import FormInputBasic from './Input/FormInputBasic'
+import InputText from './Input/InputText'
 
 class FormText extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       title: 'Text',
-      text: '',
+      value: '',
+      datasource: '',
+      filter: '',
+      filterIndex: 0,
+      startText: '',
+      endText: ''
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
@@ -23,12 +30,22 @@ class FormText extends React.Component {
     let payload = {
       typeWidget: 'Text',
       title: this.state.title,
-      text: this.state.text
+      value: this.state.value,
+      datasource: this.state.datasource,
+      filter: this.state.filter,
+      filterIndex: this.state.filterIndex,
+      startText: this.state.startText,
+      endText: this.state.endText
     }
     WidgetStore.createWidget(Store.currentId, payload)
     this.setState({
       title: 'Text',
-      text: ''
+      value: '',
+      datasource: '',
+      filter: '',
+      filterIndex: 0,
+      startText: '',
+      endText: ''
     })
   }
   render() {
@@ -36,34 +53,9 @@ class FormText extends React.Component {
     return (
       <div className="FormProgressBar container">
         <form>
-          <div className="form-group row">
-            <label htmlFor="title" className="col-3 col-form-label">
-              Title :
-          </label>
-            <div className="col-9">
-              <input
-                name="title"
-                type="text"
-                className="form-control"
-                value={payload.title}
-                onChange={this.handlePayload}
-              />
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="text" className="col-3 col-form-label">
-              Text :
-          </label>
-            <div className="col-9">
-              <textarea
-                name="text"
-                type="textarea"
-                className="form-control"
-                value={payload.percent}
-                onChange={this.handlePayload}
-              />
-            </div>
-          </div>
+          <FormInputBasic callback={this.handlePayload} values={payload} />
+          <InputText callback={this.handlePayload} title="Start Text" name="startText" value={payload.startText} />
+          <InputText callback={this.handlePayload} title="End Text" name="startText" value={payload.endText} />
           <div className="row justify-content-end">
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>

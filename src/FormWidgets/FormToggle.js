@@ -9,8 +9,6 @@ class FormToggle extends React.Component {
     super(props)
     this.state = {
       title: 'Toggle',
-      labelOn: 'ON',
-      labelOff: 'OFF',
       datasource: '',
       toggleState: '',
       toggleValue: 1,
@@ -20,6 +18,7 @@ class FormToggle extends React.Component {
       tpaOff: '',
       valueOff: '',
       onCreated: '',
+      onCreatedValue: '',
       listDatasources: DatasourceStore.listsDatasources()
     }
   }
@@ -35,8 +34,6 @@ class FormToggle extends React.Component {
     let payload = {
       typeWidget: 'Toggle',
       title: this.state.title,
-      labelOn: this.state.labelOn,
-      labelOff: this.state.labelOff,
       datasource: this.state.datasource,
       toggleState: this.state.toggleState,
       toggleValue: this.state.toggleValue,
@@ -45,12 +42,11 @@ class FormToggle extends React.Component {
       valueOn: this.state.valueOn,
       tpaOff: this.state.tpaOff,
       valueOff: this.state.valueOff,
-      onCreated: this.state.onCreated
+      onCreated: this.state.onCreated,
+      onCreatedValue: this.state.onCreatedValue
     }
     this.setState({
       title: 'Toggle',
-      labelOn: 'ON',
-      labelOff: 'OFF',
       datasource: '',
       toggleState: '',
       toggleValue: 1,
@@ -58,7 +54,9 @@ class FormToggle extends React.Component {
       tpaOn: '',
       valueOn: '',
       tpaOff: '',
-      valueOff: ''
+      valueOff: '',
+      onCreated: '',
+      onCreatedValue: '',
     })
     WidgetStore.createWidget(Store.currentId, payload)
   }
@@ -68,8 +66,6 @@ class FormToggle extends React.Component {
     return (
       <div className="FormButton container">
         <InputText callback={this.handlePayload} title="Title" name="title" value={payload.title} />
-        <InputText callback={this.handlePayload} title="Label ON" name="labelOn" value={payload.labelOn} />
-        <InputText callback={this.handlePayload} title="Label OFF" name="labelOff" value={payload.labelOff} />
         <div className="form-group row">
           <label htmlFor="datasource" className="col-3 col-form-label">
             Datasource :
@@ -78,6 +74,27 @@ class FormToggle extends React.Component {
             <select className="custom-select" name="datasource" onBlur={this.handlePayload}>
               {payload.listDatasources}
             </select>
+          </div>
+        </div>
+        <div className="form-group row">
+          <label htmlFor="datasource" className="col-3 col-form-label">
+            OnCreated :
+          </label>
+          <div className="col-6">
+            <input type="text" name="onCreated"
+              className="form-control"
+              onChange={this.handlePayload}
+              value={payload.onCreated}
+              placeholder='Gearname (Alias) :: NodeMCU'
+            />
+          </div>
+          <div className="col-3">
+            <input type="text" name="onCreatedValue" 
+              className="form-control"
+              onChange={this.handlePayload} 
+              value={payload.onCreatedValue} 
+              placeholder='Value check State'  
+            />
           </div>
         </div>
         <div className="form-group row">
@@ -113,7 +130,6 @@ class FormToggle extends React.Component {
           </div>
         </div>
         <TypeMicrogear payload={payload} handlePayload={this.handlePayload} />
-        
         <div className="row justify-content-end">
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>

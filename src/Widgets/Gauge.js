@@ -2,6 +2,9 @@ import React from 'react'
 import CanvasGauge from 'react-canvas-gauge'
 import WidgetStore from '../store/WidgetStore'
 import NETPIEMicrogear from '../store/Microgear'
+import './Widget.css'
+import Store from '../store/Store'
+import HeaderCard from "./HeaderCard"
 
 class Gauge extends React.Component {
 
@@ -40,9 +43,9 @@ class Gauge extends React.Component {
     const payload = this.props.payload
     const value = this.state.value
     return (
-      <div className="item Guage col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3">
+      <div className="item Guage col-xl-3 col-lg-4 col-md-6 col-12 text-body mb-3">
         <div className="item-content card border-success shadow rounded-0 widgetCard">
-          <h5 className="card-header">{payload.title}</h5>
+        <HeaderCard title={payload.title}/>
           <div className="card-body">
             <CanvasGauge
               value={parseInt(value, 10)}
@@ -57,7 +60,7 @@ class Gauge extends React.Component {
             //scaleList={payload.setColor}
             />
           </div>
-          <div className="card-footer text-right">
+          <div className="card-footer text-right"  id={(Store.mode)?'settingMode':'displayMode'}>
             <a href="/#" data-toggle="modal" data-target=".ModalCreate"><i className="fas fa-cog text-dark mr-3"></i></a>
             <button className="btn" onClick={this.delWidget.bind(this)} ><i className="fas fa-trash-alt text-danger"></i></button>          </div>
         </div>

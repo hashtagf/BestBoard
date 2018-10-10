@@ -1,6 +1,9 @@
 import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import NETPIEMicrogear from '../store/Microgear'
+import './Widget.css'
+import Store from '../store/Store'
+import HeaderCard from "./HeaderCard"
 
 class Lists extends React.Component {
   constructor(props) {
@@ -57,15 +60,15 @@ class Lists extends React.Component {
       <List key={index} payload={payload} icon={icon} />
     )
     return (
-      <div className="item List col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3">
+      <div className="item List col-xl-3 col-lg-4 col-md-6 col-12 text-body mb-3">
         <div className="item-content card border-info shadow rounded-0 widgetCard">
-          <h5 className="card-header">{payload.title}</h5>
+        <HeaderCard title={payload.title}/>
           <div className="card-body m-0 p-0">
             <ul className="list-group" data-spy="scroll">
               {mapList.reverse()}
             </ul>
           </div>
-          <div className="card-footer text-right">
+          <div className="card-footer text-right" id={(Store.mode)?'settingMode':'displayMode'}>
             <a href="/#" data-toggle="modal" data-target=".ModalCreate"><i className="fas fa-cog text-dark mr-3"></i></a>
             <button className="btn" onClick={this.delWidget.bind(this)} ><i className="fas fa-trash-alt text-danger"></i></button>
           </div>
