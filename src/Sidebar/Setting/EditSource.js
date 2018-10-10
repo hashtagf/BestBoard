@@ -17,7 +17,7 @@ class EditSource extends Component {
   render() {
     var props = this.props.values
     return (
-      <div className={"modal fade edit ModalEditSource"} id="scrollbar-style" data-backdrop="false" tabIndex="-1" role="dialog" aria-hidden="false" >
+      <div className={"modal fade edit ModalEditSource"} id="scrollbar-style" data-backdrop="true" tabIndex="-1" role="dialog" aria-hidden="false" >
         <div className="modal-dialog modal-lg">
           <div className="modal-content text-dark">
             <div className="modal-header">

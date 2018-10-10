@@ -95,13 +95,7 @@ ul.CTAs a {
     text-align: center;
     font-size: 0.9em !important;
     display: block;
-    border-radius: 5px;
     margin-bottom: 5px;
-}
-
-a.download {
-    background: #fff;
-    color: var(--activePresence);
 }
 
 a.article, a.article:hover {

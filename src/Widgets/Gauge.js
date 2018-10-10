@@ -3,7 +3,6 @@ import CanvasGauge from 'react-canvas-gauge'
 import WidgetStore from '../store/WidgetStore'
 import NETPIEMicrogear from '../store/Microgear'
 import './Widget.css'
-import Store from '../store/Store'
 import HeaderCard from "./HeaderCard"
 
 class Gauge extends React.Component {
@@ -60,9 +59,6 @@ class Gauge extends React.Component {
             //scaleList={payload.setColor}
             />
           </div>
-          <div className="card-footer text-right"  id={(Store.mode)?'settingMode':'displayMode'}>
-            <a href="/#" data-toggle="modal" data-target=".ModalCreate"><i className="fas fa-cog text-dark mr-3"></i></a>
-            <button className="btn" onClick={this.delWidget.bind(this)} ><i className="fas fa-trash-alt text-danger"></i></button>          </div>
         </div>
       </div>
     )

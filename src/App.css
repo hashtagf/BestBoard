@@ -11,6 +11,9 @@ body {
 a {
   cursor: pointer;
 }
+.btn {
+  border-radius: 20rem;
+}
 .text-muted {
   color: var(--textMute)
 }
@@ -29,6 +32,10 @@ a {
   transition: all 0.3s;
   z-index:-1;
   overflow-y: auto;
+}
+.modal-backdrop {
+  background: transparent;
+  z-index: -1;
 }
 .btn-primary {
   background-color: var(--activePresence);
@@ -51,4 +58,8 @@ a {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.3);
 	background-color: #00000017;
+}
+.form-control {
+  border: 0px;
+  background-color: #f3f3f3;
 }

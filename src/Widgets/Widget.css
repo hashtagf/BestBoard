@@ -4,3 +4,9 @@
 #displayMode {
     display: none;
 }
+.settingwid {
+    font-size: 1rem;
+}
+.card-header {
+    background: transparent;
+}

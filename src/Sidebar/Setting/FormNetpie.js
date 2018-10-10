@@ -158,7 +158,7 @@ class FormSource extends Component {
             onChange={this.handleChange} 
             value={values.topic}/>
         </div>
-        <details open="">
+        <details className="mb-4" open="">
           <summary>Advance</summary>
           <div className="form-group my-1">
             <label htmlFor="jsOncreated">Oncreated Action</label>
@@ -179,9 +179,9 @@ class FormSource extends Component {
 class Buttonform extends Component {
   render () {
     if (this.props._id) {
-      return <button type="submit" onClick={this.props.edit} className="btn btn-primary" data-dismiss="modal" aria-label="Close" aria-hidden={true}>Edit</button>
+      return <button type="submit" onClick={this.props.edit} className="btn btn-primary border-0" data-dismiss="modal" aria-label="Close" aria-hidden={true}>Edit</button>
     }
-    return <button type="submit" onClick={this.props.new} className="btn btn-primary" data-dismiss="modal" aria-label="Close" aria-hidden={true}>Save</button>
+    return <button type="submit" onClick={this.props.new} className="btn btn-primary border-0" data-dismiss="modal" aria-label="Close" aria-hidden={true}>Save</button>
 
   }
 }

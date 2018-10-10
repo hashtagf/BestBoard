@@ -1,7 +1,6 @@
 import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import NETPIEMicrogear from '../store/Microgear'
-import Store from '../store/Store'
 import './Toggle.css'
 import './Widget.css'
 import HeaderCard from "./HeaderCard"
@@ -69,16 +68,12 @@ class CardBox extends React.Component {
     return (
       <div className="item CardBox col-xl-3 col-lg-4 col-md-6 col-12 text-body mb-3">
         <div className="item-content card shadow rounded-0 widgetCard">
-        <HeaderCard title={payload.title}/>
+        <HeaderCard title={payload.title} del={this.delWidget.bind(this)}/>
           <div className="card-body ">
             <span className="switch">
               <input type="checkbox" className="switch switch-lg" id="switch-id" onChange={this.handleChange} checked={checked}/>
               <label htmlFor="switch-id"></label>
             </span>
-          </div>
-          <div className="card-footer text-right" id={(Store.mode)?'settingMode':'displayMode'}>
-            <a href="/#" data-toggle="modal" data-target=".ModalCreate"><i className="fas fa-cog text-dark mr-3"></i></a>
-            <button className="btn" onClick={this.delWidget.bind(this)} ><i className="fas fa-trash-alt text-danger"></i></button>
           </div>
         </div>
       </div>

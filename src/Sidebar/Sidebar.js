@@ -41,7 +41,7 @@ class Page extends Component {
           <Pagelist />
           <Settingmenu colorId={this.props.colorId} mode={mode} />
           <ul className="list-unstyled CTAs">
-            <li><a className="article" onClick={this.handleClick}>{(mode) ? 'Done' : 'Setting'}</a></li>
+            <li><a className="article btn" onClick={this.handleClick}>{(mode) ? 'Done' : 'Setting'}</a></li>
           </ul>
         </nav>
       </div>

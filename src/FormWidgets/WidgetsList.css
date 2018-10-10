@@ -13,7 +13,7 @@
     overflow-y: auto;
     max-height: 65vh;
 }
-.modal-content {
+.modal-content.createwidget {
     max-height: 100vh;
 }
 @media screen and (max-width: 575px) {

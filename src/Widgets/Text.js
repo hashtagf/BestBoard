@@ -1,9 +1,9 @@
 import React from 'react'
 import WidgetStore from '../store/WidgetStore'
-import Store from '../store/Store'
 import NETPIEMicrogear from '../store/Microgear'
 import './Widget.css'
 import HeaderCard from "./HeaderCard"
+import date from 'date-and-time';
 
 class Text extends React.Component {
   constructor(props) {
@@ -31,25 +31,37 @@ class Text extends React.Component {
     const strMsg = msg + ''
     const value = strMsg.split(payload.filter)[payload.filterIndex]
     if (payload.value === topic) {
+      let now = new Date();
       this.setState({
         value: value,
+        time: now
       })
     }
   } 
+  showTime () {
 
+    let now = new Date();
+    let time = this.state.time
+    time = (typeof time === 'string' || time instanceof String)?new Date(time):time;
+    
+    let ago = date.subtract(now, time)
+    if (ago.toSeconds() <= 60) return ago.toSeconds()+ ' seconds'
+    else if (ago.toMinutes() < 60) return ago.toMinutes()+ ' Minutes'
+    else if (ago.toHours() < 24) return ago.toHours()+ ' Hours'
+    else if(ago.toDays() < 30) return ago.toDays()+ ' Days'
+  }
   render() {
     const payload = this.props.payload
     const value = this.state.value
     return (
       <div className="item Text col-xl-3 col-lg-4 col-md-6 col-12 text-body mb-3">
         <div className="item-content card shadow rounded-0 widgetCard">
-        <HeaderCard title={payload.title}/>
+        <HeaderCard title={payload.title} del={this.delWidget.bind(this)}/>
           <div className="card-body">
             {payload.startText} <strong>{value}</strong> {payload.endText}
           </div>
-          <div className="card-footer text-right" id={(Store.mode)?'settingMode':'displayMode'}>
-            <a href="/#" data-toggle="modal" data-target=".ModalCreate"><i className="fas fa-cog text-dark mr-3"></i></a>
-            <button className="btn" onClick={this.delWidget.bind(this)} ><i className="fas fa-trash-alt text-danger"></i></button>
+          <div className="card-footer text-right">
+            {this.showTime}
           </div>
         </div>
       </div>
