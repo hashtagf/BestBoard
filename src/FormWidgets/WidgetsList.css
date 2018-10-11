@@ -33,4 +33,7 @@
         display: inline-block;
         max-width: 33%;
     }
+    .selectdefault {
+        background-color: unset;
+    }
 }

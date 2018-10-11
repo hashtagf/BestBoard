@@ -17,8 +17,9 @@ class FormGauge extends React.Component {
       theme: 'light',
       mode: 'gauge',
       enableAnimation: true,
-      datasource: '',
-      filter: '',
+      datasource: '',       
+      body: '',
+      filter: ',',
       filterIndex: 0
     }
     this.handlePayload = this.handlePayload.bind(this)
@@ -58,8 +59,9 @@ class FormGauge extends React.Component {
       theme: 'light',
       mode: 'gauge',
       enableAnimation: true,
-      datasource: '',
-      filter: '',
+      datasource: '',       
+      body: '',
+      filter: ',',
       filterIndex: 0
     })
   }

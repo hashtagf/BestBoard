@@ -6,6 +6,7 @@ import socketIOClient from 'socket.io-client'
 import Muuri from 'muuri'
 import axios from 'axios'
 import WidgetStore from '../store/WidgetStore'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const socket = socketIOClient(Store.server)
 var grid = null
@@ -74,13 +75,26 @@ class Main extends Component {
   componentWillUnmount() {
     grid.destroy(true)
   }
-
+  refresh = (e) => {
+    grid.refreshSortData();
+    grid.refreshItems();
+  }
   render() {
     const listWidgets = this.state.listWidgets
     return ( 
-      <div className = 'grid'> 
-        {listWidgets} 
-      </div>
+      <ReactCSSTransitionGroup
+      transitionName="example"
+      transitionAppear={true}
+      transitionAppearTimeout={500}
+      transitionEnter={false}
+      transitionLeave={false}>
+        <div className = 'grid'> 
+          {listWidgets} 
+        </div>
+      </ReactCSSTransitionGroup>
+
+        
+
     )
   }
 }

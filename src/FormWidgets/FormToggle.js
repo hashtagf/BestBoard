@@ -9,7 +9,8 @@ class FormToggle extends React.Component {
     super(props)
     this.state = {
       title: 'Toggle',
-      datasource: '',
+      datasource: '',       
+      body: '',
       toggleState: '',
       toggleValue: 1,
       type: 'chat',
@@ -47,7 +48,8 @@ class FormToggle extends React.Component {
     }
     this.setState({
       title: 'Toggle',
-      datasource: '',
+      datasource: '',       
+      body: '',
       toggleState: '',
       toggleValue: 1,
       type: 'chat',

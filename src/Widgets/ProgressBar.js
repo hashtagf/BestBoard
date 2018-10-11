@@ -40,10 +40,11 @@ class ProgressBar extends React.Component {
   render() {
     const payload = this.props.payload
     const value = this.state.value
+    const widgetId = this.props.widgetId
     return (
       <div className="item ProgressBar col-xl-3 col-lg-4 col-md-6 col-12 text-body mb-3">
         <div className="item-content card shadow rounded-0 widgetCard border-0">
-        <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)}/>
+        <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body">
             <h6 className="pt-5">{payload.title} : {value} {payload.unit}</h6>
             <Line

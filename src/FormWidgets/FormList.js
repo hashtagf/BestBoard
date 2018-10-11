@@ -13,8 +13,9 @@ class FormList extends React.Component {
       text: '',
       unit: '',
       icon: '',
-      datasource: '',
-      filter: '',
+      datasource: '',       
+      body: '',
+      filter: ',',
       filterIndex: 0
     }
     this.handlePayload = this.handlePayload.bind(this)
@@ -46,8 +47,9 @@ class FormList extends React.Component {
       text: '',
       unit: '',
       icon: '',
-      datasource: '',
-      filter: '',
+      datasource: '',       
+      body: '',
+      filter: ',',
       filterIndex: 0
     })
   }

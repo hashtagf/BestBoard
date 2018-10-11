@@ -8,26 +8,43 @@ class FormInputBasic extends React.Component {
     super(props)
     this.state = {
       topics: [],
-      count: 0,
       checkTopic: [],
-      selectOption: [],
+      selectOption: {},
       listDatasources: DatasourceStore.listsDatasources()
     }
     this.handleChange = this.handleChange.bind(this)
   }
 
+  componentWillReceiveProps(nextProps) {
+    const values = nextProps.values
+    console.log('body', values.body)
+    this.setState({
+      selectOption: {
+        label: values.value,
+        value: values.body,
+        //__isNew__: true
+      }
+    })
+  }
+
 
   handleChange(e) {
-    var { topics, checkTopic, count } = this.state
+    let { topics, checkTopic } = this.state
+    let { value } = this.props.values
     if (e.target.name === 'datasource') {
-      NETPIEMicrogear.microgear[e.target.value].on('message', (topic, body, index) => {
-        console.log('incoming : ' + topic + ' : ' + body)
+      this.setState({
+        topics: []
+      })
+      NETPIEMicrogear.microgear[e.target.value].on('message', (topic, msg) => {
+        // console.log('incoming : ' + topic + ' : ' + msg)
+        if (topic === value) this.props.values.body = msg + ''
+        
         if (!this.state.checkTopic[topic]) {
-          checkTopic[topic] = count++
-          topics[checkTopic[topic]] = {
+          checkTopic[topic] = true
+          topics.push({
             label: topic,
-            value: body + '',
-          }
+            value: msg + '',
+          })
           this.setState({
             topics: topics,
             checkTopic: checkTopic,
@@ -40,7 +57,9 @@ class FormInputBasic extends React.Component {
 
   handleSelected = (selectOption) => {
     this.setState({ selectOption })
+    
     this.props.values.value = selectOption.label
+    this.props.values.body = selectOption.value
   }
 
   render() {
@@ -65,10 +84,16 @@ class FormInputBasic extends React.Component {
         </div>
         <div className="form-group row">
           <label htmlFor="datasource" className="col-3 col-form-label">
-            Datasource :
+            Datasource : {console.log(values.datasource)}
           </label>
           <div className="col-9">
-            <select className="custom-select" name="datasource" onBlur={this.handleChange}>
+            <select className="form-control custom-select" 
+              name="datasource" 
+              onChange={this.handleChange}
+              value={values.datasource}
+              readOnly
+            >
+              <option value="" disabled>Please Select Datasource</option>
               {listDatasources}
             </select>
           </div>
@@ -144,7 +169,7 @@ class ButtonIndex extends React.Component {
               <button
                 key={index}
                 type="radio"
-                className="btn btn-secondary"
+                className="btn border-right"
                 name="filterIndex"
                 onClick={handleChange}
                 value={index}

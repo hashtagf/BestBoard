@@ -10,8 +10,9 @@ class FormText extends React.Component {
     this.state = {
       title: 'Text',
       value: '',
-      datasource: '',
-      filter: '',
+      datasource: '',       
+      body: '',
+      filter: ',',
       filterIndex: 0,
       startText: '',
       endText: ''
@@ -41,8 +42,9 @@ class FormText extends React.Component {
     this.setState({
       title: 'Text',
       value: '',
-      datasource: '',
-      filter: '',
+      datasource: '',       
+      body: '',
+      filter: ',',
       filterIndex: 0,
       startText: '',
       endText: ''

@@ -14,7 +14,6 @@ import Button from '../Widgets/Button'
 import Toggle from '../Widgets/Toggle'
 import LocalStore from './LocalStore'
 import Store from './Store'
-
 class WidgetStore {
   @observable widgets = []
   // @observable listWidgets = []
@@ -35,6 +34,7 @@ class WidgetStore {
   }
 
   updateWidget(widgetId, payload) {
+    console.log('Id', widgetId, payload)
     axios.put(Store.server + '/widget/' + widgetId, payload).then((res) =>
       console.log(res)
     )
@@ -48,32 +48,46 @@ class WidgetStore {
 
   showWidgets(widgets) {
     var listWidgets = widgets.map((widget) => {
+      var content
       switch (widget.widget.typeWidget) {
         case 'Gauge':
-          return <Gauge key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          content = <Gauge key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          break
         case 'Progress':
-          return <Progress key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          content = <Progress key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          break
         case 'CardBox':
-          return <CardBox key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          content = <CardBox key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          break
         case 'GaugeSpeed':
-          return <GaugeSpeed key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          content = <GaugeSpeed key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          break
         case 'ProgressBar':
-          return <ProgressBar key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          content = <ProgressBar key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          break
         case 'Text':
-          return <Text key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          content = <Text key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          break
         case 'Image':
-          return <Image key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          content = <Image key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          break
         case 'Chart':
-          return <Chart key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          content = <Chart key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          break
         case 'List':
-          return <List key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          content = <List key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          break
         case 'Button':
-          return <Button key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          content = <Button key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          break
         case 'Toggle':
-          return <Toggle key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          content = <Toggle key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          break
         default:
-          return <h2 key={widget._id} className="item"><span className="item-content">Coming Soon Widgets</span></h2>
+          content = <h2 key={widget._id} className="item"><span className="item-content">Coming Soon Widgets</span></h2>
+          break
       }
+      return (content)
     })
     return listWidgets
 

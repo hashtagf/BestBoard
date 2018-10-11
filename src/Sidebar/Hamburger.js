@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './Hamburger.css'
+import Store from '../store/Store'
 
 class Hamburger extends Component {
 
@@ -16,7 +17,7 @@ class Hamburger extends Component {
               </button>
               
             </div>
-            <div className="navbar-brand my-auto text-truncate display-1">BestBoard</div>
+            <div className="navbar-brand my-auto text-truncate"><h4>{Store.pageName}</h4></div>
             <div><i className="fas fa-bell"></i></div>
           </div>
         </nav>

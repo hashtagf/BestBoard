@@ -71,10 +71,11 @@ class Chart extends React.Component {
 
   render() {
     const payload = this.props.payload
+    const widgetId = this.props.widgetId
     return (
       <div className="item Chart col-xl-9 col-lg-9 col-md-12 col-12 text-body mb-3">
         <div className="item-content card shadow rounded-0 widgetChart border-0">
-        <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)}/>
+        <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body">
             <div className="btn-group mb-2" role="group" aria-label="DayMonthYear">
               <button type="button"

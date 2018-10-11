@@ -4,7 +4,7 @@ class ListDatasources extends React.Component {
   render() {
     const datasource = this.props.datasource
     return (
-      <option value={datasource._id}>{datasource.datasource.name}</option>
+      <option value={datasource._id} >{datasource.datasource.name}</option>
     ) 
   }
 }

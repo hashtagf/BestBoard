@@ -10,7 +10,8 @@ class FormCardBox extends React.Component {
       title: 'Card Box',
       value: '',
       datasource: '',
-      filter: '',
+      body: '',
+      filter: ',',
       filterIndex: 0,
       unit: '',
       icon: '',
@@ -19,7 +20,6 @@ class FormCardBox extends React.Component {
     this.handlePayload = this.handlePayload.bind(this)
   }
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
     let editWidget = nextProps.editWidget
     if (editWidget) {
       this.setState({
@@ -35,9 +35,10 @@ class FormCardBox extends React.Component {
     } else
       this.setState({
         title: 'Card Box',
-        datasource: '',
+        datasource: '',       
+        body: '',
         value: '',
-        filter: '',
+        filter: ',',
         filterIndex: 0,
         unit: '',
         icon: ''
@@ -51,6 +52,7 @@ class FormCardBox extends React.Component {
   }
 
   handleSubmit(e) {
+    const editWidget = this.props.editWidget
     e.preventDefault()
     let payload = {
       typeWidget: 'CardBox',
@@ -62,13 +64,17 @@ class FormCardBox extends React.Component {
       unit: this.state.unit,
       icon: this.state.icon
     }
-    WidgetStore.createWidget(Store.currentId, payload)
+    if (editWidget)  
+      WidgetStore.updateWidget(editWidget.widgetId, payload)
+    else 
+      WidgetStore.createWidget(Store.currentId, payload)
 
     this.setState({
       title: 'Card Box',
-      datasource: '',
+      datasource: '',       
+      body: '',
       value: '',
-      filter: '',
+      filter: ',',
       filterIndex: 0,
       unit: '',
       icon: ''

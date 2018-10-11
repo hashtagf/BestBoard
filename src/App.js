@@ -19,7 +19,7 @@ class App extends Component {
       <div className="App">
         <div className="wrapper">
           <Sidebar clickSetting={this.clickSetting} colorId={this.state.colorId} />
-          <div id="content">
+          <div className="content" id="scrollbar-style">
             <Hamburger />
             <Routing />
           </div>

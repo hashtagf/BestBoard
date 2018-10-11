@@ -8,15 +8,13 @@ class FormButton extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      form: {
-        title: 'Button',
-        label: 'Click',
-        datasource: '',
-        type: 'chat',
-        tpa: '',
-        value: '',
-      },
-
+      title: 'Button',
+      label: 'Click',
+      datasource: '',       
+      body: '',
+      type: 'chat',
+      tpa: '',
+      value: '',
       listDatasources: DatasourceStore.listsDatasources()
     }
   }
@@ -53,7 +51,8 @@ class FormButton extends React.Component {
     this.setState({
       title: 'Button',
       label: 'Click',
-      datasource: '',
+      datasource: '',       
+      body: '',
       type: 'chat',
       tpa: '',
       value: ''

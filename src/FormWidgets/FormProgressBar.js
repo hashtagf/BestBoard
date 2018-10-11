@@ -16,8 +16,9 @@ class FormProgress extends React.Component {
       strokeColor: '#2db7f5',
       trailColor: '#D9D9D9',
       strokeLinecap: 'round',
-      datasource: '',
-      filter: '',
+      datasource: '',       
+      body: '',
+      filter: ',',
       filterIndex: 0
     }
     this.handlePayload = this.handlePayload.bind(this)
@@ -55,8 +56,9 @@ class FormProgress extends React.Component {
       strokeColor: '#2db7f5',
       trailColor: '#D9D9D9',
       strokeLinecap: 'round',
-      datasource: '',
-      filter: '',
+      datasource: '',       
+      body: '',
+      filter: ',',
       filterIndex: 0
     })
   }

@@ -19,8 +19,9 @@ class FormGaugeSpeed extends React.Component {
       startColor: '#00ee00',
       endColor: '#ff0000',
       textColor: '#000000',
-      datasource: '',
-      filter: '',
+      datasource: '',       
+      body: '',
+      filter: ',',
       filterIndex: 0
     }
     this.handlePayload = this.handlePayload.bind(this)
@@ -62,8 +63,9 @@ class FormGaugeSpeed extends React.Component {
       startColor: '#00ee00',
       endColor: '#ff0000',
       textColor: '#000000',
-      datasource: '',
-      filter: '',
+      datasource: '',       
+      body: '',
+      filter: ',',
       filterIndex: 0
     })
   }

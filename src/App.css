@@ -25,7 +25,7 @@ a {
 .shadow {
   box-shadow: 0 0rem 0.5rem rgba(0,0,0,.15)
 }
-#content {
+.content {
   padding: 20px;
   max-height: 100vh;
   min-height: 100vh;

@@ -17,8 +17,9 @@ class FormProgress extends React.Component {
       theme: 'light',
       mode: 'progress',
       enableAnimation: true,
-      datasource: '',
-      filter: '',
+      datasource: '',       
+      body: '',
+      filter: ',',
       filterIndex: 0
     }
     this.handlePayload = this.handlePayload.bind(this)
@@ -58,8 +59,9 @@ class FormProgress extends React.Component {
       theme: 'light',
       mode: 'progress',
       enableAnimation: true,
-      datasource: '',
-      filter: '',
+      datasource: '',       
+      body: '',
+      filter: ',',
       filterIndex: 0
     })
   }

@@ -121,11 +121,12 @@ class Page extends Component {
     LocalStore.deletePage(pageId)
   }
 
-  handleClickpage = (pageId) => {
+  handleClickpage = (pageId,pageName) => {
     this.setState({
       selectPage: pageId
     })
     Store.currentId = pageId
+    Store.pageName = pageName
   }
 
   render () {
@@ -161,7 +162,7 @@ class Page extends Component {
       }
       if (editPage !== index) {
         lspage =
-          <Link to={'/board/' + page.id} onClick={() => this.handleClickpage(page.id)} key={page.id} className={(this.state.selectPage === page.id) ? 'active' : ''}>
+          <Link to={'/board/' + page.id} onClick={() => this.handleClickpage(page.id,page.name)} key={page.id} className={(this.state.selectPage === page.id) ? 'active' : ''}>
             <li>
               <div className="row">
                 <div className="col-10 col-sm-10 text-truncate">

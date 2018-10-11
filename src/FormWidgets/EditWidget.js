@@ -62,19 +62,26 @@ class WidgetsList extends React.Component {
           name: "Toggle",
           img: "https://i.stack.imgur.com/k7Nit.png"
         },
-      ]
+      ],
+      selectType: "CardBox"
     }
+  }
+  selectWidget = (e) => {
+    this.setState({
+      selectType: e.target.name
+    })
+    this.props.selectWidget(e)
   }
   render() {
     // const boardId = this.props.match.params.boardId
     let listWidget = this.state.widgets.map((widget, index) => {
       var tmp =
         <div key={index} className={(this.state.selectType === widget.name) ? 'listwid active rounded p-2' : 'listwid rounded p-2'}>
-          <img className="img-thumbnail"
+          <img className="img-thumbnail border-0"
             src={widget.img}
             name={widget.name}
             alt=""
-            onClick={this.props.selectWidget}
+            onClick={this.selectWidget}
           />
           <figcaption className="figure-caption text-center">{widget.name}</figcaption>
         </div>
