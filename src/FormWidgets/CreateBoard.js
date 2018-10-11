@@ -1,5 +1,6 @@
 import React from 'react'
 import EditWidget from './EditWidget'
+import './WidgetsList.css'
 import Store from '../store/Store'
 import { observer } from 'mobx-react'
 @observer

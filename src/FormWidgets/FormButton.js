@@ -18,18 +18,28 @@ class FormButton extends React.Component {
       listDatasources: DatasourceStore.listsDatasources()
     }
   }
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     let editWidget = nextProps.editWidget
-    if (editWidget.typeWidget) {
-      this.setState({
-        title: editWidget.title,
-        label: editWidget.label,
-        datasource: editWidget.datasource,
-        type: editWidget.type,
-        tpa: editWidget.tpa,
-        value: editWidget.value
-      })
-    }
+    if (editWidget) {
+      Object.keys(editWidget).forEach((objectKey) => {
+        if (objectKey !== 'widgetId') {
+          return this.setState({
+            [objectKey]: editWidget[objectKey]
+          })
+        }
+      });
+    } else this.reState()
+  }
+  reState () {
+    this.setState({
+      title: 'Button',
+      label: 'Click',
+      datasource: '',       
+      body: '',
+      type: 'chat',
+      tpa: '',
+      value: ''
+    })
   }
   handlePayload = (e) => {
     this.setState({
@@ -48,15 +58,7 @@ class FormButton extends React.Component {
       tpa: this.state.tpa,
       value: this.state.value
     }
-    this.setState({
-      title: 'Button',
-      label: 'Click',
-      datasource: '',       
-      body: '',
-      type: 'chat',
-      tpa: '',
-      value: ''
-    })
+    this.reState()
     WidgetStore.createWidget(Store.currentId, payload)
   }
 

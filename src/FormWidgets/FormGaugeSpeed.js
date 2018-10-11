@@ -26,7 +26,37 @@ class FormGaugeSpeed extends React.Component {
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
-
+  componentWillReceiveProps(nextProps) {
+    let editWidget = nextProps.editWidget
+    if (editWidget) {
+      Object.keys(editWidget).forEach((objectKey) => {
+        if (objectKey !== 'widgetId') {
+          return this.setState({
+            [objectKey]: editWidget[objectKey]
+          })
+        }
+      });
+    } else this.reState()
+  }
+  reState () {
+    this.setState({
+      title: 'Gauge Speed',
+      value: 0,
+      unit: '',
+      width: 300,
+      height: 200,
+      minValue: '0',
+      maxValue: '100',
+      segments: 3,
+      startColor: '#00ee00',
+      endColor: '#ff0000',
+      textColor: '#000000',
+      datasource: '',       
+      body: '',
+      filter: ',',
+      filterIndex: 0
+    })
+  }
   handlePayload(e) {
     this.setState({
       [e.target.name]: e.target.value
@@ -51,23 +81,7 @@ class FormGaugeSpeed extends React.Component {
       filterIndex: this.state.filterIndex
     }
     WidgetStore.createWidget(Store.currentId, payload)
-    this.setState({
-      title: 'Gauge Speed',
-      value: 0,
-      unit: '',
-      width: 300,
-      height: 200,
-      minValue: '0',
-      maxValue: '100',
-      segments: 3,
-      startColor: '#00ee00',
-      endColor: '#ff0000',
-      textColor: '#000000',
-      datasource: '',       
-      body: '',
-      filter: ',',
-      filterIndex: 0
-    })
+    this.reState()
   }
   render() {
     const payload = this.state

@@ -14,11 +14,34 @@ class FormChart extends React.Component {
       type: 'monotone',
       stroke: '#8884d8',
       fillOpacity: 1,
-      fill: 'url(#color)',
+      fill: 'url(#color)'
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
-
+  componentWillReceiveProps(nextProps) {
+    let editWidget = nextProps.editWidget
+    if (editWidget) {
+      Object.keys(editWidget).forEach((objectKey) => {
+        if (objectKey !== 'widgetId') {
+          return this.setState({
+            [objectKey]: editWidget[objectKey]
+          })
+        }
+      });
+    } else this.reState()
+  }
+  reState () {
+    this.setState({
+      title: 'Chart',
+      feedID: '',
+      feedAPI: '',
+      value: 0,
+      type: 'monotone',
+      stroke: '#8884d8',
+      fillOpacity: 1,
+      fill: 'url(#color)'
+    })
+  }
   handlePayload(e) {
     this.setState({
       [e.target.name]: e.target.value
@@ -37,19 +60,10 @@ class FormChart extends React.Component {
       type: 'monotone',
       stroke: '#8884d8',
       fillOpacity: 1,
-      fill: 'url(#color)',
+      fill: 'url(#color)'
     }
     WidgetStore.createWidget(Store.currentId, payload)
-    this.setState({
-      title: 'Chart',
-      feedID: '',
-      feedAPI: '',
-      value: 0,
-      type: 'monotone',
-      stroke: '#8884d8',
-      fillOpacity: 1,
-      fill: 'url(#color)',
-    })
+    this.reState()
   }
   render() {
     const payload = this.state

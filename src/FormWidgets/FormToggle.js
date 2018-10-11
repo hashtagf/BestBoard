@@ -23,7 +23,34 @@ class FormToggle extends React.Component {
       listDatasources: DatasourceStore.listsDatasources()
     }
   }
-
+  componentWillReceiveProps(nextProps) {
+    let editWidget = nextProps.editWidget
+    if (editWidget) {
+      Object.keys(editWidget).forEach((objectKey) => {
+        if (objectKey !== 'widgetId') {
+          return this.setState({
+            [objectKey]: editWidget[objectKey]
+          })
+        }
+      });
+    } else this.reState()
+  }
+  reState () {
+    this.setState({
+      title: 'Toggle',
+      datasource: '',       
+      body: '',
+      toggleState: '',
+      toggleValue: 1,
+      type: 'chat',
+      tpaOn: '',
+      valueOn: '',
+      tpaOff: '',
+      valueOff: '',
+      onCreated: '',
+      onCreatedValue: '',
+    })
+  }
   handlePayload = (e) => {
     this.setState({
       [e.target.name]: e.target.value
@@ -46,20 +73,7 @@ class FormToggle extends React.Component {
       onCreated: this.state.onCreated,
       onCreatedValue: this.state.onCreatedValue
     }
-    this.setState({
-      title: 'Toggle',
-      datasource: '',       
-      body: '',
-      toggleState: '',
-      toggleValue: 1,
-      type: 'chat',
-      tpaOn: '',
-      valueOn: '',
-      tpaOff: '',
-      valueOff: '',
-      onCreated: '',
-      onCreatedValue: '',
-    })
+    this.reState()
     WidgetStore.createWidget(Store.currentId, payload)
   }
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import './WidgetsList.css'
 import FormCardBox from './FormCardBox'
 import FormGauge from './FormGauge'
 import FormGaugeSpeed from './FormGaugeSpeed'

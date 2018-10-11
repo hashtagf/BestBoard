@@ -23,27 +23,26 @@ class FormCardBox extends React.Component {
   componentWillReceiveProps(nextProps) {
     let editWidget = nextProps.editWidget
     if (editWidget) {
-      this.setState({
-        title: editWidget.title,
-        value: editWidget.value,
-        datasource: editWidget.datasource,
-        filter: editWidget.filter,
-        filterIndex: editWidget.filterIndex,
-        unit: editWidget.unit,
-        icon: editWidget.icon,
-        status: editWidget.status
-      })
-    } else
-      this.setState({
-        title: 'Card Box',
-        datasource: '',       
-        body: '',
-        value: '',
-        filter: ',',
-        filterIndex: 0,
-        unit: '',
-        icon: ''
-      })
+      Object.keys(editWidget).forEach((objectKey) => {
+        if (objectKey !== 'widgetId') {
+          return this.setState({
+            [objectKey]: editWidget[objectKey]
+          })
+        }
+      });
+    } else this.reState()
+  }
+  reState () {
+    this.setState({
+      title: 'Card Box',
+      datasource: '',       
+      body: '',
+      value: '',
+      filter: ',',
+      filterIndex: 0,
+      unit: '',
+      icon: ''
+    })
   }
   // End Update
   handlePayload(e) {
@@ -70,17 +69,7 @@ class FormCardBox extends React.Component {
       WidgetStore.updateWidget(editWidget.widgetId, payload)
     else 
       WidgetStore.createWidget(Store.currentId, payload)
-
-    this.setState({
-      title: 'Card Box',
-      datasource: '',       
-      body: '',
-      value: '',
-      filter: ',',
-      filterIndex: 0,
-      unit: '',
-      icon: ''
-    })
+    this.reState()
   }
 
   render() {

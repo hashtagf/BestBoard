@@ -13,7 +13,24 @@ class FormImage extends React.Component {
     this.handlePayload = this.handlePayload.bind(this)
     this.handleFile = this.handleFile.bind(this)
   }
-
+  componentWillReceiveProps(nextProps) {
+    let editWidget = nextProps.editWidget
+    if (editWidget) {
+      Object.keys(editWidget).forEach((objectKey) => {
+        if (objectKey !== 'widgetId') {
+          return this.setState({
+            [objectKey]: editWidget[objectKey]
+          })
+        }
+      });
+    } 
+    else {
+      this.setState({
+        title: 'Image',
+        file: 'empty'
+      })
+    }
+  }
   handlePayload(e) {
     this.setState({
       [e.target.name]: e.target.value

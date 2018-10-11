@@ -32,16 +32,27 @@ class FormInputBasic extends React.Component {
     let { topics, checkTopic } = this.state
     let { value } = this.props.values
     if (e.target.name === 'datasource') {
-      
-      var topicsObj = NETPIEMicrogear.topics[e.target.value]
-      var topicsAr =  Object.values(topicsObj)
       this.setState({
-        topics: topicsAr
-      })
-      console.log(topicsAr)
-      if (topicsObj[value]) this.props.values.body = topicsObj[value].value + ''
-      
-      
+        topics: []
+       })
+      var topicsObj = NETPIEMicrogear.topics[e.target.value]
+      if (topicsObj) {
+        var topicsAr =  Object.values(topicsObj)
+        this.setState({
+          topics: topicsAr
+        })
+        if (topicsObj[value]) {
+          this.props.values.body = topicsObj[value].value
+          this.setState({
+            selectOption: {
+              label: topicsObj[value].label,
+              value: topicsObj[value].value,
+              //__isNew__: true
+            }
+          })
+        }
+      }
+
       /* this.setState({
         topics: []
        })
