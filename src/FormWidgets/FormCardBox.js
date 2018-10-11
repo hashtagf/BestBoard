@@ -7,22 +7,21 @@ class FormCardBox extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      form: {
-        title: 'Card Box',
-        value: '',
-        datasource: '',
-        filter:'',
-        filterIndex: 0,
-        unit: '',
-        icon: '',
-        status: true
-      }
+      title: 'Card Box',
+      value: '',
+      datasource: '',
+      filter: '',
+      filterIndex: 0,
+      unit: '',
+      icon: '',
+      status: true
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
     let editWidget = nextProps.editWidget
-    if (editWidget.typeWidget) {
+    if (editWidget) {
       this.setState({
         title: editWidget.title,
         value: editWidget.value,
@@ -33,8 +32,16 @@ class FormCardBox extends React.Component {
         icon: editWidget.icon,
         status: editWidget.status
       })
-
-    }
+    } else
+      this.setState({
+        title: 'Card Box',
+        datasource: '',
+        value: '',
+        filter: '',
+        filterIndex: 0,
+        unit: '',
+        icon: ''
+      })
   }
   handlePayload(e) {
     this.setState({
@@ -56,12 +63,12 @@ class FormCardBox extends React.Component {
       icon: this.state.icon
     }
     WidgetStore.createWidget(Store.currentId, payload)
-    
+
     this.setState({
       title: 'Card Box',
       datasource: '',
       value: '',
-      filter: '/',
+      filter: '',
       filterIndex: 0,
       unit: '',
       icon: ''
@@ -69,19 +76,20 @@ class FormCardBox extends React.Component {
   }
 
   render() {
+    const payload = this.state
     return (
       <div className="FormCardBox container">
-        <FormInputBasic callback={this.handlePayload} values={this.state} />
-        <InputText callback={this.handlePayload} title="Unit" name="unit" value={this.state.unit} />
-        <InputText callback={this.handlePayload} title="Icon" name="icon" value={this.state.icon} />
+        <FormInputBasic callback={this.handlePayload} values={payload} />
+        <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit} />
+        <InputText callback={this.handlePayload} title="Icon" name="icon" value={payload.icon} />
         <div className="row justify-content-end">
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button"
+            <button type="submit"
               className="btn btn-primary border-0"
               onClick={this.handleSubmit.bind(this)}
               data-dismiss="modal" aria-label="Close"
-            ><i className="fas fa-plus-square"></i> Add widget</button>
+            ><i className="fas fa-plus-square"></i>{(this.props.editWidget) ? ' Save Widget' : ' Add widget'}</button>
           </div>
         </div>
       </div>

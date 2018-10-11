@@ -52,47 +52,45 @@ class FormImage extends React.Component {
     const payload = this.state
     return (
       <div className="FormProgressBar container">
-        <form >
-          <InputText
-            callback={this.handlePayload}
-            title="Title"
-            name="title"
-            value={payload.title} />
-          <div className="form-group row">
-            <label htmlFor="file" className="col-3 col-form-label">
-              File :
+        <InputText
+          callback={this.handlePayload}
+          title="Title"
+          name="title"
+          value={payload.title} />
+        <div className="form-group row">
+          <label htmlFor="file" className="col-3 col-form-label">
+            File :
             </label>
-            <div className="col-9">
-              <div className="input-group">
-                <div className="custom-file">
-                  <input id="uploadImg"
-                    aria-describedby="uploadImg"
-                    name="path"
-                    type="file"
-                    className="custom-file-input"
-                    onChange={this.handleFile}
-                  />
-                  <label className="custom-file-label" for="uploadImg">Choose file</label>
-                </div>
+          <div className="col-9">
+            <div className="input-group">
+              <div className="custom-file">
+                <input id="uploadImg"
+                  aria-describedby="uploadImg"
+                  name="path"
+                  type="file"
+                  className="custom-file-input"
+                  onChange={this.handleFile}
+                />
+                <label className="custom-file-label" for="uploadImg">Choose file</label>
               </div>
             </div>
           </div>
-          <div className="row mb-2 text-center">
-            <div className="col-12">
-              <img src="" className="img-thumbnail" id="b64" height={250} alt="" />
-            </div>
+        </div>
+        <div className="row mb-2 text-center">
+          <div className="col-12">
+            <img src="" className="img-thumbnail" id="b64" height={250} alt="" />
           </div>
-          <div className="row justify-content-end">
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button"
-                className="btn btn-primary border-0"
-                onClick={this.handleSubmit.bind(this)}
-                data-dismiss="modal" aria-label="Close"
-              ><i className="fas fa-plus-square"></i> Add widget</button>
-            </div>
+        </div>
+        <div className="row justify-content-end">
+          <div className="modal-footer">
+            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button"
+              className="btn btn-primary border-0"
+              onClick={this.handleSubmit.bind(this)}
+              data-dismiss="modal" aria-label="Close"
+            ><i className="fas fa-plus-square"></i> Add widget</button>
           </div>
-        </form>
+        </div>
       </div>
     )
   }

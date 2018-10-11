@@ -10,11 +10,7 @@ class FormInputBasic extends React.Component {
       topics: [],
       count: 0,
       checkTopic: [],
-      selectOption: {
-        value: '',
-        label: '',
-        body: ''
-      },
+      selectOption: [],
       listDatasources: DatasourceStore.listsDatasources()
     }
     this.handleChange = this.handleChange.bind(this)
@@ -24,16 +20,11 @@ class FormInputBasic extends React.Component {
   handleChange(e) {
     var { topics, checkTopic, count } = this.state
     if (e.target.name === 'datasource') {
-      this.setState({
-        topics: [],
-        count: 0,
-        checkTopic: []
-      })
-      NETPIEMicrogear.microgear[e.target.value].on('message', (topic, body) => {
+      NETPIEMicrogear.microgear[e.target.value].on('message', (topic, body, index) => {
         console.log('incoming : ' + topic + ' : ' + body)
         if (!this.state.checkTopic[topic]) {
-          checkTopic[topic] = true
-          topics[count++] = {
+          checkTopic[topic] = count++
+          topics[checkTopic[topic]] = {
             label: topic,
             value: body + '',
           }
@@ -55,10 +46,9 @@ class FormInputBasic extends React.Component {
   render() {
     const handleChange = this.props.callback
     let values = this.props.values
-    let { selectOption, listDatasources } = this.state
-    if (selectOption.value === null) selectOption.value = ''
+    let { selectOption, listDatasources, topics } = this.state
     return (
-      <div>
+      <div className="FormInputBasic">
         <div className="form-group row">
           <label htmlFor="title" className="col-3 col-form-label">
             Title :
@@ -78,7 +68,7 @@ class FormInputBasic extends React.Component {
             Datasource :
           </label>
           <div className="col-9">
-            <select className="custom-select"  name="datasource" onBlur={this.handleChange}>
+            <select className="custom-select" name="datasource" onBlur={this.handleChange}>
               {listDatasources}
             </select>
           </div>
@@ -91,7 +81,8 @@ class FormInputBasic extends React.Component {
             <Creatable
               value={selectOption}
               onChange={this.handleSelected}
-              options={this.state.topics}
+              options={topics}
+              placeholder='Topic :: /AppID/topic'
             />
           </div>
         </div>

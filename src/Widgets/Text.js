@@ -61,7 +61,7 @@ class Text extends React.Component {
             {payload.startText} <strong>{value}</strong> {payload.endText}
           </div>
           <div className="card-footer text-right">
-            {this.showTime}
+          {/* {this.showTime} */}
           </div>
         </div>
       </div>

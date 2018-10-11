@@ -55,22 +55,20 @@ class FormChart extends React.Component {
     const payload = this.state
     return (
       <div className="FormChart container">
-        <form >
-          <InputText callback={this.handlePayload} title="Title" name="title" value={payload.title} />
-          <InputText callback={this.handlePayload} title="Feed ID" name="feedID" value={payload.feedID} />
-          <InputText callback={this.handlePayload} title="Feed API" name="feedAPI" value={payload.feedAPI} />
-          <InputText callback={this.handlePayload} title="Value" name="value" value={payload.value} />
-          <div className="row justify-content-end">
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button"
-                className="btn btn-primary border-0"
-                onClick={this.handleSubmit.bind(this)}
-                data-dismiss="modal" aria-label="Close"
-              ><i className="fas fa-plus-square"></i> Add widget</button>
-            </div>
+        <InputText callback={this.handlePayload} title="Title" name="title" value={payload.title} />
+        <InputText callback={this.handlePayload} title="Feed ID" name="feedID" value={payload.feedID} />
+        <InputText callback={this.handlePayload} title="Feed API" name="feedAPI" value={payload.feedAPI} />
+        <InputText callback={this.handlePayload} title="Value" name="value" value={payload.value} />
+        <div className="row justify-content-end">
+          <div className="modal-footer">
+            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button"
+              className="btn btn-primary border-0"
+              onClick={this.handleSubmit.bind(this)}
+              data-dismiss="modal" aria-label="Close"
+            ><i className="fas fa-plus-square"></i> Add widget</button>
           </div>
-        </form>
+        </div>
       </div>
     )
   }

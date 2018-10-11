@@ -55,30 +55,28 @@ class FormList extends React.Component {
     const payload = this.state
     return (
       <div className="FormList container">
-        <form>
-          <FormInputBasic callback={this.handlePayload} values={payload} />
-          <InputText callback={this.handlePayload} title="Icon" name="icon" value={payload.icon} />
-          <InputText callback={this.handlePayload} title="Text" name="text" value={payload.text} />
-          <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit} />
-          <div className="form-group row">
-            <label htmlFor="exampleList" className="col-3 col-form-label">
-              Example List :
+        <FormInputBasic callback={this.handlePayload} values={payload} />
+        <InputText callback={this.handlePayload} title="Icon" name="icon" value={payload.icon} />
+        <InputText callback={this.handlePayload} title="Text" name="text" value={payload.text} />
+        <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit} />
+        <div className="form-group row">
+          <label htmlFor="exampleList" className="col-3 col-form-label">
+            Example List :
           </label>
-            <div className="col-9 text-secondary">
-              {this.state.text + ' <Value> ' + this.state.unit}
-            </div>
+          <div className="col-9 text-secondary">
+            {this.state.text + ' <Value> ' + this.state.unit}
           </div>
-          <div className="row justify-content-end">
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button"
-                className="btn btn-primary border-0"
-                onClick={this.handleSubmit.bind(this)}
-                data-dismiss="modal" aria-label="Close"
-              ><i className="fas fa-plus-square"></i> Add widget</button>
-            </div>
+        </div>
+        <div className="row justify-content-end">
+          <div className="modal-footer">
+            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button"
+              className="btn btn-primary border-0"
+              onClick={this.handleSubmit.bind(this)}
+              data-dismiss="modal" aria-label="Close"
+            ><i className="fas fa-plus-square"></i> Add widget</button>
           </div>
-        </form>
+        </div>
       </div>
     )
   }

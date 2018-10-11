@@ -64,40 +64,38 @@ class FormProgress extends React.Component {
     const payload = this.state
     return (
       <div className="FormProgressBar container">
-        <form>
-          <FormInputBasic callback={this.handlePayload} values={this.state} />
-          <InputText
-            callback={this.handlePayload}
-            title="Unit"
-            name="unit"
-            value={payload.unit} />
-          <InputText
-            callback={this.handlePayload}
-            title="Stroke Color"
-            name="strokeColor"
-            value={payload.strokeColor} />
-          <InputText
-            callback={this.handlePayload}
-            title="Trial Color"
-            name="trailColor"
-            value={payload.trailColor} />
-          <InputText
-            callback={this.handlePayload}
-            title="Stroke Line cap"
-            name="strokeLinecap"
-            value={payload.strokeLinecap}
-            placeholder="`butt`, `square` or `round`." />
-          <div className="row justify-content-end">
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button"
-                className="btn btn-primary border-0"
-                onClick={this.handleSubmit.bind(this)}
-                data-dismiss="modal" aria-label="Close"
-              ><i className="fas fa-plus-square"></i> Add widget</button>
-            </div>
+        <FormInputBasic callback={this.handlePayload} values={this.state} />
+        <InputText
+          callback={this.handlePayload}
+          title="Unit"
+          name="unit"
+          value={payload.unit} />
+        <InputText
+          callback={this.handlePayload}
+          title="Stroke Color"
+          name="strokeColor"
+          value={payload.strokeColor} />
+        <InputText
+          callback={this.handlePayload}
+          title="Trial Color"
+          name="trailColor"
+          value={payload.trailColor} />
+        <InputText
+          callback={this.handlePayload}
+          title="Stroke Line cap"
+          name="strokeLinecap"
+          value={payload.strokeLinecap}
+          placeholder="`butt`, `square` or `round`." />
+        <div className="row justify-content-end">
+          <div className="modal-footer">
+            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button"
+              className="btn btn-primary border-0"
+              onClick={this.handleSubmit.bind(this)}
+              data-dismiss="modal" aria-label="Close"
+            ><i className="fas fa-plus-square"></i> Add widget</button>
           </div>
-        </form>
+        </div>
       </div>
     )
   }

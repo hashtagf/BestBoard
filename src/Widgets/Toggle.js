@@ -64,7 +64,6 @@ class CardBox extends React.Component {
   render() {
     const payload = this.props.payload
     const checked = this.state.checked
-    console.log(payload)
     return (
       <div className="item CardBox col-xl-3 col-lg-4 col-md-6 col-12 text-body mb-3">
         <div className="item-content card shadow rounded-0 widgetCard border-0">

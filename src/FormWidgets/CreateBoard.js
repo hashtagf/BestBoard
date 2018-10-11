@@ -10,13 +10,13 @@ class CreateBoard extends React.Component {
         <div className="modal-dialog modal-lg">
           <div className="modal-content text-dark createwidget">
             <div className="modal-header">
-              <h5 className="modal-title">{(Store.editWidget.typeWidget)?'Edit widget':'Create widget'}</h5>
+              <h5 className="modal-title">{(Store.editWidget) ? 'Edit widget' : 'Create widget'}</h5>
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div className="modal-body">
-              <WidgetsList editWidget={Store.editWidget}/>
+              <WidgetsList editWidget={Store.editWidget} />
             </div>
           </div>
         </div>

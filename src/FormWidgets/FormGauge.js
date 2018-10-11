@@ -67,22 +67,20 @@ class FormGauge extends React.Component {
     const payload = this.state
     return (
       <div className="FormGuage container">
-        <form>
-          <FormInputBasic callback={this.handlePayload} values={payload} />
-          <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit} />
-          <InputText callback={this.handlePayload} title="Min Value" name="minvalue" value={payload.minvalue} />
-          <InputText callback={this.handlePayload} title="Max Value" name="maxvalue" value={payload.maxvalue} />
-          <div className="row justify-content-end">
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button"
-                className="btn btn-primary border-0"
-                onClick={this.handleSubmit.bind(this)}
-                data-dismiss="modal" aria-label="Close"
-              ><i className="fas fa-plus-square"></i> Add widget</button>
-            </div>
+        <FormInputBasic callback={this.handlePayload} values={payload} />
+        <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit} />
+        <InputText callback={this.handlePayload} title="Min Value" name="minvalue" value={payload.minvalue} />
+        <InputText callback={this.handlePayload} title="Max Value" name="maxvalue" value={payload.maxvalue} />
+        <div className="row justify-content-end">
+          <div className="modal-footer">
+            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button"
+              className="btn btn-primary border-0"
+              onClick={this.handleSubmit.bind(this)}
+              data-dismiss="modal" aria-label="Close"
+            ><i className="fas fa-plus-square"></i> Add widget</button>
           </div>
-        </form>
+        </div>
       </div>
     )
   }

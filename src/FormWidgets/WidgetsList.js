@@ -81,10 +81,10 @@ class WidgetsList extends React.Component {
       return tmp
     })
     return (
-        <div className="col-sm-3 col-12 border-right listWidgets " data-spy="scroll" id="scrollbar-style">
-          <p><strong>Widget</strong></p>
-          {listWidget}
-        </div>
+      <div className="col-sm-3 col-12 border-right listWidgets " data-spy="scroll" id="scrollbar-style">
+        <p><strong>Widget</strong></p>
+        {listWidget}
+      </div>
     )
   }
 }
@@ -96,17 +96,12 @@ class EditWidget extends React.Component {
       selectType: "CardBox"
     }
   }
-  selectWidget=(e)=> {
+  selectWidget = (e) => {
     this.setState({
       selectType: e.target.name
     })
   }
-  componentWillUnMount() {
-    this.setState({
-      selectType: 0
-    })
-  }
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     let editWidget = nextProps.editWidget
     if (editWidget.typeWidget) {
       this.setState({
@@ -117,13 +112,15 @@ class EditWidget extends React.Component {
   render() {
     let editWidget = this.props.editWidget
     return (
-    <div className="row">
-      {(editWidget.typeWidget)?'':<WidgetsList selectWidget={this.selectWidget}/>}
-      <div className="col-sm-9 col-12 formWidget" id="scrollbar-style">
-        <strong>Form</strong>
-        <SelectType selectType={this.state.selectType} editWidget={editWidget}/>
+      <div className="row">
+        {(editWidget.typeWidget) ? '' : <WidgetsList selectWidget={this.selectWidget} />}
+        <div className={(editWidget.typeWidget)?"col-12 formWidget":"col-sm-9 col-12 formWidget"} id="scrollbar-style">
+          <strong>Form</strong>
+          <form>
+            <SelectType selectType={this.state.selectType} editWidget={editWidget} />
+          </form>
+        </div>
       </div>
-    </div>
     )
   }
 }
@@ -133,27 +130,27 @@ class SelectType extends React.Component {
     const { selectType } = this.props
     switch (selectType) {
       case 'CardBox':
-        return <FormCardBox editWidget={editWidget}/>
+        return <FormCardBox editWidget={editWidget} />
       case 'Gauge':
-        return <FormGauge editWidget={editWidget}/>
+        return <FormGauge editWidget={editWidget} />
       case 'GaugeSpeed':
-        return <FormGaugeSpeed editWidget={editWidget}/>
+        return <FormGaugeSpeed editWidget={editWidget} />
       case 'Image':
-        return <FormImage editWidget={editWidget}/>
+        return <FormImage editWidget={editWidget} />
       case 'ProgressBar':
-        return <FormProgressBar editWidget={editWidget}/>
+        return <FormProgressBar editWidget={editWidget} />
       case 'Progress':
-        return <FormProgress editWidget={editWidget}/>
+        return <FormProgress editWidget={editWidget} />
       case 'Text':
-        return <FormText editWidget={editWidget}/>
+        return <FormText editWidget={editWidget} />
       case 'List':
-        return <FormList editWidget={editWidget}/>
+        return <FormList editWidget={editWidget} />
       case 'Chart':
-        return <FormChart editWidget={editWidget}/>
+        return <FormChart editWidget={editWidget} />
       case 'Button':
-        return <FormButton editWidget={editWidget}/>
+        return <FormButton editWidget={editWidget} />
       case 'Toggle':
-        return <FormToggle editWidget={editWidget}/>
+        return <FormToggle editWidget={editWidget} />
       default:
         return <h1>Please select widget</h1>
     }

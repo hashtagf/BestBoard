@@ -52,21 +52,19 @@ class FormText extends React.Component {
     const payload = this.state
     return (
       <div className="FormProgressBar container">
-        <form>
-          <FormInputBasic callback={this.handlePayload} values={payload} />
-          <InputText callback={this.handlePayload} title="Start Text" name="startText" value={payload.startText} />
-          <InputText callback={this.handlePayload} title="End Text" name="startText" value={payload.endText} />
-          <div className="row justify-content-end">
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button"
-                className="btn btn-primary border-0"
-                onClick={this.handleSubmit.bind(this)}
-                data-dismiss="modal" aria-label="Close"
-              ><i className="fas fa-plus-square"></i> Add widget</button>
-            </div>
+        <FormInputBasic callback={this.handlePayload} values={payload} />
+        <InputText callback={this.handlePayload} title="Start Text" name="startText" value={payload.startText} />
+        <InputText callback={this.handlePayload} title="End Text" name="startText" value={payload.endText} />
+        <div className="row justify-content-end">
+          <div className="modal-footer">
+            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button"
+              className="btn btn-primary border-0"
+              onClick={this.handleSubmit.bind(this)}
+              data-dismiss="modal" aria-label="Close"
+            ><i className="fas fa-plus-square"></i> Add widget</button>
           </div>
-        </form>
+        </div>
       </div>
     )
   }
