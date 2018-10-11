@@ -79,7 +79,7 @@ class FormInputBasic extends React.Component {
           </label>
           <div className="col-9">
             <Creatable
-              value={selectOption}
+              value={selectOptionf}
               onChange={this.handleSelected}
               options={topics}
               placeholder='Topic :: /AppID/topic'
