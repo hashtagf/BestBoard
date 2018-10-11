@@ -13,6 +13,14 @@ a {
 }
 .btn {
   border-radius: 20rem;
+  opacity: 1;
+}
+.btn:hover {
+  opacity: 0.8;
+}
+.btn-group .btn {
+  border-radius: inherit;
+  border-right: #f3f3f3
 }
 .text-muted {
   color: var(--textMute)
@@ -63,5 +71,5 @@ a {
 }
 .form-control {
   border: 0px;
-  background-color: #f3f3f3;
+  background-color: #f3f3f3!important;
 }

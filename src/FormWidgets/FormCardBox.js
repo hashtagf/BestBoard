@@ -19,6 +19,7 @@ class FormCardBox extends React.Component {
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
+  // Start Widget
   componentWillReceiveProps(nextProps) {
     let editWidget = nextProps.editWidget
     if (editWidget) {
@@ -44,6 +45,7 @@ class FormCardBox extends React.Component {
         icon: ''
       })
   }
+  // End Update
   handlePayload(e) {
     this.setState({
       [e.target.name]: e.target.value

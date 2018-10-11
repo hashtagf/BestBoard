@@ -32,9 +32,19 @@ class FormInputBasic extends React.Component {
     let { topics, checkTopic } = this.state
     let { value } = this.props.values
     if (e.target.name === 'datasource') {
+      
+      var topicsObj = NETPIEMicrogear.topics[e.target.value]
+      var topicsAr =  Object.values(topicsObj)
       this.setState({
-        topics: []
+        topics: topicsAr
       })
+      console.log(topicsAr)
+      if (topicsObj[value]) this.props.values.body = topicsObj[value].value + ''
+      
+      
+      /* this.setState({
+        topics: []
+       })
       NETPIEMicrogear.microgear[e.target.value].on('message', (topic, msg) => {
         // console.log('incoming : ' + topic + ' : ' + msg)
         if (topic === value) this.props.values.body = msg + ''
@@ -50,14 +60,14 @@ class FormInputBasic extends React.Component {
             checkTopic: checkTopic,
           })
         }
-      })
+        console.log(this.state.topics)
+      }) */
     }
     this.props.callback(e)
   }
 
   handleSelected = (selectOption) => {
     this.setState({ selectOption })
-    
     this.props.values.value = selectOption.label
     this.props.values.body = selectOption.value
   }
@@ -87,7 +97,7 @@ class FormInputBasic extends React.Component {
             Datasource : {console.log(values.datasource)}
           </label>
           <div className="col-9">
-            <select className="form-control custom-select" 
+            <select className="form-control custom-select selectdefault" 
               name="datasource" 
               onChange={this.handleChange}
               value={values.datasource}
@@ -169,7 +179,7 @@ class ButtonIndex extends React.Component {
               <button
                 key={index}
                 type="radio"
-                className="btn border-right"
+                className="btn"
                 name="filterIndex"
                 onClick={handleChange}
                 value={index}
