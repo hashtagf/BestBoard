@@ -7,17 +7,16 @@ import { observer } from 'mobx-react'
 @observer
 class CreateBoard extends React.Component {
   hanldeClose () {
-    console.log('Unmount')
-    Store.editWidget = false
+    
   }
   render() {
     return (
-      <div className="modal fade ModalCreate" data-backdrop="true" tabIndex="-1" id="scrollbar-style" role="dialog" aria-hidden="false" >
+      <div className="modal fade ModalCreate" data-backdrop="true" tabIndex="-1" id="scrollbar-style" role="dialog" aria-hidden="true" >
         <div className="modal-dialog modal-lg">
           <div className="modal-content text-dark createwidget">
             <div className="modal-header">
               <h5 className="modal-title">{(Store.editWidget) ? 'Edit "'+Store.editWidget.title+'" widget' : 'Create widget'}</h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+              <button type="button" onClick={this.hanldeClose} className="close" data-dismiss="modal"  aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>

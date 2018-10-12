@@ -7,6 +7,7 @@
     color: var(--textColor);
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
+    min-height: 100vh;
     max-height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;

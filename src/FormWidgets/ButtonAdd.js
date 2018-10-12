@@ -4,10 +4,11 @@ import CreateBoard from './CreateBoard'
 import Store from '../store/Store'
 
 class ButtonAdd extends React.Component {
-  handleClick() {
+  handleClick = () => {
     Store.editWidget = false
   }
   render() {
+
     return (
       <div className={(Store.currentId)?'ButtonAdd':'ButtonAdd d-none'}>
         <p id="ButtonAdd">
@@ -19,7 +20,8 @@ class ButtonAdd extends React.Component {
             <div className="circleMenu">+</div>
           </button>
         </p>
-        <CreateBoard />
+        <CreateBoard/>
+        {/* {(this.state.showModal)?<CreateBoard showModal={this.handleClick}/>:''} */}
       </div>
     )
   }

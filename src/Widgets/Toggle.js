@@ -15,13 +15,16 @@ class CardBox extends React.Component {
   }
 
   handleChange = (e) => {
-    const payload = this.props.payload
-    const microgear = NETPIEMicrogear.microgear[payload.datasource]
     const checked = e.target.checked
     this.setState({
       checked: checked
-    })
-    console.log(checked)
+    }, this.contactMicrogear)
+  }
+
+  contactMicrogear () {
+    const checked = this.state.checked
+    const payload = this.props.payload
+    const microgear = NETPIEMicrogear.microgear[payload.datasource]
     if (NETPIEMicrogear.statusOnline[payload.datasource]) {
       switch (payload.type) {
         case 'chat':
@@ -33,6 +36,7 @@ class CardBox extends React.Component {
         default: return console.log('Error')
       }
     } else console.log('error : not Connect datasource !!')
+  
   }
 
   delWidget() {
@@ -44,6 +48,7 @@ class CardBox extends React.Component {
     const payload = this.props.payload
     if (NETPIEMicrogear.statusOnline[payload.datasource]) {
       const microgear = NETPIEMicrogear.microgear[payload.datasource]
+      microgear.chat(payload.onCreated, payload.onCreatedValue)
       microgear.on('message', this.onMessage.bind(this))
     } else console.log('error : not Connect datasource !!')
   }
@@ -51,12 +56,17 @@ class CardBox extends React.Component {
   onMessage(topic, msg) {
     const payload = this.props.payload
     const strMsg = msg + ''
-    const value = strMsg.split(payload.filter)[payload.filterIndex]
-    if (payload.value === topic) {
-      this.setState({
-        value: value,
-        previousValue: this.state.value
-      })
+    const value = strMsg
+    if (payload.toggleState === topic) {
+      if(payload.toggleValue === value) {
+        this.setState({
+          checked: true
+        }, this.contactMicrogear)
+      } else {
+        this.setState({
+          checked: false
+        }, this.contactMicrogear)
+      }   
     }
   }
 
@@ -71,8 +81,8 @@ class CardBox extends React.Component {
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body ">
             <span className="switch">
-              <input type="checkbox" className="switch switch-lg" id="switch-id" onChange={this.handleChange} checked={checked}/>
-              <label htmlFor="switch-id"></label>
+              <input type="checkbox" className="switch switch-lg" id={widgetId} onChange={this.handleChange} checked={checked}/>
+              <label htmlFor={widgetId}></label>
             </span>
           </div>
         </div>

@@ -97,15 +97,21 @@ class FormProgress extends React.Component {
           title="Stroke Color"
           name="strokeColor"
           value={payload.strokeColor} /> */}
-
         <div className="form-group row">
-        <label htmlFor="unit" className="col-3 col-form-label text-capitalize">Color
-        </label>
+        <label htmlFor="unit" className="col-3 col-form-label text-capitalize">Color</label>
           <div className="col">
             <div className="form-group row">
               <label className="col-3 col-form-label">Stroke Color</label>
               <div className="col">
-                  <ColorInput /* handleChangeComplete={this.handlePayload} */ name="strokeColor" />
+                  <ColorInput color={payload.strokeColor} handleChangeComplete={this.handlePayload} name="strokeColor" />
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <div className="form-group row">
+              <label className="col-3 col-form-label">Trial Color</label>
+              <div className="col">
+                  <ColorInput color={payload.trailColor} handleChangeComplete={this.handlePayload} name="trailColor" />
               </div>
             </div>
           </div>
@@ -113,15 +119,11 @@ class FormProgress extends React.Component {
 
         <InputText
           callback={this.handlePayload}
-          title="Trial Color"
-          name="trailColor"
-          value={payload.trailColor} />
-        <InputText
-          callback={this.handlePayload}
           title="Stroke Line cap"
           name="strokeLinecap"
           value={payload.strokeLinecap}
           placeholder="`butt`, `square` or `round`." />
+
         <div className="row justify-content-end">
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>

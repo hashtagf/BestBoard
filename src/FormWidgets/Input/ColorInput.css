@@ -1,5 +1,4 @@
 .coloroption {
-
         padding: 5px;
         background: #fff;
         border-radius: 1px;
@@ -9,7 +8,12 @@
 
 }
 .color {
-    width: 36px;
-    height: 14px;
-    border-radius: 2px;
+    height: 1.3rem;
+    height: 1.3rem;
+    display: inline-block;
+    cursor: 'pointer'
+}
+.ColorPicker {
+    position: absolute;
+    z-index: 100;
 }

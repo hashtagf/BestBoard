@@ -30,7 +30,6 @@ class Page extends Component {
   render() {
     const mode = this.state.mode
     return (
-      <div className="wrapper">
         <nav className="sidebar" id="scrollbar-style" data-spy="scroll">
           <div className="sidebar-header">
             <h3>BestBoard</h3>
@@ -42,7 +41,6 @@ class Page extends Component {
             <li><a className="article btn" onClick={this.handleClick}>{(mode) ? 'Done' : 'Setting'}</a></li>
           </ul>
         </nav>
-      </div>
     )
   }
 }

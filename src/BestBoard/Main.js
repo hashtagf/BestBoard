@@ -54,10 +54,10 @@ class Main extends Component {
 
   createMuuri () {
     grid = new Muuri('.grid', {
-      items: '.item',
+      // items: '.item',
       dragEnabled: true,
       dragContainer: document.body,
-      itemClass: 'col-3',
+      // itemClass: 'mx-4',
       dragStartPredicate: (item, e) => {
         if (e.distance > 10) {
           return Store.mode
@@ -75,26 +75,25 @@ class Main extends Component {
   componentWillUnmount() {
     grid.destroy(true)
   }
-  refresh = (e) => {
-    grid.refreshSortData();
-    grid.refreshItems();
+  refresh = () => {
+    grid.refreshItems().layout();
+    console.log(1)
   }
   render() {
     const listWidgets = this.state.listWidgets
     return ( 
+      <div>
       <ReactCSSTransitionGroup
       transitionName="example"
       transitionAppear={true}
       transitionAppearTimeout={500}
       transitionEnter={false}
       transitionLeave={false}>
-        <div className = 'grid'> 
+        <div className = 'grid row'> 
           {listWidgets} 
         </div>
       </ReactCSSTransitionGroup>
-
-        
-
+      </div>
     )
   }
 }

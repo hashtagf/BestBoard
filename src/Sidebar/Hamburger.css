@@ -61,6 +61,7 @@
     MEDIAQUERIES
 ----------------------------------------------------- */
 @media (max-width: 768px) {
+
   .sidebar {
     margin-left: -250px;
     transform: rotateY(90deg);
@@ -70,7 +71,10 @@
     margin-left: 0;
     transform: none;
   }
-
+  .sidebar.active ~ .content{
+    width: 100vw;
+    overflow: hidden;
+  }
   #sidebarCollapse span:first-of-type,
   #sidebarCollapse span:nth-of-type(2),
   #sidebarCollapse span:last-of-type {
