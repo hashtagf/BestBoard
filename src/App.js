@@ -7,10 +7,9 @@ import Routing from './routes'
 import Store from './store/Store'
 class App extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      mode: Store.mode,
-      colorId: 0
+      mode: Store.mode
     }
   }
   render() {
@@ -18,7 +17,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="wrapper">
-          <Sidebar clickSetting={this.clickSetting} colorId={this.state.colorId} />
+          <Sidebar clickSetting={this.clickSetting} />
           <div className="content" id="scrollbar-style">
             <Hamburger />
             <Routing />

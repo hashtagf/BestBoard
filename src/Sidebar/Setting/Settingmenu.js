@@ -3,13 +3,6 @@ import './Settingmenu.css'
 import DataSource from './DataSource.js'
 import ColorSetting from './ColorSetting.js'
 class Settingmenu extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      colorId: this.props.colorId,
-    }
-  }
-
   render() {
     const mode = this.props.mode
     return (
@@ -18,7 +11,7 @@ class Settingmenu extends Component {
           <DataSource/>
         </ul>
         <ul className="list-unstyled components">
-          <ColorSetting colorId={this.props.colorId}/>
+          <ColorSetting />
         </ul>
         
       </div>

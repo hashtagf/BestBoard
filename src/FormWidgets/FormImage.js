@@ -53,12 +53,16 @@ class FormImage extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    const editWidget = this.props.editWidget
     let payload = {
       typeWidget: 'Image',
       title: this.state.title,
       file: this.state.file
     }
-    WidgetStore.createWidget(Store.currentId, payload)
+    if (editWidget)  
+      WidgetStore.updateWidget(editWidget.widgetId, payload)
+    else 
+      WidgetStore.createWidget(Store.currentId, payload)
     this.setState({
       title: 'Image',
       file: 'empty'
@@ -88,7 +92,7 @@ class FormImage extends React.Component {
                   className="custom-file-input"
                   onChange={this.handleFile}
                 />
-                <label className="custom-file-label" for="uploadImg">Choose file</label>
+                <label className="custom-file-label" htmlFor="uploadImg">Choose file</label>
               </div>
             </div>
           </div>

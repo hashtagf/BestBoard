@@ -10,6 +10,44 @@ import FormList from './FormList'
 import FormChart from './FormChart'
 import FormButton from './FormButton'
 import FormToggle from './FormToggle'
+import { observer } from 'mobx-react'
+
+@observer
+class EditWidget extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectType: "CardBox"
+    }
+  }
+  selectWidget = (e) => {
+    this.setState({
+      selectType: e.target.name
+    })
+  }
+  componentWillReceiveProps(nextProps) {
+    let editWidget = nextProps.editWidget
+    if (editWidget.typeWidget) {
+      this.setState({
+        selectType: editWidget.typeWidget
+      })
+    }
+  }
+  render() {
+    let editWidget = this.props.editWidget
+    return (
+      <div className="row">
+        {(editWidget.typeWidget) ? '' : <WidgetsList selectWidget={this.selectWidget} />}
+        <div className={(editWidget.typeWidget)?"col-12 formWidget":"col-sm-9 col-12 formWidget"} id="scrollbar-style">
+          <strong>Form</strong>
+          <form>
+            <SelectType selectType={this.state.selectType} editWidget={editWidget} />
+          </form>
+        </div>
+      </div>
+    )
+  }
+}
 
 class WidgetsList extends React.Component {
 
@@ -95,41 +133,6 @@ class WidgetsList extends React.Component {
   }
 }
 
-class EditWidget extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      selectType: "CardBox"
-    }
-  }
-  selectWidget = (e) => {
-    this.setState({
-      selectType: e.target.name
-    })
-  }
-  componentWillReceiveProps(nextProps) {
-    let editWidget = nextProps.editWidget
-    if (editWidget.typeWidget) {
-      this.setState({
-        selectType: editWidget.typeWidget
-      })
-    }
-  }
-  render() {
-    let editWidget = this.props.editWidget
-    return (
-      <div className="row">
-        {(editWidget.typeWidget) ? '' : <WidgetsList selectWidget={this.selectWidget} />}
-        <div className={(editWidget.typeWidget)?"col-12 formWidget":"col-sm-9 col-12 formWidget"} id="scrollbar-style">
-          <strong>Form</strong>
-          <form>
-            <SelectType selectType={this.state.selectType} editWidget={editWidget} />
-          </form>
-        </div>
-      </div>
-    )
-  }
-}
 class SelectType extends React.Component {
   render() {
     let editWidget = this.props.editWidget

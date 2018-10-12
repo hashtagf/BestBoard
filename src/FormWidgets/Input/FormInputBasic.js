@@ -29,13 +29,13 @@ class FormInputBasic extends React.Component {
 
 
   handleChange(e) {
-    let { topics, checkTopic } = this.state
     let { value } = this.props.values
     if (e.target.name === 'datasource') {
       this.setState({
         topics: []
        })
       var topicsObj = NETPIEMicrogear.topics[e.target.value]
+      console.log('Value : ',value)
       if (topicsObj) {
         var topicsAr =  Object.values(topicsObj)
         this.setState({
@@ -105,7 +105,7 @@ class FormInputBasic extends React.Component {
         </div>
         <div className="form-group row">
           <label htmlFor="datasource" className="col-3 col-form-label">
-            Datasource : {console.log(values.datasource)}
+            Datasource :
           </label>
           <div className="col-9">
             <select className="form-control custom-select selectdefault" 
@@ -144,6 +144,7 @@ class FormInputBasic extends React.Component {
               value={values.filter}
               onChange={handleChange}
             />
+            
           </div>
           <div className="col-7">
             <ButtonIndex selectOption={selectOption}
@@ -192,27 +193,18 @@ class ButtonIndex extends React.Component {
                 type="radio"
                 className="btn"
                 name="filterIndex"
+                id="filterIndex"
                 onClick={handleChange}
                 value={index}
               >
                 {val}
               </button>
-              // <label key={index} class={"btn btn-secondary"}>
-              //   <input type="radio"
-              //     name="filterIndex"
-              //     id={index}
-              //     className="btn btn-secondary"
-              //     onClick={handleChange}
-              //     value={index}
-              //     autoComplete="off"
-              //   /> {val}
-              // </label>
             )
             )}
           </div>
         </div>
       )
-    } else return <h4>Index Array</h4>
+    } else return <h6>Index Array</h6>
   }
 }
 

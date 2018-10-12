@@ -9,7 +9,7 @@ class ButtonAdd extends React.Component {
   }
   render() {
     return (
-      <div className="ButtonAdd">
+      <div className={(Store.currentId)?'ButtonAdd':'ButtonAdd d-none'}>
         <p id="ButtonAdd">
           <button type="button" className="btn btn-secondary p-0 shadow rounded-circle"
             data-toggle="modal" 

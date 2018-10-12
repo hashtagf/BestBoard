@@ -3,8 +3,13 @@ import EditWidget from './EditWidget'
 import './WidgetsList.css'
 import Store from '../store/Store'
 import { observer } from 'mobx-react'
+
 @observer
 class CreateBoard extends React.Component {
+  hanldeClose () {
+    console.log('Unmount')
+    Store.editWidget = false
+  }
   render() {
     return (
       <div className="modal fade ModalCreate" data-backdrop="true" tabIndex="-1" id="scrollbar-style" role="dialog" aria-hidden="false" >

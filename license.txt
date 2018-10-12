@@ -38,3 +38,7 @@ socket.io-client : MIT
   >> https://github.com/socketio/socket.io-client/blob/master/LICENSE
 styled-components : MIT
   >> https://github.com/styled-components/styled-components/blob/master/LICENSE
+react-color : MIT
+ >> https://github.com/casesandberg/react-color/blob/master/LICENSE
+reactcss : MIT
+ >> https://github.com/casesandberg/reactcss/blob/master/LICENSE

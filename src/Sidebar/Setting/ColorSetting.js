@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+import Store from '../../store/Store'
+import socketIOClient from 'socket.io-client'
+
+const socket = socketIOClient(Store.server)
+
 class ColorSetting extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      colorId: this.props.colorId,
+      colorName: 'native',
       colorSet: [{
         name: 'native',
         colors: ['#2C3849', '#303E4D', '#6698C8', '#FFFFFF', '#2e3946', '#4A5664', '#4A5664', '#FFFFFF', '#FFFFFF', '#94E864', '#78AF8F']
@@ -17,26 +23,48 @@ class ColorSetting extends Component {
         colors: ['#0D7E83', '#076570', '#D37C71', '#FFFFFF', '#096f7a', '#076570', '#D37C71', '#FFFFFF', '#FFFFFF', '#F79F66', '#F15340']
       },
       {
-        name: 'farm',
+        name: 'water',
         colors: ['#084278', '#f5f3f3', '#0BB1EF', '#66666A', '#f5f3f3', '#e7e4e4', '#d7d7e2', '#66666A', '#66666A', '#00A9EE', '#0BB1EF']
       },
       {
-        name: 'farm',
+        name: 'forest',
         colors: ['#e7eaef', '#dadfe9', '#01a398', '#FFFFFF', '#e7eaef', '#45959e', '#79c476', '#0d3340', '#0d3340', '#79c476', '#78AF8F']
       },
       {
-        name: 'farm',
+        name: 'space',
         colors: ['#1F313F', '#355263', '#FDD24E', '#FEFEFE', '#1a2833', '#536c7a', '#557486', '#FEFEFE', '#FEFEFE', '#FDD24E', '#fad976']
       },
       ]
     }
   }
   componentDidMount() {
-    this.setColor(this.props.colorId)
+    this.response()
   }
-  setColor = (id) => {
+
+  response = () => {
+    this.getColorName()
+    socket.on('update-board', (msg) => {
+      console.log('update-board', msg)
+      this.getColorName()
+    })
+  }
+
+  getColorName() {
+    axios.get(Store.server + '/board/' + Store.currentId).then((res) => {
+      this.setState({
+        colorName: res.data.colorName
+      })
+      this.setColor(res.data.colorName)
+    })
+  }
+
+  setColor = (name) => {
     //id = 2
     var i = 0
+    var id = 0
+    this.state.colorSet.forEach((colors, index) => {
+      if (colors.name === name) id = index
+    })
     var colorSet = this.state.colorSet[id].colors
     document.documentElement.style.setProperty("--themeBG", colorSet[i++]);
     document.documentElement.style.setProperty("--themeBGHover", colorSet[i++]);
@@ -50,11 +78,11 @@ class ColorSetting extends Component {
     document.documentElement.style.setProperty("--activePresence", colorSet[i++]);
     document.documentElement.style.setProperty("--mentionBadge", colorSet[i++]);
   }
-  handleClick = (id) => {
-    //e.preventDefault();
-    this.setColor(id)
+  handleClick = (name) => {
+    axios.put(Store.server + '/board/' + Store.currentId, { colorName: name })
+    this.setColor(name)
     this.setState({
-      colorId: id
+      colorName: name
     })
   }
   render() {
@@ -63,8 +91,8 @@ class ColorSetting extends Component {
           <a> Color </a>
           <ul className="list-inline" > {this.state.colorSet.map((colors, i) => (
             <li className="list-inline-item" key={i}
-              onClick={this.handleClick.bind(this, i)} >
-              <div className={(this.state.colorId === i) ? 'rounded-circle coloroption border-active' : 'rounded-circle coloroption'}
+              onClick={this.handleClick.bind(this, colors.name)} >
+              <div className={(this.state.colorName === colors.name) ? 'rounded-circle coloroption border-active' : 'rounded-circle coloroption'}
                 id={'colorset-' + (i + 1)} >
               </div>
             </li>

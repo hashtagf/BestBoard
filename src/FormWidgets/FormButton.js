@@ -49,6 +49,7 @@ class FormButton extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
+    const editWidget = this.props.editWidget
     let payload = {
       typeWidget: 'Button',
       title: this.state.title,
@@ -59,7 +60,10 @@ class FormButton extends React.Component {
       value: this.state.value
     }
     this.reState()
-    WidgetStore.createWidget(Store.currentId, payload)
+    if (editWidget)  
+      WidgetStore.updateWidget(editWidget.widgetId, payload)
+    else 
+      WidgetStore.createWidget(Store.currentId, payload)
   }
 
   render() {

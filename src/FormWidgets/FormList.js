@@ -53,10 +53,12 @@ class FormList extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    const editWidget = this.props.editWidget
     let payload = {
       typeWidget: 'List',
       title: this.state.title,
       value: this.state.value,
+      body: this.state.body,
       text: this.state.text,
       unit: this.state.unit,
       icon: this.state.icon,
@@ -64,7 +66,10 @@ class FormList extends React.Component {
       filter: this.state.filter,
       filterIndex: this.state.filterIndex
     }
-    WidgetStore.createWidget(Store.currentId, payload)
+    if (editWidget)  
+      WidgetStore.updateWidget(editWidget.widgetId, payload)
+    else 
+      WidgetStore.createWidget(Store.currentId, payload)
     this.reState ()
   }
   render() {

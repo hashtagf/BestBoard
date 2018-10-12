@@ -37,7 +37,7 @@ class Page extends Component {
             <p className="">Dashboard for IoT</p>
           </div>
           <Pagelist />
-          <Settingmenu colorId={this.props.colorId} mode={mode} />
+          <Settingmenu mode={mode} />
           <ul className="list-unstyled CTAs">
             <li><a className="article btn" onClick={this.handleClick}>{(mode) ? 'Done' : 'Setting'}</a></li>
           </ul>

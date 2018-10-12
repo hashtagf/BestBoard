@@ -35,7 +35,7 @@ class FormChart extends React.Component {
       title: 'Chart',
       feedID: '',
       feedAPI: '',
-      value: 0,
+      value: '',
       type: 'monotone',
       stroke: '#8884d8',
       fillOpacity: 1,
@@ -51,6 +51,7 @@ class FormChart extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    const editWidget = this.props.editWidget
     let payload = {
       typeWidget: 'Chart',
       title: this.state.title,
@@ -62,7 +63,10 @@ class FormChart extends React.Component {
       fillOpacity: 1,
       fill: 'url(#color)'
     }
-    WidgetStore.createWidget(Store.currentId, payload)
+    if (editWidget)  
+      WidgetStore.updateWidget(editWidget.widgetId, payload)
+    else 
+      WidgetStore.createWidget(Store.currentId, payload)
     this.reState()
   }
   render() {
@@ -72,7 +76,7 @@ class FormChart extends React.Component {
         <InputText callback={this.handlePayload} title="Title" name="title" value={payload.title} />
         <InputText callback={this.handlePayload} title="Feed ID" name="feedID" value={payload.feedID} />
         <InputText callback={this.handlePayload} title="Feed API" name="feedAPI" value={payload.feedAPI} />
-        <InputText callback={this.handlePayload} title="Value" name="value" value={payload.value} />
+        <InputText callback={this.handlePayload} title="Value" name="value" value={payload.value} placeholder="Value of Feed"/>
         <div className="row justify-content-end">
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>

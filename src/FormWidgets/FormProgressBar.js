@@ -2,6 +2,7 @@ import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import FormInputBasic from './Input/FormInputBasic'
 import InputText from './Input/InputText'
+import ColorInput from './Input/ColorInput'
 import Store from '../store/Store'
 
 class FormProgress extends React.Component {
@@ -16,7 +17,7 @@ class FormProgress extends React.Component {
       strokeColor: '#2db7f5',
       trailColor: '#D9D9D9',
       strokeLinecap: 'round',
-      datasource: '',       
+      datasource: '',
       body: '',
       filter: ',',
       filterIndex: 0
@@ -35,7 +36,7 @@ class FormProgress extends React.Component {
       });
     } else this.reState()
   }
-  reState () {
+  reState() {
     this.setState({
       title: 'Progress Bar',
       value: 0,
@@ -45,7 +46,7 @@ class FormProgress extends React.Component {
       strokeColor: '#2db7f5',
       trailColor: '#D9D9D9',
       strokeLinecap: 'round',
-      datasource: '',       
+      datasource: '',
       body: '',
       filter: ',',
       filterIndex: 0
@@ -59,10 +60,12 @@ class FormProgress extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    const editWidget = this.props.editWidget
     let payload = {
       typeWidget: 'ProgressBar',
       title: this.state.title,
       value: this.state.value,
+      body: this.state.body,
       unit: this.state.unit,
       strokeWidth: this.state.strokeWidth,
       trailWidth: this.state.trailWidth,
@@ -73,7 +76,10 @@ class FormProgress extends React.Component {
       filter: this.state.filter,
       filterIndex: this.state.filterIndex
     }
-    WidgetStore.createWidget(Store.currentId, payload)
+    if (editWidget)
+      WidgetStore.updateWidget(editWidget.widgetId, payload)
+    else
+      WidgetStore.createWidget(Store.currentId, payload)
     this.reState()
   }
   render() {
@@ -86,11 +92,25 @@ class FormProgress extends React.Component {
           title="Unit"
           name="unit"
           value={payload.unit} />
-        <InputText
+        {/* <InputText
           callback={this.handlePayload}
           title="Stroke Color"
           name="strokeColor"
-          value={payload.strokeColor} />
+          value={payload.strokeColor} /> */}
+
+        <div className="form-group row">
+        <label htmlFor="unit" className="col-3 col-form-label text-capitalize">Color
+        </label>
+          <div className="col">
+            <div className="form-group row">
+              <label className="col-3 col-form-label">Stroke Color</label>
+              <div className="col">
+                  <ColorInput /* handleChangeComplete={this.handlePayload} */ name="strokeColor" />
+              </div>
+            </div>
+          </div>
+        </div>
+
         <InputText
           callback={this.handlePayload}
           title="Trial Color"

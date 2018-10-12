@@ -65,10 +65,12 @@ class FormGaugeSpeed extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    const editWidget = this.props.editWidget
     let payload = {
       typeWidget: 'GaugeSpeed',
       title: this.state.title,
       value: this.state.value,
+      body: this.state.body,
       unit: this.state.unit,
       minValue: this.state.minValue,
       maxValue: this.state.maxValue,
@@ -80,7 +82,10 @@ class FormGaugeSpeed extends React.Component {
       filter: this.state.filter,
       filterIndex: this.state.filterIndex
     }
-    WidgetStore.createWidget(Store.currentId, payload)
+    if (editWidget)  
+      WidgetStore.updateWidget(editWidget.widgetId, payload)
+    else 
+      WidgetStore.createWidget(Store.currentId, payload)
     this.reState()
   }
   render() {

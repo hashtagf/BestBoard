@@ -7,6 +7,7 @@ body {
   font-family: 'Poppins', sans-serif;
   background: var(--themeBG);
   color: var(--textColor);
+  overflow: hidden;
 }
 a {
   cursor: pointer;

@@ -32,6 +32,10 @@
 .form-control[readonly] {
     background-color: #f3f3f3;
 }
+.ColorPicker {
+    position: absolute;
+    z-index: 1;
+}
 @media screen and (max-width: 575px) {
     .listWidgets {
         min-width: 100%;

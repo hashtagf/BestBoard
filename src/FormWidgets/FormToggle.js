@@ -59,6 +59,7 @@ class FormToggle extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
+    const editWidget = this.props.editWidget
     let payload = {
       typeWidget: 'Toggle',
       title: this.state.title,
@@ -74,7 +75,10 @@ class FormToggle extends React.Component {
       onCreatedValue: this.state.onCreatedValue
     }
     this.reState()
-    WidgetStore.createWidget(Store.currentId, payload)
+    if (editWidget)  
+      WidgetStore.updateWidget(editWidget.widgetId, payload)
+    else 
+      WidgetStore.createWidget(Store.currentId, payload)
   }
 
   render() {

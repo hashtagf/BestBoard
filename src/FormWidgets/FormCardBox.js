@@ -59,6 +59,7 @@ class FormCardBox extends React.Component {
       typeWidget: 'CardBox',
       title: this.state.title,
       value: this.state.value,
+      body: this.state.body,
       datasource: this.state.datasource,
       filter: this.state.filter,
       filterIndex: this.state.filterIndex,
@@ -78,7 +79,7 @@ class FormCardBox extends React.Component {
       <div className="FormCardBox container">
         <FormInputBasic callback={this.handlePayload} values={payload} />
         <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit} />
-        <InputText callback={this.handlePayload} title="Icon" name="icon" value={payload.icon} />
+        <InputText callback={this.handlePayload} title="Icon" name="icon" value={payload.icon} placeholder="fontAwesome Icon (name Icon) :: tint"/>
         <div className="row justify-content-end">
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
