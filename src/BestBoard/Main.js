@@ -1,4 +1,4 @@
-import React, { Component} from 'react'
+import React, { Component } from 'react'
 import './Main.css'
 import LocalStore from '../store/LocalStore'
 import Store from '../store/Store'
@@ -7,7 +7,7 @@ import Muuri from 'muuri'
 import axios from 'axios'
 import WidgetStore from '../store/WidgetStore'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-
+import ReactResizeDetector from 'react-resize-detector';
 const socket = socketIOClient(Store.server)
 var grid = null
 
@@ -19,7 +19,7 @@ class Main extends Component {
       connect: true
     }
   }
-  componentDidMount () {
+  componentDidMount() {
     if (this.state.connect) this.response()
     else this.loadLocal()
   }
@@ -36,13 +36,13 @@ class Main extends Component {
       console.log('update-widget', msg)
       this.getWidgets()
     })
-    socket.on('error', function(exception) {
+    socket.on('error', function (exception) {
       console.log('SOCKET ERROR', exception)
       socket.destroy()
     })
   }
 
-  getWidgets () {
+  getWidgets() {
     axios.get(Store.server + '/widget/' + Store.currentId).then((res) => {
       let tmp = WidgetStore.showWidgets(res.data)
       this.setState({
@@ -52,7 +52,7 @@ class Main extends Component {
     })
   }
 
-  createMuuri () {
+  createMuuri() {
     grid = new Muuri('.grid', {
       // items: '.item',
       dragEnabled: true,
@@ -75,24 +75,25 @@ class Main extends Component {
   componentWillUnmount() {
     grid.destroy(true)
   }
-  refresh = () => {
-    grid.refreshItems().layout();
+  onResize = () => {
     console.log(1)
+    grid.refreshItems().layout();
   }
   render() {
     const listWidgets = this.state.listWidgets
-    return ( 
-      <div>
-      <ReactCSSTransitionGroup
-      transitionName="example"
-      transitionAppear={true}
-      transitionAppearTimeout={500}
-      transitionEnter={false}
-      transitionLeave={false}>
-        <div className = 'grid row'> 
-          {listWidgets} 
-        </div>
-      </ReactCSSTransitionGroup>
+    return (
+      <div id="board">
+        <ReactResizeDetector handleWidth skipOnMount refreshRate={60} onResize={this.onResize} />
+        <ReactCSSTransitionGroup
+          transitionName="maingrid"
+          transitionAppear={true}
+          transitionAppearTimeout={500}
+          transitionEnter={false}
+          transitionLeave={false}>
+          <div className='grid row'>
+            {listWidgets}
+          </div>
+        </ReactCSSTransitionGroup>
       </div>
     )
   }

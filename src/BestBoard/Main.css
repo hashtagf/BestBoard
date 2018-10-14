@@ -6,10 +6,6 @@
   .item {
     position: absolute;
     text-align: center;
-    /* width: 200px;
-    height: 200px; */
-    /* line-height: 200px; */
-    
     z-index: 1;
   }
   .item.muuri-item-releasing {
@@ -23,19 +19,20 @@
     /* border: 1px solid var(--mentionBadge); */
     border-radius: 3px;
     font-size: 25px;
-    color: var(--textColor);
-    background-color: var(--titleItem);
+    color: var(--textWidgetColor);
+    background-color: var(--widgetBG);
   }
   .item.muuri-item-dragging .item-content,
   .item.muuri-item-releasing .item-content {
-    background: var(--activePresence);
+    background: var(--mentionBadge);
+    border: 2px solid #ffff;
   }
 
-  .example-appear {
+  .maingrid-appear {
     opacity: 0.01;
   }
   
-  .example-appear.example-appear-active {
+  .maingrid-appear.maingrid-appear-active {
     opacity: 1;
     transition: opacity .5s ease-in;
   }

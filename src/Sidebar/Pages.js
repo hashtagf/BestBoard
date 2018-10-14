@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import Store from '../store/Store'
 import LocalStore from '../store/LocalStore'
 import socketIOClient from 'socket.io-client'
+import ClickOutside from 'react-click-outside';
 
 const socket = socketIOClient(Store.server)
 
@@ -86,19 +87,25 @@ class Page extends Component {
         LocalStore.updatePage(index,pageId,this.state.inputName)
         console.log(LocalStore.local.pages)
       }
-      this.setState({
-        pages: tem,
-        addPage: false,
-        inputName: '',
-        editPage: null,
-      })
     }
+    this.setState({
+      pages: tem,
+      addPage: false,
+      inputName: '',
+      editPage: null,
+    })
   }
 
   handleChange(e) {
     this.setState({ inputName: e.target.value });
   }
-
+  handleCancel = () => {
+    this.setState({
+      addPage: false,
+      inputName: '',
+      editPage: null,
+    })
+  }
   handleKeyPress = (objKeypress, e) => {
     if (e.key === 'Enter') {
       let index = objKeypress.index
@@ -141,6 +148,7 @@ class Page extends Component {
         pageId: 0
       }
       addPage =
+      <ClickOutside onClickOutside={this.handleClose}>
         <div className="input-group addpage">
           <input type="text" className="form-control addpage border-0 rounded-0 " 
             onBlur={() => this.savePage(-1)} 
@@ -154,6 +162,7 @@ class Page extends Component {
             </button>
           </div>
         </div>
+      </ClickOutside>
     }
     listPage = pages.map((page, index) => {
       let objKeypress = {
@@ -177,6 +186,7 @@ class Page extends Component {
           </Link>
       } else {
         lspage =
+        <ClickOutside onClickOutside={this.handleClose}>
           <div className="input-group addpage" key={index}>
             <input type="text" className="form-control addpage border-0 rounded-0 " 
               value={this.state.inputName} 
@@ -189,6 +199,7 @@ class Page extends Component {
             <div className="input-group-append">
             </div>
           </div>
+        </ClickOutside>
       }
       return lspage
     })

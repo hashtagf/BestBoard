@@ -5,7 +5,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
-  background: var(--themeBG);
+  background: var(--themeBGmain);
   color: var(--textColor);
   overflow: hidden;
 }
@@ -17,7 +17,7 @@ a {
   opacity: 1;
 }
 .btn:hover {
-  opacity: 0.8;
+  background: var(--mentionBadge);
 }
 .btn-group .btn {
   border-radius: inherit;
@@ -32,18 +32,19 @@ a {
   perspective: 1500px;
   overflow: hidden;
 }
-.shadow {
-  box-shadow: 0 0rem 0.5rem rgba(0,0,0,.15)
+.shadowcard {
+  box-shadow: var(--shadow)
 }
 .content {
   padding: 20px;
   max-height: 100vh;
   min-height: 100vh;
   width: 100%;
-  /* width: auto; */
+  background: var(--themeBGmain);
   transition: all 0.3s;
   z-index:-1;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 .modal-backdrop {
   background: transparent;
@@ -74,4 +75,12 @@ a {
 .form-control {
   border: 0px;
   background-color: #f3f3f3;
+}
+.buttontransition-appear {
+  opacity: 0.01;
+}
+
+.buttontransition-appear.buttontransition-appear-active {
+  opacity: 1;
+  transition: opacity .5s ease-in;
 }

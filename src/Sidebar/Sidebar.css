@@ -3,7 +3,7 @@
 .sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: var(--themeBGHover);
+    background: var(--themeBGsidebar);
     color: var(--textColor);
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
@@ -20,12 +20,12 @@
 
 .sidebar .sidebar-header {
     padding: 20px;
-    background: var(--titleItem);
+    background: var(--titleSidebar);
 }
 
 .sidebar ul.components {
     padding-bottom: 20px;
-    border-bottom: 1px solid var(--borderItem);
+    border-bottom: 1px solid var(--borderMenusidebar);
 }
 
 .sidebar ul p {
@@ -85,7 +85,7 @@ a[aria-expanded="true"]::before {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: var(--themeBGHover);
+    background: var(--themeBGsidebar);
 }
 
 ul.CTAs {

@@ -5,7 +5,7 @@
     height: 25px;
 }
 .border-active {
-    border: var(--activePresence) solid 3px;
+    border: var(--activeItem) solid 3px;
 }
 ul.list-inline {
  padding: 20px;
@@ -64,6 +64,13 @@ ul.list-inline {
     background: linear-gradient(135deg, #fdd24e 7%,#fdd24e 39%,#fdd24e 39%,#557486 51%,#1b2a49 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdd24e', endColorstr='#1b2a49',GradientType=1 );
 }
+#colorset-7 {
+    background: #cc399a;
+background: -moz-linear-gradient(-45deg, #cc399a 4%, #cc399a 20%, #cc399a 21%, #154b77 90%, #1f143b 100%);
+background: -webkit-linear-gradient(-45deg, #cc399a 4%,#cc399a 20%,#cc399a 21%,#154b77 90%,#1f143b 100%);
+background: linear-gradient(135deg, #cc399a 4%,#cc399a 20%,#cc399a 21%,#154b77 90%,#1f143b 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc399a', endColorstr='#1f143b',GradientType=1 );
+}
 .tail {
     width: 50px;
 }
@@ -75,7 +82,7 @@ ul.list-inline {
     background: var(--activePresence);
 }
 #offline {
-    background: var(--titleItem);
+    background: var(--widgetBG);
 }
 .modal.ModalCreateSource,.modal.edit {
     width: 100vw;

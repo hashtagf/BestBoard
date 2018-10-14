@@ -5,6 +5,8 @@ import Sidebar from './Sidebar/Sidebar'
 import Hamburger from './Sidebar/Hamburger'
 import Routing from './routes'
 import Store from './store/Store'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -22,7 +24,14 @@ class App extends Component {
             <Hamburger />
             <Routing />
           </div>
-          {(mode) ? <ButtonAdd /> : ''}
+          <ReactCSSTransitionGroup
+          transitionName="buttontransition"
+          transitionAppear={true}
+          transitionAppearTimeout={500}
+          transitionEnter={false}
+          transitionLeave={false}>
+          {(mode) ? <ButtonAdd /> : null}
+          </ReactCSSTransitionGroup>
         </div>
         
       </div>

@@ -60,8 +60,8 @@ class Lists extends React.Component {
       <List key={index} payload={payload} icon={icon} />
     )
     return (
-      <div className="item List col-xl-3 col-lg-4 col-md-6 col-12 text-body mb-3">
-        <div className="item-content card shadow rounded-0 widgetCard border-0">
+      <div className="item List col-xl-3 col-lg-4 col-md-6 col-12 text-body mb-3">zz
+        <div className="item-content card shadowcard rounded-0 widgetCard border-0">
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body m-0 p-0">
             <ul className="list-group" data-spy="scroll">

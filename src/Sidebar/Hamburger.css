@@ -5,7 +5,7 @@
   background: transparent;
   border: none;
   border-radius: 0;
-
+  color: var(--textWidgetColor);
 }
 
 .navbar-btn {
@@ -34,7 +34,7 @@
   height: 2px;
   margin: 0 auto;
   display: block;
-  background: var(--textColor);
+  background: var(--textWidgetColor);
   transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
   transition-delay: 0.2s;
 }
@@ -72,7 +72,7 @@
     transform: none;
   }
   .sidebar.active ~ .content{
-    width: 100vw;
+    min-width: 100vw;
     overflow: hidden;
   }
   #sidebarCollapse span:first-of-type,

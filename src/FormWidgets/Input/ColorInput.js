@@ -1,6 +1,7 @@
 import React from 'react'
 import reactCSS from 'reactcss'
 import { SketchPicker } from 'react-color';
+import ClickOutside from 'react-click-outside';
 import './ColorInput.css'
 class ColorInput extends React.Component {
   constructor(props) {
@@ -8,7 +9,6 @@ class ColorInput extends React.Component {
     this.state = {
       displayColorPicker: false,
       color: '',
-      background: '#0BB1EF',
       colors: ['#0BB1EF','#FFFFFF','#66666A','#323741','#06858C','#45C48B','#FFD039','#F47942']
     }
     //this.handleChange = this.handleChange.bind(this)
@@ -32,7 +32,12 @@ class ColorInput extends React.Component {
   }
   handleClick = () => {
     this.setState({
-      displayColorPicker: !this.state.displayColorPicker
+      displayColorPicker: true
+    })
+  }
+  handleClose = () => {
+    this.setState({
+      displayColorPicker: false
     })
   }
   render() {
@@ -56,8 +61,9 @@ class ColorInput extends React.Component {
         <div className="form-control" onClick={ this.handleClick} style={styles.color} >
           {this.props.color} <div className="color ml-2 btn"  />
         </div>
-        <ColorPicker displayColorPicker={this.state.displayColorPicker} color={this.props.color} onChange={this.handleChange}/>
-        
+        <ClickOutside onClickOutside={this.handleClose}>
+          <ColorPicker displayColorPicker={this.state.displayColorPicker} color={this.props.color} onChange={this.handleChange}/>
+        </ClickOutside>
       </div>
     )
   }

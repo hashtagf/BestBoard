@@ -1,25 +1,33 @@
-/* $themeBG: #303E4D;
-$themeBGHover: #2C3849;
-$activeItem: #6698C8;
-$activeItemText: #FFFFFF;
-$hoverItem: #4A5664;
-$textColor: #FFFFFF;
-$activePresence: #94E864;
-$mentionBadge: #78AF8F;
-//colors: ['#F8F8FA','#FFFFFF','#CAD1D9','#FFFFFF','#FFFFFF','#383F45','#60D156','#FF8669'] 
-//colors: ['#0D7E83','#076570','#F79F66','#FFFFFF','#D37C71','#FFFFFF','#F79F66','#F15340']  */
-
 :root {
-    --themeBG: #2C3849;
-    --themeBGHover: #303E4D;
+    /* --themeBGmain: #2C3849;
+    --themeBGsidebar: #303E4D;
     --activeItem: #6698C8;
     --activeItemText: #FFFFFF;
-    --borderItem: #2e3946;
-    --titleItem: #4A5664;
+    --borderMenusidebar: #2e3946;
+    --titleSidebar: #4A5664;
+    --widgetBG: #4A5664;
+    --widgetheadBG: #4A5664;
     --hoverItem: #4A5664;
     --textColor: #FFFFFF;
+    --textWidgetColor: #FFFFFF;
     --textMute: #FFFFFF;
     --activePresence: #94E864;
     --mentionBadge: #78AF8F;
+    --shadow: 0 0rem 1rem rgba(0,0,0,.15); */
+    --themeBGmain: #f8f3f0;
+    --themeBGsidebar: #4c4743;
+    --activeItem: #ffb230;
+    --activeItemText: #c3a279;
+    --borderMenusidebar: #7a7774;
+    --titleSidebar: #ed6c44;
+    --widgetBG: #ffffff;
+    --widgetheadBG: #ffffff;
+    --hoverItem: #5a564e;
+    --textColor: #cfc0bb;
+    --textWidgetColor: #7a8682;
+    --textMute: #7a8682;
+    --activePresence: #ed6c44;
+    --mentionBadge: #c3a279;
+    --shadow: 0 0rem 1rem rgba(122, 77, 26, 0.171);
     
 }

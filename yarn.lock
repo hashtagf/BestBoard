@@ -4838,6 +4838,10 @@ lodash.defaults@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.defaults/-/lodash.defaults-4.2.0.tgz#d09178716ffea4dde9e5fb7b37f6f0802274580c"
 
+lodash.isfunction@^3.0.9:
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/lodash.isfunction/-/lodash.isfunction-3.0.9.tgz#06de25df4db327ac931981d1bdb067e5af68d051"
+
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
@@ -6306,6 +6310,10 @@ react-canvas-gauge@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-canvas-gauge/-/react-canvas-gauge-1.0.2.tgz#0d1246d6d968f932cbf7fc37af59b33d95165267"
 
+"react-click-outside@github:tj/react-click-outside":
+  version "1.1.1"
+  resolved "https://codeload.github.com/tj/react-click-outside/tar.gz/a833ddc5be47490307f9fcc6ed09d8c353108510"
+
 react-color@^2.14.1:
   version "2.14.1"
   resolved "https://registry.yarnpkg.com/react-color/-/react-color-2.14.1.tgz#db8ad4f45d81e74896fc2e1c99508927c6d084e0"
@@ -6373,6 +6381,16 @@ react-is@^16.3.1:
 react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
+
+react-resize-detector@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/react-resize-detector/-/react-resize-detector-3.1.3.tgz#23ecf44db98f09dc0d39f34d2ddbadf4dde6e5c8"
+  dependencies:
+    lodash.debounce "^4.0.8"
+    lodash.isfunction "^3.0.9"
+    lodash.throttle "^4.1.1"
+    prop-types "^15.6.1"
+    resize-observer-polyfill "^1.5.0"
 
 react-resize-detector@~2.3.0:
   version "2.3.0"
