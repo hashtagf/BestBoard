@@ -1,13 +1,11 @@
 import React from 'react'
 
 class SummitBtn extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
 
-    }
-  }
   render() {
+    var btn = <span><i className="fas fa-plus-square"></i> Add widget</span>
+    if (this.props.editWidget) btn = <span><i class="fas fa-pen-square"></i> Edit widget</span>
+    
     return (
         <div className="row justify-content-end">
           <div className="modal-footer">
@@ -16,7 +14,9 @@ class SummitBtn extends React.Component {
               className="btn btn-primary border-0"
               onClick={this.props.handleSubmit}
               data-dismiss="modal" aria-label="Close"
-            ><i className="fas fa-plus-square"></i> Add widget</button>
+            >
+              {btn}              
+            </button>
           </div>
         </div>
     )

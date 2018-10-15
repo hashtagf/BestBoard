@@ -9,7 +9,7 @@ class ColorInput extends React.Component {
     this.state = {
       displayColorPicker: false,
       color: '',
-      colors: ['#0BB1EF','#FFFFFF','#66666A','#323741','#06858C','#45C48B','#FFD039','#F47942']
+      colors: ['#0BB1EF','#FFFFFF','#66666A','#323741','##374452','#45C48B','#FFD039','#F47942']
     }
     //this.handleChange = this.handleChange.bind(this)
   }
@@ -57,13 +57,18 @@ class ColorInput extends React.Component {
       }
     })
     return (
-      <div>
-        <div className="form-control" onClick={ this.handleClick} style={styles.color} >
-          {this.props.color} <div className="color ml-2 btn"  />
+      <div className="form-group row">
+        <label htmlFor="unit" className="col-3 col-form-label text-capitalize">
+          {this.props.title} :
+        </label>
+        <div className="col-9">
+          <div className="form-control" onClick={ this.handleClick} style={styles.color} >
+            {this.props.color} <div className="color ml-2"  />
+          </div>
+          <ClickOutside onClickOutside={this.handleClose}>
+            <ColorPicker displayColorPicker={this.state.displayColorPicker} color={this.props.color} onChange={this.handleChange}/>
+          </ClickOutside>
         </div>
-        <ClickOutside onClickOutside={this.handleClose}>
-          <ColorPicker displayColorPicker={this.state.displayColorPicker} color={this.props.color} onChange={this.handleChange}/>
-        </ClickOutside>
       </div>
     )
   }

@@ -83,7 +83,7 @@ class Main extends Component {
     const listWidgets = this.state.listWidgets
     return (
       <div id="board">
-        <ReactResizeDetector handleWidth skipOnMount refreshRate={60} onResize={this.onResize} />
+        <ReactResizeDetector handleWidth skipOnMount refreshRate={10} onResize={this.onResize} />
         <ReactCSSTransitionGroup
           transitionName="maingrid"
           transitionAppear={true}

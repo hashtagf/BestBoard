@@ -2,6 +2,7 @@ import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import InputText from './Input/InputText'
 import Store from '../store/Store'
+import SummitBtn from './SummitBtn'
 
 class FormChart extends React.Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class FormChart extends React.Component {
     console.log(this.state.file)
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault()
     const editWidget = this.props.editWidget
     let payload = {
@@ -77,16 +78,8 @@ class FormChart extends React.Component {
         <InputText callback={this.handlePayload} title="Feed ID" name="feedID" value={payload.feedID} />
         <InputText callback={this.handlePayload} title="Feed API" name="feedAPI" value={payload.feedAPI} />
         <InputText callback={this.handlePayload} title="Value" name="value" value={payload.value} placeholder="Value of Feed"/>
-        <div className="row justify-content-end">
-          <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button"
-              className="btn btn-primary border-0"
-              onClick={this.handleSubmit.bind(this)}
-              data-dismiss="modal" aria-label="Close"
-            ><i className="fas fa-plus-square"></i> Add widget</button>
-          </div>
-        </div>
+        <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
+
       </div>
     )
   }

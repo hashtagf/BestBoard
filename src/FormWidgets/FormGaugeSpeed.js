@@ -3,6 +3,8 @@ import WidgetStore from '../store/WidgetStore'
 import FormInputBasic from './Input/FormInputBasic'
 import InputText from './Input/InputText'
 import Store from '../store/Store' 
+import SummitBtn from './SummitBtn'
+import ColorInput from './Input/ColorInput'
 
 class FormGaugeSpeed extends React.Component {
   constructor(props) {
@@ -63,7 +65,7 @@ class FormGaugeSpeed extends React.Component {
     })
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault()
     const editWidget = this.props.editWidget
     let payload = {
@@ -97,19 +99,11 @@ class FormGaugeSpeed extends React.Component {
         <InputText callback={this.handlePayload} title="Min Value" name="minvalue" value={payload.minValue} />
         <InputText callback={this.handlePayload} title="Max Value" name="maxvalue" value={payload.maxValue} />
         <InputText callback={this.handlePayload} title="Segments" name="segments" value={payload.segments} />
-        <InputText callback={this.handlePayload} title="End Color" name="startColor" value={payload.startColor} />
-        <InputText callback={this.handlePayload} title="Start Color" name="endColor" value={payload.endColor} />
-        <InputText callback={this.handlePayload} title="Text Color" name="textColor" value={payload.textColor} />
-        <div className="row justify-content-end">
-          <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button"
-              className="btn btn-primary border-0"
-              onClick={this.handleSubmit.bind(this)}
-              data-dismiss="modal" aria-label="Close"
-            ><i className="fas fa-plus-square"></i> Add widget</button>
-          </div>
-        </div>
+        <ColorInput color={payload.startColor} handleChangeComplete={this.handlePayload} title="End Color" name="startColor" />
+        <ColorInput color={payload.endColor} handleChangeComplete={this.handlePayload} title="Start Color" name="endColor" />
+        <ColorInput color={payload.textColor} handleChangeComplete={this.handlePayload} title="Text Color" name="textColor" />
+        <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
+
       </div>
     )
   }

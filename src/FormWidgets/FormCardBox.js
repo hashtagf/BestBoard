@@ -3,6 +3,8 @@ import WidgetStore from '../store/WidgetStore'
 import Store from '../store/Store'
 import FormInputBasic from './Input/FormInputBasic'
 import InputText from './Input/InputText'
+import SummitBtn from './SummitBtn'
+
 class FormCardBox extends React.Component {
   constructor(props) {
     super(props)
@@ -52,7 +54,7 @@ class FormCardBox extends React.Component {
     console.log(e.target.name, e.target.value)
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     const editWidget = this.props.editWidget
     e.preventDefault()
     let payload = {
@@ -80,16 +82,8 @@ class FormCardBox extends React.Component {
         <FormInputBasic callback={this.handlePayload} values={payload} />
         <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit} />
         <InputText callback={this.handlePayload} title="Icon" name="icon" value={payload.icon} placeholder="fontAwesome Icon (name Icon) :: tint"/>
-        <div className="row justify-content-end">
-          <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit"
-              className="btn btn-primary border-0"
-              onClick={this.handleSubmit.bind(this)}
-              data-dismiss="modal" aria-label="Close"
-            ><i className="fas fa-plus-square"></i>{(this.props.editWidget) ? ' Save Widget' : ' Add widget'}</button>
-          </div>
-        </div>
+        <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
+
       </div>
     )
   }

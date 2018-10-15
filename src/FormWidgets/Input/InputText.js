@@ -8,21 +8,21 @@ class InputText extends React.Component {
     let placeholder = this.props.placeholder
     return (
       <div>
-          <div className="form-group row">
-            <label htmlFor="unit" className="col-3 col-form-label text-capitalize">
-              {this.props.title} :
-            </label>
-            <div className="col-9">
-              <input
-                name={name}
-                type="text"
-                className="form-control"
-                value={value}
-                onChange={handleChange}
-                placeholder={placeholder}
-              />
-            </div>
+        <div className="form-group row">
+          <label htmlFor="unit" className="col-3 col-form-label text-capitalize">
+            {this.props.title} :
+          </label>
+          <div className="col-9">
+            <input
+              name={name}
+              type="text"
+              className="form-control"
+              value={value}
+              onChange={handleChange}
+              placeholder={placeholder}
+            />
           </div>
+        </div>
       </div>
     )
   }

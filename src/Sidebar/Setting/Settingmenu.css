@@ -82,7 +82,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc399a', end
     background: var(--activePresence);
 }
 #offline {
-    background: var(--widgetBG);
+    background: var(--borderMenusidebar);
 }
 .modal.ModalCreateSource,.modal.edit {
     width: 100vw;

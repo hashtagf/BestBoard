@@ -3,6 +3,7 @@ import WidgetStore from '../store/WidgetStore'
 import FormInputBasic from './Input/FormInputBasic'
 import InputText from './Input/InputText'
 import Store from '../store/Store'
+import SummitBtn from './SummitBtn'
 
 class FormList extends React.Component {
   constructor(props) {
@@ -51,7 +52,7 @@ class FormList extends React.Component {
     })
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault()
     const editWidget = this.props.editWidget
     let payload = {
@@ -88,16 +89,8 @@ class FormList extends React.Component {
             {this.state.text + ' <Value> ' + this.state.unit}
           </div>
         </div>
-        <div className="row justify-content-end">
-          <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button"
-              className="btn btn-primary border-0"
-              onClick={this.handleSubmit.bind(this)}
-              data-dismiss="modal" aria-label="Close"
-            ><i className="fas fa-plus-square"></i> Add widget</button>
-          </div>
-        </div>
+        <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
+
       </div>
     )
   }

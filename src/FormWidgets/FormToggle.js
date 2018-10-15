@@ -2,6 +2,7 @@ import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import Store from '../store/Store'
 import InputText from './Input/InputText'
+import SummitBtn from './SummitBtn'
 import DatasourceStore from '../store/DatasourceStore'
 
 class FormToggle extends React.Component {
@@ -150,16 +151,8 @@ class FormToggle extends React.Component {
           </div>
         </div>
         <TypeMicrogear payload={payload} handlePayload={this.handlePayload} />
-        <div className="row justify-content-end">
-          <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button"
-              className="btn btn-primary border-0"
-              onClick={this.handleSubmit}
-              data-dismiss="modal" aria-label="Close"
-            ><i className="fas fa-plus-square"></i> Add widget</button>
-          </div>
-        </div>
+        
+        <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
       </div>
     )
   }

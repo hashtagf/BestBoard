@@ -12,7 +12,7 @@ class ColorSetting extends Component {
       colorName: 'native',
       colorSet: [{
         name: 'native',
-        colors: ['#2C3849', '#303E4D', '#6698C8', '#FFFFFF', '#2e3946', '#4A5664','#4A5664', '#4f5d6d', '#4A5664', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#94E864', '#78AF8F','0 0rem 1rem rgba(0,0,0,.15)']
+        colors: ['#2C3849', '#303E4D', '#6698C8', '#FFFFFF', '#425263', '#4A5664','#4A5664', '#4f5d6d', '#4A5664', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#94E864', '#78AF8F','0 0rem 1rem rgba(0,0,0,.15)']
       },
       {
         name: 'clean',
@@ -24,19 +24,19 @@ class ColorSetting extends Component {
       },
       {
         name: 'water',
-        colors: ['#084278', '#f5f3f3', '#0BB1EF', '#66666A', '#f5f3f3', '#e7e4e4', '#094e90', '#094a86','#d7d7e2', '#66666A', '#FFFFFF', '#66666A', '#00A9EE', '#0BB1EF','0 0rem 1rem rgba(0,0,0,.15)']
+        colors: ['#084278', '#f5f3f3', '#0BB1EF', '#66666A', '#dedada', '#e7e4e4', '#094e90', '#094a86','#d7d7e2', '#66666A', '#FFFFFF', '#66666A', '#00A9EE', '#0BB1EF','0 0rem 1rem rgba(0,0,0,.15)']
       },
       {
         name: 'forest',
-        colors: ['#e7eaef', '#dadfe9', '#01a398', '#FFFFFF', '#e7eaef', '#45959e', '#c2d2d4','#bcced0', '#79c476', '#0d3340', '#0d3340', '#0d3340', '#79c476', '#78AF8F','0 0rem 1rem rgba(0,0,0,.15)']
+        colors: ['#e7eaef', '#dadfe9', '#01a398', '#FFFFFF', '#c3c8d2', '#45959e', '#c2d2d4','#bcced0', '#79c476', '#0d3340', '#0d3340', '#0d3340', '#79c476', '#78AF8F','0 0rem 1rem rgba(0,0,0,.15)']
       },
       {
         name: 'space',
-        colors: ['#1F313F', '#355263', '#FDD24E', '#FEFEFE', '#1a2833', '#536c7a', '#536c7a','#4a606d', '#557486', '#FEFEFE', '#FFFFFF', '#FEFEFE', '#FDD24E', '#fad976','0 0rem 1rem rgba(0,0,0,.15)']
+        colors: ['#1F313F', '#355263', '#FDD24E', '#FEFEFE', '#435e6d', '#536c7a', '#536c7a','#4a606d', '#557486', '#FEFEFE', '#FFFFFF', '#FEFEFE', '#FDD24E', '#fad976','0 0rem 1rem rgba(0,0,0,.15)']
       },
       {
         name: 'galaxy',
-        colors: ['#211942', '#1f1d45', '#2dcdf2', '#FFFFFF', '#25224d', '#292558', '#241d48','#241d48', '#24214c', '#FFFFFF', '#FFFFFF', '#FEFEFE', '#cb3a91', '#b236be','0 0rem 1rem rgba(255, 0, 200, 0.05)']
+        colors: ['#211942', '#1f1d45', '#2dcdf2', '#FFFFFF', '#322e5a', '#292558', '#241d48','#241d48', '#24214c', '#FFFFFF', '#FFFFFF', '#FEFEFE', '#cb3a91', '#b236be','0 0rem 1rem rgba(255, 0, 200, 0.05)']
       }
       ]
     }

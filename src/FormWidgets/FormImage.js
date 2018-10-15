@@ -2,6 +2,7 @@ import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import InputText from './Input/InputText'
 import Store from '../store/Store'
+import SummitBtn from './SummitBtn'
 
 class FormImage extends React.Component {
   constructor(props) {
@@ -51,7 +52,7 @@ class FormImage extends React.Component {
     }
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault()
     const editWidget = this.props.editWidget
     let payload = {
@@ -102,16 +103,8 @@ class FormImage extends React.Component {
             <img src="" className="img-thumbnail" id="b64" height={250} alt="" />
           </div>
         </div>
-        <div className="row justify-content-end">
-          <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button"
-              className="btn btn-primary border-0"
-              onClick={this.handleSubmit.bind(this)}
-              data-dismiss="modal" aria-label="Close"
-            ><i className="fas fa-plus-square"></i> Add widget</button>
-          </div>
-        </div>
+        <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
+
       </div>
     )
   }

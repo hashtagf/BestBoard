@@ -39,38 +39,48 @@ class CardBox extends React.Component {
     }
   }
 
-
   render() {
     const payload = this.props.payload
     const state = this.state
     const widgetId = this.props.widgetId
-    let arrow = 'up text-success'
-    if (state.value - state.previousValue >= 0) arrow = 'up text-success'
-    else arrow = 'down text-danger'
+    let arrow = 'up'
+    let colorText = 'text-success updown'
+    if (state.value - state.previousValue >= 0) arrow = 'up'
+    else {
+      arrow = 'down'
+      colorText = 'text-danger updown'
+    }
+
     return (
       <div className="item CardBox col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3">
         <div className="item-content shadowcard card rounded-0 widgetCard border-0">
           <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body ">
-            <div className="row pb-2">
-              <div className="col-6">
-                <i className={`fas fa-3x fa-` + payload.icon}></i>
-              </div>
-            </div>
             <div className="row">
-              <div className="col-6 text-right">
-                <h2>{parseFloat(state.value).toFixed(2)}</h2>
+            <div className="col-4">
+              <i className={`fas fa-` + payload.icon}></i>
+            </div>
+
+            <div className="col-8 text-right">
+              <div className="row">
+                <h1>{parseFloat(state.value).toFixed(2)}</h1>
+
               </div>
-              <div className="col-2 text-left pt-4">
-                <h6>{payload.unit}</h6>
-              </div>
-              <div className="col-4 text-left">
-                <span className="fa-layers fa-fw">
-                  <i className={`fas fa-2x pt-2 fa-arrow-` + arrow}></i>
+              <div className="row">
+                <h6>{payload.unit}</h6><br/>
+                {/* <span className="fa-layers fa-fw">
+                  <i className={`fas pt-2 fa-arrow-` + arrow}></i>
                   <span className="fa-layers-counter">{(state.value - state.previousValue).toFixed(2)}</span>
+                </span> */}
+                
+                <span className={colorText}>
+                <i className={`fas pt-2 mr-2 fa-angle-` + arrow}></i>
+                <span className="fa-layers-counter">{(state.value - state.previousValue).toFixed(2)}</span>
                 </span>
               </div>
             </div>
+            </div>
+
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import FormInputBasic from './Input/FormInputBasic'
 import InputText from './Input/InputText'
 import ColorInput from './Input/ColorInput'
 import Store from '../store/Store'
+import SummitBtn from './SummitBtn'
 
 class FormProgress extends React.Component {
   constructor(props) {
@@ -97,25 +98,8 @@ class FormProgress extends React.Component {
           title="Stroke Color"
           name="strokeColor"
           value={payload.strokeColor} /> */}
-        <div className="form-group row">
-        <label htmlFor="unit" className="col-3 col-form-label text-capitalize">Color</label>
-          <div className="col">
-            <div className="form-group row">
-              <label className="col-3 col-form-label">Stroke Color</label>
-              <div className="col">
-                  <ColorInput color={payload.strokeColor} handleChangeComplete={this.handlePayload} name="strokeColor" />
-              </div>
-            </div>
-          </div>
-          <div className="col">
-            <div className="form-group row">
-              <label className="col-3 col-form-label">Trial Color</label>
-              <div className="col">
-                  <ColorInput color={payload.trailColor} handleChangeComplete={this.handlePayload} name="trailColor" />
-              </div>
-            </div>
-          </div>
-        </div>
+        <ColorInput color={payload.strokeColor} handleChangeComplete={this.handlePayload} title="Stroke Color" name="strokeColor" />
+        <ColorInput color={payload.trailColor} handleChangeComplete={this.handlePayload} title="Trial Color" name="trailColor" />
 
         <InputText
           callback={this.handlePayload}
@@ -124,16 +108,7 @@ class FormProgress extends React.Component {
           value={payload.strokeLinecap}
           placeholder="`butt`, `square` or `round`." />
 
-        <div className="row justify-content-end">
-          <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button"
-              className="btn btn-primary border-0"
-              onClick={this.handleSubmit.bind(this)}
-              data-dismiss="modal" aria-label="Close"
-            ><i className="fas fa-plus-square"></i> Add widget</button>
-          </div>
-        </div>
+          <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
       </div>
     )
   }
