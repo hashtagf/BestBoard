@@ -4,7 +4,7 @@ class SummitBtn extends React.Component {
 
   render() {
     var btn = <span><i className="fas fa-plus-square"></i> Add widget</span>
-    if (this.props.editWidget) btn = <span><i class="fas fa-pen-square"></i> Edit widget</span>
+    if (this.props.editWidget) btn = <span><i className="fas fa-pen-square"></i> Edit widget</span>
     
     return (
         <div className="row justify-content-end">

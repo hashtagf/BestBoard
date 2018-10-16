@@ -73,7 +73,7 @@ class Chart extends React.Component {
     const payload = this.props.payload
     const widgetId = this.props.widgetId
     return (
-      <div className="item Chart col-xl-9 col-lg-9 col-md-12 col-12 text-body mb-3">
+      <div className="item Chart col-xl-9 col-lg-9 col-md-12 col-12 text-body mb-3" data-id={widgetId}>
         <div className="item-content card shadowcard rounded-0 widgetChart border-0">
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body">

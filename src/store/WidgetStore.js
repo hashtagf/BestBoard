@@ -34,10 +34,18 @@ class WidgetStore {
   }
 
   updateWidget(widgetId, payload) {
-    console.log('Id', widgetId, payload)
-    axios.put(Store.server + '/widget/' + widgetId, payload).then((res) =>
+    axios.put(Store.server + '/widget/' + widgetId, {widget : payload}).then((res) =>
       console.log(res)
     )
+  }
+
+  updateIndexMuuri(widgetId, payload) {
+    axios.put(Store.server + '/widget/' + widgetId, {
+      indexMuuri : payload
+    }).then((res) =>
+      console.log(res)
+    )
+    
   }
 
   deleteWidget(widgetId) {
@@ -47,50 +55,37 @@ class WidgetStore {
   }
 
   showWidgets(widgets) {
-    var listWidgets = widgets.map((widget) => {
-      var content
+    var widgetsSort = widgets.sort((beforeIndex, afterIndex) => {return beforeIndex.indexMuuri - afterIndex.indexMuuri})
+    console.log(widgetsSort)
+    var listWidgets = widgetsSort.map((widget) => {
       switch (widget.widget.typeWidget) {
         case 'Gauge':
-          content = <Gauge key={widget._id} payload={widget.widget} widgetId={widget._id} />
-          break
+          return <Gauge key={widget._id} payload={widget.widget} widgetId={widget._id} />         
         case 'Progress':
-          content = <Progress key={widget._id} payload={widget.widget} widgetId={widget._id} />
-          break
+          return<Progress key={widget._id} payload={widget.widget} widgetId={widget._id} />          
         case 'CardBox':
-          content = <CardBox key={widget._id} payload={widget.widget} widgetId={widget._id} />
-          break
+          return <CardBox key={widget._id} payload={widget.widget} widgetId={widget._id} />        
         case 'GaugeSpeed':
-          content = <GaugeSpeed key={widget._id} payload={widget.widget} widgetId={widget._id} />
-          break
+          return <GaugeSpeed key={widget._id} payload={widget.widget} widgetId={widget._id} />          
         case 'ProgressBar':
-          content = <ProgressBar key={widget._id} payload={widget.widget} widgetId={widget._id} />
-          break
+          return <ProgressBar key={widget._id} payload={widget.widget} widgetId={widget._id} />
         case 'Text':
-          content = <Text key={widget._id} payload={widget.widget} widgetId={widget._id} />
-          break
+          return <Text key={widget._id} payload={widget.widget} widgetId={widget._id} />
         case 'Image':
-          content = <Image key={widget._id} payload={widget.widget} widgetId={widget._id} />
-          break
+          return <Image key={widget._id} payload={widget.widget} widgetId={widget._id} />         
         case 'Chart':
-          content = <Chart key={widget._id} payload={widget.widget} widgetId={widget._id} />
-          break
+          return <Chart key={widget._id} payload={widget.widget} widgetId={widget._id} />        
         case 'List':
-          content = <List key={widget._id} payload={widget.widget} widgetId={widget._id} />
-          break
+          return <List key={widget._id} payload={widget.widget} widgetId={widget._id} />       
         case 'Button':
-          content = <Button key={widget._id} payload={widget.widget} widgetId={widget._id} />
-          break
+          return <Button key={widget._id} payload={widget.widget} widgetId={widget._id} />       
         case 'Toggle':
-          content = <Toggle key={widget._id} payload={widget.widget} widgetId={widget._id} />
-          break
+          return <Toggle key={widget._id} payload={widget.widget} widgetId={widget._id} />      
         default:
-          content = <h2 key={widget._id} className="item"><span className="item-content">Coming Soon Widgets</span></h2>
-          break
+          return <h2 key={widget._id} className="item"><span className="item-content">Coming Soon Widgets</span></h2>
       }
-      return (content)
     })
     return listWidgets
-
   }
 }
 

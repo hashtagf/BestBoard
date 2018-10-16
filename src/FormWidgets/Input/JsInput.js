@@ -5,14 +5,14 @@ class JsInput extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      code: '',
+      code: this.props.value,
       error: null
     }
     this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(e) {
-    let codeStr =e.target.value
+    let codeStr = e.target.value
     let error = null
 
     try {
@@ -30,15 +30,17 @@ class JsInput extends React.Component {
     e.target.value = codeStr
     this.props.callback(e)
   }
-  
-  processScrirt () {
 
-  }
   render() {
     const name = this.props.name
     return (
       <div>
-        <input type="text" className={(this.state.error===null)?'form-control is-valid':'form-control is-invalid'} id={name} name={name} placeholder="Enter Java script" onChange={this.handleChange}/>
+        <input type="text" 
+          className={(this.state.error===null)?'form-control is-valid':'form-control is-invalid'} 
+          id={name} 
+          name={name}
+          value={this.state.code}
+          placeholder="Enter Javascript" onChange={this.handleChange}/>
       </div>
     )
   }

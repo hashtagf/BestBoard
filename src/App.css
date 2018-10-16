@@ -16,12 +16,15 @@ a {
   border-radius: 20rem;
   opacity: 1;
 }
+.btn:focus {
+  outline: none;
+}
 .btn:hover {
   background: var(--mentionBadge);
 }
 .btn-group .btn {
-  border-radius: inherit;
-  border-right: #f3f3f3
+  /* border-radius: inherit;
+  border-right: #f3f3f3 */
 }
 .text-muted {
   color: var(--textMute)
@@ -52,6 +55,7 @@ a {
 }
 .btn-primary {
   background-color: var(--activePresence);
+  border: var(--activePresence);
 }
 #scrollbar-style::-webkit-scrollbar-track
 {
@@ -75,6 +79,9 @@ a {
 .form-control {
   border: 0px;
   background-color: #f3f3f3;
+}
+.form-control:focus {
+  outline: none;
 }
 .buttontransition-appear {
   opacity: 0.01;

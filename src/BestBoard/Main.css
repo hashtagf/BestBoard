@@ -36,3 +36,6 @@
     opacity: 1;
     transition: opacity .5s ease-in;
   }
+  .card-body {
+    padding-top: 1rem;
+  }

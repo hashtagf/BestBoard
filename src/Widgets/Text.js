@@ -55,7 +55,7 @@ class Text extends React.Component {
     const value = this.state.value
     const widgetId = this.props.widgetId
     return (
-      <div className="item Text col-xl-3 col-lg-4 col-md-6 col-12 text-body mb-3">
+      <div className="item Text col-xl-3 col-lg-4 col-md-6 col-12 text-body mb-3" data-id={widgetId}>
       
         <div className="item-content card shadowcard rounded-0 widgetCard border-0">
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>

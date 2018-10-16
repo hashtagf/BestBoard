@@ -12,6 +12,9 @@
 .listwid.active {
     background-color: var(--activeItem);
 }
+.listwid {
+    cursor: pointer;
+}
 .listwid.active .figure-caption {
     color: #f1f1f1;
 }

@@ -17,7 +17,8 @@ class FormCardBox extends React.Component {
       filterIndex: 0,
       unit: '',
       icon: '',
-      status: true
+      jsValue: '',
+      manual: false,
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
@@ -43,7 +44,9 @@ class FormCardBox extends React.Component {
       filter: ',',
       filterIndex: 0,
       unit: '',
-      icon: ''
+      icon: '',
+      jsValue: '',
+      manual: false
     })
   }
   // End Update
@@ -66,7 +69,9 @@ class FormCardBox extends React.Component {
       filter: this.state.filter,
       filterIndex: this.state.filterIndex,
       unit: this.state.unit,
-      icon: this.state.icon
+      icon: this.state.icon,
+      jsValue: this.state.jsValue,
+      manual: this.state.manual
     }
     if (editWidget)  
       WidgetStore.updateWidget(editWidget.widgetId, payload)

@@ -46,7 +46,8 @@ class Page extends Component {
       res.data.map((board) =>
         pages.push({
           id: board._id,
-          name: board.boardName
+          name: board.boardName,
+          colorName: board.colorName
         })
       )
       this.setState({
@@ -71,21 +72,20 @@ class Page extends Component {
     let tem = this.state.pages
     if (this.state.inputName !== '') {
       let payload = {
-        boardName: this.state.inputName
+        boardName: this.state.inputName,
+        colorName: 'native'
       }
       if (index === -1) {
         axios.post( Store.server + '/board/', payload ).then((res) => {
           console.log(res)
         })
         LocalStore.insertPage(this.state.inputName)
-        console.log(LocalStore.local.pages)
       }
       else {
         axios.put( Store.server + '/board/' + pageId, payload).then((res) => {
           console.log(res)
         })
         LocalStore.updatePage(index,pageId,this.state.inputName)
-        console.log(LocalStore.local.pages)
       }
     }
     this.setState({
@@ -128,12 +128,14 @@ class Page extends Component {
     LocalStore.deletePage(pageId)
   }
 
-  handleClickpage = (pageId,pageName) => {
+  handleClickpage = (pageId, pageName, colorName) => {
     this.setState({
       selectPage: pageId
+    },() => {
+      Store.currentId = pageId
+      Store.pageName = pageName
+      Store.setColor(colorName)
     })
-    Store.currentId = pageId
-    Store.pageName = pageName
   }
 
   render () {
@@ -171,7 +173,7 @@ class Page extends Component {
       }
       if (editPage !== index) {
         lspage =
-          <Link to={'/board/' + page.id} onClick={() => this.handleClickpage(page.id,page.name)} key={page.id} className={(this.state.selectPage === page.id) ? 'active' : ''}>
+          <Link to={'/board/' + page.id} onClick={() => this.handleClickpage(page.id, page.name, page.colorName)} key={page.id} className={(this.state.selectPage === page.id) ? 'active' : ''}>
             <li>
               <div className="row">
                 <div className="col-10 col-sm-10 text-truncate">

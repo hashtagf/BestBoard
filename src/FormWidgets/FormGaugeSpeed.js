@@ -99,8 +99,8 @@ class FormGaugeSpeed extends React.Component {
         <InputText callback={this.handlePayload} title="Min Value" name="minvalue" value={payload.minValue} />
         <InputText callback={this.handlePayload} title="Max Value" name="maxvalue" value={payload.maxValue} />
         <InputText callback={this.handlePayload} title="Segments" name="segments" value={payload.segments} />
-        <ColorInput color={payload.startColor} handleChangeComplete={this.handlePayload} title="End Color" name="startColor" />
-        <ColorInput color={payload.endColor} handleChangeComplete={this.handlePayload} title="Start Color" name="endColor" />
+        <ColorInput color={payload.startColor} handleChangeComplete={this.handlePayload} title="Start Color" name="startColor" />
+        <ColorInput color={payload.endColor} handleChangeComplete={this.handlePayload} title="End Color" name="endColor" />
         <ColorInput color={payload.textColor} handleChangeComplete={this.handlePayload} title="Text Color" name="textColor" />
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
 

@@ -1,5 +1,5 @@
 :root {
-    /* --themeBGmain: #2C3849;
+    --themeBGmain: #2C3849;
     --themeBGsidebar: #303E4D;
     --activeItem: #6698C8;
     --activeItemText: #FFFFFF;
@@ -13,8 +13,8 @@
     --textMute: #FFFFFF;
     --activePresence: #94E864;
     --mentionBadge: #78AF8F;
-    --shadow: 0 0rem 1rem rgba(0,0,0,.15); */
-    --themeBGmain: #f8f3f0;
+    --shadow: 0 0rem 1rem rgba(0,0,0,.15);
+    /* --themeBGmain: #f8f3f0;
     --themeBGsidebar: #4c4743;
     --activeItem: #ffb230;
     --activeItemText: #c3a279;
@@ -28,6 +28,6 @@
     --textMute: #7a8682;
     --activePresence: #ed6c44;
     --mentionBadge: #c3a279;
-    --shadow: 0 0rem 1rem rgba(122, 77, 26, 0.171);
+    --shadow: 0 0rem 1rem rgba(122, 77, 26, 0.171); */
     
 }

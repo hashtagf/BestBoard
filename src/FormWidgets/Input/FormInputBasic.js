@@ -1,7 +1,9 @@
+/* eslint no-eval: 0 */
 import React from 'react'
 import NETPIEMicrogear from '../../store/Microgear'
 import DatasourceStore from '../../store/DatasourceStore'
 import Creatable from 'react-select/lib/Creatable'
+import InputText from './InputText'
 
 class FormInputBasic extends React.Component {
   constructor(props) {
@@ -10,7 +12,8 @@ class FormInputBasic extends React.Component {
       topics: [],
       checkTopic: [],
       selectOption: {},
-      listDatasources: DatasourceStore.listsDatasources()
+      listDatasources: DatasourceStore.listsDatasources(),
+      manual: null
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -33,11 +36,10 @@ class FormInputBasic extends React.Component {
     if (e.target.name === 'datasource') {
       this.setState({
         topics: []
-       })
+      })
       var topicsObj = NETPIEMicrogear.topics[e.target.value]
-      console.log('Value : ',value)
       if (topicsObj) {
-        var topicsAr =  Object.values(topicsObj)
+        var topicsAr = Object.values(topicsObj)
         this.setState({
           topics: topicsAr
         })
@@ -47,32 +49,10 @@ class FormInputBasic extends React.Component {
             selectOption: {
               label: topicsObj[value].label,
               value: topicsObj[value].value,
-              //__isNew__: true
             }
           })
         }
       }
-
-      /* this.setState({
-        topics: []
-       })
-      NETPIEMicrogear.microgear[e.target.value].on('message', (topic, msg) => {
-        // console.log('incoming : ' + topic + ' : ' + msg)
-        if (topic === value) this.props.values.body = msg + ''
-        
-        if (!this.state.checkTopic[topic]) {
-          checkTopic[topic] = true
-          topics.push({
-            label: topic,
-            value: msg + '',
-          })
-          this.setState({
-            topics: topics,
-            checkTopic: checkTopic,
-          })
-        }
-        console.log(this.state.topics)
-      }) */
     }
     this.props.callback(e)
   }
@@ -87,29 +67,18 @@ class FormInputBasic extends React.Component {
     const handleChange = this.props.callback
     let values = this.props.values
     let { selectOption, listDatasources, topics } = this.state
+    let manual = (values.manual==='false'||!values.manual)?false:true
     return (
       <div className="FormInputBasic">
-        <div className="form-group row">
-          <label htmlFor="title" className="col-3 col-form-label">
-            Title :
-            </label>
-          <div className="col-9">
-            <input
-              name="title"
-              type="text"
-              className="form-control"
-              value={values.title}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
+        <InputText callback={handleChange} title="Title" name="title" value={values.title} />
+
         <div className="form-group row">
           <label htmlFor="datasource" className="col-3 col-form-label">
             Datasource :
           </label>
           <div className="col-9">
-            <select className="form-control custom-select selectdefault" 
-              name="datasource" 
+            <select className="form-control custom-select selectdefault"
+              name="datasource"
               onChange={this.handleChange}
               value={values.datasource}
               readOnly
@@ -119,10 +88,11 @@ class FormInputBasic extends React.Component {
             </select>
           </div>
         </div>
+
         <div className="form-group row">
           <label htmlFor="value" className="col-3 col-form-label">
             Value :
-          </label>
+            </label>
           <div className="col-9">
             <Creatable
               value={selectOption}
@@ -132,26 +102,53 @@ class FormInputBasic extends React.Component {
             />
           </div>
         </div>
-        <div className="form-group row">
-          <label htmlFor="filter" className="col-3 col-form-label">
-            Filter Symbol :
-          </label>
-          <div className="col-2">
-            <input
-              name="filter"
-              type="text"
-              className="form-control"
-              value={values.filter}
-              onChange={handleChange}
-            />
-            
+
+        <div className="accordion" id="accordionExample">
+          <div className="form-group row">
+            <label htmlFor="value" className="col-3 col-form-label">
+              Apply Value :
+              </label>
+            <div className="col-9">
+              
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button className={(!manual)?'btn btn-primary':'btn'} type="button" name="manual" value={false} data-toggle="collapse" data-target="#collapseAuto" aria-expanded={(!manual)?"true":"false"} aria-controls="collapseAuto" onClick={handleChange}>
+                  Automatic 
+                </button>
+                <button className={(manual)?'btn btn-primary':'btn'} type="button" name="manual" value={true} data-toggle="collapse" data-target="#collapseManual" aria-expanded={(manual)?"true":"false"} aria-controls="collapseManual" onClick={handleChange}>
+                  Manual 
+                </button>
+              </div>
+            </div>
           </div>
-          <div className="col-7">
-            <ButtonIndex selectOption={selectOption}
-              handleChange={handleChange}
-              filterIndex={values.filterIndex}
-              filter={values.filter}
-            />
+
+
+          <div id="collapseAuto" className={(!manual)?'collapse show':'collapse'} aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div className="form-group row">
+              <label htmlFor="filter" className="col-3 col-form-label">
+                Filter Symbol :
+                </label>
+              <div className="col-2">
+                <input
+                  name="filter"
+                  type="text"
+                  className="form-control"
+                  value={values.filter}
+                  onChange={handleChange}
+                />
+
+              </div>
+              <div className="col-7">
+                <ButtonIndex selectOption={selectOption}
+                  handleChange={handleChange}
+                  filterIndex={values.filterIndex}
+                  filter={values.filter}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div id="collapseManual" className={(manual)?'collapse show':'collapse'} aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <JsText jsValue={values.jsValue} msg={selectOption.value} name='jsValue' callback={handleChange} placeholder="Enter Javascript" />
           </div>
         </div>
       </div>
@@ -170,6 +167,7 @@ class ButtonIndex extends React.Component {
             Array Index :
           </label>
           <div className="col-7">
+
             <input type="number"
               className="form-control"
               name="filterIndex"
@@ -205,6 +203,67 @@ class ButtonIndex extends React.Component {
         </div>
       )
     } else return <h6>Index Array</h6>
+  }
+}
+class JsText extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      code: '',
+      error: null,
+      output: ''
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.jsValue)
+      this.setState({
+        code: nextProps.jsValue
+      })
+  }
+  handleChange = (e) => {
+    let codeStr = e.target.value
+    let error = null
+    let value = this.props.msg
+    try {
+      eval(codeStr)
+    }
+    catch (err) {
+      error = err
+      //console.log(err)
+    }
+    this.setState({
+      code: codeStr,
+      error: error,
+      output: value
+    })
+    if (error !== null) codeStr = ''
+    e.target.value = codeStr
+    this.props.callback(e)
+  }
+  render() {
+    let name = this.props.name
+    let placeholder = this.props.placeholder
+    return (
+      <div className="form-group row">
+        <label htmlFor="unit" className="col-3 col-form-label text-capitalize">
+          JavaScript :
+        </label>
+        <div className="col-9">
+          function (value) {'{'}
+          <textarea
+            className={(this.state.error === null) ? 'form-control is-valid' : 'form-control is-invalid texxt-danger'}
+            id="exampleFormControlTextarea1"
+            rows="3"
+            name={name}
+            value={this.state.code}
+            onChange={this.handleChange}
+            placeholder={placeholder}
+          ></textarea>
+          &emsp;return value<br />
+          {'}'} result : {this.state.output}
+        </div>
+      </div>
+    )
   }
 }
 

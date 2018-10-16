@@ -11,15 +11,14 @@ class ButtonAdd extends React.Component {
 
     return (
       <div className={(Store.currentId)?'ButtonAdd':'ButtonAdd d-none'}>
-        <p id="ButtonAdd">
-          <button type="button" className="btn btn-secondary p-0 shadow rounded-circle"
-            data-toggle="modal" 
-            data-target=".ModalCreate"
-            onClick={this.handleClick}
-          >
-            <div className="circleMenu">+</div>
-          </button>
-        </p>
+
+   
+          <div className="circleMenu btn p-0 rounded-circle" 
+          data-toggle="modal" 
+          data-target=".ModalCreate"
+          onClick={this.handleClick}>+</div>
+  
+
         <CreateBoard/>
         {/* {(this.state.showModal)?<CreateBoard showModal={this.handleClick}/>:''} */}
       </div>

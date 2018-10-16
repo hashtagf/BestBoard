@@ -1,3 +1,5 @@
+/* eslint no-eval: 0 */
+
 import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import NETPIEMicrogear from '../store/Microgear'
@@ -22,14 +24,16 @@ class CardBox extends React.Component {
     const payload = this.props.payload
     if (NETPIEMicrogear.statusOnline[payload.datasource]) {
       const microgear = NETPIEMicrogear.microgear[payload.datasource]
-      microgear.on('message', this.onMessage.bind(this))
+      microgear.on('message', this.onMessage)
     } else console.log('error : not Connect datasource !!')
   }
 
-  onMessage(topic, msg) {
+  onMessage = (topic, msg) => {
     const payload = this.props.payload
     const strMsg = msg + ''
-    const value = strMsg.split(payload.filter)[payload.filterIndex]
+    let value = strMsg
+    if (payload.manual) eval(payload.jsValue)
+    else value = strMsg.split(payload.filter)[payload.filterIndex]
     const stateValue = this.state.value
     if (payload.value === topic) {
       this.setState({
@@ -38,7 +42,7 @@ class CardBox extends React.Component {
       })
     }
   }
-
+  
   render() {
     const payload = this.props.payload
     const state = this.state
@@ -52,7 +56,7 @@ class CardBox extends React.Component {
     }
 
     return (
-      <div className="item CardBox col-xl-3 col-lg-4 col-md-6 col-sm-12 text-body mb-3">
+      <div className="item CardBox col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 text-body mb-3" data-id={widgetId}>
         <div className="item-content shadowcard card rounded-0 widgetCard border-0">
           <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body ">
@@ -67,12 +71,12 @@ class CardBox extends React.Component {
 
               </div>
               <div className="row">
-                <h6>{payload.unit}</h6><br/>
+                <h6>{payload.unit}</h6>
                 {/* <span className="fa-layers fa-fw">
                   <i className={`fas pt-2 fa-arrow-` + arrow}></i>
                   <span className="fa-layers-counter">{(state.value - state.previousValue).toFixed(2)}</span>
-                </span> */}
-                
+                </span> */}</div>
+                <div className="row">
                 <span className={colorText}>
                 <i className={`fas pt-2 mr-2 fa-angle-` + arrow}></i>
                 <span className="fa-layers-counter">{(state.value - state.previousValue).toFixed(2)}</span>
@@ -80,7 +84,6 @@ class CardBox extends React.Component {
               </div>
             </div>
             </div>
-
           </div>
         </div>
       </div>

@@ -6,8 +6,8 @@ import socketIOClient from 'socket.io-client'
 import Muuri from 'muuri'
 import axios from 'axios'
 import WidgetStore from '../store/WidgetStore'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import ReactResizeDetector from 'react-resize-detector';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import ReactResizeDetector from 'react-resize-detector'
 const socket = socketIOClient(Store.server)
 var grid = null
 
@@ -15,8 +15,10 @@ class Main extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      widgets: [],
       listWidgets: [],
-      connect: true
+      connect: true,
+      moveItems: []
     }
   }
   componentDidMount() {
@@ -46,7 +48,8 @@ class Main extends Component {
     axios.get(Store.server + '/widget/' + Store.currentId).then((res) => {
       let tmp = WidgetStore.showWidgets(res.data)
       this.setState({
-        listWidgets: tmp
+        listWidgets: tmp,
+        widgets: res.data
       })
       this.createMuuri()
     })
@@ -54,10 +57,8 @@ class Main extends Component {
 
   createMuuri() {
     grid = new Muuri('.grid', {
-      // items: '.item',
       dragEnabled: true,
       dragContainer: document.body,
-      // itemClass: 'mx-4',
       dragStartPredicate: (item, e) => {
         if (e.distance > 10) {
           return Store.mode
@@ -68,17 +69,34 @@ class Main extends Component {
       }
     })
     grid.on('move', (data) => {
-      console.log('ok')
+      // var toIndex = parseFloat(data.toIndex)
+      // this.state.widgets.forEach((widget) => {
+      //   if(parseFloat(widget.toIndex) === toIndex)
+      //     toIndex = toIndex - 1
+      // })
+      // WidgetStore.updateIndexMuuri(data.item._element.dataset.id, toIndex)
+      // this.state.moveItems.push({
+      //   widgetId : data.item._element.dataset.id,
+      //   toIndex: toIndex
+      // })   
+    })
+    grid.on('showEnd', function (items) {
+      console.log('End')
+      items.forEach((item, index) => {
+        WidgetStore.updateIndexMuuri(item._element.dataset.id, index)
+      })
     })
   }
 
   componentWillUnmount() {
+    console.log('Unmount')
+    grid.show()
     grid.destroy(true)
   }
   onResize = () => {
-    console.log(1)
-    grid.refreshItems().layout();
+    grid.refreshItems().layout()
   }
+
   render() {
     const listWidgets = this.state.listWidgets
     return (
