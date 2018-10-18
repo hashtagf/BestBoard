@@ -13,7 +13,7 @@ class FormGauge extends React.Component {
       value: 0,
       unit: '',
       minvalue: '0',
-      maxvalue: '100',
+      //maxvalue: '100',
       setColor: '',
       theme: 'light',
       mode: 'gauge',
@@ -21,7 +21,9 @@ class FormGauge extends React.Component {
       datasource: '',       
       body: '',
       filter: ',',
-      filterIndex: 0
+      filterIndex: 0,
+      jsValue: '',
+      manual: false
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
@@ -43,7 +45,7 @@ class FormGauge extends React.Component {
       value: 0,
       unit: '',
       minvalue: '0',
-      maxvalue: '100',
+      // maxvalue: '100',
       setColor: '',
       theme: 'light',
       mode: 'gauge',
@@ -51,7 +53,9 @@ class FormGauge extends React.Component {
       datasource: '',       
       body: '',
       filter: ',',
-      filterIndex: 0
+      filterIndex: 0,
+      jsValue: '',
+      manual: false
     })
   }
   handlePayload(e) {
@@ -70,14 +74,16 @@ class FormGauge extends React.Component {
       body: this.state.body,
       unit: this.state.unit,
       minvalue: this.state.minvalue,
-      maxvalue: this.state.maxvalue,
+      //maxvalue: this.state.maxValue,
       setColor: this.state.setColor,
       theme: this.state.theme,
       mode: this.state.mode,
       enableAnimation: this.state.enableAnimation,
       datasource: this.state.datasource,
       filter: this.state.filter,
-      filterIndex: this.state.filterIndex
+      filterIndex: this.state.filterIndex,
+      jsValue: this.state.jsValue,
+      manual: this.state.manual
     }
     if (editWidget)  
       WidgetStore.updateWidget(editWidget.widgetId, payload)
@@ -92,7 +98,7 @@ class FormGauge extends React.Component {
         <FormInputBasic callback={this.handlePayload} values={payload} />
         <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit} />
         <InputText callback={this.handlePayload} title="Min Value" name="minvalue" value={payload.minvalue} />
-        <InputText callback={this.handlePayload} title="Max Value" name="maxvalue" value={payload.maxvalue} />
+        {/* <InputText callback={this.handlePayload} title="Max Value" name="maxvalue" value={payload.maxvalue} /> */}
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
 
       </div>

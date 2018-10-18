@@ -30,12 +30,11 @@ class CardBox extends React.Component {
 
   onMessage = (topic, msg) => {
     const payload = this.props.payload
-    const strMsg = msg + ''
-    let value = strMsg
-    if (payload.manual) eval(payload.jsValue)
-    else value = strMsg.split(payload.filter)[payload.filterIndex]
-    const stateValue = this.state.value
     if (payload.value === topic) {
+      let value = msg + ''
+      if (payload.manual) eval(payload.jsValue)
+      else value = value.split(payload.filter)[payload.filterIndex]
+      const stateValue = this.state.value
       this.setState({
         value: value,
         previousValue: stateValue
@@ -62,7 +61,7 @@ class CardBox extends React.Component {
           <div className="card-body ">
             <div className="row">
             <div className="col-4">
-              <i className={`fas fa-` + payload.icon}></i>
+              <i className={payload.icon}></i>
             </div>
 
             <div className="col-8 text-right">

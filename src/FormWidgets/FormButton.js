@@ -16,6 +16,8 @@ class FormButton extends React.Component {
       type: 'chat',
       tpa: '',
       value: '',
+      jsValue: '',
+      manual: false,
       listDatasources: DatasourceStore.listsDatasources()
     }
   }
@@ -39,7 +41,9 @@ class FormButton extends React.Component {
       body: '',
       type: 'chat',
       tpa: '',
-      value: ''
+      value: '',
+      jsValue: '',
+      manual: false
     })
   }
   handlePayload = (e) => {
@@ -58,7 +62,9 @@ class FormButton extends React.Component {
       datasource: this.state.datasource,
       type: this.state.type,
       tpa: this.state.tpa,
-      value: this.state.value
+      value: this.state.value,
+      jsValue: this.state.jsValue,
+      manual: this.state.manual
     }
     this.reState()
     if (editWidget)  

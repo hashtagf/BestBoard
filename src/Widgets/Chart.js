@@ -34,11 +34,21 @@ class Chart extends React.Component {
   }
 
   getData(filterSince) {
+    let granularity = ''
+    switch (filterSince) {
+      case '24hours': granularity = '30minutes'
+        break
+      case '3days': granularity = '1hour'
+        break
+      case '7days': granularity = '3hours'
+        break
+      default: granularity = '15seconds'
+    }
     const payload = this.props.payload
     const netpieAPI = 'https://api.netpie.io/feed/'
     axios.get(netpieAPI + payload.feedID
       + '?apikey=' + payload.feedAPI
-      + '&granularity=15seconds'
+      + '&granularity=' + granularity
       + '&since=' + filterSince
       + '&filter=' + payload.value
     ).then(function (res) {

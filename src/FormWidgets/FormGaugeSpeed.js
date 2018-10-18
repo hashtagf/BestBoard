@@ -24,7 +24,9 @@ class FormGaugeSpeed extends React.Component {
       datasource: '',       
       body: '',
       filter: ',',
-      filterIndex: 0
+      filterIndex: 0,
+      jsValue: '',
+      manual: false
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
@@ -56,7 +58,9 @@ class FormGaugeSpeed extends React.Component {
       datasource: '',       
       body: '',
       filter: ',',
-      filterIndex: 0
+      filterIndex: 0,
+      jsValue: '',
+      manual: false
     })
   }
   handlePayload(e) {
@@ -82,7 +86,9 @@ class FormGaugeSpeed extends React.Component {
       textColor: this.state.textColor,
       datasource: this.state.datasource,
       filter: this.state.filter,
-      filterIndex: this.state.filterIndex
+      filterIndex: this.state.filterIndex,
+      jsValue: this.state.jsValue,
+      manual: this.state.manual
     }
     if (editWidget)  
       WidgetStore.updateWidget(editWidget.widgetId, payload)
@@ -96,8 +102,8 @@ class FormGaugeSpeed extends React.Component {
       <div className="FormGuage container">
         <FormInputBasic callback={this.handlePayload} values={payload} />
         <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit} />
-        <InputText callback={this.handlePayload} title="Min Value" name="minvalue" value={payload.minValue} />
-        <InputText callback={this.handlePayload} title="Max Value" name="maxvalue" value={payload.maxValue} />
+        <InputText callback={this.handlePayload} title="Min Value" name="minValue" value={payload.minValue} />
+        <InputText callback={this.handlePayload} title="Max Value" name="maxValue" value={payload.maxValue} />
         <InputText callback={this.handlePayload} title="Segments" name="segments" value={payload.segments} />
         <ColorInput color={payload.startColor} handleChangeComplete={this.handlePayload} title="Start Color" name="startColor" />
         <ColorInput color={payload.endColor} handleChangeComplete={this.handlePayload} title="End Color" name="endColor" />

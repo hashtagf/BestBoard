@@ -20,12 +20,11 @@ class FormInputBasic extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const values = nextProps.values
-    console.log('body', values.body)
     this.setState({
       selectOption: {
         label: values.value,
         value: values.body,
-        //__isNew__: true
+        // __isNew__: true
       }
     })
   }
@@ -110,7 +109,7 @@ class FormInputBasic extends React.Component {
               </label>
             <div className="col-9">
               
-              <div class="btn-group" role="group" aria-label="Basic example">
+              <div className="btn-group" role="group" aria-label="Basic example">
                 <button className={(!manual)?'btn btn-primary':'btn'} type="button" name="manual" value={false} data-toggle="collapse" data-target="#collapseAuto" aria-expanded={(!manual)?"true":"false"} aria-controls="collapseAuto" onClick={handleChange}>
                   Automatic 
                 </button>
@@ -157,7 +156,6 @@ class FormInputBasic extends React.Component {
 }
 
 class ButtonIndex extends React.Component {
-
   render() {
     const { filter, filterIndex, handleChange, selectOption } = this.props
     if (selectOption.__isNew__) {
@@ -184,14 +182,14 @@ class ButtonIndex extends React.Component {
       return (
         <div className="Index">
           Example Data ( select Index ) : <br />
-          <div className="btn-group btn-group-toggle" data-toggle="buttons">
+          <div className="btn-group btn-group-toggle" >
             {(selectOption.value.split(filter).map((val, index) =>
               <button
                 key={index}
-                type="radio"
-                className="btn"
+                type="button"
+                className={(parseInt(filterIndex, 10) === index)?'btn btn-primary':'btn'}
                 name="filterIndex"
-                id="filterIndex"
+                data-toggle="filterIndex"
                 onClick={handleChange}
                 value={index}
               >

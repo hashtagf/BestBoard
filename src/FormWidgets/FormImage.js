@@ -9,7 +9,9 @@ class FormImage extends React.Component {
     super(props)
     this.state = {
       title: 'Image',
-      file: 'empty'
+      file: 'empty',
+      jsValue: '',
+      manual: false
     }
     this.handlePayload = this.handlePayload.bind(this)
     this.handleFile = this.handleFile.bind(this)
@@ -25,12 +27,13 @@ class FormImage extends React.Component {
         }
       });
     } 
-    else {
-      this.setState({
-        title: 'Image',
-        file: 'empty'
-      })
-    }
+    else this.reState()
+  }
+  reState () {
+    this.setState({
+      title: 'Image',
+      file: 'empty'
+    })
   }
   handlePayload(e) {
     this.setState({
@@ -43,7 +46,6 @@ class FormImage extends React.Component {
 
       var FR = new FileReader()
       FR.onloadend = () => {
-        document.getElementById("b64").src = FR.result
         this.setState({
           file: FR.result
         })
@@ -58,17 +60,15 @@ class FormImage extends React.Component {
     let payload = {
       typeWidget: 'Image',
       title: this.state.title,
-      file: this.state.file
+      file: this.state.file,
+      jsValue: this.state.jsValue,
+      manual: this.state.manual
     }
     if (editWidget)  
       WidgetStore.updateWidget(editWidget.widgetId, payload)
     else 
       WidgetStore.createWidget(Store.currentId, payload)
-    this.setState({
-      title: 'Image',
-      file: 'empty'
-    })
-    document.getElementById('b64').src = ''
+    this.reState()
   }
   render() {
     const payload = this.state
@@ -100,7 +100,7 @@ class FormImage extends React.Component {
         </div>
         <div className="row mb-2 text-center">
           <div className="col-12">
-            <img src="" className="img-thumbnail" id="b64" height={250} alt="" />
+            <img src={payload.file} className="img-thumbnail" id="b64" height={250} alt="" />
           </div>
         </div>
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>

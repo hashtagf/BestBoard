@@ -56,7 +56,7 @@ class Gauge extends React.Component {
               //title={payload.title}
               unit={payload.unit}
               minValue={parseInt(payload.minvalue, 10)}
-              maxValue={parseInt(payload.maxvalue, 10)}
+              // maxValue={parseInt(payload.maxvalue, 10)}
             //scaleList={payload.setColor}
             />
           </div>

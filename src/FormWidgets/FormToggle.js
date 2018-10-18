@@ -21,6 +21,8 @@ class FormToggle extends React.Component {
       valueOff: '',
       onCreated: '',
       onCreatedValue: '',
+      jsValue: '',
+      manual: false,
       listDatasources: DatasourceStore.listsDatasources()
     }
   }
@@ -50,6 +52,8 @@ class FormToggle extends React.Component {
       valueOff: '',
       onCreated: '',
       onCreatedValue: '',
+      jsValue: '',
+      manual: false
     })
   }
   handlePayload = (e) => {
@@ -73,7 +77,9 @@ class FormToggle extends React.Component {
       tpaOff: this.state.tpaOff,
       valueOff: this.state.valueOff,
       onCreated: this.state.onCreated,
-      onCreatedValue: this.state.onCreatedValue
+      onCreatedValue: this.state.onCreatedValue,
+      jsValue: this.state.jsValue,
+      manual: this.state.manual
     }
     this.reState()
     if (editWidget)  

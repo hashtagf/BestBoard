@@ -21,3 +21,14 @@
     margin-left: 50%;
     font-size: 1rem;
 }
+
+.ImageCover img{
+    width: 70vw;
+}
+.ImageCover .card-header {
+    background: transparent;
+}
+.item-content.ImageCover {
+    background: transparent;
+    box-shadow: none;
+}

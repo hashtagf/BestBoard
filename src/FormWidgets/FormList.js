@@ -17,7 +17,9 @@ class FormList extends React.Component {
       datasource: '',       
       body: '',
       filter: ',',
-      filterIndex: 0
+      filterIndex: 0,
+      jsValue: '',
+      manual: false
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
@@ -43,7 +45,9 @@ class FormList extends React.Component {
       datasource: '',       
       body: '',
       filter: ',',
-      filterIndex: 0
+      filterIndex: 0,
+      jsValue: '',
+      manual: false
     })
   }
   handlePayload(e) {
@@ -65,7 +69,9 @@ class FormList extends React.Component {
       icon: this.state.icon,
       datasource: this.state.datasource,
       filter: this.state.filter,
-      filterIndex: this.state.filterIndex
+      filterIndex: this.state.filterIndex,
+      jsValue: this.state.jsValue,
+      manual: this.state.manual
     }
     if (editWidget)  
       WidgetStore.updateWidget(editWidget.widgetId, payload)

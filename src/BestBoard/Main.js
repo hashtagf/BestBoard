@@ -8,8 +8,8 @@ import axios from 'axios'
 import WidgetStore from '../store/WidgetStore'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import ReactResizeDetector from 'react-resize-detector'
+
 const socket = socketIOClient(Store.server)
-var grid = null
 
 class Main extends Component {
   constructor(props) {
@@ -18,7 +18,8 @@ class Main extends Component {
       widgets: [],
       listWidgets: [],
       connect: true,
-      moveItems: []
+      moveItems: [],
+      grid: null
     }
   }
   componentDidMount() {
@@ -35,8 +36,18 @@ class Main extends Component {
   response = () => {
     this.getWidgets()
     socket.on('update-widget', (msg) => {
-      console.log('update-widget', msg)
-      this.getWidgets()
+      if (msg === 'new' ) {
+        // this.state.grid.destroy()
+        // this.setState({
+        //   listWidgets: [],
+        //   widgets: [],
+        //   grid: null
+        // })
+        this.getWidgets()
+      } else if (msg !== 'update-index') {
+        this.getWidgets()
+        this.state.grid.refreshItems()
+      } 
     })
     socket.on('error', function (exception) {
       console.log('SOCKET ERROR', exception)
@@ -51,53 +62,43 @@ class Main extends Component {
         listWidgets: tmp,
         widgets: res.data
       })
-      this.createMuuri()
+      if (!this.state.grid) 
+        this.createMuuri()
     })
   }
 
-  createMuuri() {
-    grid = new Muuri('.grid', {
-      dragEnabled: true,
-      dragContainer: document.body,
-      dragStartPredicate: (item, e) => {
-        if (e.distance > 10) {
-          return Store.mode
+  createMuuri = () => {
+    this.setState({
+      grid: new Muuri('.grid', {
+        dragEnabled: true,
+        dragContainer: document.body,
+        dragStartPredicate: (item, e) => {
+          if (e.distance > 10) {
+            return Store.mode
+          }
+        },
+        dragSort: () => {
+          return [this.state.grid]
         }
-      },
-      dragSort: function () {
-        return [grid]
-      }
-    })
-    grid.on('move', (data) => {
-      // var toIndex = parseFloat(data.toIndex)
-      // this.state.widgets.forEach((widget) => {
-      //   if(parseFloat(widget.toIndex) === toIndex)
-      //     toIndex = toIndex - 1
-      // })
-      // WidgetStore.updateIndexMuuri(data.item._element.dataset.id, toIndex)
-      // this.state.moveItems.push({
-      //   widgetId : data.item._element.dataset.id,
-      //   toIndex: toIndex
-      // })   
-    })
-    grid.on('showEnd', function (items) {
-      console.log('End')
-      items.forEach((item, index) => {
-        WidgetStore.updateIndexMuuri(item._element.dataset.id, index)
       })
+    })
+    this.state.grid.on('showEnd', function (items) {
+      items.forEach((item, index) => {
+       WidgetStore.updateIndexMuuri(item._element.dataset.id, index)
+     })
     })
   }
 
   componentWillUnmount() {
-    console.log('Unmount')
-    grid.show()
-    grid.destroy(true)
+    this.state.grid.show()
+    // this.state.grid.destroy(true)
   }
   onResize = () => {
-    grid.refreshItems().layout()
+    this.state.grid.refreshItems().layout()
   }
 
   render() {
+    console.log(this.state.grid)
     const listWidgets = this.state.listWidgets
     return (
       <div id="board">

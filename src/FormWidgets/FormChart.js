@@ -15,7 +15,9 @@ class FormChart extends React.Component {
       type: 'monotone',
       stroke: '#8884d8',
       fillOpacity: 1,
-      fill: 'url(#color)'
+      fill: 'url(#color)',
+      jsValue: '',
+      manual: false
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
@@ -40,7 +42,9 @@ class FormChart extends React.Component {
       type: 'monotone',
       stroke: '#8884d8',
       fillOpacity: 1,
-      fill: 'url(#color)'
+      fill: 'url(#color)',
+      jsValue: '',
+      manual: false
     })
   }
   handlePayload(e) {
@@ -62,7 +66,9 @@ class FormChart extends React.Component {
       type: 'monotone',
       stroke: '#8884d8',
       fillOpacity: 1,
-      fill: 'url(#color)'
+      fill: 'url(#color)',
+      jsValue: this.state.jsValue,
+      manual: this.state.jsValue
     }
     if (editWidget)  
       WidgetStore.updateWidget(editWidget.widgetId, payload)

@@ -8,10 +8,11 @@ import GaugeSpeed from '../Widgets/GaugeSpeed'
 import ProgressBar from '../Widgets/ProgressBar'
 import Text from '../Widgets/Text'
 import Image from '../Widgets/Image'
+import ImageCover from '../Widgets/ImageCover'
+import Toggle from '../Widgets/Toggle'
 import Chart from '../Widgets/Chart'
 import List from '../Widgets/List'
 import Button from '../Widgets/Button'
-import Toggle from '../Widgets/Toggle'
 import LocalStore from './LocalStore'
 import Store from './Store'
 class WidgetStore {
@@ -40,12 +41,9 @@ class WidgetStore {
   }
 
   updateIndexMuuri(widgetId, payload) {
-    axios.put(Store.server + '/widget/' + widgetId, {
+    axios.put(Store.server + '/widget/indexMuuri/' + widgetId, {
       indexMuuri : payload
-    }).then((res) =>
-      console.log(res)
-    )
-    
+    })
   }
 
   deleteWidget(widgetId) {
@@ -56,7 +54,6 @@ class WidgetStore {
 
   showWidgets(widgets) {
     var widgetsSort = widgets.sort((beforeIndex, afterIndex) => {return beforeIndex.indexMuuri - afterIndex.indexMuuri})
-    console.log(widgetsSort)
     var listWidgets = widgetsSort.map((widget) => {
       switch (widget.widget.typeWidget) {
         case 'Gauge':
@@ -72,7 +69,9 @@ class WidgetStore {
         case 'Text':
           return <Text key={widget._id} payload={widget.widget} widgetId={widget._id} />
         case 'Image':
-          return <Image key={widget._id} payload={widget.widget} widgetId={widget._id} />         
+          return <Image key={widget._id} payload={widget.widget} widgetId={widget._id} />
+        case 'ImageCover':
+          return <ImageCover key={widget._id} payload={widget.widget} widgetId={widget._id} />
         case 'Chart':
           return <Chart key={widget._id} payload={widget.widget} widgetId={widget._id} />        
         case 'List':

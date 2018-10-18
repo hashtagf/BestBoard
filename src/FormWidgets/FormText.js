@@ -16,7 +16,9 @@ class FormText extends React.Component {
       filter: ',',
       filterIndex: 0,
       startText: '',
-      endText: ''
+      endText: '',
+      jsValue: '',
+      manual: false
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
@@ -41,7 +43,9 @@ class FormText extends React.Component {
       filter: ',',
       filterIndex: 0,
       startText: '',
-      endText: ''
+      endText: '',
+      jsValue: '',
+      manual: false
     })
   }
   handlePayload(e) {
@@ -62,7 +66,9 @@ class FormText extends React.Component {
       filter: this.state.filter,
       filterIndex: this.state.filterIndex,
       startText: this.state.startText,
-      endText: this.state.endText
+      endText: this.state.endText,
+      jsValue: this.state.jsValue,
+      manual: this.state.manual
     }
     if (editWidget)  
       WidgetStore.updateWidget(editWidget.widgetId, payload)

@@ -20,7 +20,7 @@
 }
 .formWidget {
     overflow-y: auto;
-    max-height: 65vh;
+    max-height: 60vh;
 }
 .modal-content.createwidget {
     max-height: 100vh;
@@ -35,13 +35,17 @@
 .form-control[readonly] {
     background-color: #f3f3f3;
 }
-
+.FormInputBasic {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #f3f3f3;
+}
 @media screen and (max-width: 575px) {
     .listWidgets {
         min-width: 100%;
         overflow-x: auto;
-        max-height: 100px;
-        margin-bottom: 10px 
+        max-height: 150px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #f3f3f3;
     }
     .listwid {
         display: inline-block;

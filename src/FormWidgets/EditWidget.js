@@ -3,6 +3,7 @@ import FormCardBox from './FormCardBox'
 import FormGauge from './FormGauge'
 import FormGaugeSpeed from './FormGaugeSpeed'
 import FormImage from './FormImage'
+import FormImageCover from './FormImageCover'
 import FormProgress from './FormProgress'
 import FormProgressBar from './FormProgressBar'
 import FormText from './FormText'
@@ -80,6 +81,10 @@ class WidgetsList extends React.Component {
           img: "https://i.stack.imgur.com/k7Nit.png"
         },
         {
+          name: "ImageCover",
+          img: "https://i.stack.imgur.com/k7Nit.png"
+        },
+        {
           name: "Chart",
           img: "https://image.opencart.com/cache/583c1e869b365-resize-710x380.jpg"
         },
@@ -146,6 +151,8 @@ class SelectType extends React.Component {
         return <FormGaugeSpeed editWidget={editWidget} />
       case 'Image':
         return <FormImage editWidget={editWidget} />
+      case 'ImageCover':
+        return <FormImageCover editWidget={editWidget} />
       case 'ProgressBar':
         return <FormProgressBar editWidget={editWidget} />
       case 'Progress':

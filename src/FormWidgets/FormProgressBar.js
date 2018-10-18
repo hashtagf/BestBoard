@@ -21,7 +21,9 @@ class FormProgress extends React.Component {
       datasource: '',
       body: '',
       filter: ',',
-      filterIndex: 0
+      filterIndex: 0,
+      jsValue: '',
+      manual: false
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
@@ -50,7 +52,9 @@ class FormProgress extends React.Component {
       datasource: '',
       body: '',
       filter: ',',
-      filterIndex: 0
+      filterIndex: 0,
+      jsValue: '',
+      manual: false
     })
   }
   handlePayload(e) {
@@ -59,7 +63,7 @@ class FormProgress extends React.Component {
     })
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault()
     const editWidget = this.props.editWidget
     let payload = {
@@ -75,7 +79,9 @@ class FormProgress extends React.Component {
       strokeLinecap: this.state.strokeLinecap,
       datasource: this.state.datasource,
       filter: this.state.filter,
-      filterIndex: this.state.filterIndex
+      filterIndex: this.state.filterIndex,
+      jsValue: this.state.jsValue,
+      manual: this.state.manual
     }
     if (editWidget)
       WidgetStore.updateWidget(editWidget.widgetId, payload)
