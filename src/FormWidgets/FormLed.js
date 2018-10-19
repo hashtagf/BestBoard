@@ -7,7 +7,7 @@ import SummitBtn from './SummitBtn'
 import fontAwesomeIcons from './fontawesomeIcons.json'
 import Creatable from 'react-select/lib/Creatable'
 
-class FormCardBox extends React.Component {
+class FormLed extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -39,7 +39,7 @@ class FormCardBox extends React.Component {
   }
   reState () {
     this.setState({
-      title: 'Card Box',
+      title: 'LED',
       datasource: '',       
       body: '',
       value: '',
@@ -62,7 +62,7 @@ class FormCardBox extends React.Component {
     const editWidget = this.props.editWidget
     e.preventDefault()
     let payload = {
-      typeWidget: 'CardBox',
+      typeWidget: 'Led',
       title: this.state.title,
       value: this.state.value,
       body: this.state.body,
@@ -115,7 +115,7 @@ class Icons extends React.Component {
     let icons = []
     fontAwesomeIcons.icons.map((icon) => 
       icons.push({
-        label: icon.split(' ')[1] ,
+        label: icon ,
         value: icon
       })
     )
@@ -158,4 +158,4 @@ class Icons extends React.Component {
   }
 }
 
-export default FormCardBox
+export default FormLed

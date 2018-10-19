@@ -1,3 +1,4 @@
+/* eslint no-eval: 0 */
 import React from 'react'
 import CanvasGauge from 'react-canvas-gauge'
 import WidgetStore from '../store/WidgetStore'
@@ -28,9 +29,10 @@ class Progress extends React.Component {
 
   onMessage(topic, msg) {
     const payload = this.props.payload
-    const strMsg = msg + ''
     if (payload.value === topic) {
-      const value = strMsg.split(payload.filter)[payload.filterIndex]
+      let value = msg + ''
+      if (payload.manual) eval(payload.jsValue)
+      else value = value.split(payload.filter)[payload.filterIndex]
       this.setState({
         value: value
       })
@@ -45,8 +47,7 @@ class Progress extends React.Component {
     const value = this.state.value
     const widgetId = this.props.widgetId
     return (
-      <div className="item Progress col-xl-3 col-lg-4 col-md-6 col-12 text-body mb-3" data-id={widgetId}>
-        <div className="item-content card shadowcard rounded-0 widgetCard border-0">
+        <div className="item-content card shadowcard rounded-0 h-100 widgetCard border-0 col-12" data-id={widgetId}>
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body">
             <CanvasGauge
@@ -65,7 +66,6 @@ class Progress extends React.Component {
           </div>
 
         </div>
-      </div>
     )
   }
 }

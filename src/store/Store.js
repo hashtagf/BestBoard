@@ -5,6 +5,7 @@ class Store {
   @observable pageName = ''
   @observable mode = false
   @observable editSource = {}
+  @observable colorUse
   @observable server = 'http://172.18.6.7:5582'
   //@observable server = 'http://localhost:5582'  
   @observable editWidget = {
@@ -35,17 +36,19 @@ class Store {
   },
   {
     name: 'galaxy',
-    colors: ['#211942', '#1f1d45', '#2dcdf2', '#FFFFFF', '#322e5a', '#292558', '#241d48','#241d48', '#24214c', '#FFFFFF', '#FFFFFF', '#FEFEFE', '#cb3a91', '#b236be','0 0rem 1rem rgba(255, 0, 200, 0.05)']
+    colors: ['#211942', '#1f1d45', '#2dcdf2', '#FFFFFF', '#322e5a', '#292558', '#241d48','#241d48', '#24214c', '#FFFFFF', '#FFFFFF', '#FEFEFE', 'linear-gradient(to right, rgba(255,93,177,1) 0%, rgba(239,1,124,1) 100%)', '#b236be','0 0rem 1rem rgba(255, 0, 200, 0.05)']
   }
   ]
-
+  //#cb3a91
   setColor = (name) => {
+    
     //id = 2
     var i = 0
     var id = 0
     this.colorSet.forEach((colors, index) => {
       if (colors.name === name) id = index
     })
+    this.colorUse = id
     var colorSet = this.colorSet[id].colors
     document.documentElement.style.setProperty("--themeBGmain", colorSet[i++]);
     document.documentElement.style.setProperty("--themeBGsidebar", colorSet[i++]);

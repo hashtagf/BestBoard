@@ -41,7 +41,6 @@ class NETPIEMicrogear {
             value: msg + ''
           }
           this.topics[datasource._id][topic] = obj
-          //console.log(this.topics)
         })
       }
       else datasources.splice(index, 1)

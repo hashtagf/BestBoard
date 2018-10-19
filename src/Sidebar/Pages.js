@@ -210,19 +210,6 @@ class Page extends Component {
         <li>
           <a href="#pageSubmenu" data-toggle="collapse" aria-haspopup="true" aria-expanded="true">Pages</a>
           <ul className="collapse list-unstyled show" id="pageSubmenu">
-            <Link to={'/react/'} onClick={() => Store.currentId = 0}>
-              <li>
-                <div className="row">
-                  <div className="col-10 col-sm-10 text-truncate">
-                    React Grid Lyout
-                  </div>
-                  <div className="col-2 col-sm-2 editmenu px-0">
-                    <i className="fas fa-pen-square editbtn mr-1" ></i>
-                    <i className="fas fa-minus-square editbtn del"></i>
-                  </div>
-                </div>
-            </li>
-            </Link>
             {listPage}
             <li>{addPage}</li>
           </ul>

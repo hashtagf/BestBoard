@@ -13,6 +13,8 @@ import Toggle from '../Widgets/Toggle'
 import Chart from '../Widgets/Chart'
 import List from '../Widgets/List'
 import Button from '../Widgets/Button'
+import Map from '../Widgets/Map'
+import Led from '../Widgets/Led'
 import LocalStore from './LocalStore'
 import Store from './Store'
 class WidgetStore {
@@ -40,9 +42,11 @@ class WidgetStore {
     )
   }
 
-  updateIndexMuuri(widgetId, payload) {
-    axios.put(Store.server + '/widget/indexMuuri/' + widgetId, {
-      indexMuuri : payload
+  updatelayout(widgetId, payload) {
+    axios.put(Store.server + '/widget/' + widgetId, {
+      widget: {
+        layout : payload.layout
+      }
     })
   }
 
@@ -79,7 +83,11 @@ class WidgetStore {
         case 'Button':
           return <Button key={widget._id} payload={widget.widget} widgetId={widget._id} />       
         case 'Toggle':
-          return <Toggle key={widget._id} payload={widget.widget} widgetId={widget._id} />      
+          return <Toggle key={widget._id} payload={widget.widget} widgetId={widget._id} />
+        case 'Map':
+          return <Map key={widget._id} payload={widget.widget} widgetId={widget._id} />
+        case 'Led':
+          return <Led key={widget._id} payload={widget.widget} widgetId={widget._id} />    
         default:
           return <h2 key={widget._id} className="item"><span className="item-content">Coming Soon Widgets</span></h2>
       }

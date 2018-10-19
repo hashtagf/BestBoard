@@ -1,3 +1,4 @@
+/* eslint no-eval: 0 */
 import React from 'react'
 import { Line } from 'rc-progress'
 import NETPIEMicrogear from '../store/Microgear'
@@ -28,11 +29,12 @@ class ProgressBar extends React.Component {
 
   onMessage(topic, msg) {
     const payload = this.props.payload
-    const strMsg = msg + ''
-    const value = strMsg.split(payload.filter)[payload.filterIndex]
     if (payload.value === topic) {
+      let value = msg + ''
+      if (payload.manual) eval(payload.jsValue)
+      else value = value.split(payload.filter)[payload.filterIndex]
       this.setState({
-        value: value,
+        value: value
       })
     }
   }
@@ -42,8 +44,7 @@ class ProgressBar extends React.Component {
     const value = this.state.value
     const widgetId = this.props.widgetId
     return (
-      <div className="item ProgressBar col-xl-3 col-lg-4 col-md-6 col-12 text-body mb-3" data-id={widgetId}>
-        <div className="item-content card shadowcard rounded-0 widgetCard border-0">
+        <div className="item-content card shadowcard rounded-0 widgetCard border-0  ProgressBar col-12 h-100"  data-id={widgetId}>
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body">
             <h6 className="pt-5">{payload.title} : {value} {payload.unit}</h6>
@@ -58,7 +59,6 @@ class ProgressBar extends React.Component {
           </div>
 
         </div>
-      </div>
     )
   }
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import GoogleMapReact from 'google-map-react';
 import WidgetStore from '../store/WidgetStore'
 import InputText from './Input/InputText'
 import FormInputBasic from './Input/FormInputBasic'
@@ -7,12 +8,13 @@ import SummitBtn from './SummitBtn'
 import './FormImageCover.css'
 import reactCSS from 'reactcss'
 const $ = require("jquery")
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 class FormImageCover extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: 'Image',
+      title: 'Map',
       file: 'empty',
       selectPoint: 0,
       popups: []
@@ -35,7 +37,7 @@ class FormImageCover extends React.Component {
   }
   reState () {
     this.setState({
-      title: 'Image',
+      title: 'Map',
       file: 'empty',
       popups: []
     })
@@ -64,7 +66,7 @@ class FormImageCover extends React.Component {
     e.preventDefault()
     const editWidget = this.props.editWidget
     let payload = {
-      typeWidget: 'ImageCover',
+      typeWidget: 'Map',
       title: this.state.title,
       file: this.state.file,
       popups: this.state.popups,
@@ -111,26 +113,17 @@ class FormImageCover extends React.Component {
           title="Title"
           name="title"
           value={payload.title} />
-        <div className="form-group row">
-          <label htmlFor="file" className="col-3 col-form-label">
-            File :
-            </label>
-          <div className="col-9">
-            <div className="input-group">
-              <div className="custom-file">
-                <input id="uploadImg"
-                  aria-describedby="uploadImg"
-                  name="path"
-                  type="file"
-                  className="custom-file-input"
-                  onChange={this.handleFile}
-                />
-                <label className="custom-file-label" htmlFor="uploadImg">Choose file</label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <ImgArea file={payload.file} value={payload} handlePayload={this.handlePayload}/>
+        <GoogleMapReact
+              bootstrapURLKeys={{ key: 'AIzaSyCmONUAkFkKSXNpjjcaihGMVkBZw9vwJzQ' }}
+              defaultCenter={this.props.center}
+              defaultZoom={this.props.zoom}
+            >
+              <AnyReactComponent
+              lat={59.955413}
+              lng={30.337844}
+              text={'K'}
+              />
+            </GoogleMapReact>
         <div className="row mt-2 mb-2 text-center">
           <div className="col-12">
             <a className="btn" onClick={this.addPopup}>Add popup</a>

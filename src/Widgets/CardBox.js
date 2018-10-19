@@ -25,9 +25,11 @@ class CardBox extends React.Component {
     if (NETPIEMicrogear.statusOnline[payload.datasource]) {
       const microgear = NETPIEMicrogear.microgear[payload.datasource]
       microgear.on('message', this.onMessage)
+      //if (NETPIEMicrogear.topics[payload.datasource][payload.value])
+      //console.log(NETPIEMicrogear.topics[payload.datasource][payload.value].value)
+
     } else console.log('error : not Connect datasource !!')
   }
-
   onMessage = (topic, msg) => {
     const payload = this.props.payload
     if (payload.value === topic) {
@@ -41,7 +43,16 @@ class CardBox extends React.Component {
       })
     }
   }
-  
+  showTime () {
+   /*  let now = new Date();
+    let time = this.state.time
+    time = (typeof time === 'string' || time instanceof String)?new Date(time):time;
+    let ago = date.subtract(now, time)
+    if (ago.toSeconds() <= 60) return ago.toSeconds()+ ' seconds'
+    else if (ago.toMinutes() < 60) return ago.toMinutes()+ ' Minutes'
+    else if (ago.toHours() < 24) return ago.toHours()+ ' Hours'
+    else if(ago.toDays() < 30) return ago.toDays()+ ' Days' */
+  }
   render() {
     const payload = this.props.payload
     const state = this.state
@@ -55,27 +66,21 @@ class CardBox extends React.Component {
     }
 
     return (
-      <div className="item CardBox col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 text-body mb-3" data-id={widgetId}>
-        <div className="item-content shadowcard card rounded-0 widgetCard border-0">
+        <div className="shadowcard item-content card h-100 rounded-0 widgetCard border-0 col-12" data-id={widgetId}>
           <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body ">
             <div className="row">
             <div className="col-4">
               <i className={payload.icon}></i>
             </div>
-
             <div className="col-8 text-right">
               <div className="row">
                 <h1>{parseFloat(state.value).toFixed(2)}</h1>
-
               </div>
               <div className="row">
                 <h6>{payload.unit}</h6>
-                {/* <span className="fa-layers fa-fw">
-                  <i className={`fas pt-2 fa-arrow-` + arrow}></i>
-                  <span className="fa-layers-counter">{(state.value - state.previousValue).toFixed(2)}</span>
-                </span> */}</div>
-                <div className="row">
+              </div>
+              <div className="row">
                 <span className={colorText}>
                 <i className={`fas pt-2 mr-2 fa-angle-` + arrow}></i>
                 <span className="fa-layers-counter">{(state.value - state.previousValue).toFixed(2)}</span>
@@ -85,7 +90,6 @@ class CardBox extends React.Component {
             </div>
           </div>
         </div>
-      </div>
     )
   }
 }

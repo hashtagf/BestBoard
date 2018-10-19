@@ -64,7 +64,13 @@ class FormButton extends React.Component {
       tpa: this.state.tpa,
       value: this.state.value,
       jsValue: this.state.jsValue,
-      manual: this.state.manual
+      manual: this.state.manual,
+      layout: {
+        w: 3,
+        h:6,
+        minW: 3,
+        minH: 5
+      }
     }
     this.reState()
     if (editWidget)  

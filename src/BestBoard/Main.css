@@ -4,9 +4,10 @@
     position: relative;
   }
   .item {
-    position: absolute;
+    position: relative;
     text-align: center;
     z-index: 1;
+    min-height: 100%;
   }
   .item.muuri-item-releasing {
     z-index: 2;
@@ -21,13 +22,13 @@
     font-size: 25px;
     color: var(--textWidgetColor);
     background-color: var(--widgetBG);
+    padding: 0px;
   }
   .item.muuri-item-dragging .item-content,
   .item.muuri-item-releasing .item-content {
     background: var(--mentionBadge);
     border: 2px solid #ffff;
   }
-
   .maingrid-appear {
     opacity: 0.01;
   }
@@ -37,5 +38,6 @@
     transition: opacity .5s ease-in;
   }
   .card-body {
-    padding-top: 1rem;
+    padding: 1rem;
+    text-align: center;
   }

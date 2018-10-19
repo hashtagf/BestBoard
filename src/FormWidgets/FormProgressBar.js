@@ -15,7 +15,7 @@ class FormProgress extends React.Component {
       unit: '',
       strokeWidth: '8',
       trailWidth: '8',
-      strokeColor: '#2db7f5',
+      strokeColor: Store.colorSet[Store.colorUse].colors[2],
       trailColor: '#D9D9D9',
       strokeLinecap: 'round',
       datasource: '',
@@ -46,7 +46,7 @@ class FormProgress extends React.Component {
       unit: '',
       strokeWidth: '8',
       trailWidth: '8',
-      strokeColor: '#2db7f5',
+      strokeColor: Store.colorSet[Store.colorUse].colors[2],
       trailColor: '#D9D9D9',
       strokeLinecap: 'round',
       datasource: '',
@@ -81,7 +81,13 @@ class FormProgress extends React.Component {
       filter: this.state.filter,
       filterIndex: this.state.filterIndex,
       jsValue: this.state.jsValue,
-      manual: this.state.manual
+      manual: this.state.manual,
+      layout: {
+        w: 3,
+        h:6,
+        minW: 3,
+        minH: 5
+      }
     }
     if (editWidget)
       WidgetStore.updateWidget(editWidget.widgetId, payload)

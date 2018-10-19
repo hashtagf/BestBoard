@@ -18,9 +18,9 @@ class FormGaugeSpeed extends React.Component {
       minValue: '0',
       maxValue: '100',
       segments: 3,
-      startColor: '#00ee00',
-      endColor: '#ff0000',
-      textColor: '#000000',
+      startColor: Store.colorSet[Store.colorUse].colors[2],
+      endColor: Store.colorSet[Store.colorUse].colors[12],
+      textColor: Store.colorSet[Store.colorUse].colors[10],
       datasource: '',       
       body: '',
       filter: ',',
@@ -52,9 +52,9 @@ class FormGaugeSpeed extends React.Component {
       minValue: '0',
       maxValue: '100',
       segments: 3,
-      startColor: '#00ee00',
-      endColor: '#ff0000',
-      textColor: '#000000',
+      startColor: Store.colorSet[Store.colorUse].colors[2],
+      endColor: Store.colorSet[Store.colorUse].colors[12],
+      textColor: Store.colorSet[Store.colorUse].colors[10],
       datasource: '',       
       body: '',
       filter: ',',
@@ -88,7 +88,13 @@ class FormGaugeSpeed extends React.Component {
       filter: this.state.filter,
       filterIndex: this.state.filterIndex,
       jsValue: this.state.jsValue,
-      manual: this.state.manual
+      manual: this.state.manual,
+      layout: {
+        w: 3,
+        h:6,
+        minW: 3,
+        minH: 5
+      }
     }
     if (editWidget)  
       WidgetStore.updateWidget(editWidget.widgetId, payload)

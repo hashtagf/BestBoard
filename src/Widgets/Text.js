@@ -1,3 +1,4 @@
+/* eslint no-eval: 0 */
 import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import NETPIEMicrogear from '../store/Microgear'
@@ -28,10 +29,11 @@ class Text extends React.Component {
 
   onMessage(topic, msg) {
     const payload = this.props.payload
-    const strMsg = msg + ''
-    const value = strMsg.split(payload.filter)[payload.filterIndex]
     if (payload.value === topic) {
+      let value = msg + ''
       let now = new Date();
+      if (payload.manual) eval(payload.jsValue)
+      else value = value.split(payload.filter)[payload.filterIndex]
       this.setState({
         value: value,
         time: now
@@ -55,18 +57,15 @@ class Text extends React.Component {
     const value = this.state.value
     const widgetId = this.props.widgetId
     return (
-      <div className="item Text col-xl-3 col-lg-4 col-md-6 col-12 text-body mb-3" data-id={widgetId}>
-      
-        <div className="item-content card shadowcard rounded-0 widgetCard border-0">
+        <div className="item-content card shadowcard rounded-0 widgetCard border-0 h-100 Text col-12" data-id={widgetId}>
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
-          <div className="card-body">
+          <div className="card-body text-center">
             {payload.startText} <strong>{value}</strong> {payload.endText}
           </div>
           <div className="card-footer text-right">
           {/* {this.showTime} */}
           </div>
         </div>
-      </div>
     )
   }
 }

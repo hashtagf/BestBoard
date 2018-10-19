@@ -12,7 +12,7 @@
     --textWidgetColor: #FFFFFF;
     --textMute: #FFFFFF;
     --activePresence: #94E864;
-    --mentionBadge: #78AF8F;
+    --mentionBadge: rgb(4, 5, 5);
     --shadow: 0 0rem 1rem rgba(0,0,0,.15);
     /* --themeBGmain: #f8f3f0;
     --themeBGsidebar: #4c4743;

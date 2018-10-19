@@ -79,7 +79,13 @@ class FormToggle extends React.Component {
       onCreated: this.state.onCreated,
       onCreatedValue: this.state.onCreatedValue,
       jsValue: this.state.jsValue,
-      manual: this.state.manual
+      manual: this.state.manual,
+      layout: {
+        w: 3,
+        h:6,
+        minW: 3,
+        minH: 5
+      }
     }
     this.reState()
     if (editWidget)  

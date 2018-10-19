@@ -83,7 +83,13 @@ class FormProgress extends React.Component {
       filter: this.state.filter,
       filterIndex: this.state.filterIndex,
       jsValue: this.state.jsValue,
-      manual: this.state.manual
+      manual: this.state.manual,
+      layout: {
+        w: 3,
+        h:6,
+        minW: 3,
+        minH: 5
+      }
     }
     if (editWidget)  
       WidgetStore.updateWidget(editWidget.widgetId, payload)

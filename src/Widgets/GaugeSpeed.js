@@ -1,3 +1,5 @@
+/* eslint no-eval: 0 */
+
 import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import NETPIEMicrogear from '../store/Microgear'
@@ -28,11 +30,14 @@ class Gauge extends React.Component {
 
   onMessage(topic, msg) {
     const payload = this.props.payload
-    const strMsg = msg + ''
-    const value = strMsg.split(payload.filter)[payload.filterIndex]
     if (payload.value === topic) {
+      let value = msg + ''
+      if (payload.manual) eval(payload.jsValue)
+      else value = value.split(payload.filter)[payload.filterIndex]
+      const stateValue = this.state.value
       this.setState({
         value: value,
+        previousValue: stateValue
       })
     }
   }
@@ -42,8 +47,8 @@ class Gauge extends React.Component {
     const value = this.state.value
     const widgetId = this.props.widgetId
     return (
-      <div className="item GaugeSpeed col-xl-3 col-lg-4 col-md-6 col-12 text-body mb-3" data-id={widgetId}>
-        <div className="item-content card shadowcard rounded-0 widgetCard border-0">
+
+        <div className="item-content card shadowcard rounded-0 widgetCard border-0 h-100 GaugeSpeed col-12" data-id={widgetId}>
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body">
             <ReactSpeedometer
@@ -59,7 +64,6 @@ class Gauge extends React.Component {
             />
           </div>
         </div>
-      </div>
     )
   }
 }

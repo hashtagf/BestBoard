@@ -68,7 +68,13 @@ class FormChart extends React.Component {
       fillOpacity: 1,
       fill: 'url(#color)',
       jsValue: this.state.jsValue,
-      manual: this.state.jsValue
+      manual: this.state.jsValue,
+      layout: {
+        w: 3,
+        h:6,
+        minW: 3,
+        minH: 5
+      }
     }
     if (editWidget)  
       WidgetStore.updateWidget(editWidget.widgetId, payload)

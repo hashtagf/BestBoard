@@ -6,7 +6,7 @@ import Redirect from '../BestBoard/Redirect'
 
 export default () => (
   <Switch>
-    <Route exact path="/:boardId/" component={Main}/>
+    <Route exact path="/:boardId/" component={MyFirstGrid}/>
     <Route exact path="/board/:boardId" component={Redirect}/>
     <Route exact path="/react/" component={MyFirstGrid}/>
   </Switch>

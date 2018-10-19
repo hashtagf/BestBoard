@@ -11,6 +11,9 @@ import FormList from './FormList'
 import FormChart from './FormChart'
 import FormButton from './FormButton'
 import FormToggle from './FormToggle'
+import FormMap from './FormMap'
+import FormLed from './FormLed'
+
 import { observer } from 'mobx-react'
 
 @observer
@@ -104,6 +107,14 @@ class WidgetsList extends React.Component {
           name: "Toggle",
           img: "https://i.stack.imgur.com/k7Nit.png"
         },
+        {
+          name: "Map",
+          img: "https://i.stack.imgur.com/k7Nit.png"
+        },
+        {
+          name: "Led",
+          img: "https://i.stack.imgur.com/k7Nit.png"
+        }
       ],
       selectType: "CardBox"
     }
@@ -167,6 +178,11 @@ class SelectType extends React.Component {
         return <FormButton editWidget={editWidget} />
       case 'Toggle':
         return <FormToggle editWidget={editWidget} />
+      case 'Map':
+        return <FormMap editWidget={editWidget} />
+      case 'Led':
+        return <FormLed editWidget={editWidget} />
+      
       default:
         return <h1>Please select widget</h1>
     }

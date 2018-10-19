@@ -54,7 +54,7 @@ a {
   z-index: -1;
 }
 .btn-primary {
-  background-color: var(--activePresence);
+  background: var(--activePresence);
   border: var(--activePresence);
 }
 #scrollbar-style::-webkit-scrollbar-track

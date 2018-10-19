@@ -1,3 +1,5 @@
+/* eslint no-eval: 0 */
+
 import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import NETPIEMicrogear from '../store/Microgear'
@@ -39,12 +41,14 @@ class CardBox extends React.Component {
 
   onMessage(topic, msg) {
     const payload = this.props.payload
-    const strMsg = msg + ''
-    const value = strMsg.split(payload.filter)[payload.filterIndex]
     if (payload.value === topic) {
+      let value = msg + ''
+      if (payload.manual) eval(payload.jsValue)
+      else value = value.split(payload.filter)[payload.filterIndex]
+      const stateValue = this.state.value
       this.setState({
         value: value,
-        previousValue: this.state.value
+        previousValue: stateValue
       })
     }
   }
@@ -54,8 +58,8 @@ class CardBox extends React.Component {
     const payload = this.props.payload
     const widgetId = this.props.widgetId
     return (
-      <div className="item CardBox col-xl-3 col-lg-4 col-md-6 col-12 text-body mb-3" data-id={widgetId}>
-        <div className="item-content shadowcard card rounded-0 widgetCard border-0">
+      <div className="item Button col-12" data-id={widgetId}>
+        <div className="shadowcard item-content card rounded-0 widgetCard border-0">
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body ">
             <button 
