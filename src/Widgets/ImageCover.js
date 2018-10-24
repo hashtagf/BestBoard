@@ -20,7 +20,7 @@ class ImageCover extends React.Component {
   }
   componentWillMount () {
     const count = this.props.payload.popups.length
-    var tmp = Array.apply(null, Array(count)).map(function () {})
+    var tmp = Array.apply(null, Array(count)).map(function () {return 0})
     this.setState({
       values: tmp
     })
@@ -75,7 +75,6 @@ class ImageCover extends React.Component {
         {(this.state.values[index])?this.state.values[index]:'Loading'}{payload.unit}
       </div>
     )
-    console.log(this.state.values)
     return (
         <div className="item-content ImageCover card shadowcard rounded-0 border-0  col-12 mb-3 h-100" data-id={widgetId}>
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>

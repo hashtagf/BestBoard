@@ -61,34 +61,51 @@ class Main extends React.Component {
     })
   }
 
+
   onLayoutChange(layout, layouts) {
-    saveToLS("layouts", layouts)
+    if(Store.mode)
+    layout.map((widget) => 
+      WidgetStore.updatelayout(widget.i,{
+        x: widget.x,
+        y: widget.y,
+        h: widget.h,
+        w: widget.w,
+        minH: widget.minH,
+        minW: widget.minW,
+        maxH: widget.maxH,
+        maxW: widget.maxW
+      })
+    )
+    // console.log(layout)
+    // WidgetStore.updatelayout()
+    // saveToLS("layouts", layouts)
     this.setState({ layouts })
   }
 
   render() {
     const { listWidgets, layouts } = this.state
-
-    let widgets = listWidgets.map((widget, index, array) =>
-      <div key={widget.key}
-        data-grid={{
-          x: index,
-          y: 0,
-          w: widget.props.payload.layout.w,
-          h: widget.props.payload.layout.h,
-          minW: widget.props.payload.layout.minW,
-          minH: widget.props.payload.layout.minH,
-          // autoSize: true
-        }}>
-        {widget}
-      </div>
-    )
+    let position = 0
+    let widgets = listWidgets.map((widget) => {
+      return (
+        <div key={widget.key}
+          data-grid={{
+            x: (widget.props.layout.x !== undefined)?widget.props.layout.x:position % 12,
+            y: (widget.props.layout.y !== undefined)?widget.props.layout.y:Infinity,
+            w: widget.props.layout.w,
+            h: widget.props.layout.h,
+            minW: widget.props.layout.minW,
+            minH: widget.props.layout.minH,
+            // autoSize: true
+          }}>
+          {widget}
+        </div>
+      )
+    })
     // function calculateWH(widthPx, heightPx, colWidth, rowHeight, margin) {
     //   let w = Math.ceil((widthPx - margin[0]) / (colWidth + margin[0]));
     //   let h = Math.ceil((heightPx - margin[1]) / (rowHeight + margin[1]));
     //   return [w, h];
     // };
-    console.log(layouts)
     return (
       <div className="board">
         <ReactResizeDetector handleWidth skipOnMount refreshRate={10} onResize={this.onResize} />
@@ -99,8 +116,8 @@ class Main extends React.Component {
           transitionEnter={false}
           transitionLeave={false}>
           <ResponsiveGridLayout className="layouts"
-            breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480 }}
-            cols={{ lg: 12, md: 10, sm: 8, xs: 6 }}
+            breakpoints={{ lg: 1140, md: 960, sm: 720, xs: 540 }}
+            cols={{ lg: 12, md: 9, sm: 6, xs: 3 }}
             layouts={layouts}
             rowHeight={25}
             isDraggable={Store.mode}
@@ -131,7 +148,7 @@ function getFromLS(key) {
 }
 
 function saveToLS(key, value) {
-  console.log(key,value)
+  console.log(key, value)
   if (global.localStorage) {
     global.localStorage.setItem(
       "rgl-8",

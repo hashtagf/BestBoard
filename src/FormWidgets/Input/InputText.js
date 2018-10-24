@@ -20,6 +20,7 @@ class InputText extends React.Component {
               value={value}
               onChange={handleChange}
               placeholder={placeholder}
+              readOnly={this.props.readOnly}
             />
           </div>
         </div>

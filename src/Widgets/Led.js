@@ -11,7 +11,7 @@ class Led extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: 0
+      value: false
     }
   }
 
@@ -29,10 +29,10 @@ class Led extends React.Component {
       let value = msg + ''
       if (payload.manual) eval(payload.jsValue)
       else {
-        
+        console.log(payload.filter,payload.filterIndex)
         value = value.split(payload.filter)[payload.filterIndex]
         let flag = false
-        //console.log(msg,value,payload.filterIndex)
+        console.log(msg,value,payload.filterIndex)
         switch (payload.expressionON) {
           case '=':flag = value === payload.valueON;break;
           case '≠':flag = value !== payload.valueON;break;
@@ -58,12 +58,11 @@ class Led extends React.Component {
   render() {
     const payload = this.props.payload
     const widgetId = this.props.widgetId
-
     return (
         <div className="item-content card shadowcard rounded-0 border-0 col-12 h-100" data-id={widgetId}>
           <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body ">
-            {(this.state.value)?<span class="led on"></span>:<span class="led off"></span>}
+            {(this.state.value)?<span className="led on"></span>:<span className="led off"></span>}
           </div>
         </div>
     )

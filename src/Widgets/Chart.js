@@ -83,7 +83,6 @@ class Chart extends React.Component {
     const payload = this.props.payload
     const widgetId = this.props.widgetId
     return (
-
         <div className="item-content card shadowcard rounded-0 widgetChart border-0 col-12" data-id={widgetId}>
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body">
@@ -124,7 +123,7 @@ class Chart extends React.Component {
                 Last 7 Days
               </button>
             </div>
-            <ResponsiveContainer width='95%' aspect={4.0/1.0}>
+            <ResponsiveContainer width='100%' aspect={4.0/1.0}>
               <AreaChart data={this.state.data}
                 margin={{ top: 0, bottom: 0, left: 0, right: 0 }}
               >

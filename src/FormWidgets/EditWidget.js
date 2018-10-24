@@ -13,6 +13,7 @@ import FormButton from './FormButton'
 import FormToggle from './FormToggle'
 import FormMap from './FormMap'
 import FormLed from './FormLed'
+import FormHtml from './FormHtml'
 
 import { observer } from 'mobx-react'
 
@@ -42,7 +43,7 @@ class EditWidget extends React.Component {
     return (
       <div className="row">
         {(editWidget.typeWidget) ? '' : <WidgetsList selectWidget={this.selectWidget} />}
-        <div className={(editWidget.typeWidget)?"col-12 formWidget":"col-sm-9 col-12 formWidget"} id="scrollbar-style">
+        <div className={(editWidget.typeWidget) ? "col-12 formWidget" : "col-sm-9 col-12 formWidget"} id="scrollbar-style">
           <strong>Form</strong>
           <form>
             <SelectType selectType={this.state.selectType} editWidget={editWidget} />
@@ -115,6 +116,11 @@ class WidgetsList extends React.Component {
           name: "Led",
           img: "https://i.stack.imgur.com/k7Nit.png"
         }
+        ,
+        {
+          name: "HTML",
+          img: "https://i.stack.imgur.com/k7Nit.png"
+        }
       ],
       selectType: "CardBox"
     }
@@ -129,12 +135,14 @@ class WidgetsList extends React.Component {
     // const boardId = this.props.match.params.boardId
     let listWidget = this.state.widgets.map((widget, index) => {
       var tmp =
-        <div key={index} className={(this.state.selectType === widget.name) ? 'listwid active rounded p-2' : 'listwid rounded p-2'}>
+        <div key={index} 
+          onClick={this.selectWidget}
+          className={(this.state.selectType === widget.name) ? 'listwid active rounded p-2' : 'listwid rounded p-2'}>
           <img className="img-thumbnail border-0"
             src={widget.img}
             name={widget.name}
             alt=""
-            onClick={this.selectWidget}
+            
           />
           <figcaption className="figure-caption text-center">{widget.name}</figcaption>
         </div>
@@ -182,7 +190,8 @@ class SelectType extends React.Component {
         return <FormMap editWidget={editWidget} />
       case 'Led':
         return <FormLed editWidget={editWidget} />
-      
+      case 'HTML':
+        return <FormHtml editWidget={editWidget} />
       default:
         return <h1>Please select widget</h1>
     }

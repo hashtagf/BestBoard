@@ -13,7 +13,7 @@ class FormImageCover extends React.Component {
     super(props)
     this.state = {
       title: 'Image',
-      file: 'empty',
+      file: null,
       selectPoint: 0,
       popups: []
     }
@@ -36,7 +36,7 @@ class FormImageCover extends React.Component {
   reState () {
     this.setState({
       title: 'Image',
-      file: 'empty',
+      file: null,
       popups: []
     })
   }
@@ -131,10 +131,10 @@ class FormImageCover extends React.Component {
             </div>
           </div>
         </div>
-        <ImgArea file={payload.file} value={payload} handlePayload={this.handlePayload}/>
+        {(payload.file)?<ImgArea file={payload.file} value={payload} handlePayload={this.handlePayload}/>:null}
         <div className="row mt-2 mb-2 text-center">
           <div className="col-12">
-            <a className="btn" onClick={this.addPopup}>Add popup</a>
+            {(payload.file)?<a className="btn" onClick={this.addPopup}>Add popup</a>:null}
           </div>
         </div>
         {
@@ -176,7 +176,7 @@ class FormPopups extends React.Component {
         <div className="form-group row">
             <label htmlFor="value" className="col-3 col-form-label">
               Form :
-              </label>
+            </label>
             <div className="col-9">
               <div className="btn-group" role="group" aria-label="Basic example">
                   {buttons}

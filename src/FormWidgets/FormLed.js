@@ -2,7 +2,7 @@ import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import Store from '../store/Store'
 import FormInputBasic from './Input/FormInputBasic'
-// import InputText from './Input/InputText'
+import InputText from './Input/InputText'
 import SummitBtn from './SummitBtn'
 // import fontAwesomeIcons from './fontawesomeIcons.json'
 // import Creatable from 'react-select/lib/Creatable'
@@ -60,6 +60,7 @@ class FormLed extends React.Component {
     this.setState({
       [e.target.name]: e.target.value
     })
+    console.log(e.target.value)
   }
 
   handleSubmit = (e) => {
@@ -101,8 +102,12 @@ class FormLed extends React.Component {
       <div className="FormCardBox container">
         <FormInputBasic callback={this.handlePayload} values={payload} />
         <ConditionForm event="ON" handlePayload={this.handlePayload} values={payload}/>
-        <ConditionForm event="OFF" handlePayload={this.handlePayload} values={payload}/>
-        {/* <InputText callback={this.handlePayload} title="Icon" name="icon" value={payload.icon} placeholder="fontAwesome Icon (name Icon) :: tint"/> */}
+        {/* <ConditionForm event="OFF" handlePayload={this.handlePayload} values={payload}/> */}
+        <InputText callback={this.handlePayload} 
+          title="Condition Light OFF" 
+          value={'else'} 
+          placeholder="else"
+          readOnly={true}/>
           
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
 
@@ -114,13 +119,14 @@ class ConditionForm extends React.Component {
   render () {
     let props = this.props
     return (
-      <div class="form-row form-group">
-        <label for="inputCity col-2 col-form-label">Condition Light {props.event} :</label>
-        <div class="col-3">
-          <select id="inputState" class="form-control" 
+      <div className="form-row form-group">
+        <label htmlFor="inputCity col-2 col-form-label">Condition Light {props.event} :</label>
+        <div className="col-3">
+          <select id="inputState" className="form-control"
+            value={props.values.expressionON} 
             name={'expression' + props.event} 
             onChange={props.handlePayload}>
-            {(props.event === 'OFF')?<option selected value="else">else</option>:null}
+            {(props.event === 'OFF')?<option value="else">else</option>:null}
             <option value="="> = </option>
             <option value="≠"> ≠ </option>
             <option value=">"> {'>'} </option>
@@ -129,8 +135,12 @@ class ConditionForm extends React.Component {
             <option value="<="> {'<='} </option>
           </select>
         </div>
-        <div class="col">
-          <input type="text" class="form-control" name={'value' + props.event} placeholder="Static value" readOnly={(props.event==='OFF'&&props.values.expressionOFF==='else')?true:false}/>
+        <div className="col">
+          <input type="text" className="form-control" 
+            value={props.values.valueON} 
+            name={'value' + props.event} 
+            placeholder="Static value" 
+            onChange={props.handlePayload}/>
         </div>
       </div>
     )

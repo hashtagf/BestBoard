@@ -15,6 +15,7 @@ import List from '../Widgets/List'
 import Button from '../Widgets/Button'
 import Map from '../Widgets/Map'
 import Led from '../Widgets/Led'
+import Html from '../Widgets/Html'
 import LocalStore from './LocalStore'
 import Store from './Store'
 class WidgetStore {
@@ -29,7 +30,8 @@ class WidgetStore {
   createWidget(boardId, payload) {
     axios.post(Store.server + '/widget', {
       boardId: boardId,
-      widget: payload
+      widget: payload,
+      layout: payload.layout
     }).then((res) => {
       console.log(res)
     })
@@ -37,16 +39,14 @@ class WidgetStore {
   }
 
   updateWidget(widgetId, payload) {
-    axios.put(Store.server + '/widget/' + widgetId, {widget : payload}).then((res) =>
+    axios.put(Store.server + '/widget/' + widgetId, { widget: payload }).then((res) =>
       console.log(res)
     )
   }
 
   updatelayout(widgetId, payload) {
     axios.put(Store.server + '/widget/' + widgetId, {
-      widget: {
-        layout : payload.layout
-      }
+      layout: payload
     })
   }
 
@@ -57,37 +57,38 @@ class WidgetStore {
   }
 
   showWidgets(widgets) {
-    var widgetsSort = widgets.sort((beforeIndex, afterIndex) => {return beforeIndex.indexMuuri - afterIndex.indexMuuri})
-    var listWidgets = widgetsSort.map((widget) => {
+    var listWidgets = widgets.map((widget) => {
       switch (widget.widget.typeWidget) {
         case 'Gauge':
-          return <Gauge key={widget._id} payload={widget.widget} widgetId={widget._id} />         
+          return <Gauge key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         case 'Progress':
-          return<Progress key={widget._id} payload={widget.widget} widgetId={widget._id} />          
+          return <Progress key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         case 'CardBox':
-          return <CardBox key={widget._id} payload={widget.widget} widgetId={widget._id} />        
+          return <CardBox key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         case 'GaugeSpeed':
-          return <GaugeSpeed key={widget._id} payload={widget.widget} widgetId={widget._id} />          
+          return <GaugeSpeed key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         case 'ProgressBar':
-          return <ProgressBar key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          return <ProgressBar key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         case 'Text':
-          return <Text key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          return <Text key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         case 'Image':
-          return <Image key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          return <Image key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         case 'ImageCover':
-          return <ImageCover key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          return <ImageCover key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         case 'Chart':
-          return <Chart key={widget._id} payload={widget.widget} widgetId={widget._id} />        
+          return <Chart key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         case 'List':
-          return <List key={widget._id} payload={widget.widget} widgetId={widget._id} />       
+          return <List key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         case 'Button':
-          return <Button key={widget._id} payload={widget.widget} widgetId={widget._id} />       
+          return <Button key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         case 'Toggle':
-          return <Toggle key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          return <Toggle key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         case 'Map':
-          return <Map key={widget._id} payload={widget.widget} widgetId={widget._id} />
+          return <Map key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         case 'Led':
-          return <Led key={widget._id} payload={widget.widget} widgetId={widget._id} />    
+          return <Led key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
+        case 'HTML':
+          return <Html key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         default:
           return <h2 key={widget._id} className="item"><span className="item-content">Coming Soon Widgets</span></h2>
       }
