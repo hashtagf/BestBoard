@@ -6,31 +6,52 @@ import NETPIEMicrogear from '../store/Microgear'
 import './Widget.css'
 import HeaderCard from "./HeaderCard"
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const AnyReactComponent = ({ text }) => <i className="fas fa-map-marker-alt markMap" alt={text}></i>;
 class Map extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      value: 0
+      lat: 0,
+      lng: 0,
+      center: {
+        lat: 59.95,
+        lng: 30.33
+      },
+      zoom: 11
     }
   }
 
-  componentDidMount() {
-    const payload = this.props.payload
-    if (NETPIEMicrogear.statusOnline[payload.datasource]) {
-      const microgear = NETPIEMicrogear.microgear[payload.datasource]
+  componentDidMount () {
+    const payload = this.props.payload.forms
+    if (NETPIEMicrogear.statusOnline[payload[0].datasource]) {
+      const microgear = NETPIEMicrogear.microgear[payload[0].datasource]
+      microgear.on('message', this.onMessage.bind(this))
+    } else console.log('error : not Connect datasource !!')
+    if (NETPIEMicrogear.statusOnline[payload[1].datasource]) {
+      const microgear = NETPIEMicrogear.microgear[payload[1].datasource]
       microgear.on('message', this.onMessage.bind(this))
     } else console.log('error : not Connect datasource !!')
   }
 
-  onMessage(topic, msg) {
-    const payload = this.props.payload
-    const strMsg = msg + ''
-    const value = strMsg.split(payload.filter)[payload.filterIndex]
-    if (payload.value === topic) {
+  onMessage (topic, msg) {
+    var payload = this.props.payload.forms
+    if (payload[0].value === topic || payload[1].value === topic) {
+      var index = 1
+      var name = 'lng'
+      if (payload[0].value === topic){
+        index = 0
+        name = 'lat'
+      }
+      payload = payload[index]
+      let value = msg + ''
+      if (payload.manual) eval(payload.jsValue)
+      else value = value.split(payload.filter)[payload.filterIndex]
       this.setState({
-        value: value
+        [name]: value,
+        center: {
+          [name]: value
+        }
       })
     }
   }
@@ -39,13 +60,6 @@ class Map extends React.Component {
     const widgetId = this.props.widgetId
     WidgetStore.deleteWidget(widgetId)
   }
-  static defaultProps = {
-    center: {
-      lat: 59.95,
-      lng: 30.33
-    },
-    zoom: 11
-  };
   render() {
     const payload = this.props.payload
     const widgetId = this.props.widgetId
@@ -55,12 +69,12 @@ class Map extends React.Component {
           <div className="card-body" style={{height: '300px'}}>
             <GoogleMapReact
               bootstrapURLKeys={{ key: 'AIzaSyCmONUAkFkKSXNpjjcaihGMVkBZw9vwJzQ' }}
-              defaultCenter={this.props.center}
-              defaultZoom={this.props.zoom}
+              defaultCenter={this.state.center}
+              defaultZoom={this.state.zoom}
             >
               <AnyReactComponent
-              lat={59.955413}
-              lng={30.337844}
+              lat={this.state.lat}
+              lng={this.state.lng}
               text={'K'}
               />
             </GoogleMapReact>

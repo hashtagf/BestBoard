@@ -3,6 +3,7 @@ import GoogleMapReact from 'google-map-react';
 import WidgetStore from '../store/WidgetStore'
 import InputText from './Input/InputText'
 import FormInputBasic from './Input/FormInputBasic'
+import FormMulti from './Input/FormMulti'
 import Store from '../store/Store'
 import SummitBtn from './SummitBtn'
 import './FormImageCover.css'
@@ -15,10 +16,30 @@ class FormMap extends React.Component {
     super(props)
     this.state = {
       title: 'Map',
-      file: 'empty',
-      selectPoint: 0,
-      popups: [],
-      search: ''
+      forms: [
+        {
+          title: 'Latitude',
+          value: '',
+          datasource: '',
+          body: '',
+          filter: ',',
+          filterIndex: 0,
+          jsValue: '',
+          manual: false,
+        },
+        {
+          title: 'Longitude',
+          value: '',
+          datasource: '',
+          body: '',
+          filter: ',',
+          filterIndex: 0,
+          jsValue: '',
+          manual: false,
+        }
+      ],
+      lat : 59.955413,
+      lng: 30.337844
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
@@ -61,8 +82,7 @@ class FormMap extends React.Component {
     let payload = {
       typeWidget: 'Map',
       title: this.state.title,
-      file: this.state.file,
-      popups: this.state.popups,
+      forms: this.state.forms,
       layout: {
         w: 3,
         h:6,
@@ -78,24 +98,18 @@ class FormMap extends React.Component {
       WidgetStore.createWidget(Store.currentId, payload)
     this.reState()
   }
-  addPopup = (e) => {
-    var tmp = this.state.popups
-    tmp.push({
-      title: 'Gauge',
-      datasource: '',       
-      body: '',
-      value: '',
-      filter: ',',
-      filterIndex: 0,
-      unit: '',
-      icon: '',
-      jsValue: '',
-      manual: false,
-      position: []
-    })
-    this.setState({
-      popups: tmp
-    })
+  setPosition = ()=> {
+    /* const forms = this.state.forms
+    if (forms[0].value&&forms[1].value) {
+      let value = msg + ''
+      if (payload.manual) eval(payload.jsValue)
+      else value = value.split(payload.filter)[payload.filterIndex]
+      const stateValue = this.state.value
+      this.setState({
+        lat: value,
+        lng: 0
+      })
+    } */
   }
   render() {
     const payload = this.state
@@ -106,28 +120,24 @@ class FormMap extends React.Component {
           title="Title"
           name="title"
           value={payload.title} />
-        <FormInputBasic callback={this.handlePayload} values={payload} />
-          <div className="card-body" style={{height: '300px'}}>
-            <GoogleMapReact
-              bootstrapURLKeys={{ key: 'AIzaSyCmONUAkFkKSXNpjjcaihGMVkBZw9vwJzQ' }}
-              defaultCenter={this.props.center}
-              defaultZoom={this.props.zoom}
-            >
-              <AnyReactComponent
-              lat={59.955413}
-              lng={30.337844}
-              text={'K'}
-              />
-            </GoogleMapReact>
-          </div>
-        <div className="row mt-2 mb-2 text-center">
-          <div className="col-12">
-            <a className="btn" onClick={this.addPopup}>Add popup</a>
-          </div>
+          <FormMulti payload={payload} 
+          handlePayload={this.handlePayload} 
+          title={'Position'}
+          formsbtn={['Latitude','Longitude']}
+          forms={payload.forms}/>
+        <div className="card-body" style={{height: '300px'}}>
+          <GoogleMapReact
+            bootstrapURLKeys={{ key: 'AIzaSyCmONUAkFkKSXNpjjcaihGMVkBZw9vwJzQ' }}
+            defaultCenter={this.props.center}
+            defaultZoom={this.props.zoom}
+          >
+            <AnyReactComponent
+            lat={payload.lat}
+            lng={payload.lng}
+            text={'K'}
+            />
+          </GoogleMapReact>
         </div>
-        {
-          (payload.popups)?<FormPopups payload={payload} handlePayload={this.handlePayload}/>:null
-        }
 
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget} />
       </div>
@@ -135,47 +145,5 @@ class FormMap extends React.Component {
   }
 }
 
-class FormPopups extends React.Component {
-  handlePayload = (e) => {
-    var tmp = this.props.payload.popups
-    var index = parseInt(this.props.payload.selectPoint,10)
-    tmp[index][e.target.name] = e.target.value
-    var obj = {
-      target: {
-        name: 'popups',
-        value: tmp
-      }
-    }
-    this.props.handlePayload(obj)
-  }
-  render () {
-    const payload = this.props.payload
-    var buttons = payload.popups.map((popup,index) =>
-        <button key={index} className={(payload.selectPoint === index+'')?'btn btn-primary':'btn'} type="button" name="selectPoint" value={index} data-toggle="collapse" data-target={"#form"+index} aria-expanded={(payload.selectPoint === index+'')?"true":"false"} aria-controls={"form"+index} onClick={this.props.handlePayload}>
-            {index+1}
-        </button>
-    );
-    var forms = payload.popups.map((popup,index) =>
-          <div key={index} id={"form"+index} className={(payload.selectPoint === index+'')?'collapse show':'collapse'} aria-labelledby="headingOne" data-parent="#popupForm">
-            <FormInputBasic callback={this.handlePayload} values={popup} />
-          </div>
-    );
-    return (
-      <div className="accordion" id="popupForm">
-        <div className="form-group row">
-            <label htmlFor="value" className="col-3 col-form-label">
-              Form :
-              </label>
-            <div className="col-9">
-              <div className="btn-group" role="group" aria-label="Basic example">
-                  {buttons}
-              </div>
-            </div>
-          </div>
-          {forms}
-        </div>
-    )
-  }
-}
 
 export default FormMap

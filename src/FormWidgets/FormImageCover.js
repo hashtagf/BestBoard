@@ -134,11 +134,11 @@ class FormImageCover extends React.Component {
         {(payload.file)?<ImgArea file={payload.file} value={payload} handlePayload={this.handlePayload}/>:null}
         <div className="row mt-2 mb-2 text-center">
           <div className="col-12">
-            {(payload.file)?<a className="btn" onClick={this.addPopup}>Add popup</a>:null}
+            {(payload.file)?<button className="btn btn-primary" type="button" onClick={this.addPopup}>Add popup</button>:null}
           </div>
         </div>
         {
-          (payload.popups)?<FormPopups payload={payload} handlePayload={this.handlePayload}/>:null
+          (payload.file&&payload.popups)?<FormPopups payload={payload} handlePayload={this.handlePayload}/>:null
         }
 
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget} />
