@@ -5,13 +5,14 @@ import WidgetStore from '../store/WidgetStore'
 import NETPIEMicrogear from '../store/Microgear'
 import './Widget.css'
 import HeaderCard from "./HeaderCard"
+import date from 'date-and-time';
 
 class CardBox extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       value: 0,
-      previousValue: 0,
+      previousValue: null
     }
   }
 
@@ -25,8 +26,9 @@ class CardBox extends React.Component {
     if (NETPIEMicrogear.statusOnline[payload.datasource]) {
       const microgear = NETPIEMicrogear.microgear[payload.datasource]
       microgear.on('message', this.onMessage)
-      //if (NETPIEMicrogear.topics[payload.datasource][payload.value])
-      //console.log(NETPIEMicrogear.topics[payload.datasource][payload.value].value)
+      //if (NETPIEMicrogear.topics[payload.datasource][payload.value]) {
+      //  this.onMessage(payload.datasource,NETPIEMicrogear.topics[payload.datasource][payload.value].value)
+      //}
 
     } else console.log('error : not Connect datasource !!')
   }
@@ -34,6 +36,7 @@ class CardBox extends React.Component {
     const payload = this.props.payload
     if (payload.value === topic) {
       let value = msg + ''
+      let now = new Date();
       if (payload.manual) eval(payload.jsValue)
       else value = value.split(payload.filter)[payload.filterIndex]
       const stateValue = this.state.value
@@ -42,16 +45,6 @@ class CardBox extends React.Component {
         previousValue: stateValue
       })
     }
-  }
-  showTime () {
-   /*  let now = new Date();
-    let time = this.state.time
-    time = (typeof time === 'string' || time instanceof String)?new Date(time):time;
-    let ago = date.subtract(now, time)
-    if (ago.toSeconds() <= 60) return ago.toSeconds()+ ' seconds'
-    else if (ago.toMinutes() < 60) return ago.toMinutes()+ ' Minutes'
-    else if (ago.toHours() < 24) return ago.toHours()+ ' Hours'
-    else if(ago.toDays() < 30) return ago.toDays()+ ' Days' */
   }
   render() {
     const payload = this.props.payload
@@ -64,7 +57,6 @@ class CardBox extends React.Component {
       arrow = 'down'
       colorText = 'text-danger updown'
     }
-
     return (
         <div className="shadowcard item-content card h-100 rounded-0 widgetCard border-0 col-12" data-id={widgetId}>
           <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
@@ -81,14 +73,16 @@ class CardBox extends React.Component {
                 <h6>{payload.unit}</h6>
               </div>
               <div className="row">
+                {(state.previousValue)?
                 <span className={colorText}>
                 <i className={`fas pt-2 mr-2 fa-angle-` + arrow}></i>
                 <span className="fa-layers-counter">{(state.value - state.previousValue).toFixed(2)}</span>
-                </span>
+                </span>:null}
               </div>
             </div>
             </div>
           </div>
+
         </div>
     )
   }

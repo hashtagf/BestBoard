@@ -6,7 +6,7 @@ import NETPIEMicrogear from '../store/Microgear'
 import './Widget.css'
 import HeaderCard from "./HeaderCard"
 
-class CardBox extends React.Component {
+class Button extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -58,8 +58,7 @@ class CardBox extends React.Component {
     const payload = this.props.payload
     const widgetId = this.props.widgetId
     return (
-      <div className="item Button col-12" data-id={widgetId}>
-        <div className="shadowcard item-content card rounded-0 widgetCard border-0">
+        <div className="shadowcard item-content card rounded-0 widgetCard col-12 h-100 border-0" data-id={widgetId}>
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body ">
             <button 
@@ -70,9 +69,8 @@ class CardBox extends React.Component {
             </button>
           </div>
         </div>
-      </div>
     )
   }
 }
 
-export default CardBox
+export default Button

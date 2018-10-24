@@ -67,9 +67,11 @@ class FormButton extends React.Component {
       manual: this.state.manual,
       layout: {
         w: 3,
-        h:6,
+        h:3,
         minW: 3,
-        minH: 5
+        minH: 3,
+        maxW: 6,
+        maxH: 6
       }
     }
     this.reState()

@@ -11,16 +11,18 @@ class FormLed extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: 'Card Box',
+      title: 'LED',
       value: '',
       datasource: '',
       body: '',
       filter: ',',
       filterIndex: 0,
-      unit: '',
-      icon: '',
       jsValue: '',
       manual: false,
+      expressionON: '',
+      expressionOFF: 'else',
+      valueON: '',
+      valueOFF: ''
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
@@ -45,10 +47,12 @@ class FormLed extends React.Component {
       value: '',
       filter: ',',
       filterIndex: 0,
-      unit: '',
-      icon: '',
       jsValue: '',
-      manual: false
+      manual: false,
+      expressionON: '',
+      expressionOFF: 'else',
+      valueON: '',
+      valueOFF: ''
     })
   }
   // End Update
@@ -69,15 +73,19 @@ class FormLed extends React.Component {
       datasource: this.state.datasource,
       filter: this.state.filter,
       filterIndex: this.state.filterIndex,
-      unit: this.state.unit,
-      icon: this.state.icon,
       jsValue: this.state.jsValue,
       manual: this.state.manual,
+      expressionON: this.state.expressionON,
+      expressionOFF: this.state.expressionOFF,
+      valueON: this.state.valueON,
+      valueOFF: this.state.valueOFF,
       layout: {
-        w: 3,
-        h:6,
-        minW: 3,
-        minH: 5
+        w: 2,
+        h:4,
+        minW: 1,
+        minH: 3,
+        maxW: 6,
+        maxH: 6
       }
     }
     if (editWidget)  
@@ -92,70 +100,40 @@ class FormLed extends React.Component {
     return (
       <div className="FormCardBox container">
         <FormInputBasic callback={this.handlePayload} values={payload} />
-        <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit} />
+        <ConditionForm event="ON" handlePayload={this.handlePayload} values={payload}/>
+        <ConditionForm event="OFF" handlePayload={this.handlePayload} values={payload}/>
         {/* <InputText callback={this.handlePayload} title="Icon" name="icon" value={payload.icon} placeholder="fontAwesome Icon (name Icon) :: tint"/> */}
-        <Icons value={payload} callback={this.handlePayload}/>
+          
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
 
       </div>
     )
   }
 }
-
-class Icons extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      icons: [],
-      selectOption: {}
-    }
-  }
-
-  componentWillReceiveProps(nextProps){
-    let icons = []
-    fontAwesomeIcons.icons.map((icon) => 
-      icons.push({
-        label: icon ,
-        value: icon
-      })
-    )
-    this.setState({
-      icons: icons,
-      selectOption: {
-        label: nextProps.value.icon,
-        value: nextProps.value.icon
-      }
-    })
-  }
-
-  handleSelected = (selectOption) => {
-    this.setState({ selectOption })
-    this.props.value.icon = selectOption.value
-  }
-
+class ConditionForm extends React.Component {
   render () {
-    let {icons, selectOption} = this.state
-    if(selectOption === null) selectOption = ''
+    let props = this.props
     return (
-      <div className="form-group row">
-        <label htmlFor="value" className="col-3 col-form-label">
-          Select Icon :
-        </label>
-        <div className="col-7">
-          <Creatable
-            value={selectOption}
-            onChange={this.handleSelected}
-            options={icons}
-            placeholder='Topic :: Name icons'
-          />
+      <div class="form-row form-group">
+        <label for="inputCity col-2 col-form-label">Condition Light {props.event} :</label>
+        <div class="col-3">
+          <select id="inputState" class="form-control" 
+            name={'expression' + props.event} 
+            onChange={props.handlePayload}>
+            {(props.event === 'OFF')?<option selected value="else">else</option>:null}
+            <option value="="> = </option>
+            <option value="≠"> ≠ </option>
+            <option value=">"> {'>'} </option>
+            <option value="<"> {'<'} </option>
+            <option value=">="> >= </option>
+            <option value="<="> {'<='} </option>
+          </select>
         </div>
-        <div className="col-2">
-          <i className={'fa-2x ' + selectOption.value}></i>
-          {/* {(selectOption.value)?<i className={'fa-2x ' + selectOption.value}></i>:<i className="fa-2x fas fa-spinner fa-pulse"></i>} */}
+        <div class="col">
+          <input type="text" class="form-control" name={'value' + props.event} placeholder="Static value" readOnly={(props.event==='OFF'&&props.values.expressionOFF==='else')?true:false}/>
         </div>
       </div>
     )
   }
 }
-
 export default FormLed

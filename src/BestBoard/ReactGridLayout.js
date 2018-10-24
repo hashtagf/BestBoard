@@ -98,15 +98,15 @@ class Main extends React.Component {
           transitionAppearTimeout={500}
           transitionEnter={false}
           transitionLeave={false}>
-          <ResponsiveGridLayout className="layouts" layouts={layouts}
+          <ResponsiveGridLayout className="layouts"
             breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480 }}
             cols={{ lg: 12, md: 10, sm: 8, xs: 6 }}
             layouts={layouts}
             rowHeight={25}
             isDraggable={Store.mode}
             isResizable={Store.mode}
-            onLayoutChange={(layout, layoutss) =>
-              this.onLayoutChange(layout, layoutss)
+            onLayoutChange={(layout, layouts) =>
+              this.onLayoutChange(layout, layouts)
             }>
             {widgets}
           </ResponsiveGridLayout>

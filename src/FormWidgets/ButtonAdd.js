@@ -11,7 +11,6 @@ class ButtonAdd extends React.Component {
 
     return (
       <div className={(Store.currentId)?'ButtonAdd':'ButtonAdd d-none'}>
-
    
           <div className="circleMenu btn p-0 rounded-circle" 
           data-toggle="modal" 

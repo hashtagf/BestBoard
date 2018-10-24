@@ -7,7 +7,6 @@
     position: relative;
     text-align: center;
     z-index: 1;
-    min-height: 100%;
   }
   .item.muuri-item-releasing {
     z-index: 2;

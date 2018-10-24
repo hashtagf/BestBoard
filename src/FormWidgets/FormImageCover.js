@@ -69,10 +69,12 @@ class FormImageCover extends React.Component {
       file: this.state.file,
       popups: this.state.popups,
       layout: {
-        w: 3,
+        w: 10,
         h:6,
-        minW: 3,
-        minH: 5
+        minW: 6,
+        minH: 5,
+        maxW: 12,
+        maxH: 12
       }
     }
     if (editWidget)
@@ -103,7 +105,6 @@ class FormImageCover extends React.Component {
   }
   render() {
     const payload = this.state
-    console.log(this.state.popups)
     return (
       <div className="FormProgressBar container">
         <InputText

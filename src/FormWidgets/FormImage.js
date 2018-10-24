@@ -67,7 +67,9 @@ class FormImage extends React.Component {
         w: 3,
         h:6,
         minW: 3,
-        minH: 5
+        minH: 5,
+        maxW: 12,
+        maxH: 6
       }
     }
     if (editWidget)  

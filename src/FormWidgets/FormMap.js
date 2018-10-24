@@ -8,20 +8,27 @@ import SummitBtn from './SummitBtn'
 import './FormImageCover.css'
 import reactCSS from 'reactcss'
 const $ = require("jquery")
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const AnyReactComponent = ({ text }) => <i class="fas fa-map-marker-alt markMap" alt={text}></i>;
 
-class FormImageCover extends React.Component {
+class FormMap extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       title: 'Map',
       file: 'empty',
       selectPoint: 0,
-      popups: []
+      popups: [],
+      search: ''
     }
     this.handlePayload = this.handlePayload.bind(this)
-    this.handleFile = this.handleFile.bind(this)
   }
+  static defaultProps = {
+    center: {
+      lat: 59.95,
+      lng: 30.33
+    },
+    zoom: 11
+  };
   componentWillReceiveProps(nextProps) {
     let editWidget = nextProps.editWidget
     if (editWidget) {
@@ -48,20 +55,6 @@ class FormImageCover extends React.Component {
     })
   }
 
-  handleFile(e) {
-    if (e.target.files && e.target.files[0]) {
-
-      var FR = new FileReader()
-      FR.onloadend = () => {
-        // document.getElementById("b64").src = FR.result
-        this.setState({
-          file: FR.result
-        })
-      }
-      FR.readAsDataURL(e.target.files[0])
-    }
-  }
-
   handleSubmit = (e) => {
     e.preventDefault()
     const editWidget = this.props.editWidget
@@ -74,7 +67,9 @@ class FormImageCover extends React.Component {
         w: 3,
         h:6,
         minW: 3,
-        minH: 5
+        minH: 5,
+        maxW: 12,
+        maxH: 6
       }
     }
     if (editWidget)
@@ -82,7 +77,6 @@ class FormImageCover extends React.Component {
     else
       WidgetStore.createWidget(Store.currentId, payload)
     this.reState()
-    document.getElementById('b64').src = ''
   }
   addPopup = (e) => {
     var tmp = this.state.popups
@@ -105,7 +99,6 @@ class FormImageCover extends React.Component {
   }
   render() {
     const payload = this.state
-    console.log(this.state.popups)
     return (
       <div className="FormProgressBar container">
         <InputText
@@ -113,7 +106,9 @@ class FormImageCover extends React.Component {
           title="Title"
           name="title"
           value={payload.title} />
-        <GoogleMapReact
+        <FormInputBasic callback={this.handlePayload} values={payload} />
+          <div className="card-body" style={{height: '300px'}}>
+            <GoogleMapReact
               bootstrapURLKeys={{ key: 'AIzaSyCmONUAkFkKSXNpjjcaihGMVkBZw9vwJzQ' }}
               defaultCenter={this.props.center}
               defaultZoom={this.props.zoom}
@@ -124,6 +119,7 @@ class FormImageCover extends React.Component {
               text={'K'}
               />
             </GoogleMapReact>
+          </div>
         <div className="row mt-2 mb-2 text-center">
           <div className="col-12">
             <a className="btn" onClick={this.addPopup}>Add popup</a>
@@ -138,6 +134,7 @@ class FormImageCover extends React.Component {
     )
   }
 }
+
 class FormPopups extends React.Component {
   handlePayload = (e) => {
     var tmp = this.props.payload.popups
@@ -180,63 +177,5 @@ class FormPopups extends React.Component {
     )
   }
 }
-class ImgArea extends React.Component {  
-  drag_start = (event) => {
-    var style = window.getComputedStyle(event.target, null);
-    var str = (parseInt(style.getPropertyValue("left"),10) - event.clientX) + ',' + (parseInt(style.getPropertyValue("top"),10) - event.clientY)+ ',' + event.target.id;
-    event.dataTransfer.setData("Text",str);
-  } 
 
-  drop = (event) => {
-    var offset = event.dataTransfer.getData("Text").split(',');
-    var dm = document.getElementById(offset[2]);
-    var h = $('#imgcontain').innerHeight();
-    var w = $('#imgcontain').innerWidth();
-    var x = (event.clientX + parseInt(offset[0],10))/w*100.0 + '%';
-    var y = (event.clientY + parseInt(offset[1],10))/h*100.0 + '%';
-    dm.style.left = x
-    dm.style.top = y
-    var index = parseInt(offset[2].substr(4, 5),10)
-    event.target.name = 'popups'
-    var temp = this.props.value.popups
-    temp[index].position = [x,y]
-    event.target.value = temp
-    this.props.handlePayload(event)
-    event.preventDefault();
-    return false;
-  }
-
-  drag_over (event) {
-    event.preventDefault();
-    return false;
-  }
-  render () {
-    const file = this.props.file
-    var stylesObj = {}
-    this.props.value.popups.map( (popup,index) =>
-      stylesObj['item'+index] = {
-        left: popup.position[0],
-        top: popup.position[1]
-      }
-    )
-    var styles = reactCSS({
-      'default': stylesObj
-    })
-    var popups = this.props.value.popups.map((popup,index) =>
-      <div className="item rounded-circle" key={index} id={'item'+index} name={'item'+index} draggable="true" onDragStart={this.drag_start} style={styles['item'+index]}>
-          {index+1}
-      </div>
-    )
-    return (
-      <div className="row">
-        <div className="col-12">
-          <img src={file} className="img-fluid" id="b64" alt="" />
-          <div className='gridPopupPreview' id="imgcontain" onDrop={this.drop} onDragOver={this.drag_over}>
-            {popups}
-          </div>
-        </div>
-      </div>
-    )
-  }
-}
-export default FormImageCover
+export default FormMap

@@ -8,7 +8,7 @@ import './Widget.css'
 import HeaderCard from "./HeaderCard"
 
 
-class CardBox extends React.Component {
+class Toggle extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -91,4 +91,4 @@ class CardBox extends React.Component {
   }
 }
 
-export default CardBox
+export default Toggle
