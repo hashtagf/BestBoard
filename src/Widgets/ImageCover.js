@@ -34,7 +34,6 @@ class ImageCover extends React.Component {
       } else console.log('error : not Connect datasource !!')
       return 0
     })
-
   }
   onMessage = (topic, msg) => {
     var popups = this.props.payload.popups

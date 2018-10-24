@@ -6,8 +6,8 @@ import FormInputBasic from './Input/FormInputBasic'
 import Store from '../store/Store'
 import SummitBtn from './SummitBtn'
 import './FormImageCover.css'
-import reactCSS from 'reactcss'
-const $ = require("jquery")
+// import reactCSS from 'reactcss'
+// const $ = require("jquery")
 const AnyReactComponent = ({ text }) => <i class="fas fa-map-marker-alt markMap" alt={text}></i>;
 
 class FormMap extends React.Component {

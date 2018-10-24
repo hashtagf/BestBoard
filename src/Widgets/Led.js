@@ -40,6 +40,7 @@ class Led extends React.Component {
           case '<':flag = value < payload.valueON;break;
           case '>=':flag = value >= payload.valueON;break;
           case '<=':flag = value <= payload.valueON;break;
+          default : ''
         }
         this.setState({
           value: flag,

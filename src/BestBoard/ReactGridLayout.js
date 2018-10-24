@@ -72,13 +72,13 @@ class Main extends React.Component {
     let widgets = listWidgets.map((widget, index, array) =>
       <div key={widget.key}
         data-grid={{
-          x: (this.state.layouts.length * 2) % (12),
-          y: Infinity,
+          x: index,
+          y: 0,
           w: widget.props.payload.layout.w,
           h: widget.props.payload.layout.h,
           minW: widget.props.payload.layout.minW,
           minH: widget.props.payload.layout.minH,
-          autoSize: true
+          // autoSize: true
         }}>
         {widget}
       </div>

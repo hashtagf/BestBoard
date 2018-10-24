@@ -2,10 +2,10 @@ import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import Store from '../store/Store'
 import FormInputBasic from './Input/FormInputBasic'
-import InputText from './Input/InputText'
+// import InputText from './Input/InputText'
 import SummitBtn from './SummitBtn'
-import fontAwesomeIcons from './fontawesomeIcons.json'
-import Creatable from 'react-select/lib/Creatable'
+// import fontAwesomeIcons from './fontawesomeIcons.json'
+// import Creatable from 'react-select/lib/Creatable'
 
 class FormLed extends React.Component {
   constructor(props) {

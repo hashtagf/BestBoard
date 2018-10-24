@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Main from '../BestBoard/Main'
+// import Main from '../BestBoard/Main'
 import MyFirstGrid from '../BestBoard/ReactGridLayout'
 import Redirect from '../BestBoard/Redirect'
 

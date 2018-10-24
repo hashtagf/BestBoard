@@ -5,7 +5,7 @@ import WidgetStore from '../store/WidgetStore'
 import NETPIEMicrogear from '../store/Microgear'
 import './Widget.css'
 import HeaderCard from "./HeaderCard"
-import date from 'date-and-time';
+// import date from 'date-and-time'
 
 class CardBox extends React.Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class CardBox extends React.Component {
     const payload = this.props.payload
     if (payload.value === topic) {
       let value = msg + ''
-      let now = new Date();
+      // let now = new Date();
       if (payload.manual) eval(payload.jsValue)
       else value = value.split(payload.filter)[payload.filterIndex]
       const stateValue = this.state.value
