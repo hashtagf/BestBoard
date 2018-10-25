@@ -21,7 +21,20 @@ class FormChart extends React.Component {
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
-  componentWillReceiveProps(nextProps) {
+  componentDidMount() {
+    let editWidget = this.props.editWidget
+    if (editWidget) {
+      Object.keys(editWidget).forEach((objectKey) => {
+        if (objectKey !== 'widgetId') {
+          return this.setState({
+            [objectKey]: editWidget[objectKey]
+          })
+        }
+      });
+    } else this.reState()
+  }
+
+  componentWillReceiveProps(nextProps){
     let editWidget = nextProps.editWidget
     if (editWidget) {
       Object.keys(editWidget).forEach((objectKey) => {
@@ -33,6 +46,7 @@ class FormChart extends React.Component {
       });
     } else this.reState()
   }
+
   reState () {
     this.setState({
       title: 'Chart',

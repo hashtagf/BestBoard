@@ -20,7 +20,8 @@
 }
 .formWidget {
     overflow-y: auto;
-    max-height: 60vh;
+    max-height: 65vh;
+    min-height: 65vh;
 }
 .modal-content.createwidget {
     max-height: 100vh;

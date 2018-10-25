@@ -26,7 +26,20 @@ class FormToggle extends React.Component {
       listDatasources: DatasourceStore.listsDatasources()
     }
   }
-  componentWillReceiveProps(nextProps) {
+  componentDidMount() {
+    let editWidget = this.props.editWidget
+    if (editWidget) {
+      Object.keys(editWidget).forEach((objectKey) => {
+        if (objectKey !== 'widgetId') {
+          return this.setState({
+            [objectKey]: editWidget[objectKey]
+          })
+        }
+      })
+    } else this.reState()
+  }
+
+  componentWillReceiveProps(nextProps){
     let editWidget = nextProps.editWidget
     if (editWidget) {
       Object.keys(editWidget).forEach((objectKey) => {
@@ -35,9 +48,10 @@ class FormToggle extends React.Component {
             [objectKey]: editWidget[objectKey]
           })
         }
-      });
+      })
     } else this.reState()
   }
+
   reState () {
     this.setState({
       title: 'Toggle',

@@ -52,9 +52,12 @@ class CardBox extends React.Component {
     const widgetId = this.props.widgetId
     let arrow = 'up'
     let colorText = 'text-success updown'
-    if (state.value - state.previousValue >= 0) arrow = 'up'
+    if (state.value - state.previousValue > 0) arrow = 'angle-up'
+    else if (state.value - state.previousValue === 0) {
+      arrow = 'equals'
+    }
     else {
-      arrow = 'down'
+      arrow = 'angle-down'
       colorText = 'text-danger updown'
     }
     return (
@@ -75,7 +78,7 @@ class CardBox extends React.Component {
               <div className="row">
                 {(state.previousValue)?
                 <span className={colorText}>
-                <i className={`fas pt-2 mr-2 fa-angle-` + arrow}></i>
+                <i className={`fas pt-2 mr-2 fa-` + arrow}></i>
                 <span className="fa-layers-counter">{(state.value - state.previousValue).toFixed(2)}</span>
                 </span>:null}
               </div>

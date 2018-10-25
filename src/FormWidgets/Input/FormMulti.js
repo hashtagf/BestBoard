@@ -28,10 +28,9 @@ class FormMulti extends React.Component {
         value: tmp
       }
     }
-    //this.props.handlePayload(obj)
+    this.props.handlePayload(obj)
   }
   render() {
-    const payload = this.props.payload
     const selectForm = this.state.selectForm
     var buttons = this.props.formsbtn.map((popup, index) =>
       <button key={index}
@@ -49,21 +48,28 @@ class FormMulti extends React.Component {
         className={(selectForm === index + '') ? 'collapse show' : 'collapse'} 
         aria-labelledby="headingOne"
         data-parent="#popupForm">
-        <FormInputBasic callback={this.handlePayload} values={form}/>
+        <FormInputBasic callback={this.handlePayload} values={form} hiddenTitle={true}/>
       </div>
     );
     return (
       <div className="accordion" id="popupForm">
-        <div className="form-group row">
-          <label htmlFor="value" className="col-3 col-form-label">
-            {this.props.title} :
-              </label>
-          <div className="col-9">
-            <div className="btn-group" role="group" aria-label="Basic example">
-              {buttons}
+        {
+          (this.props.formsbtn)?
+            <div className="form-group row">
+            <label htmlFor="value" className="col-3 col-form-label">
+              {this.props.title} :
+                </label>
+            <div className="col-9">
+              <div className="btn-group" role="group" aria-label="Basic example">
+                {buttons}
+              </div>
             </div>
           </div>
-        </div>
+        :null
+
+        }
+
+        <strong className="text-center">{this.props.formsbtn[this.state.selectForm]}</strong>
         {forms}
       </div>
     )

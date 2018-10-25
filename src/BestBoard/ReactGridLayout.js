@@ -56,9 +56,7 @@ class Main extends React.Component {
   }
 
   onResize = () => {
-    this.setState({
-      layouts: JSON.parse(JSON.stringify(originalLayouts))
-    })
+    
   }
 
 
@@ -76,9 +74,6 @@ class Main extends React.Component {
         maxW: widget.maxW
       })
     )
-    // console.log(layout)
-    // WidgetStore.updatelayout()
-    // saveToLS("layouts", layouts)
     this.setState({ layouts })
   }
 

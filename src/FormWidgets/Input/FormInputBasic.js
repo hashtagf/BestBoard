@@ -4,6 +4,7 @@ import NETPIEMicrogear from '../../store/Microgear'
 import DatasourceStore from '../../store/DatasourceStore'
 import Creatable from 'react-select/lib/Creatable'
 import InputText from './InputText'
+const $ = require("jquery")
 
 class FormInputBasic extends React.Component {
   constructor(props) {
@@ -24,7 +25,6 @@ class FormInputBasic extends React.Component {
       selectOption: {
         label: values.value,
         value: values.body,
-        // __isNew__: true
       }
     })
   }
@@ -61,7 +61,9 @@ class FormInputBasic extends React.Component {
     this.props.values.value = selectOption.label
     this.props.values.body = selectOption.value
   }
-
+  static defaultProps = {
+    hiddenTitle: false
+  };
   render() {
     const handleChange = this.props.callback
     let values = this.props.values
@@ -69,7 +71,7 @@ class FormInputBasic extends React.Component {
     let manual = (values.manual==='false'||!values.manual)?false:true
     return (
       <div className="FormInputBasic">
-        <InputText callback={handleChange} title="Title" name="title" value={values.title} />
+        {(!this.props.hiddenTitle)?<InputText callback={handleChange} title="Title" name="title" value={values.title} />:null}
 
         <div className="form-group row">
           <label htmlFor="datasource" className="col-3 col-form-label">
@@ -207,19 +209,32 @@ class JsText extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      code: '',
+      code: ''||this.props.jsValue,
       error: null,
       output: ''
     }
+    this.process = this.process.bind(this)
+  }
+  componentDidMount () {
+    $("textarea").keydown(function (e) {
+      if (e.keyCode === 9) {
+        var start = this.selectionStart;
+        var end = this.selectionEnd;
+        var $this = $(this);
+        $this.val($this.val().substring(0, start)
+          + "  "
+          + $this.val().substring(end));
+
+        this.selectionStart = this.selectionEnd = start + 2;
+        return false;
+      }
+    });
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.jsValue)
-      this.setState({
-        code: nextProps.jsValue
-      })
+      this.process(nextProps.jsValue)
   }
-  handleChange = (e) => {
-    let codeStr = e.target.value
+  process (codeStr) {
     let error = null
     let value = this.props.msg
     try {
@@ -227,16 +242,13 @@ class JsText extends React.Component {
     }
     catch (err) {
       error = err
-      //console.log(err)
+      console.log(err)
     }
     this.setState({
       code: codeStr,
       error: error,
       output: value
     })
-    if (error !== null) codeStr = ''
-    e.target.value = codeStr
-    this.props.callback(e)
   }
   render() {
     let name = this.props.name
@@ -249,12 +261,12 @@ class JsText extends React.Component {
         <div className="col-9">
           function (value) {'{'}
           <textarea
-            className={(this.state.error === null) ? 'form-control is-valid' : 'form-control is-invalid texxt-danger'}
+            className={(this.state.error === null) ? 'form-control is-valid' : 'form-control is-invalid text-danger'}
             id="exampleFormControlTextarea1"
             rows="3"
             name={name}
             value={this.state.code}
-            onChange={this.handleChange}
+            onChange={this.props.callback}
             placeholder={placeholder}
           ></textarea>
           &emsp;return value<br />

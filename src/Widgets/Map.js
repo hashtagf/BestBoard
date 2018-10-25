@@ -1,3 +1,4 @@
+/* eslint no-eval: 0 */
 
 import GoogleMapReact from 'google-map-react';
 import React from 'react'
@@ -6,23 +7,32 @@ import NETPIEMicrogear from '../store/Microgear'
 import './Widget.css'
 import HeaderCard from "./HeaderCard"
 
-const AnyReactComponent = ({ text }) => <i className="fas fa-map-marker-alt markMap" alt={text}></i>;
+const AnyReactComponent = ({ text }) => <i className="fas fa-map-marker-alt markMap text-primary" alt={text}></i>;
+const YourPosition = ({ text }) => <span><i className="fas fa-male markMap text-primary"></i>{text}</span>;
 class Map extends React.Component {
-
+  static defaultProps = {
+    center: {
+      lat: 40.6976701,
+      lng: 74.2598779
+    },
+    zoom: 11
+  };
   constructor(props) {
     super(props)
     this.state = {
       lat: 0,
       lng: 0,
       center: {
-        lat: 59.95,
-        lng: 30.33
+        lat: 50,
+        lng: 50
       },
       zoom: 11
     }
   }
-
-  componentDidMount () {
+  componentWillMount () {
+    this.getLocation()
+  }
+    componentDidMount () {
     const payload = this.props.payload.forms
     if (NETPIEMicrogear.statusOnline[payload[0].datasource]) {
       const microgear = NETPIEMicrogear.microgear[payload[0].datasource]
@@ -47,15 +57,27 @@ class Map extends React.Component {
       let value = msg + ''
       if (payload.manual) eval(payload.jsValue)
       else value = value.split(payload.filter)[payload.filterIndex]
+      var tmp = this.state.center
+      tmp[name] = value
       this.setState({
         [name]: value,
-        center: {
-          [name]: value
-        }
       })
     }
   }
-
+  getLocation () {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(this.setCenter);
+    }
+    else console.log('geolocation not work')
+  }
+  setCenter = (position) =>{
+    this.setState({
+      center: {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      }
+    })
+  }
   delWidget() {
     const widgetId = this.props.widgetId
     WidgetStore.deleteWidget(widgetId)
@@ -66,16 +88,21 @@ class Map extends React.Component {
     return (
         <div className="item-content card border-success shadowcard rounded-0 widgetCard border-0 col-12 h-100" data-id={widgetId}>
           <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId} />
-          <div className="card-body" style={{height: '300px'}}>
+          <div className="card-body googlemap">
             <GoogleMapReact
               bootstrapURLKeys={{ key: 'AIzaSyCmONUAkFkKSXNpjjcaihGMVkBZw9vwJzQ' }}
-              defaultCenter={this.state.center}
+              defaultCenter={this.props.center}
               defaultZoom={this.state.zoom}
             >
               <AnyReactComponent
-              lat={this.state.lat}
-              lng={this.state.lng}
-              text={'K'}
+                lat={this.state.lat}
+                lng={this.state.lng}
+                text={'K'}
+              />
+              <YourPosition
+                lat={this.state.center.lat}
+                lng={this.state.center.lng}
+                text={'You are here'}
               />
             </GoogleMapReact>
           </div>

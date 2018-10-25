@@ -3,6 +3,7 @@ import WidgetStore from '../store/WidgetStore'
 import InputText from './Input/InputText'
 import Store from '../store/Store'
 import SummitBtn from './SummitBtn'
+const $ = require("jquery")
 
 class FormHtml extends React.Component {
   constructor(props) {
@@ -13,8 +14,8 @@ class FormHtml extends React.Component {
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
-  componentWillReceiveProps(nextProps) {
-    let editWidget = nextProps.editWidget
+  componentDidMount() {
+    let editWidget = this.props.editWidget
     if (editWidget) {
       Object.keys(editWidget).forEach((objectKey) => {
         if (objectKey !== 'widgetId') {
@@ -25,7 +26,34 @@ class FormHtml extends React.Component {
       });
     }
     else this.reState()
+    $("textarea").keydown(function (e) {
+      if (e.keyCode === 9) {
+        var start = this.selectionStart;
+        var end = this.selectionEnd;
+        var $this = $(this);
+        $this.val($this.val().substring(0, start)
+          + "  "
+          + $this.val().substring(end));
+
+        this.selectionStart = this.selectionEnd = start + 2;
+        return false;
+      }
+    });
   }
+
+  componentWillReceiveProps(nextProps) {
+    let editWidget = nextProps.editWidget
+    if (editWidget) {
+      Object.keys(editWidget).forEach((objectKey) => {
+        if (objectKey !== 'widgetId') {
+          return this.setState({
+            [objectKey]: editWidget[objectKey]
+          })
+        }
+      })
+    } else this.reState()
+  }
+
   reState() {
     this.setState({
       title: 'HTML',

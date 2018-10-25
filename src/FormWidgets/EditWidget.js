@@ -54,6 +54,47 @@ class EditWidget extends React.Component {
   }
 }
 
+class SelectType extends React.Component {
+  render() {
+    let editWidget = this.props.editWidget
+    const { selectType } = this.props
+    switch (selectType) {
+      case 'CardBox':
+        return <FormCardBox editWidget={editWidget} />
+      case 'Gauge':
+        return <FormGauge editWidget={editWidget} />
+      case 'GaugeSpeed':
+        return <FormGaugeSpeed editWidget={editWidget} />
+      case 'Image':
+        return <FormImage editWidget={editWidget} />
+      case 'ImageCover':
+        return <FormImageCover editWidget={editWidget} />
+      case 'ProgressBar':
+        return <FormProgressBar editWidget={editWidget} />
+      case 'Progress':
+        return <FormProgress editWidget={editWidget} />
+      case 'Text':
+        return <FormText editWidget={editWidget} />
+      case 'List':
+        return <FormList editWidget={editWidget} />
+      case 'Chart':
+        return <FormChart editWidget={editWidget} />
+      case 'Button':
+        return <FormButton editWidget={editWidget} />
+      case 'Toggle':
+        return <FormToggle editWidget={editWidget} />
+      case 'Map':
+        return <FormMap editWidget={editWidget} />
+      case 'Led':
+        return <FormLed editWidget={editWidget} />
+      case 'HTML':
+        return <FormHtml editWidget={editWidget} />
+      default:
+        return <h1>Please select widget</h1>
+    }
+  }
+}
+
 class WidgetsList extends React.Component {
 
   constructor(props) {
@@ -154,47 +195,6 @@ class WidgetsList extends React.Component {
         {listWidget}
       </div>
     )
-  }
-}
-
-class SelectType extends React.Component {
-  render() {
-    let editWidget = this.props.editWidget
-    const { selectType } = this.props
-    switch (selectType) {
-      case 'CardBox':
-        return <FormCardBox editWidget={editWidget} />
-      case 'Gauge':
-        return <FormGauge editWidget={editWidget} />
-      case 'GaugeSpeed':
-        return <FormGaugeSpeed editWidget={editWidget} />
-      case 'Image':
-        return <FormImage editWidget={editWidget} />
-      case 'ImageCover':
-        return <FormImageCover editWidget={editWidget} />
-      case 'ProgressBar':
-        return <FormProgressBar editWidget={editWidget} />
-      case 'Progress':
-        return <FormProgress editWidget={editWidget} />
-      case 'Text':
-        return <FormText editWidget={editWidget} />
-      case 'List':
-        return <FormList editWidget={editWidget} />
-      case 'Chart':
-        return <FormChart editWidget={editWidget} />
-      case 'Button':
-        return <FormButton editWidget={editWidget} />
-      case 'Toggle':
-        return <FormToggle editWidget={editWidget} />
-      case 'Map':
-        return <FormMap editWidget={editWidget} />
-      case 'Led':
-        return <FormLed editWidget={editWidget} />
-      case 'HTML':
-        return <FormHtml editWidget={editWidget} />
-      default:
-        return <h1>Please select widget</h1>
-    }
   }
 }
 

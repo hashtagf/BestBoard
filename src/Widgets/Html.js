@@ -2,7 +2,6 @@ import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import './Widget.css'
 import HeaderCard from "./HeaderCard"
-import NETPIEMicrogear from '../store/Microgear'
 
 class HTML extends React.Component {
   delWidget() {

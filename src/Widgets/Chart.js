@@ -85,7 +85,7 @@ class Chart extends React.Component {
     return (
         <div className="item-content card shadowcard rounded-0 widgetChart border-0 col-12" data-id={widgetId}>
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
-          <div className="card-body">
+          <div className="card-body h-100">
             <div className="btn-group mb-2" role="group" aria-label="DayMonthYear">
               <button type="button"
                 className="btn btn-secondary btn-sm"

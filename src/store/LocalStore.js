@@ -1,60 +1,9 @@
 import { observable } from 'mobx'
+var fs = require('fs')
 //import socketIOClient from 'socket.io-client'
 
 class LocalStore {
-  @observable local = {
-    datasources: [
-      {
-        _id: 0,
-        datasource: {
-          typeDatasource: "NETPIE",
-          name: "name",
-          appID: "smarth",
-          key: "2CnqbZKz85LXoRg",
-          secret: "aZFoGTdCVtzth1f9OXxV5N63R",
-          topic: "/#",
-          jsOnconnect: "",
-          jsOncreated: ""
-        }
-      },
-      {
-        _id: 1,
-        datasource: {
-          typeDatasource: "NETPIE",
-          name: "418B_Board",
-          appID: "SmartOfficeAt418B",
-          key: "ej2smdC7pZF8PyR",
-          secret: "ZFXns7FxJEqqenSTSfeDHcih3",
-          topic: "/#",
-          jsOnconnect: "",
-          jsOncreated: ""
-        }
-      }
-    ],
-    microgear: [
-    ],
-    pages: [
-      {
-        id: 0,
-        name: "BoardName"
-      }
-    ],
-    widgets: {
-      0: {
-        boardId: 0,
-        widget: {
-          datasource: "",
-          filter: "/",
-          filterIndex: 0,
-          icon: "p",
-          title: "Card Box",
-          typeWidget: "CardBox",
-          unit: "p",
-          value: ""
-        }
-      }
-    }
-  }
+  @observable local = []
   insertPage(name) {
     this.local.pages.push({
       id: this.local.pages.length,
@@ -84,10 +33,18 @@ class LocalStore {
     }
   }
   insertWidget(id, payload) {
-    this.local.widgets[id] = {
+    var obj = {
       boardId: id,
       widget: payload
     }
+    // console.log(fs)
+    // fs.writeFile('widgets.json', JSON.stringify(obj), (err) => {
+    //   if (err) {
+    //     console.error(err)
+    //     return
+    //   };
+    //   console.log("File has been created")
+    // })
   }
 
 }

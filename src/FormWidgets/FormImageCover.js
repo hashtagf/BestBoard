@@ -4,23 +4,40 @@ import InputText from './Input/InputText'
 import FormInputBasic from './Input/FormInputBasic'
 import Store from '../store/Store'
 import SummitBtn from './SummitBtn'
+import FormMulti from './Input/FormMulti'
 import './FormImageCover.css'
 import reactCSS from 'reactcss'
+
 const $ = require("jquery")
 
 class FormImageCover extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: 'Image',
+      title: 'ImageCover',
       file: null,
       selectPoint: 0,
-      popups: []
+      popups: [],
+      formsbtn: []
     }
     this.handlePayload = this.handlePayload.bind(this)
     this.handleFile = this.handleFile.bind(this)
   }
-  componentWillReceiveProps(nextProps) {
+  componentDidMount() {
+    let editWidget = this.props.editWidget
+    if (editWidget) {
+      Object.keys(editWidget).forEach((objectKey) => {
+        if (objectKey !== 'widgetId') {
+          return this.setState({
+            [objectKey]: editWidget[objectKey]
+          })
+        }
+      })
+    }
+    else this.reState()
+  }
+
+  componentWillReceiveProps(nextProps){
     let editWidget = nextProps.editWidget
     if (editWidget) {
       Object.keys(editWidget).forEach((objectKey) => {
@@ -29,13 +46,13 @@ class FormImageCover extends React.Component {
             [objectKey]: editWidget[objectKey]
           })
         }
-      });
-    }
-    else this.reState()
+      })
+    } else this.reState()
   }
+
   reState () {
     this.setState({
-      title: 'Image',
+      title: 'ImageCover',
       file: null,
       popups: []
     })
@@ -86,6 +103,7 @@ class FormImageCover extends React.Component {
   }
   addPopup = (e) => {
     var tmp = this.state.popups
+    var tmpbtn = this.state.formsbtn
     tmp.push({
       title: 'Gauge',
       datasource: '',       
@@ -99,8 +117,10 @@ class FormImageCover extends React.Component {
       manual: false,
       position: []
     })
+    tmpbtn.push(tmp.length)
     this.setState({
-      popups: tmp
+      popups: tmp,
+      formsbtn: tmpbtn
     })
   }
   render() {
@@ -131,16 +151,20 @@ class FormImageCover extends React.Component {
             </div>
           </div>
         </div>
-        {(payload.file)?<ImgArea file={payload.file} value={payload} handlePayload={this.handlePayload}/>:null}
         <div className="row mt-2 mb-2 text-center">
           <div className="col-12">
-            {(payload.file)?<button className="btn btn-primary" type="button" onClick={this.addPopup}>Add popup</button>:null}
+            {(payload.file)?<button className="btn btn-primary" type="button" onClick={this.addPopup}><i className="fas fa-plus-square"></i> Add popup</button>:null}
           </div>
         </div>
+        {(payload.file)?<ImgArea file={payload.file} value={payload} handlePayload={this.handlePayload}/>:null}
         {
-          (payload.file&&payload.popups)?<FormPopups payload={payload} handlePayload={this.handlePayload}/>:null
+          (payload.file&&payload.popups)?        
+            <FormMulti payload={payload} 
+            handlePayload={this.handlePayload} 
+            title={'Points'}
+            formsbtn={payload.formsbtn}
+            forms={payload.popups}/>:null
         }
-
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget} />
       </div>
     )

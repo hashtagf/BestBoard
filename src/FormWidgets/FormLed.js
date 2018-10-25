@@ -27,8 +27,8 @@ class FormLed extends React.Component {
     this.handlePayload = this.handlePayload.bind(this)
   }
   // Start Widget
-  componentWillReceiveProps(nextProps) {
-    let editWidget = nextProps.editWidget
+  componentDidMount() {
+    let editWidget = this.props.editWidget
     if (editWidget) {
       Object.keys(editWidget).forEach((objectKey) => {
         if (objectKey !== 'widgetId') {
@@ -39,6 +39,20 @@ class FormLed extends React.Component {
       });
     } else this.reState()
   }
+
+  componentWillReceiveProps(nextProps){
+    let editWidget = nextProps.editWidget
+    if (editWidget) {
+      Object.keys(editWidget).forEach((objectKey) => {
+        if (objectKey !== 'widgetId') {
+          return this.setState({
+            [objectKey]: editWidget[objectKey]
+          })
+        }
+      })
+    } else this.reState()
+  }
+
   reState () {
     this.setState({
       title: 'LED',
@@ -60,7 +74,6 @@ class FormLed extends React.Component {
     this.setState({
       [e.target.name]: e.target.value
     })
-    console.log(e.target.value)
   }
 
   handleSubmit = (e) => {

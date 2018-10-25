@@ -27,26 +27,35 @@ class Led extends React.Component {
     const payload = this.props.payload
     if (payload.value === topic) {
       let value = msg + ''
-      if (payload.manual) eval(payload.jsValue)
-      else {
-        console.log(payload.filter,payload.filterIndex)
-        value = value.split(payload.filter)[payload.filterIndex]
-        let flag = false
-        console.log(msg,value,payload.filterIndex)
-        switch (payload.expressionON) {
-          case '=':flag = value === payload.valueON;break;
-          case '≠':flag = value !== payload.valueON;break;
-          case '>':flag = value > payload.valueON;break;
-          case '<':flag = value < payload.valueON;break;
-          case '>=':flag = value >= payload.valueON;break;
-          case '<=':flag = value <= payload.valueON;break;
-          default : ''
-        }
-        this.setState({
-          value: flag,
-        })
+      let valueCondition = payload.valueON
+      if (payload.manual) {
+        try {eval(payload.jsValue)}
+        catch (err){}
+        value += ''
       }
-
+      else {
+        value = value.split(payload.filter)[payload.filterIndex]
+      }
+      let flag = false
+      console.log(value,valueCondition)
+      switch (payload.expressionON) {
+        case '=':flag = value === valueCondition
+          break
+        case '≠':flag = value !== valueCondition
+          break
+        case '>':flag = value > valueCondition
+          break
+        case '<':flag = value < valueCondition
+          break
+        case '>=':flag = value >= valueCondition
+          break
+        case '<=':flag = value <= valueCondition
+          break
+        default : break
+      }
+      this.setState({
+        value: flag,
+      })
     }
   }
 
