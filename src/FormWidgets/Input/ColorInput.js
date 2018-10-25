@@ -57,7 +57,7 @@ class ColorInput extends React.Component {
       }
     })
     return (
-      <div className="form-group row">
+      <div className="form-group row inputcolor">
         <label htmlFor="unit" className="col-3 col-form-label text-capitalize">
           {this.props.title} :
         </label>

@@ -1,5 +1,5 @@
 import React from 'react'
-import FormCardBox from './FormCardBox'
+import FormNumberBox from './FormNumberBox'
 import FormGauge from './FormGauge'
 import FormGaugeSpeed from './FormGaugeSpeed'
 import FormImage from './FormImage'
@@ -22,7 +22,7 @@ class EditWidget extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectType: "CardBox"
+      selectType: "NumberBox"
     }
   }
   selectWidget = (e) => {
@@ -59,8 +59,8 @@ class SelectType extends React.Component {
     let editWidget = this.props.editWidget
     const { selectType } = this.props
     switch (selectType) {
-      case 'CardBox':
-        return <FormCardBox editWidget={editWidget} />
+      case 'NumberBox':
+        return <FormNumberBox editWidget={editWidget} />
       case 'Gauge':
         return <FormGauge editWidget={editWidget} />
       case 'GaugeSpeed':
@@ -102,7 +102,7 @@ class WidgetsList extends React.Component {
     this.state = {
       widgets: [
         {
-          name: "CardBox",
+          name: "NumberBox",
           img: "https://i.stack.imgur.com/k7Nit.png"
         },
         {
@@ -163,7 +163,7 @@ class WidgetsList extends React.Component {
           img: "https://i.stack.imgur.com/k7Nit.png"
         }
       ],
-      selectType: "CardBox"
+      selectType: "NumberBox"
     }
   }
   selectWidget = (e) => {

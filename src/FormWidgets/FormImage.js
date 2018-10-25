@@ -9,7 +9,7 @@ class FormImage extends React.Component {
     super(props)
     this.state = {
       title: 'Image',
-      file: 'empty',
+      file: null,
       jsValue: '',
       manual: false
     }
@@ -46,7 +46,7 @@ class FormImage extends React.Component {
   reState () {
     this.setState({
       title: 'Image',
-      file: 'empty'
+      file: null
     })
   }
   handlePayload(e) {
@@ -122,7 +122,10 @@ class FormImage extends React.Component {
         </div>
         <div className="row mb-2 text-center">
           <div className="col-12">
-            <img src={payload.file} className="img-thumbnail" id="b64" height={250} alt="" />
+            {
+              (payload.file)?
+              <img src={payload.file} className="img-thumbnail" id="b64" height={250} alt="" />
+            :null}
           </div>
         </div>
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>

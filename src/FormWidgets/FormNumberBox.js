@@ -7,7 +7,7 @@ import SummitBtn from './SummitBtn'
 import fontAwesomeIcons from './fontawesomeIcons.json'
 import Creatable from 'react-select/lib/Creatable'
 
-class FormCardBox extends React.Component {
+class FormNumberBox extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -76,7 +76,7 @@ class FormCardBox extends React.Component {
     const editWidget = this.props.editWidget
     e.preventDefault()
     let payload = {
-      typeWidget: 'CardBox',
+      typeWidget: 'NumberBox',
       title: this.state.title,
       value: this.state.value,
       body: this.state.body,
@@ -90,8 +90,8 @@ class FormCardBox extends React.Component {
       layout: {
         w: 3,
         h:6,
-        minW: 3,
-        minH: 5,
+        minW: 2,
+        minH: 6,
         maxW: 12,
         maxH: 6
       }
@@ -106,7 +106,7 @@ class FormCardBox extends React.Component {
   render() {
     const payload = this.state
     return (
-      <div className="FormCardBox container">
+      <div className="FormNumberBox container">
         <FormInputBasic callback={this.handlePayload} values={payload} />
         <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit} />
         {/* <InputText callback={this.handlePayload} title="Icon" name="icon" value={payload.icon} placeholder="fontAwesome Icon (name Icon) :: tint"/> */}
@@ -174,4 +174,4 @@ class Icons extends React.Component {
   }
 }
 
-export default FormCardBox
+export default FormNumberBox

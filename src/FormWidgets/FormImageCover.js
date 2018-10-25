@@ -170,48 +170,7 @@ class FormImageCover extends React.Component {
     )
   }
 }
-class FormPopups extends React.Component {
-  handlePayload = (e) => {
-    var tmp = this.props.payload.popups
-    var index = parseInt(this.props.payload.selectPoint,10)
-    tmp[index][e.target.name] = e.target.value
-    var obj = {
-      target: {
-        name: 'popups',
-        value: tmp
-      }
-    }
-    this.props.handlePayload(obj)
-  }
-  render () {
-    const payload = this.props.payload
-    var buttons = payload.popups.map((popup,index) =>
-        <button key={index} className={(payload.selectPoint === index+'')?'btn btn-primary':'btn'} type="button" name="selectPoint" value={index} data-toggle="collapse" data-target={"#form"+index} aria-expanded={(payload.selectPoint === index+'')?"true":"false"} aria-controls={"form"+index} onClick={this.props.handlePayload}>
-            {index+1}
-        </button>
-    );
-    var forms = payload.popups.map((popup,index) =>
-          <div key={index} id={"form"+index} className={(payload.selectPoint === index+'')?'collapse show':'collapse'} aria-labelledby="headingOne" data-parent="#popupForm">
-            <FormInputBasic callback={this.handlePayload} values={popup} />
-          </div>
-    );
-    return (
-      <div className="accordion" id="popupForm">
-        <div className="form-group row">
-            <label htmlFor="value" className="col-3 col-form-label">
-              Form :
-            </label>
-            <div className="col-9">
-              <div className="btn-group" role="group" aria-label="Basic example">
-                  {buttons}
-              </div>
-            </div>
-          </div>
-          {forms}
-        </div>
-    )
-  }
-}
+
 class ImgArea extends React.Component {  
   drag_start = (event) => {
     var style = window.getComputedStyle(event.target, null);

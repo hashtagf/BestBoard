@@ -51,7 +51,7 @@ class FormList extends React.Component {
 
   reState () {
     this.setState({
-      title: 'Text',
+      title: 'List',
       value: '',
       text: '',
       unit: '',
@@ -88,11 +88,11 @@ class FormList extends React.Component {
       manual: this.state.manual,
       layout: {
         w: 3,
-        h:6,
+        h:8,
         minW: 3,
-        minH: 5,
+        minH: 6,
         maxW: 6,
-        maxH: 6
+        maxH: 10
       }
     }
     if (editWidget)  

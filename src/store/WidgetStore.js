@@ -3,7 +3,7 @@ import axios from 'axios'
 import { observable } from 'mobx'
 import Gauge from '../Widgets/Gauge'
 import Progress from '../Widgets/Progress'
-import CardBox from '../Widgets/CardBox'
+import NumberBox from '../Widgets/NumberBox'
 import GaugeSpeed from '../Widgets/GaugeSpeed'
 import ProgressBar from '../Widgets/ProgressBar'
 import Text from '../Widgets/Text'
@@ -63,8 +63,8 @@ class WidgetStore {
           return <Gauge key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         case 'Progress':
           return <Progress key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
-        case 'CardBox':
-          return <CardBox key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
+        case 'NumberBox':
+          return <NumberBox key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         case 'GaugeSpeed':
           return <GaugeSpeed key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         case 'ProgressBar':

@@ -4,7 +4,6 @@ import WidgetStore from '../store/WidgetStore'
 import NETPIEMicrogear from '../store/Microgear'
 import './Widget.css'
 import HeaderCard from "./HeaderCard"
-import date from 'date-and-time';
 
 class Text extends React.Component {
   constructor(props) {
@@ -41,18 +40,7 @@ class Text extends React.Component {
       })
     }
   } 
-  showTime () {
 
-    let now = new Date();
-    let time = this.state.time
-    time = (typeof time === 'string' || time instanceof String)?new Date(time):time;
-    
-    let ago = date.subtract(now, time)
-    if (ago.toSeconds() <= 60) return ago.toSeconds()+ ' seconds'
-    else if (ago.toMinutes() < 60) return ago.toMinutes()+ ' Minutes'
-    else if (ago.toHours() < 24) return ago.toHours()+ ' Hours'
-    else if(ago.toDays() < 30) return ago.toDays()+ ' Days'
-  }
   render() {
     const payload = this.props.payload
     const value = this.state.value
@@ -64,7 +52,6 @@ class Text extends React.Component {
             {payload.startText} <strong>{value}</strong> {payload.endText}
           </div>
           <div className="card-footer text-right">
-          {/* {this.showTime} */}
           </div>
         </div>
     )

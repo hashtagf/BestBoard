@@ -3,7 +3,9 @@ var fs = require('fs')
 //import socketIOClient from 'socket.io-client'
 
 class LocalStore {
-  @observable local = []
+  @observable local = {
+    pages: []
+  }
   insertPage(name) {
     this.local.pages.push({
       id: this.local.pages.length,

@@ -3,6 +3,7 @@ import WidgetStore from '../store/WidgetStore'
 import NETPIEMicrogear from '../store/Microgear'
 import './Widget.css'
 import HeaderCard from "./HeaderCard"
+import date from 'date-and-time';
 
 class Lists extends React.Component {
   constructor(props) {
@@ -57,11 +58,11 @@ class Lists extends React.Component {
     const icon = payload.icon
     const widgetId = this.props.widgetId
     const mapList = data.map((payload, index) =>
-      <List key={index} payload={payload} icon={icon} />
+      <List key={index} index={index} payload={payload} icon={icon} />
     )
     return (
 
-        <div className="item-content card shadowcard rounded-0 h-100 widgetCard border-0 col-12" data-id={widgetId}>
+        <div className="item-content List card shadowcard rounded-0 h-100 widgetCard border-0 col-12" data-id={widgetId}>
           <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body m-0 p-0">
             <ul className="list-group" data-spy="scroll">
@@ -74,23 +75,51 @@ class Lists extends React.Component {
 }
 
 class List extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      counter: 0
+    }
+  }
+  showTime (time) {
+    let now = new Date();
+    time =new Date(time);
+    let ago = date.subtract(now, time)
+    if (ago.toSeconds() === 0) return 'now'
+    else if (ago.toSeconds() < 60) return ago.toSeconds()+ ' seconds'
+    else if (ago.toMinutes() < 60) return ago.toMinutes()+ ' Minutes'
+    else if (ago.toHours() < 24) return ago.toHours()+ ' Hours'
+    else if(ago.toDays() < 30) return ago.toDays()+ ' Days'
+  }
+  componentWillMount () {
+    setInterval(this.change, 7000)
+  }
+  change = () => {
+    this.setState({
+        counter: this.state.counter + 1
+    });
+  }
   render() {
     const payload = this.props.payload
     const icon = this.props.icon
     return (
-      <li className="list-group-item list-group-item-action">
+      <li className={(this.props.index===0)?"list-group-item list-group-item-action":"list-group-item"}>
         <div className="row">
           <div className="col-2 m-0 p-0">
-            <span className="fa-layers fa-fw" >
+            <span className="fa-layers fa-fw icon" >
               <i className={'fas fa-2x fa-' + icon}></i>
             </span>
-            <small>{payload.timestamp}</small>
-
           </div>
-          <div className="col-9 text-secondary">
-            {payload.text + ' '}
-            {payload.value}
-            {' ' + payload.unit}
+          <div className="col-9">
+          <div className="row">
+            <strong>{payload.text + ' '}</strong> {payload.value}{' ' + payload.unit}
+          </div>
+          <div className="row">
+          
+            <small>{this.showTime(payload.timestamp)}</small>
+          </div>
+
+
           </div>
         </div>
       </li>

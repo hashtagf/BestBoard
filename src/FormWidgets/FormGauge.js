@@ -100,11 +100,11 @@ class FormGauge extends React.Component {
       manual: this.state.manual,
       layout: {
         w: 3,
-        h:6,
+        h:7,
         minW: 3,
         minH: 6,
         maxW: 6,
-        maxH: 6
+        maxH: 10
       }
     }
     if (editWidget)  

@@ -52,7 +52,7 @@ class Gauge extends React.Component {
               value={parseInt(value, 10)}
               theme={payload.theme}
               mode={payload.mode}
-              size={150}
+              size={20 * payload.layout.h}
               enableAnimation={payload.enableAnimation}
               //title={payload.title}
               unit={payload.unit}

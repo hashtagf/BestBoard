@@ -7,11 +7,11 @@ import './Widget.css'
 import HeaderCard from "./HeaderCard"
 // import date from 'date-and-time'
 
-class CardBox extends React.Component {
+class NumberBox extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: 0,
+      value: null,
       previousValue: null
     }
   }
@@ -55,27 +55,28 @@ class CardBox extends React.Component {
     if (state.value - state.previousValue > 0) arrow = 'angle-up'
     else if (state.value - state.previousValue === 0) {
       arrow = 'equals'
+      colorText = 'updown'
     }
     else {
       arrow = 'angle-down'
       colorText = 'text-danger updown'
     }
     return (
-        <div className="shadowcard item-content card h-100 rounded-0 widgetCard border-0 col-12" data-id={widgetId}>
+        <div className="shadowcard NumberBox item-content card h-100 rounded-0 widgetCard border-0 col-12" data-id={widgetId}>
           <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
-          <div className="card-body ">
+          <div className="card-body">
             <div className="row">
-            <div className="col-4">
+            <div className="col-4 icon">
               <i className={payload.icon}></i>
             </div>
-            <div className="col-8 text-right">
+            <div className="col-8">
               <div className="row">
-                <h1>{parseFloat(state.value).toFixed(2)}</h1>
+                <h1 class="display-4 m-0">{(state.value)?parseFloat(state.value).toFixed(2):'wait'}</h1>
               </div>
               <div className="row">
-                <h6>{payload.unit}</h6>
+                <h6 className="m-0">{payload.unit}</h6>
               </div>
-              <div className="row">
+              <div className="row text-right">
                 {(state.previousValue)?
                 <span className={colorText}>
                 <i className={`fas pt-2 mr-2 fa-` + arrow}></i>
@@ -91,4 +92,4 @@ class CardBox extends React.Component {
   }
 }
 
-export default CardBox
+export default NumberBox

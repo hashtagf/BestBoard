@@ -24,7 +24,7 @@
             "boardId": "01",
             "widget": {
                 "01":{
-                    "typeWidget": "CardBox",
+                    "typeWidget": "NumberBox",
                     "title": "title",
                     "value": "",
                     "datasource": "01",

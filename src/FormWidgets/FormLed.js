@@ -112,7 +112,7 @@ class FormLed extends React.Component {
   render() {
     const payload = this.state
     return (
-      <div className="FormCardBox container">
+      <div className="FormNumberBox container">
         <FormInputBasic callback={this.handlePayload} values={payload} />
         <ConditionForm event="ON" handlePayload={this.handlePayload} values={payload}/>
         {/* <ConditionForm event="OFF" handlePayload={this.handlePayload} values={payload}/> */}

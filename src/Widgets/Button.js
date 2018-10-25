@@ -58,12 +58,12 @@ class Button extends React.Component {
     const payload = this.props.payload
     const widgetId = this.props.widgetId
     return (
-        <div className="shadowcard item-content card rounded-0 widgetCard col-12 h-100 border-0" data-id={widgetId}>
+        <div className="shadowcard item-content Button card rounded-0 widgetCard col-12 h-100 border-0" data-id={widgetId}>
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body ">
             <button 
               onClick={this.handleClick}
-              className="btn btn-primary btn-block"
+              className="btn btn-primary"
             >
               {payload.label}
             </button>

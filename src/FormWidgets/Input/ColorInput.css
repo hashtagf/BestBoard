@@ -17,3 +17,6 @@
     position: absolute;
     z-index: 100;
 }
+.inputcolor {
+    overflow: hidden;
+}
