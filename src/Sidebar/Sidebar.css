@@ -111,3 +111,8 @@ a.article, a.article:hover {
     color: var(--textColor);
     background: var(--hoverItem);
 }
+
+.logoSide {
+    width: 12rem;
+    height: auto
+}

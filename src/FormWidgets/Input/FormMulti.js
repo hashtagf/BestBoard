@@ -42,15 +42,15 @@ class FormMulti extends React.Component {
         aria-controls={"form" + index} onClick={this.handleClick}>
         {popup}
       </button>
-    );
+    )
     var forms = this.props.forms.map((form, index) =>
       <div key={index} id={"#form" + index}
         className={(selectForm === index + '') ? 'collapse show' : 'collapse'} 
         aria-labelledby="headingOne"
         data-parent="#popupForm">
-        <FormInputBasic callback={this.handlePayload} values={form} hiddenTitle={true}/>
+        <FormInputBasic callback={this.handlePayload} values={form} hiddenTitle={this.props.hideTitle}/>
       </div>
-    );
+    )
     return (
       <div className="accordion" id="popupForm">
         {

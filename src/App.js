@@ -14,6 +14,7 @@ class App extends Component {
       mode: Store.mode
     }
   }
+
   render() {
     const mode = this.state.mode
     return (

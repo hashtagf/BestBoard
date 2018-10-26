@@ -84,12 +84,14 @@ class Main extends React.Component {
       return (
         <div key={widget.key}
           data-grid={{
-            x: (widget.props.payload.layout.x !== undefined)?widget.props.payload.layout.x:position % 12,
-            y: (widget.props.payload.layout.y !== undefined)?widget.props.payload.layout.y:Infinity,
-            w: widget.props.payload.layout.w,
-            h: widget.props.payload.layout.h,
-            minW: widget.props.payload.layout.minW,
-            minH: widget.props.payload.layout.minH,
+            x: (widget.props.layout.x !== undefined)?widget.props.layout.x:position % 12,
+            y: (widget.props.layout.y !== undefined)?widget.props.layout.y:Infinity,
+            w: widget.props.layout.w,
+            h: widget.props.layout.h,
+            minW: widget.props.layout.minW,
+            minH: widget.props.layout.minH,
+            maxW: widget.props.layout.maxW,
+            maxH: widget.props.layout.maxH
             // autoSize: true
           }}>
           {widget}

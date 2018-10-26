@@ -76,10 +76,10 @@ class ImageCover extends React.Component {
       </div>
     )
     return (
-        <div className="item-content ImageCover card shadowcard rounded-0 border-0  col-12 mb-3 h-100" data-id={widgetId}>
+        <div className="item-content ImageCover card shadowcard rounded-0 border-0 col-12 mb-3 h-100" data-id={widgetId}>
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body">
-            <img src={payload.file} className="img-fluid widgetImage" alt="base64"/>
+            <img src={payload.file} className="img-fluid" alt="base64"/>
             <div className='gridPopup'>
               {popups}
             </div>

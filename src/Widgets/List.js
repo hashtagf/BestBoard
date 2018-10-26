@@ -64,7 +64,7 @@ class Lists extends React.Component {
 
         <div className="item-content List card shadowcard rounded-0 h-100 widgetCard border-0 col-12" data-id={widgetId}>
           <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
-          <div className="card-body m-0 p-0">
+          <div className="card-body m-0 p-0" id="scrollbar-style">
             <ul className="list-group" data-spy="scroll">
               {mapList.reverse()}
             </ul>

@@ -9,6 +9,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.6",
     "axios": "^0.18.0",
+    "dangerously-set-inner-html": "^2.0.1",
     "date-and-time": "^0.6.2",
     "google-map-react": "^1.0.9",
     "hammerjs": "^2.0.8",

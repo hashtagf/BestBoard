@@ -70,8 +70,8 @@ class NumberBox extends React.Component {
               <i className={payload.icon}></i>
             </div>
             <div className="col-8">
-              <div className="row">
-                <h1 class="display-4 m-0">{(state.value)?parseFloat(state.value).toFixed(2):'wait'}</h1>
+              <div className="row justify-content-center">
+                <h1 className="display-4 m-0">{(state.value)?parseFloat(state.value).toFixed(2):<i class="mx-auto fa-xs fas fa-sync fa-spin"></i>}</h1>
               </div>
               <div className="row">
                 <h6 className="m-0">{payload.unit}</h6>

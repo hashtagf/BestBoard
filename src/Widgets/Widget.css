@@ -28,12 +28,8 @@
 .googlemap {
     height: 90%;
 }
-.ImageCover img{
-    width: 80vw;
-}
-.ImageCover .card-header {
-    background: transparent;
-}
+
+
 .item-content.ImageCover {
     background: transparent;
     box-shadow: none;
@@ -44,7 +40,7 @@
 	top: 3rem;
 	left: 0px;
 	width: 100%;
-    height: 100%;
+    height: 80%;
     
 }
 .gridPopup .item {
@@ -71,6 +67,13 @@
     overflow-y: auto;
     font-size: 1.2rem;
 }
+.Table .card-body {
+    overflow-y: auto;
+    font-size: 1.2rem;
+}
+.card-body {
+    overflow: hidden;
+}
 .List .list-group-item {
     background: transparent;
     color: var(--textColor);
@@ -84,4 +87,13 @@
 .List .icon i{
     font-size: 1.2rem;
     padding: .9rem;
+}
+.ImageCover .card-header {
+    background: transparent;
+}
+.ImageCover .card-body {
+    height: 80%;
+}
+.ImageCover img {
+    /* height: 100%; */
 }

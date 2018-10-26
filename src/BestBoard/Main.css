@@ -40,3 +40,13 @@
     padding: 1rem;
     text-align: center;
   }
+  .pagecircle {
+    border: 2px solid #6c757d;
+    width: 8rem;
+    height: 8rem;
+    margin-left: 2.5rem;
+  }
+  .pagecircle.addpage {
+    font-size: 3rem;
+    border: 2px dashed #6c757d;
+  }

@@ -14,6 +14,7 @@ import FormToggle from './FormToggle'
 import FormMap from './FormMap'
 import FormLed from './FormLed'
 import FormHtml from './FormHtml'
+import FormTable from './FormTable'
 
 import { observer } from 'mobx-react'
 
@@ -89,6 +90,8 @@ class SelectType extends React.Component {
         return <FormLed editWidget={editWidget} />
       case 'HTML':
         return <FormHtml editWidget={editWidget} />
+      case 'Table':
+        return <FormTable editWidget={editWidget} />
       default:
         return <h1>Please select widget</h1>
     }
@@ -161,6 +164,10 @@ class WidgetsList extends React.Component {
         {
           name: "HTML",
           img: "https://i.stack.imgur.com/k7Nit.png"
+        },
+        {
+          name: "Table",
+          img: "https://www.excel-easy.com/examples/images/line-chart/line-chart.png"
         }
       ],
       selectType: "NumberBox"

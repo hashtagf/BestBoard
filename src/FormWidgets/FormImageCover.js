@@ -1,7 +1,6 @@
 import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import InputText from './Input/InputText'
-import FormInputBasic from './Input/FormInputBasic'
 import Store from '../store/Store'
 import SummitBtn from './SummitBtn'
 import FormMulti from './Input/FormMulti'
@@ -87,9 +86,9 @@ class FormImageCover extends React.Component {
       popups: this.state.popups,
       layout: {
         w: 10,
-        h:6,
+        h:8,
         minW: 6,
-        minH: 5,
+        minH: 8,
         maxW: 12,
         maxH: 12
       }
@@ -162,8 +161,10 @@ class FormImageCover extends React.Component {
             <FormMulti payload={payload} 
             handlePayload={this.handlePayload} 
             title={'Points'}
+            hideTitle={true}
             formsbtn={payload.formsbtn}
             forms={payload.popups}/>:null
+            
         }
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget} />
       </div>

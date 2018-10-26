@@ -5,10 +5,13 @@ import { Link } from 'react-router-dom'
 import Store from '../store/Store'
 import LocalStore from '../store/LocalStore'
 import socketIOClient from 'socket.io-client'
-import ClickOutside from 'react-click-outside';
+import ClickOutside from 'react-click-outside'
+import PageStore from '../store/PageStore'
+import { observer } from 'mobx-react'
 
 const socket = socketIOClient(Store.server)
 
+@observer
 class Page extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +23,7 @@ class Page extends Component {
       selectPage: 0,
       connect: true
     }
+    this.textInput = React.createRef()
   }
   componentWillMount () {
   }
@@ -50,6 +54,7 @@ class Page extends Component {
           colorName: board.colorName
         })
       )
+      PageStore.pages = pages
       this.setState({
         pages: pages
       })
@@ -57,15 +62,16 @@ class Page extends Component {
   }
 
   handleClick = (e) => {
-    e.preventDefault();
-    this.props.callback(!this.props.mode);
+    e.preventDefault()
+    this.props.callback(!this.props.mode)
   }
 
   handleClickAdditem = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     this.setState({
       addPage: true
     })
+    Store.addPage = true
   }
 
   savePage = (index, pageId) => {
@@ -94,6 +100,8 @@ class Page extends Component {
       inputName: '',
       editPage: null,
     })
+    Store.addPage = false
+
   }
 
   handleChange(e) {
@@ -105,6 +113,7 @@ class Page extends Component {
       inputName: '',
       editPage: null,
     })
+    Store.addPage = false
   }
   handleKeyPress = (objKeypress, e) => {
     if (e.key === 'Enter') {
@@ -113,7 +122,7 @@ class Page extends Component {
       this.savePage(index, pageId)
     }
   }
-
+  
   clickEdit = (index) => {
     this.setState({
       editPage: index,
@@ -144,13 +153,13 @@ class Page extends Component {
     let lspage
 
     let addPage = <a onClick={this.handleClickAdditem} className="second"><i className="fas fa-plus-square"></i> new page</a>
-    if (this.state.addPage) {
+    if (Store.addPage) {
       let objKeypress = {
         index: -1,
         pageId: 0
       }
       addPage =
-      <ClickOutside onClickOutside={this.handleClose}>
+      <ClickOutside onClickOutside={this.handleCancel}>
         <div className="input-group addpage">
           <input type="text" className="form-control addpage border-0 rounded-0 " 
             onBlur={() => this.savePage(-1)} 
@@ -186,9 +195,9 @@ class Page extends Component {
               </div>
           </li>
           </Link>
-      } else {
+      } else {//new
         lspage =
-        <ClickOutside onClickOutside={this.handleClose}>
+        <ClickOutside onClickOutside={this.handleCancel}>
           <div className="input-group addpage" key={index}>
             <input type="text" className="form-control addpage border-0 rounded-0 " 
               value={this.state.inputName} 
@@ -197,7 +206,7 @@ class Page extends Component {
               placeholder="new page" aria-label="new page" 
               onChange={this.handleChange.bind(this)} 
               aria-describedby="button-addon2" 
-              autoFocus />
+              ref={(input) => { this.nameInput = input; }} />
             <div className="input-group-append">
             </div>
           </div>
@@ -212,6 +221,9 @@ class Page extends Component {
           <ul className="collapse list-unstyled show" id="pageSubmenu">
             {listPage}
             <li>{addPage}</li>
+            {
+              (this.nameInput)? this.nameInput.focus():null
+            }
           </ul>
         </li>
       </ul>

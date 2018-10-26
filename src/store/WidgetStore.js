@@ -16,8 +16,10 @@ import Button from '../Widgets/Button'
 import Map from '../Widgets/Map'
 import Led from '../Widgets/Led'
 import Html from '../Widgets/Html'
+import Table from '../Widgets/Table'
 import LocalStore from './LocalStore'
 import Store from './Store'
+
 class WidgetStore {
   @observable widgets = []
   // @observable listWidgets = []
@@ -89,8 +91,10 @@ class WidgetStore {
           return <Led key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         case 'HTML':
           return <Html key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
+        case 'Table':
+          return <Table key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />
         default:
-          return <h2 key={widget._id} className="item"><span className="item-content">Coming Soon Widgets</span></h2>
+          return <h2 key={widget._id} layout={widget.layout} className="item"><span className="item-content">Coming Soon Widgets</span></h2>
       }
     })
     return listWidgets

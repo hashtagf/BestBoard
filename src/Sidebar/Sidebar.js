@@ -3,6 +3,7 @@ import './Sidebar.css'
 import Settingmenu from './Setting/Settingmenu'
 import Pagelist from './Pages'
 import Store from '../store/Store'
+import Logo from '../BestBoard/logo.png'
 const $ = require("jquery")
 
 class Page extends Component {
@@ -32,8 +33,7 @@ class Page extends Component {
     return (
         <nav className="sidebar" id="scrollbar-style" data-spy="scroll">
           <div className="sidebar-header">
-            <h3>BestBoard</h3>
-            <p className="">Dashboard for IoT</p>
+           <a href="/"><img src={Logo} alt="" className="logoSide" /></a>
           </div>
           <Pagelist />
           <Settingmenu mode={mode} />
