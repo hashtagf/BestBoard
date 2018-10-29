@@ -4,6 +4,7 @@ import moment from 'moment'
 import axios from 'axios'
 import './Widget.css'
 import HeaderCard from "./HeaderCard"
+import Store from '../store/Store'
 
 import {
   XAxis,YAxis,
@@ -78,45 +79,49 @@ class Chart extends React.Component {
     else
       return moment(tickItem).format('DD-MM-YY')
   }
-
+  checkBtnTime (since) {
+    if (this.state.filterSince === since) return 'btn btn-primary btn-sm'
+    else  return 'btn btn-secondary btn-sm'
+  }
   render() {
     const payload = this.props.payload
     const widgetId = this.props.widgetId
+    var areaColor = Store.colorSet[Store.colorUse].colors[2]
     return (
-        <div className="item-content card shadowcard rounded-0 widgetChart border-0 col-12" data-id={widgetId}>
+        <div className="item-content card chart shadowcard rounded-0 widgetChart border-0 col-12 h-100" data-id={widgetId}>
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
-          <div className="card-body h-100">
+          <div className="card-body">
             <div className="btn-group mb-2" role="group" aria-label="DayMonthYear">
               <button type="button"
-                className="btn btn-secondary btn-sm"
+                className={this.checkBtnTime('1hour')}
                 value='1hour'
                 onClick={this.handleFilter}
               >
                 Last 1 hours
               </button>
               <button type="button"
-                className="btn btn-secondary btn-sm"
+                className={this.checkBtnTime('8hours')}
                 value='8hours'
                 onClick={this.handleFilter}
               >
                 Last 8 hours
               </button>
               <button type="button"
-                className="btn btn-secondary btn-sm"
+                className={this.checkBtnTime('24hours')}
                 value='24hours'
                 onClick={this.handleFilter}
               >
                 Last 24 Hours
               </button>
               <button type="button"
-                className="btn btn-secondary btn-sm"
+                className={this.checkBtnTime('3days')}
                 value='3days'
                 onClick={this.handleFilter}
               >
                 Last 3 Days
               </button>
               <button type="button"
-                className="btn btn-secondary btn-sm"
+                className={this.checkBtnTime('7days')}
                 value='7days'
                 onClick={this.handleFilter}
               >
@@ -129,8 +134,8 @@ class Chart extends React.Component {
               >
                 <defs>
                   <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.7} />
-                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                    <stop offset="5%" stopColor={areaColor} stopOpacity={0.7} />
+                    <stop offset="95%" stopColor={areaColor} stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <XAxis
@@ -148,7 +153,7 @@ class Chart extends React.Component {
                   name={payload.value}
                   type={payload.type}
                   dataKey="value"
-                  stroke={payload.stroke}
+                  stroke={areaColor}
                   fillOpacity={payload.fillOpacity}
                   fill={payload.fill} />
               </AreaChart>

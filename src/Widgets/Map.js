@@ -55,7 +55,12 @@ class Map extends React.Component {
       }
       payload = payload[index]
       let value = msg + ''
-      if (payload.manual) eval(payload.jsValue)
+      if (payload.manual) {
+        try {eval(payload.jsValue)}
+        catch (err){
+          if(err!==null) value = msg + ''
+        }
+      }
       else value = value.split(payload.filter)[payload.filterIndex]
       var tmp = this.state.center
       tmp[name] = value

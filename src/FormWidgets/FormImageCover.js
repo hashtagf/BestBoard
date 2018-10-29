@@ -53,7 +53,8 @@ class FormImageCover extends React.Component {
     this.setState({
       title: 'ImageCover',
       file: null,
-      popups: []
+      popups: [],
+      formsbtn: []
     })
   }
   handlePayload(e) {
@@ -84,13 +85,14 @@ class FormImageCover extends React.Component {
       title: this.state.title,
       file: this.state.file,
       popups: this.state.popups,
+      formsbtn: this.state.formsbtn,
       layout: {
         w: 10,
         h:8,
         minW: 6,
         minH: 8,
         maxW: 12,
-        maxH: 12
+        maxH: 50
       }
     }
     if (editWidget)
@@ -162,6 +164,8 @@ class FormImageCover extends React.Component {
             handlePayload={this.handlePayload} 
             title={'Points'}
             hideTitle={true}
+            hideTitle={false}
+            addBtnFunc={this.addPopup}
             formsbtn={payload.formsbtn}
             forms={payload.popups}/>:null
             

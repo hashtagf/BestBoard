@@ -43,6 +43,11 @@
 .markMap {
     font-size: 2rem;
 }
+#popupForm .collapse.show,#accordionExample .collapse.show{
+    border-left: 3px solid #ddd;
+    padding-left: 1rem;
+}
+
 @media screen and (max-width: 575px) {
     .listWidgets {
         min-width: 100%;

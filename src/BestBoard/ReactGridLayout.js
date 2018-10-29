@@ -10,6 +10,7 @@ import axios from 'axios'
 import WidgetStore from '../store/WidgetStore'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import ReactResizeDetector from 'react-resize-detector'
+import Skeleton from 'react-skeleton-loader'
 
 const socket = socketIOClient(Store.server)
 const ResponsiveGridLayout = WidthProvider(Responsive)
@@ -24,6 +25,9 @@ class Main extends React.Component {
       connect: true,
       layouts: JSON.parse(JSON.stringify(originalLayouts))
     }
+  }
+  componentWillMount () {
+    Store.currentId = this.props.location.pathname.split('/')[1]
   }
   componentDidMount() {
     if (this.state.connect) this.response()
@@ -122,7 +126,7 @@ class Main extends React.Component {
             onLayoutChange={(layout, layouts) =>
               this.onLayoutChange(layout, layouts)
             }>
-            {widgets}
+            {(listWidgets)?widgets:<Skeleton/>}
           </ResponsiveGridLayout>
         </ReactCSSTransitionGroup>
       </div>

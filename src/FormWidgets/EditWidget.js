@@ -1,10 +1,9 @@
 import React from 'react'
 import FormNumberBox from './FormNumberBox'
 import FormGauge from './FormGauge'
-import FormGaugeSpeed from './FormGaugeSpeed'
+// import FormGaugeSpeed from './FormGaugeSpeed'
 import FormImage from './FormImage'
 import FormImageCover from './FormImageCover'
-import FormProgress from './FormProgress'
 import FormProgressBar from './FormProgressBar'
 import FormText from './FormText'
 import FormList from './FormList'
@@ -15,6 +14,7 @@ import FormMap from './FormMap'
 import FormLed from './FormLed'
 import FormHtml from './FormHtml'
 import FormTable from './FormTable'
+import GaugeImg from '../assets/gauge.jpg'
 
 import { observer } from 'mobx-react'
 
@@ -64,16 +64,12 @@ class SelectType extends React.Component {
         return <FormNumberBox editWidget={editWidget} />
       case 'Gauge':
         return <FormGauge editWidget={editWidget} />
-      case 'GaugeSpeed':
-        return <FormGaugeSpeed editWidget={editWidget} />
       case 'Image':
         return <FormImage editWidget={editWidget} />
       case 'ImageCover':
         return <FormImageCover editWidget={editWidget} />
       case 'ProgressBar':
         return <FormProgressBar editWidget={editWidget} />
-      case 'Progress':
-        return <FormProgress editWidget={editWidget} />
       case 'Text':
         return <FormText editWidget={editWidget} />
       case 'List':
@@ -110,19 +106,11 @@ class WidgetsList extends React.Component {
         },
         {
           name: "Gauge",
-          img: "https://i.stack.imgur.com/k7Nit.png"
+          img: GaugeImg
         },
         {
           name: "ProgressBar",
           img: "https://image.opencart.com/cache/583c1e869b365-resize-710x380.jpg"
-        },
-        {
-          name: "Progress",
-          img: "https://www.excel-easy.com/examples/images/line-chart/line-chart.png"
-        },
-        {
-          name: "GaugeSpeed",
-          img: "https://i.stack.imgur.com/k7Nit.png"
         },
         {
           name: "Image",

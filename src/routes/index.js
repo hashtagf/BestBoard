@@ -9,7 +9,6 @@ export default () => (
   <Switch>
     <Route exact path="/:boardId/" component={MyFirstGrid}/>
     <Route exact path="/board/:boardId" component={Redirect}/>
-    <Route exact path="/react/" component={MyFirstGrid}/>
     <Route exact path="/" component={First}/>
     <Route exact path="/null" component={First}/>
 

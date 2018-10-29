@@ -3,7 +3,7 @@ import './Sidebar.css'
 import Settingmenu from './Setting/Settingmenu'
 import Pagelist from './Pages'
 import Store from '../store/Store'
-import Logo from '../BestBoard/logo.png'
+import Logo from '../assets/logo.png'
 const $ = require("jquery")
 
 class Page extends Component {

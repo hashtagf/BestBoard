@@ -84,12 +84,12 @@ class FormChart extends React.Component {
       jsValue: this.state.jsValue,
       manual: this.state.jsValue,
       layout: {
-        w: 3,
+        w: 6,
         h:6,
-        minW: 3,
-        minH: 5,
+        minW: 6,
+        minH: 6,
         maxW: 12,
-        maxH: 6
+        maxH: 100
       }
     }
     if (editWidget)  

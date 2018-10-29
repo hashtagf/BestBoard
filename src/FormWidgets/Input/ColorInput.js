@@ -18,6 +18,19 @@ class ColorInput extends React.Component {
       color: nextProps.color
     })
   }
+  handleAuto = (e) => {
+    this.setState({
+      color: 'auto'
+    })
+    e = {
+      target: {
+        name: this.props.name,
+        value: 'auto'
+      }
+    }
+    this.props.handleChangeComplete(e)
+
+  }
   handleChange = (color, e) => {
     this.setState({
       color: color.hex
@@ -44,7 +57,7 @@ class ColorInput extends React.Component {
     var styles = reactCSS({
       'default': {
         color: {
-          background: `${ this.props.color }`
+          background: `${ (this.props.color !== 'auto')?this.props.color:'#f3f3f3' }`
         },
         swatch: {
           padding: '5px',
@@ -62,8 +75,18 @@ class ColorInput extends React.Component {
           {this.props.title} :
         </label>
         <div className="col-9">
+        <div className="form-check">
+          <input className="form-check-input" 
+            type="checkbox" 
+            name="colorAuto"
+            onClick={this.handleAuto}
+            id="exampleRadios1" value="auto" checked={(this.props.color==='auto')?true:false}/>
+          <label className="form-check-label" htmlFor="exampleRadios1">
+            Auto
+          </label>
+        </div>
           <div className="form-control" onClick={ this.handleClick} style={styles.color} >
-            {this.props.color} <div className="color ml-2"  />
+            {(this.props.color!=='auto')?this.props.color:'auto'} <div className="color ml-2"/>
           </div>
           <ClickOutside onClickOutside={this.handleClose}>
             <ColorPicker displayColorPicker={this.state.displayColorPicker} color={this.props.color} onChange={this.handleChange}/>

@@ -43,7 +43,12 @@ class Button extends React.Component {
     const payload = this.props.payload
     if (payload.value === topic) {
       let value = msg + ''
-      if (payload.manual) eval(payload.jsValue)
+      if (payload.manual) {
+        try {eval(payload.jsValue)}
+        catch (err){
+          if(err!==null) value = msg + ''
+        }
+      }
       else value = value.split(payload.filter)[payload.filterIndex]
       const stateValue = this.state.value
       this.setState({

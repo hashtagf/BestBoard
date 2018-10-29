@@ -5,8 +5,10 @@ import WidgetStore from '../store/WidgetStore'
 import NETPIEMicrogear from '../store/Microgear'
 import './Widget.css'
 import HeaderCard from "./HeaderCard"
-// import date from 'date-and-time'
+import { observer } from 'mobx-react'
 
+// import date from 'date-and-time'
+@observer
 class NumberBox extends React.Component {
   constructor(props) {
     super(props)
@@ -15,29 +17,32 @@ class NumberBox extends React.Component {
       previousValue: null
     }
   }
-
   delWidget() {
     const widgetId = this.props.widgetId
     WidgetStore.deleteWidget(widgetId)
   }
-
+  componentDidUpdate () {
+    //const payload = this.props.payload
+    //if (NETPIEMicrogear.topics[payload.datasource][payload.value])
+    //console.log(NETPIEMicrogear.topics[payload.datasource][payload.value].value)
+  }
   componentDidMount() {
     const payload = this.props.payload
     if (NETPIEMicrogear.statusOnline[payload.datasource]) {
       const microgear = NETPIEMicrogear.microgear[payload.datasource]
       microgear.on('message', this.onMessage)
-      //if (NETPIEMicrogear.topics[payload.datasource][payload.value]) {
-      //  this.onMessage(payload.datasource,NETPIEMicrogear.topics[payload.datasource][payload.value].value)
-      //}
-
     } else console.log('error : not Connect datasource !!')
   }
   onMessage = (topic, msg) => {
     const payload = this.props.payload
     if (payload.value === topic) {
       let value = msg + ''
-      // let now = new Date();
-      if (payload.manual) eval(payload.jsValue)
+      if (payload.manual) {
+        try {eval(payload.jsValue)}
+        catch (err){
+          if(err!==null) value += ''
+        }
+      }
       else value = value.split(payload.filter)[payload.filterIndex]
       const stateValue = this.state.value
       this.setState({
@@ -52,6 +57,7 @@ class NumberBox extends React.Component {
     const widgetId = this.props.widgetId
     let arrow = 'up'
     let colorText = 'text-success updown'
+    
     if (state.value - state.previousValue > 0) arrow = 'angle-up'
     else if (state.value - state.previousValue === 0) {
       arrow = 'equals'
@@ -69,11 +75,11 @@ class NumberBox extends React.Component {
             <div className="col-4 icon">
               <i className={payload.icon}></i>
             </div>
-            <div className="col-8">
-              <div className="row justify-content-center">
-                <h1 className="display-4 m-0">{(state.value)?parseFloat(state.value).toFixed(2):<i class="mx-auto fa-xs fas fa-sync fa-spin"></i>}</h1>
+            {(state.value)?<div className="col-8">
+              <div className="row justify-content-rigth">
+                <h1 className="display-4 m-0">{parseFloat(state.value).toFixed(2)}</h1>
               </div>
-              <div className="row">
+              <div className="row justify-content-rigth">
                 <h6 className="m-0">{payload.unit}</h6>
               </div>
               <div className="row text-right">
@@ -83,7 +89,7 @@ class NumberBox extends React.Component {
                 <span className="fa-layers-counter">{(state.value - state.previousValue).toFixed(2)}</span>
                 </span>:null}
               </div>
-            </div>
+            </div>:<div className="col-8"><i className="mx-auto fa-xs fas fa-sync fa-spin"></i></div>}
             </div>
           </div>
 

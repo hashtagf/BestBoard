@@ -35,10 +35,10 @@ class FormHtml extends React.Component {
           + "  "
           + $this.val().substring(end));
 
-        this.selectionStart = this.selectionEnd = start + 2;
-        return false;
+        this.selectionStart = this.selectionEnd = start + 2
+        return false
       }
-    });
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -79,7 +79,7 @@ class FormHtml extends React.Component {
         minW: 3,
         minH: 5,
         maxW: 12,
-        maxH: 6
+        maxH: 1000
       }
     }
     if (editWidget)
@@ -90,6 +90,7 @@ class FormHtml extends React.Component {
   }
   render() {
     const payload = this.state
+
     return (
       <div className="FormHtml container">
         <InputText

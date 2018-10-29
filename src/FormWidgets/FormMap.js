@@ -103,7 +103,7 @@ class FormMap extends React.Component {
         minW: 3,
         minH: 8,
         maxW: 12,
-        maxH: 10
+        maxH: 30
       }
     }
     if (editWidget)

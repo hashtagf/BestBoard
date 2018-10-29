@@ -97,10 +97,10 @@ class FormToggle extends React.Component {
       layout: {
         w: 3,
         h:6,
-        minW: 3,
-        minH: 3,
+        minW: 2,
+        minH: 5,
         maxW: 6,
-        maxH: 6
+        maxH: 8
       }
     }
     this.reState()

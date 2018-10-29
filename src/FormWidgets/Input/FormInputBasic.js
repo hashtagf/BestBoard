@@ -115,6 +115,9 @@ class FormInputBasic extends React.Component {
                 <button className={(!manual)?'btn btn-primary':'btn'} type="button" name="manual" value={false} data-toggle="collapse" data-target="#collapseAuto" aria-expanded={(!manual)?"true":"false"} aria-controls="collapseAuto" onClick={handleChange}>
                   Automatic 
                 </button>
+                <button type="button" className="btn btn-group" readOnly={true}>
+                  or 
+                </button>
                 <button className={(manual)?'btn btn-primary':'btn'} type="button" name="manual" value={true} data-toggle="collapse" data-target="#collapseManual" aria-expanded={(manual)?"true":"false"} aria-controls="collapseManual" onClick={handleChange}>
                   Manual 
                 </button>
@@ -122,6 +125,7 @@ class FormInputBasic extends React.Component {
             </div>
           </div>
 
+          <strong className="text-center">{(!manual)?' Automatic':' Manual'}</strong>
 
           <div id="collapseAuto" className={(!manual)?'collapse show':'collapse'} aria-labelledby="headingOne" data-parent="#accordionExample">
             <div className="form-group row">

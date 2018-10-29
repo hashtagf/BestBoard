@@ -4,6 +4,8 @@ import FormInputBasic from './Input/FormInputBasic'
 import InputText from './Input/InputText'
 import Store from '../store/Store'
 import SummitBtn from './SummitBtn'
+import fontAwesomeIcons from './fontawesomeIcons.json'
+import Creatable from 'react-select/lib/Creatable'
 
 class FormList extends React.Component {
   constructor(props) {
@@ -91,8 +93,8 @@ class FormList extends React.Component {
         h:8,
         minW: 3,
         minH: 6,
-        maxW: 6,
-        maxH: 10
+        maxW: 12,
+        maxH: 12
       }
     }
     if (editWidget)  
@@ -106,7 +108,7 @@ class FormList extends React.Component {
     return (
       <div className="FormList container">
         <FormInputBasic callback={this.handlePayload} values={payload} />
-        <InputText callback={this.handlePayload} title="Icon" name="icon" value={payload.icon} />
+        <Icons value={payload} callback={this.handlePayload}/>
         <InputText callback={this.handlePayload} title="Text" name="text" value={payload.text} />
         <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit} />
         <div className="form-group row">
@@ -114,11 +116,67 @@ class FormList extends React.Component {
             Example List :
           </label>
           <div className="col-9 text-secondary">
-            {this.state.text + ' <Value> ' + this.state.unit}
+            <i className={'fas fa-2x ' + payload.icon}></i> {this.state.text + ' <Value> ' + this.state.unit}
           </div>
         </div>
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
 
+      </div>
+    )
+  }
+}
+
+class Icons extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      icons: [],
+      selectOption: {}
+    }
+  }
+
+  componentWillReceiveProps(nextProps){
+    let icons = []
+    fontAwesomeIcons.icons.map((icon) => 
+      icons.push({
+        label: icon.split(' ')[1] ,
+        value: icon
+      })
+    )
+    this.setState({
+      icons: icons,
+      selectOption: {
+        label: nextProps.value.icon,
+        value: nextProps.value.icon
+      }
+    })
+  }
+
+  handleSelected = (selectOption) => {
+    this.setState({ selectOption })
+    this.props.value.icon = selectOption.value
+  }
+
+  render () {
+    let {icons, selectOption} = this.state
+    if(selectOption === null) selectOption = ''
+    return (
+      <div className="form-group row">
+        <label htmlFor="value" className="col-3 col-form-label">
+          Select Icon :
+        </label>
+        <div className="col-7">
+          <Creatable
+            value={selectOption}
+            onChange={this.handleSelected}
+            options={icons}
+            placeholder='Topic :: Name icons'
+          />
+        </div>
+        <div className="col-2">
+          <i className={'fa-2x ' + selectOption.value}></i>
+          {/* {(selectOption.value)?<i className={'fa-2x ' + selectOption.value}></i>:<i className="fa-2x fas fa-spinner fa-pulse"></i>} */}
+        </div>
       </div>
     )
   }

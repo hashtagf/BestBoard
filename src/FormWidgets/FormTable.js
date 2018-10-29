@@ -67,7 +67,7 @@ class FormText extends React.Component {
         minW: 3,
         minH: 5,
         maxW: 12,
-        maxH: 6
+        maxH: 50
       }
     }
     if (editWidget)  

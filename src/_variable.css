@@ -1,5 +1,6 @@
 :root {
-    --themeBGmain: #2C3849;
+    /* --themeBGmain: #2C3849; */
+    --themeBGmain: url('assets/bg.jpg');
     --themeBGsidebar: #303E4D;
     --activeItem: #6698C8;
     --activeItemText: #FFFFFF;

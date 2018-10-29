@@ -3,7 +3,7 @@ import WidgetStore from '../store/WidgetStore'
 import NETPIEMicrogear from '../store/Microgear'
 import './Widget.css'
 import HeaderCard from "./HeaderCard"
-import date from 'date-and-time';
+import date from 'date-and-time'
 
 class Lists extends React.Component {
   constructor(props) {
@@ -58,7 +58,7 @@ class Lists extends React.Component {
     const icon = payload.icon
     const widgetId = this.props.widgetId
     const mapList = data.map((payload, index) =>
-      <List key={index} index={index} payload={payload} icon={icon} />
+      <List key={index} recent={index===data.length-1} payload={payload} icon={icon} />
     )
     return (
 
@@ -82,8 +82,8 @@ class List extends React.Component {
     }
   }
   showTime (time) {
-    let now = new Date();
-    time =new Date(time);
+    let now = new Date()
+    time =new Date(time)
     let ago = date.subtract(now, time)
     if (ago.toSeconds() === 0) return 'now'
     else if (ago.toSeconds() < 60) return ago.toSeconds()+ ' seconds'
@@ -97,29 +97,26 @@ class List extends React.Component {
   change = () => {
     this.setState({
         counter: this.state.counter + 1
-    });
+    })
   }
   render() {
     const payload = this.props.payload
     const icon = this.props.icon
     return (
-      <li className={(this.props.index===0)?"list-group-item list-group-item-action":"list-group-item"}>
+      <li className={(this.props.recent)?"list-group-item list-group-item-action":"list-group-item"}>
         <div className="row">
           <div className="col-2 m-0 p-0">
             <span className="fa-layers fa-fw icon" >
-              <i className={'fas fa-2x fa-' + icon}></i>
+              <i className={'fas fa-2x ' + icon}></i>
             </span>
           </div>
           <div className="col-9">
-          <div className="row">
-            <strong>{payload.text + ' '}</strong> {payload.value}{' ' + payload.unit}
-          </div>
-          <div className="row">
-          
-            <small>{this.showTime(payload.timestamp)}</small>
-          </div>
-
-
+            <div className="row">
+              <strong>{payload.text + ' '}</strong> {payload.value}{' ' + payload.unit}
+            </div>
+            <div className="row">
+              <small>{this.showTime(payload.timestamp)}</small>
+            </div>
           </div>
         </div>
       </li>

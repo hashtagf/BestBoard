@@ -119,6 +119,21 @@ class FormGauge extends React.Component {
       <div className="FormGuage container">
         <FormInputBasic callback={this.handlePayload} values={payload} />
         <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit} />
+        <div className="form-group row">
+          <label htmlFor="datasource" className="col-3 col-form-label">
+            Mode :
+          </label>
+          <div className="col-9">
+            <select className="form-control custom-select selectdefault"
+              name="mode"
+              onChange={this.handlePayload}
+              value={payload.mode}
+            >
+              <option value="gauge" >Gauge</option>
+              <option value="progress" >Progress</option>
+            </select>
+          </div>
+        </div>
         <InputText callback={this.handlePayload} title="Min Value" name="minvalue" value={payload.minvalue} />
         {/* <InputText callback={this.handlePayload} title="Max Value" name="maxvalue" value={payload.maxvalue} /> */}
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>

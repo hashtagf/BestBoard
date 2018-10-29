@@ -11,7 +11,7 @@ class ImageCover extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      values: [0,0,0]
+      values: []
     }
   }
   delWidget() {
@@ -20,10 +20,13 @@ class ImageCover extends React.Component {
   }
   componentWillMount () {
     const count = this.props.payload.popups.length
-    var tmp = Array.apply(null, Array(count)).map(function () {return 0})
+    var tmp = this.state.values
+    tmp.length = count
+    //var tmp = Array.apply(null, Array(count)).map(function () {return 0})
     this.setState({
       values: tmp
     })
+    console.log(count,this.state.values)
   }
   componentDidMount () {
     const popups = this.props.payload.popups
@@ -41,16 +44,20 @@ class ImageCover extends React.Component {
       return popup.value === topic;
     });
     if (index >= 0) {
-      console.log(index)
       var popup = this.props.payload.popups[index]
       if (popup.value === topic) {
         let value = msg + ''
-        if (popup.manual) eval(popup.jsValue)
+        if (popup.manual) {
+          try {eval(popup.jsValue)}
+          catch (err){
+            if(err!==null) value = msg+''
+          }
+        }
         else value = value.split(popup.filter)[popup.filterIndex]
         const stateValue = this.state.values
         stateValue[index] = value
         this.setState({
-          values: stateValue,
+          values: stateValue
         })
       }
     }

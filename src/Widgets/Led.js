@@ -22,7 +22,9 @@ class Led extends React.Component {
       microgear.on('message', this.onMessage.bind(this))
     } else console.log('error : not Connect datasource !!')
   }
+  processJs = () => {
 
+  }
   onMessage(topic, msg) {
     const payload = this.props.payload
     if (payload.value === topic) {
@@ -30,14 +32,12 @@ class Led extends React.Component {
       let valueCondition = payload.valueON
       if (payload.manual) {
         try {eval(payload.jsValue)}
-        catch (err){}
-        value += ''
+        catch (err){
+          if(err!==null) value = msg+''
+        }
       }
-      else {
-        value = value.split(payload.filter)[payload.filterIndex]
-      }
+      else value = value.split(payload.filter)[payload.filterIndex]
       let flag = false
-      console.log(value,valueCondition)
       switch (payload.expressionON) {
         case '=':flag = value === valueCondition
           break

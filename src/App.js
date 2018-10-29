@@ -14,7 +14,9 @@ class App extends Component {
       mode: Store.mode
     }
   }
-
+  componentWillMount () {
+    //var myParam = this.props.location.search.split('board/')[1]
+  }
   render() {
     const mode = this.state.mode
     return (

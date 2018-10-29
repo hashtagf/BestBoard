@@ -98,11 +98,11 @@ class FormProgress extends React.Component {
       manual: this.state.manual,
       layout: {
         w: 3,
-        h:6,
+        h:3,
         minW: 3,
         minH: 2,
         maxW: 6,
-        maxH: 3
+        maxH: 6
       }
     }
     if (editWidget)

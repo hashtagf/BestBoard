@@ -6,7 +6,6 @@ import Store from '../store/Store'
 import LocalStore from '../store/LocalStore'
 import socketIOClient from 'socket.io-client'
 import ClickOutside from 'react-click-outside'
-import PageStore from '../store/PageStore'
 import { observer } from 'mobx-react'
 
 const socket = socketIOClient(Store.server)
@@ -54,10 +53,11 @@ class Page extends Component {
           colorName: board.colorName
         })
       )
-      PageStore.pages = pages
+      Store.pages = pages
       this.setState({
         pages: pages
       })
+      Store.setPage()
     })
   }
 
@@ -72,6 +72,7 @@ class Page extends Component {
       addPage: true
     })
     Store.addPage = true
+    //(this.nameInput)? this.nameInput.focus():null
   }
 
   savePage = (index, pageId) => {
@@ -105,7 +106,7 @@ class Page extends Component {
   }
 
   handleChange(e) {
-    this.setState({ inputName: e.target.value });
+    this.setState({ inputName: e.target.value })
   }
   handleCancel = () => {
     this.setState({
@@ -140,15 +141,14 @@ class Page extends Component {
   handleClickpage = (pageId, pageName, colorName) => {
     this.setState({
       selectPage: pageId
-    },() => {
-      Store.currentId = pageId
-      Store.pageName = pageName
-      Store.setColor(colorName)
     })
+    Store.currentId = pageId
+    Store.pageName = pageName
+    Store.setColor(colorName)
   }
 
   render () {
-    let listPage = []
+    let listPage =  []
     const {pages, editPage} = this.state
     let lspage
 
@@ -166,7 +166,8 @@ class Page extends Component {
             onKeyPress={this.handleKeyPress.bind(this, objKeypress)} 
             placeholder="new page" aria-label="new page" 
             onChange={this.handleChange.bind(this)} 
-            aria-describedby="button-addon2" />
+            aria-describedby="button-addon2"
+            ref={input => input && input.focus()}/>
           <div className="input-group-append">
             <button className="btn rounded-0 editbtn bg-transparent" type="button" id="button-addon2" onClick={() => this.savePage(-1)}>
               <i className="fas fa-save"></i>
@@ -206,7 +207,7 @@ class Page extends Component {
               placeholder="new page" aria-label="new page" 
               onChange={this.handleChange.bind(this)} 
               aria-describedby="button-addon2" 
-              ref={(input) => { this.nameInput = input; }} />
+               />
             <div className="input-group-append">
             </div>
           </div>
@@ -221,9 +222,6 @@ class Page extends Component {
           <ul className="collapse list-unstyled show" id="pageSubmenu">
             {listPage}
             <li>{addPage}</li>
-            {
-              (this.nameInput)? this.nameInput.focus():null
-            }
           </ul>
         </li>
       </ul>

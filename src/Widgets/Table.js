@@ -56,7 +56,12 @@ class Table extends React.Component {
     if (payload.value === topic) {
       let value = msg + ''
       let now = new Date()
-      if (payload.manual) eval(payload.jsValue)
+      if (payload.manual) {
+        try {eval(payload.jsValue)}
+        catch (err){
+          if(err!==null) value = msg + ''
+        }
+      }
       else value = value.split(payload.filter)[payload.filterIndex]
       this.setState({
         value: value,

@@ -1,7 +1,7 @@
 import { observable } from 'mobx'
 
 class Store {
-  @observable currentId = null
+  @observable currentId = ''
   @observable pageName = ''
   @observable mode = false
   @observable editSource = {}
@@ -42,10 +42,19 @@ class Store {
       colors: ['#211942', '#1f1d45', '#2dcdf2', '#FFFFFF', '#322e5a', '#292558', '#241d48', '#241d48', '#24214c', '#FFFFFF', '#FFFFFF', '#FEFEFE', 'linear-gradient(to right, rgba(255,93,177,1) 0%, rgba(239,1,124,1) 100%)', '#b236be', '0 0rem 1rem rgba(255, 0, 200, 0.05)']
     }
   ]
-  //#cb3a91
+  setPage = () => {
+    if (this.currentId !== '' && this.pageName === '') {
+      var id = this.currentId
+      var found = this.pages.find(function(page) {
+        return page.id === id
+      });
+      if (found) {
+        this.pageName = found.name
+        this.setColor(found.colorName)
+      }
+    }
+  }
   setColor = (name) => {
-
-    //id = 2
     var i = 0
     var id = 0
     this.colorSet.forEach((colors, index) => {

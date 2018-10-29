@@ -8,6 +8,7 @@ import axios from 'axios'
 import WidgetStore from '../store/WidgetStore'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import ReactResizeDetector from 'react-resize-detector'
+import Skeleton from 'react-skeleton-loader'
 
 const socket = socketIOClient(Store.server)
 
