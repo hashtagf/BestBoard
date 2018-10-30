@@ -1,10 +1,10 @@
 import React from 'react'
 import WidgetStore from '../store/WidgetStore'
 import Store from '../store/Store'
-// import FormInputBasic from './Input/FormInputBasic'
+import FormInputBasic from './Input/FormInputBasic'
 import InputText from './Input/InputText'
 import SummitBtn from './SummitBtn'
-import FormMulti from './Input/FormMulti'
+import FormMultiple from './Input/FormMultiple'
 
 class FormText extends React.Component {
   constructor(props) {
@@ -101,20 +101,30 @@ class FormText extends React.Component {
     return (
       <div className="FormProgressBar container">
         <InputText callback={this.handlePayload} title="Table" name="title" value={payload.title} />
-        <button type="button" class="btn btn-primary btn-block mb-2" onClick={this.addColumn}>Add Colunm</button>
+        <button type="button" className="btn btn-primary btn-block mb-2" onClick={this.addColumn}>Add Colunm</button>
         {
           (payload.columns)?        
-            <FormMulti payload={payload} 
+
+            <FormMultiple
             handlePayload={this.handlePayload} 
             title={'Columns'}
-            hideTitle={false}
+            hideTitle={true}
+            addBtnFunc={this.addColumn}
             formsbtn={payload.formsBtn}
-            forms={payload.columns}/>:null
+            forms={payload.columns}>
+              <FormInputBasic/>
+            </FormMultiple>
+            :null
         }        
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
       </div>
     )
   }
 }
-
+            {/* <FormMulti payload={payload} 
+            handlePayload={this.handlePayload} 
+            title={'Columns'}
+            hideTitle={false}
+            formsbtn={payload.formsBtn}
+            forms={payload.columns}/> */}
 export default FormText

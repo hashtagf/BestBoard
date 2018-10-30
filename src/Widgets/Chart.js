@@ -47,22 +47,32 @@ class Chart extends React.Component {
     }
     const payload = this.props.payload
     const netpieAPI = 'https://api.netpie.io/feed/'
+    let value = ''
+    payload.values.map((val) => value += val.value + ',')
     axios.get(netpieAPI + payload.feedID
       + '?apikey=' + payload.feedAPI
       + '&granularity=' + granularity
       + '&since=' + filterSince
-      + '&filter=' + payload.value
-    ).then(function (res) {
+      + '&filter=' + value.substr(0, value.length -1 )
+    ).then((res) => {
       this.setState({
-        data: res.data.data[0].values.map((data) => {
-          const obj = {
-            'timestamp': data[0],
-            'value': data[1]
-          }
-          return obj
+        data: res.data.data.map((data, index) => {
+          let objAttr = data.values.map((val) => {
+            let obj = []
+            if (index === 0) {
+              obj = {
+                'timestamp': val[0],
+                ['value' + index]: val[1]
+              }
+            } else {
+              obj = val[1]
+            }
+            return obj
+          })
+          return (objAttr)
         })
       })
-    }.bind(this))
+    })
   }
 
   handleFilter(e) {
@@ -86,7 +96,14 @@ class Chart extends React.Component {
   render() {
     const payload = this.props.payload
     const widgetId = this.props.widgetId
+    const data = this.state.data
     var areaColor = Store.colorSet[Store.colorUse].colors[2]
+    for (let i = 0; i < data[0].length; i++) {
+      data.map((datas, index) => {
+        if(index !== 0) 
+          data[0][i] = Object.assign({['value'+index]: data[index][i]}, data[0][i])
+      })
+    }
     return (
         <div className="item-content card chart shadowcard rounded-0 widgetChart border-0 col-12 h-100" data-id={widgetId}>
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
@@ -129,15 +146,19 @@ class Chart extends React.Component {
               </button>
             </div>
             <ResponsiveContainer width='100%' aspect={4.0/1.0}>
-              <AreaChart data={this.state.data}
+              <AreaChart data={data[0]}
                 margin={{ top: 0, bottom: 0, left: 0, right: 0 }}
               >
-                <defs>
-                  <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor={areaColor} stopOpacity={0.7} />
-                    <stop offset="95%" stopColor={areaColor} stopOpacity={0} />
-                  </linearGradient>
-                </defs>
+                {
+                  data.map((data, index) => 
+                  <defs>
+                    <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor={areaColor} stopOpacity={0.7} />
+                      <stop offset="95%" stopColor={areaColor} stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  )
+                }
                 <XAxis
                   dataKey="timestamp"
                   reversed={true}
@@ -149,13 +170,18 @@ class Chart extends React.Component {
                 <Legend />
                 <CartesianGrid strokeDasharray="3 3" />
                 <Tooltip />
-                <Area
-                  name={payload.value}
-                  type={payload.type}
-                  dataKey="value"
-                  stroke={areaColor}
-                  fillOpacity={payload.fillOpacity}
-                  fill={payload.fill} />
+                {
+                  data.map((data, index) => 
+                    <Area
+                    key={index}
+                    name={payload.values[index].value}
+                    type={payload.type}
+                    dataKey={'value' + index}
+                    stroke={areaColor}
+                    fillOpacity={payload.fillOpacity}
+                    fill={payload.fill} />
+                  )
+                }
               </AreaChart>
             </ResponsiveContainer>
           </div>

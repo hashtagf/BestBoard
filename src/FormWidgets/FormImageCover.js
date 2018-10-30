@@ -3,7 +3,10 @@ import WidgetStore from '../store/WidgetStore'
 import InputText from './Input/InputText'
 import Store from '../store/Store'
 import SummitBtn from './SummitBtn'
-import FormMulti from './Input/FormMulti'
+import FormMultiple from './Input/FormMultiple'
+import FormInputBasic from './Input/FormInputBasic'
+import InputIcons from './Input/InputIcon'
+
 import './FormImageCover.css'
 import reactCSS from 'reactcss'
 
@@ -106,7 +109,7 @@ class FormImageCover extends React.Component {
     var tmp = this.state.popups
     var tmpbtn = this.state.formsbtn
     tmp.push({
-      title: 'Gauge',
+      title: 'Popup'+(tmp.length+1),
       datasource: '',       
       body: '',
       value: '',
@@ -160,14 +163,16 @@ class FormImageCover extends React.Component {
         {(payload.file)?<ImgArea file={payload.file} value={payload} handlePayload={this.handlePayload}/>:null}
         {
           (payload.file&&payload.popups)?        
-            <FormMulti payload={payload} 
+            <FormMultiple
             handlePayload={this.handlePayload} 
             title={'Points'}
             hideTitle={true}
-            hideTitle={false}
             addBtnFunc={this.addPopup}
             formsbtn={payload.formsbtn}
-            forms={payload.popups}/>:null
+            forms={payload.popups}>
+              <FormInputBasic/>
+              <InputIcons/>
+            </FormMultiple>:null
             
         }
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget} />
@@ -220,7 +225,7 @@ class ImgArea extends React.Component {
     })
     var popups = this.props.value.popups.map((popup,index) =>
       <div className="item rounded-circle" key={index} id={'item'+index} name={'item'+index} draggable="true" onDragStart={this.drag_start} style={styles['item'+index]}>
-          {index+1}
+          {(popup.title)?popup.title:index+1}
       </div>
     )
     return (

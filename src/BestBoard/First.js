@@ -19,7 +19,7 @@ class First extends Component {
     return (
       <div className="container text-center">
         <img src={Logo} alt="" className="logo"/>
-        <image class="my-svg-alternate" src={LogoPng} />
+        <image className="my-svg-alternate" src={LogoPng} />
 
         <div className="jumbotron bg-transparent">
           <div className="row">

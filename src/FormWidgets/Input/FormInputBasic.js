@@ -115,7 +115,7 @@ class FormInputBasic extends React.Component {
                 <button className={(!manual)?'btn btn-primary':'btn'} type="button" name="manual" value={false} data-toggle="collapse" data-target="#collapseAuto" aria-expanded={(!manual)?"true":"false"} aria-controls="collapseAuto" onClick={handleChange}>
                   Automatic 
                 </button>
-                <button type="button" className="btn btn-group" readOnly={true}>
+                <button type="button" className="btn btn-group" disabled={true}>
                   or 
                 </button>
                 <button className={(manual)?'btn btn-primary':'btn'} type="button" name="manual" value={true} data-toggle="collapse" data-target="#collapseManual" aria-expanded={(manual)?"true":"false"} aria-controls="collapseManual" onClick={handleChange}>
@@ -266,7 +266,6 @@ class JsText extends React.Component {
           function (value) {'{'}
           <textarea
             className={(this.state.error === null) ? 'form-control is-valid' : 'form-control is-invalid text-danger'}
-            id="exampleFormControlTextarea1"
             rows="3"
             name={name}
             value={this.state.code}

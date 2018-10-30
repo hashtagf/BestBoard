@@ -3,10 +3,12 @@ import GoogleMapReact from 'google-map-react';
 import WidgetStore from '../store/WidgetStore'
 import InputText from './Input/InputText'
 // import FormInputBasic from './Input/FormInputBasic'
-import FormMulti from './Input/FormMulti'
+import FormMultiple from './Input/FormMultiple'
 import Store from '../store/Store'
 import SummitBtn from './SummitBtn'
 import './FormImageCover.css'
+import FormInputBasic from './Input/FormInputBasic'
+
 // import reactCSS from 'reactcss'
 // const $ = require("jquery")
 const AnyReactComponent = ({ text }) => <i className="fas fa-map-marker-alt markMap" alt={text}></i>;
@@ -17,27 +19,30 @@ class FormMap extends React.Component {
     this.state = {
       title: 'Map',
       forms: [
-        {
-          title: 'Latitude',
-          value: '',
-          datasource: '',
-          body: '',
-          filter: ',',
-          filterIndex: 0,
-          jsValue: '',
-          manual: false,
-        },
-        {
-          title: 'Longitude',
-          value: '',
-          datasource: '',
-          body: '',
-          filter: ',',
-          filterIndex: 0,
-          jsValue: '',
-          manual: false,
-        }
+        [
+          {
+            title: 'Latitude',
+            value: '',
+            datasource: '',
+            body: '',
+            filter: ',',
+            filterIndex: 0,
+            jsValue: '',
+            manual: false,
+          },
+          {
+            title: 'Longitude',
+            value: '',
+            datasource: '',
+            body: '',
+            filter: ',',
+            filterIndex: 0,
+            jsValue: '',
+            manual: false,
+          }
+        ]
       ],
+      formsbtn: ['1'],
       lat : 59.955413,
       lng: 30.337844
     }
@@ -81,7 +86,31 @@ class FormMap extends React.Component {
     this.setState({
       title: 'Map',
       file: 'empty',
-      popups: []
+      forms: [
+        [
+          {
+            title: 'Latitude',
+            value: '',
+            datasource: '',
+            body: '',
+            filter: ',',
+            filterIndex: 0,
+            jsValue: '',
+            manual: false,
+          },
+          {
+            title: 'Longitude',
+            value: '',
+            datasource: '',
+            body: '',
+            filter: ',',
+            filterIndex: 0,
+            jsValue: '',
+            manual: false,
+          }
+        ]
+      ],
+      formsbtn: ['1']
     })
   }
   handlePayload(e) {
@@ -97,6 +126,7 @@ class FormMap extends React.Component {
       typeWidget: 'Map',
       title: this.state.title,
       forms: this.state.forms,
+      formsbtn: this.state.formsbtn,
       layout: {
         w: 3,
         h:8,
@@ -125,6 +155,37 @@ class FormMap extends React.Component {
       })
     } */
   }
+  addPopup = (e) => {
+    var tmp = this.state.forms
+    var tmpbtn = this.state.formsbtn
+    tmp.push(        [
+      {
+        title: 'Latitude',
+        value: '',
+        datasource: '',
+        body: '',
+        filter: ',',
+        filterIndex: 0,
+        jsValue: '',
+        manual: false,
+      },
+      {
+        title: 'Longitude',
+        value: '',
+        datasource: '',
+        body: '',
+        filter: ',',
+        filterIndex: 0,
+        jsValue: '',
+        manual: false,
+      }
+    ])
+    tmpbtn.push(tmp.length)
+    this.setState({
+      forms: tmp,
+      formsbtn: tmpbtn
+    })
+  }
   render() {
     const payload = this.state
     return (
@@ -134,12 +195,21 @@ class FormMap extends React.Component {
           title="Title"
           name="title"
           value={payload.title} />
-          <FormMulti payload={payload} 
-          handlePayload={this.handlePayload} 
-          title={'Position'}
-          formsbtn={['Latitude','Longitude']}
-          forms={payload.forms}/>
-        <div className="card-body" style={{height: '300px'}}>
+          <FormMultiple
+            handlePayload={this.handlePayload}
+            title={'Points'}
+            addBtnFunc={this.addPopup}
+            formsbtn={payload.formsbtn}
+            forms={payload.forms}>
+            <FormMultiple
+              title={'Position'}
+              formsbtn={['Latitude','Longitude']}
+              
+            >
+              <FormInputBasic hiddenTitle={true}/>
+            </FormMultiple>
+          </FormMultiple>
+        {/* <div className="card-body" style={{height: '300px'}}>
           <GoogleMapReact
             bootstrapURLKeys={{ key: 'AIzaSyCmONUAkFkKSXNpjjcaihGMVkBZw9vwJzQ' }}
             defaultCenter={this.props.center}
@@ -150,8 +220,8 @@ class FormMap extends React.Component {
             lng={payload.lng}
             text={'K'}
             />
-          </GoogleMapReact>
-        </div>
+          </GoogleMapReact> 
+        </div> */}
 
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget} />
       </div>

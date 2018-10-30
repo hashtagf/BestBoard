@@ -1,13 +1,11 @@
 import React from 'react'
-import FormInputBasic from './FormInputBasic'
-import InputIcons from './InputIcon'
+
 
 // import reactCSS from 'reactcss'
 // const $ = require("jquery")
 
-//(payload.file&&payload.popups)?<FormPopups payload={payload} handlePayload={this.handlePayload}/>:null
 
-class FormMulti extends React.Component {
+class FormMultiple extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -26,7 +24,6 @@ class FormMulti extends React.Component {
   handlePayload = (e) => {
     var tmp = this.props.forms
     var index = parseInt(this.state.selectForm, 10)
-    console.log(tmp, index)
     tmp[index][e.target.name] = e.target.value
     var obj = {
       target: {
@@ -34,23 +31,29 @@ class FormMulti extends React.Component {
         value: tmp
       }
     }
+    console.log(tmp, index)
     this.props.handlePayload(obj)
+  }
+  hideTitle = (e) => {
+
   }
   render() {
     const selectForm = this.state.selectForm
-    var buttons = this.props.formsbtn.map((popup, index) =>
-      <button key={index}
+    const formsbtn = []
+    var buttons = this.props.forms.map((form, index) =>{
+      formsbtn.push((form.title)?form.title:index+1)
+      return <button key={index}
         className={(selectForm === index + '') ? 'btn btn-primary' : 'btn'}
         type="button" name="selectForm"
         value={index} data-toggle="collapse"
         data-target={"#form" + index}
         aria-expanded={(selectForm === index + '') ? "true" : "false"}
         aria-controls={"form" + index} onClick={this.handleClick}>
-        {popup}
-      </button>
+        {(form.title)?form.title:index+1}
+      </button>}
     )
     if (this.props.addBtnFunc) {
-      let addBtn = <button className="btn" onClick={this.props.addBtnFunc}>+ Add{this.props.title}</button>
+      let addBtn = <button className="btn" onClick={this.props.addBtnFunc}><i className="fas fa-plus-square"></i></button>
       buttons.push(addBtn)
     }
     var forms = this.props.forms.map((form, index) =>
@@ -58,14 +61,20 @@ class FormMulti extends React.Component {
         className={(selectForm === index + '') ? 'collapse show' : 'collapse'}
         aria-labelledby="headingOne"
         data-parent="#popupForm">
-        <FormInputBasic callback={this.handlePayload} values={form} hiddenTitle={this.props.hideTitle} />
-        {(this.props.hiddenIcon)?<InputIcons value={form} callback={this.handlePayload}/>:null}
+          {React.Children.map(this.props.children,child => {
+              if (child.type.name === 'InputText') 
+                return React.cloneElement(child, {value: form[child.props.name],callback:this.handlePayload})
+              else if (child.type.name === 'FormMultiple')
+                return React.cloneElement(child, {forms: form,handlePayload:this.handlePayload})
+              else return React.cloneElement(child, {values: form,callback:this.handlePayload})
+            }
+          )}
       </div>
     )
     return (
       <div className="accordion" id="popupForm">
         {
-          (this.props.formsbtn) ?
+          (formsbtn) ?
             <div className="form-group row">
               <label htmlFor="value" className="col-3 col-form-label">
                 {this.props.title} :
@@ -80,11 +89,11 @@ class FormMulti extends React.Component {
 
         }
 
-        <strong className="text-center">Value : {this.props.formsbtn[this.state.selectForm]}</strong>
+        <strong className="text-center">Value : {formsbtn[this.state.selectForm]}</strong>
         {forms}
       </div>
     )
   }
 }
 
-export default FormMulti
+export default FormMultiple

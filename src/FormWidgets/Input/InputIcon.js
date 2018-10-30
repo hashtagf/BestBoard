@@ -25,15 +25,15 @@ class InputIcons extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       selectOption: {
-        label: nextProps.value.icon,
-        value: nextProps.value.icon
+        label: nextProps.values.icon,
+        value: nextProps.values.icon
       }
     })
   }
 
   handleSelected = (selectOption) => {
     this.setState({ selectOption })
-    this.props.value.icon = selectOption.value
+    this.props.values.icon = selectOption.value
   }
 
   render() {

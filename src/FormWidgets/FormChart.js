@@ -3,6 +3,7 @@ import WidgetStore from '../store/WidgetStore'
 import InputText from './Input/InputText'
 import Store from '../store/Store'
 import SummitBtn from './SummitBtn'
+import FormMultiple from './Input/FormMultiple'
 
 class FormChart extends React.Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class FormChart extends React.Component {
       title: 'Chart',
       feedID: '',
       feedAPI: '',
-      value: '',
+      values: [
+      ],
       type: 'monotone',
       stroke: '#8884d8',
       fillOpacity: 1,
@@ -52,7 +54,7 @@ class FormChart extends React.Component {
       title: 'Chart',
       feedID: '',
       feedAPI: '',
-      value: '',
+      values: [],
       type: 'monotone',
       stroke: '#8884d8',
       fillOpacity: 1,
@@ -76,7 +78,7 @@ class FormChart extends React.Component {
       title: this.state.title,
       feedID: this.state.feedID,
       feedAPI: this.state.feedAPI,
-      value: this.state.value,
+      values: this.state.values,
       type: 'monotone',
       stroke: '#8884d8',
       fillOpacity: 1,
@@ -98,6 +100,15 @@ class FormChart extends React.Component {
       WidgetStore.createWidget(Store.currentId, payload)
     this.reState()
   }
+  addPopup = (e) => {
+    var tmp = this.state.values
+    tmp.push({
+      value: ''
+    })
+    this.setState({
+      popups: tmp
+    })
+  }
   render() {
     const payload = this.state
     return (
@@ -105,7 +116,17 @@ class FormChart extends React.Component {
         <InputText callback={this.handlePayload} title="Title" name="title" value={payload.title} />
         <InputText callback={this.handlePayload} title="Feed ID" name="feedID" value={payload.feedID} />
         <InputText callback={this.handlePayload} title="Feed API" name="feedAPI" value={payload.feedAPI} />
-        <InputText callback={this.handlePayload} title="Value" name="value" value={payload.value} placeholder="Value of Feed"/>
+{/*         <InputText callback={this.handlePayload} title="Value" name="value" value={payload.values} placeholder="Value of Feed"/>
+ */}    <FormMultiple
+          payload={payload} 
+          handlePayload={this.handlePayload} 
+          title={'Values'}
+          hideTitle={true}
+          addBtnFunc={this.addPopup}
+          forms={payload.values}
+        >
+          <InputText title="Value" name="value" placeholder="Value of Feed"/>
+        </FormMultiple>
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
 
       </div>

@@ -20,52 +20,80 @@ class Map extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      lat: 0,
-      lng: 0,
-      center: {
+      points: [
+      ],
+      center: 
+        {
         lat: 50,
         lng: 50
-      },
+        },
       zoom: 11
     }
   }
   componentWillMount () {
+    const count = this.props.payload.forms.length
+    var tmp = this.state.points
+    tmp.length = count
+    //var tmp = Array.apply(null, Array(count)).map(function () {return 0})
+    this.setState({
+      points: tmp
+    })
     this.getLocation()
   }
-    componentDidMount () {
+
+  componentDidMount () {
+    let source = {}
     const payload = this.props.payload.forms
-    if (NETPIEMicrogear.statusOnline[payload[0].datasource]) {
-      const microgear = NETPIEMicrogear.microgear[payload[0].datasource]
-      microgear.on('message', this.onMessage.bind(this))
-    } else console.log('error : not Connect datasource !!')
-    if (NETPIEMicrogear.statusOnline[payload[1].datasource]) {
-      const microgear = NETPIEMicrogear.microgear[payload[1].datasource]
-      microgear.on('message', this.onMessage.bind(this))
-    } else console.log('error : not Connect datasource !!')
+    payload.map((point, index) => {
+      point.map((value, index) => {
+          source[value.datasource] = value.datasource
+          return 0
+      })
+      return 0
+    })
+    Object.keys(source).forEach((objectKey) => {
+      if (NETPIEMicrogear.statusOnline[objectKey]) {
+        const microgear = NETPIEMicrogear.microgear[objectKey]
+        microgear.on('message', this.onMessage.bind(this))
+      } else console.log('error : not Connect datasource !!')
+      return 0
+    });
+
   }
 
   onMessage (topic, msg) {
     var payload = this.props.payload.forms
-    if (payload[0].value === topic || payload[1].value === topic) {
-      var index = 1
+    var i,j
+    var positionObj
+    payload.map((point,x) => {
+      point.map((pos,y) => {
+        if (pos.value === topic) {
+          i = x
+          j = y
+          positionObj = pos
+        }
+        return 0
+      })
+      return 0
+    })
+    payload = positionObj
+    if (payload) {
       var name = 'lng'
-      if (payload[0].value === topic){
-        index = 0
-        name = 'lat'
-      }
-      payload = payload[index]
+      if (j === 0) name = 'lat'
+      
       let value = msg + ''
-      if (payload.manual) {
+      if (payload.manual&&payload.manual!=='false') {
         try {eval(payload.jsValue)}
         catch (err){
           if(err!==null) value = msg + ''
         }
       }
       else value = value.split(payload.filter)[payload.filterIndex]
-      var tmp = this.state.center
-      tmp[name] = value
+      var tmp = this.state.points
+      if (!tmp[i]) tmp[i] = {}
+      tmp[i][name] = value
       this.setState({
-        [name]: value,
+        points: tmp,
       })
     }
   }
@@ -96,14 +124,23 @@ class Map extends React.Component {
           <div className="card-body googlemap">
             <GoogleMapReact
               bootstrapURLKeys={{ key: 'AIzaSyCmONUAkFkKSXNpjjcaihGMVkBZw9vwJzQ' }}
-              defaultCenter={this.props.center}
+              center={this.state.center}
               defaultZoom={this.state.zoom}
             >
-              <AnyReactComponent
-                lat={this.state.lat}
-                lng={this.state.lng}
-                text={'K'}
-              />
+              {
+                this.state.points.map((point,index) => {
+                  if (!point.lat || !point.lng) {
+                    return null
+                  }
+                  return <AnyReactComponent
+                  key={index}
+                  lat={point.lat}
+                  lng={point.lng}
+                  text={'K'}
+                />
+                })
+              }
+              
               <YourPosition
                 lat={this.state.center.lat}
                 lng={this.state.center.lng}

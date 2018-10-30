@@ -107,7 +107,7 @@ class List extends React.Component {
         <div className="row">
           <div className="col-2 m-0 p-0">
             <span className="fa-layers fa-fw icon" >
-              <i className={'fas fa-2x ' + icon}></i>
+              <i className={'fab fa-2x ' + icon}></i>
             </span>
           </div>
           <div className="col-9">

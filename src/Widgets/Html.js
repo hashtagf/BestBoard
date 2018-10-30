@@ -12,7 +12,6 @@ class HTML extends React.Component {
     super(props)
     this.state = {
       body: props.payload.body,
-      html: '',
       datasources : []
     }
   }
@@ -24,19 +23,16 @@ class HTML extends React.Component {
   initHtml = () => {
     
     let body = this.state.body
-    console.log(body)
     let datasources = this.state.datasources
-      let start_cut = body.indexOf('<script>')
-      let start_body = body.substr(0,start_cut)
+    let start_body = body
+    let scriptBody = ''
+    let start_cut = body.indexOf('<script>')
+    if (start_cut !== -1 ){
+      start_body = body.substr(0,start_cut)
       let body_cut = body.substr(start_cut + 8)
-      body = body.substr(body_cut)
-      console.log(start_body)
-      let end_cut = body.indexOf('</script>')
-      if (end_cut === -1) this.setState({html: body}) 
-      end_cut = body.indexOf('</script>')
-      body = body.substr(end_cut, 9)
-    
-    
+      let end_cut = body_cut.indexOf('</script>')
+      scriptBody = body_cut.substr(0, end_cut)
+    }
     DatasourceStore.datasources.forEach((datasource, index) => {
       NETPIEMicrogear.microgear[datasource._id].on('message', (topic, msg) => {
         let initHtml = ''
@@ -50,7 +46,9 @@ class HTML extends React.Component {
         datasources.map((val) => 
           initHtml += `datasource['` + val.topic + `'] = '` + val.msg + `';`
         )
-        initHtml += body
+        initHtml += scriptBody
+        initHtml += '</script>'
+        // console.log(initHtml)
         this.setState({
           body: initHtml,
           datasources : datasources

@@ -99,10 +99,10 @@ class Table extends React.Component {
       </tr>
     )
     return (
-        <div className="item-content Table card shadowcard rounded-0 widgetCard border-0 h-100 Text col-12" data-id={widgetId}>
+        <div className="item-content Table card shadowcard rounded-0 widgetCard border-0 h-100 col-12" data-id={widgetId}>
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body text-center" id="scrollbar-style">
-          <table className="table table-striped table-dark">
+          <table className="table table-striped">
             <thead>
               <tr>
                 {cols}

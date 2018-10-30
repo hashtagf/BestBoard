@@ -13,7 +13,11 @@
     background-color: var(--activeItem);
 }
 .listwid {
+    background: transparent;
     cursor: pointer;
+}
+.listwid span,.listwid figcaption {
+    pointer-events: none;
 }
 .listwid.active .figure-caption {
     color: #f1f1f1;
@@ -28,6 +32,10 @@
 }
 .btn-group {
     z-index: 0;
+    flex-wrap: wrap;
+}
+.btn-group i{
+    font-size: 1rem;
 }
 .btn.active {
     background-color: var(--activeItem);

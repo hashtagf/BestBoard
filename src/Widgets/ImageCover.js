@@ -26,7 +26,6 @@ class ImageCover extends React.Component {
     this.setState({
       values: tmp
     })
-    console.log(count,this.state.values)
   }
   componentDidMount () {
     const popups = this.props.payload.popups

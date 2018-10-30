@@ -109,7 +109,7 @@ class FormNumberBox extends React.Component {
         <FormInputBasic callback={this.handlePayload} values={payload} />
         <InputText callback={this.handlePayload} title="Unit" name="unit" value={payload.unit} />
         {/* <InputText callback={this.handlePayload} title="Icon" name="icon" value={payload.icon} placeholder="fontAwesome Icon (name Icon) :: tint"/> */}
-        <InputIcons value={payload} callback={this.handlePayload}/>
+        <InputIcons values={payload} callback={this.handlePayload}/>
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
 
       </div>
