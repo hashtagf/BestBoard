@@ -140,22 +140,22 @@ function getFromLS(key) {
   let ls = {};
   if (global.localStorage) {
     try {
-      ls = JSON.parse(global.localStorage.getItem("rgl-8")) || {};
+      ls = JSON.parse(global.localStorage.getItem("rgl-8")) || {}
     } catch (e) {
       /*Ignore*/
     }
   }
-  return ls[key];
+  return ls[key]
 }
 
-function saveToLS(key, value) {
-  console.log(key, value)
-  if (global.localStorage) {
-    global.localStorage.setItem(
-      "rgl-8",
-      JSON.stringify({
-        [key]: value
-      })
-    );
-  }
-}
+// function saveToLS(key, value) {
+//   console.log(key, value)
+//   if (global.localStorage) {
+//     global.localStorage.setItem(
+//       "rgl-8",
+//       JSON.stringify({
+//         [key]: value
+//       })
+//     )
+//   }
+// }

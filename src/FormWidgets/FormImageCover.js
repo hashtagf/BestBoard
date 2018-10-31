@@ -20,7 +20,6 @@ class FormImageCover extends React.Component {
       file: null,
       selectPoint: 0,
       popups: [],
-      formsbtn: []
     }
     this.handlePayload = this.handlePayload.bind(this)
     this.handleFile = this.handleFile.bind(this)
@@ -57,7 +56,6 @@ class FormImageCover extends React.Component {
       title: 'ImageCover',
       file: null,
       popups: [],
-      formsbtn: []
     })
   }
   handlePayload(e) {
@@ -88,7 +86,6 @@ class FormImageCover extends React.Component {
       title: this.state.title,
       file: this.state.file,
       popups: this.state.popups,
-      formsbtn: this.state.formsbtn,
       layout: {
         w: 10,
         h:8,
@@ -107,7 +104,6 @@ class FormImageCover extends React.Component {
   }
   addPopup = (e) => {
     var tmp = this.state.popups
-    var tmpbtn = this.state.formsbtn
     tmp.push({
       title: 'Popup'+(tmp.length+1),
       datasource: '',       
@@ -121,10 +117,8 @@ class FormImageCover extends React.Component {
       manual: false,
       position: []
     })
-    tmpbtn.push(tmp.length)
     this.setState({
-      popups: tmp,
-      formsbtn: tmpbtn
+      popups: tmp
     })
   }
   render() {
@@ -168,7 +162,6 @@ class FormImageCover extends React.Component {
             title={'Points'}
             hideTitle={true}
             addBtnFunc={this.addPopup}
-            formsbtn={payload.formsbtn}
             forms={payload.popups}>
               <FormInputBasic/>
               <InputIcons/>

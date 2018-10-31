@@ -69,10 +69,33 @@
 }
 .Table .card-body {
     font-size: 1rem;
-}
-.Table tbody {
     overflow-y: auto;
 }
+.Table thead th {
+    border-top:none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+}
+.table tbody tr{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+.table td {
+    border-top:none;
+}
+.Table tbody {
+    border-bottom: none;
+}
+/* .Table tbody {
+    overflow-y: auto;
+} */
+table tbody, table thead {
+    /* display: block; */
+}
+
+table tbody {
+   overflow: auto;
+   height: 80%;
+}
+
 .card-body {
     overflow: hidden;
 }

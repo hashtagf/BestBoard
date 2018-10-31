@@ -14,7 +14,7 @@ class NumberBox extends React.Component {
     super(props)
     this.state = {
       value: null,
-      previousValue: null
+      previousValue: 0
     }
   }
   delWidget() {
@@ -71,15 +71,16 @@ class NumberBox extends React.Component {
         <div className="shadowcard NumberBox item-content card h-100 rounded-0 widgetCard border-0 col-12" data-id={widgetId}>
           <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body">
-            <div className="row">
+          <div className="row">
             <div className="col-4 icon">
               <i className={payload.icon}></i>
             </div>
             {(state.value)?<div className="col-8">
-              <div className="row justify-content-rigth">
+            <center>
+              <div className="row justify-content-right">
                 <h1 className="display-4 m-0">{parseFloat(state.value).toFixed(2)}</h1>
               </div>
-              <div className="row justify-content-rigth">
+              <div className="row justify-content-right">
                 <h6 className="m-0">{payload.unit}</h6>
               </div>
               <div className="row text-right">
@@ -89,13 +90,18 @@ class NumberBox extends React.Component {
                 <span className="fa-layers-counter">{(state.value - state.previousValue).toFixed(2)}</span>
                 </span>:null}
               </div>
+              </center>
             </div>:<div className="col-8"><i className="mx-auto fa-xs fas fa-sync fa-spin"></i></div>}
             </div>
-          </div>
 
+          </div>
         </div>
     )
   }
 }
-
+            /* <div className="row"><div className="col-sm text-center">
+              <h2 className="display-5">{payload.title}</h2>
+              <h1 className="display-4" id="countPeople">{parseFloat(state.value).toFixed(2)}</h1>
+              <p className="lead mb-4">{payload.unit}</p>
+            </div></div> */
 export default NumberBox

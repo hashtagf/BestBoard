@@ -4,6 +4,7 @@ import WidgetStore from '../store/WidgetStore'
 import NETPIEMicrogear from '../store/Microgear'
 import './Widget.css'
 import HeaderCard from "./HeaderCard"
+import date from 'date-and-time';
 
 class Table extends React.Component {
   constructor(props) {
@@ -11,8 +12,7 @@ class Table extends React.Component {
     this.state = {
       colTitle: [],
       values: [],
-      time: null,
-      checkValue: []
+      time: null
     }
   }
 
@@ -23,32 +23,36 @@ class Table extends React.Component {
 
   componentDidMount() {
     const payload = this.props.payload
- 
     payload.columns.forEach((col, index) => {
-      if (NETPIEMicrogear.statusOnline[col.datasource]) {
-        const microgear = NETPIEMicrogear.microgear[col.datasource]
-        microgear.on('message', (topic, msg) => {
-          let values = this.state.values
-          let checkValue = this.state.checkValue
-          if (col.value === topic) {
-            let value = msg + ''
-            let now = new Date()
-            if (col.manual) eval(col.jsValue)
-            else value = value.split(col.filter)[col.filterIndex]
-            if (!this.state.checkValue[index]) {
-              values[index] = [value]
-              checkValue[index] = true
-            } else values[index].push(value)
-
-            this.setState({
-              values: values,
-              time: now
-            })
-          }
-        })
-      } else console.log('error : not Connect datasource !!')
+      if (col.type === 'data') {
+        if (NETPIEMicrogear.statusOnline[col.datasource]) {
+          const microgear = NETPIEMicrogear.microgear[col.datasource]
+          microgear.on('message', (topic, msg) => {
+            let values = this.state.values
+            if (col.value === topic) {
+              let value = msg + ''
+              let now = new Date()
+              if (col.manual) eval(col.jsValue)
+              else value = value.split(col.filter)[col.filterIndex]
+              if (!values[index]) {
+                values[index] = [value]
+                values[0] = [now]
+              } else {
+                values[index].push(value)
+                if (values[index].length > values[0].length)
+                  values[0].push(now)
+                //if (payload.columns[0].type === 'time')
+              }
+              this.setState({
+                values: values,
+                time: now
+              })
+            }
+          })
+        } else console.log('error : not Connect datasource !!')
+      }
     })
-    
+
   }
 
   onMessage(topic, msg) {
@@ -57,9 +61,9 @@ class Table extends React.Component {
       let value = msg + ''
       let now = new Date()
       if (payload.manual) {
-        try {eval(payload.jsValue)}
-        catch (err){
-          if(err!==null) value = msg + ''
+        try { eval(payload.jsValue) }
+        catch (err) {
+          if (err !== null) value = msg + ''
         }
       }
       else value = value.split(payload.filter)[payload.filterIndex]
@@ -68,41 +72,41 @@ class Table extends React.Component {
         time: now
       })
     }
-  } 
+  }
 
   render() {
     const payload = this.props.payload
     const values = this.state.values
     const widgetId = this.props.widgetId
-    const cols = payload.columns.map((col, index) => 
+    const cols = payload.columns.map((col, index) =>
       <th key={index}>
         {col.title}
-      </th>  
+      </th>
     )
     // Logic sort Table
     let valRows = []
-    let chkValRows = []
-    values.map((value, index) => 
+    values.map((value, index) =>
       value.map((val, i) => {
-        if (!chkValRows[i]) {
-          chkValRows[i] = true
+        if (!valRows[i]) {
           return valRows[i] = [val]
         } else return valRows[i].push(val)
       })
     )
-    const rows = valRows.map((value, index) => 
+    const rows = valRows.map((value, index) =>
       <tr key={index}>
-        
-        {value.map((val, i) => 
-          <td key={i}>{val}</td>  
+        {value.map((val, i) => {
+          if (payload.columns[i].type === 'time') 
+            return <td key={i}>{date.format(val, payload.columns[i].time)}</td>
+          return <td key={i}>{val +' '+ payload.columns[i].unit}</td>
+        }
         )}
       </tr>
     )
     return (
-        <div className="item-content Table card shadowcard rounded-0 widgetCard border-0 h-100 col-12" data-id={widgetId}>
-        <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
-          <div className="card-body text-center" id="scrollbar-style">
-          <table className="table table-striped">
+      <div className="item-content Table card shadowcard rounded-0 widgetCard border-0 h-100 col-12" data-id={widgetId}>
+        <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId} />
+        <div className="card-body text-center" id="scrollbar-style">
+          <table className="table">
             <thead>
               <tr>
                 {cols}
@@ -112,8 +116,8 @@ class Table extends React.Component {
               {rows}
             </tbody>
           </table>
-          </div>
         </div>
+      </div>
     )
   }
 }

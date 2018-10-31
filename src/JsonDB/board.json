@@ -1,8 +1,29 @@
-{
-  "boards": [
-    {
-      "_id": "0",
-      "boardName": "Test"
-    }
-  ]
-}
+[
+  {
+    "colorName": "native",
+    "_id": "5bd7b5bc6827a613e211490a",
+    "boardName": "all widget",
+    "__v": 0
+  },
+  {
+    "colorName": "native",
+    "_id": "5bd95127c6719e50eef8a571",
+    "boardName": "table",
+    "__v": 0
+  },
+  {
+    "boardName": "asdasd",
+    "colorName": "native",
+    "_id": 2
+  },
+  {
+    "boardName": "asdasd",
+    "colorName": "native",
+    "_id": 3
+  },
+  {
+    "boardName": "asdasdasd",
+    "colorName": "native",
+    "_id": 4
+  }
+]

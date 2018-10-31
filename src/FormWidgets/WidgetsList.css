@@ -32,7 +32,9 @@
 }
 .btn-group {
     z-index: 0;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
+    max-width: 100%;
+    overflow: auto;
 }
 .btn-group i{
     font-size: 1rem;
@@ -40,6 +42,9 @@
 .btn.active {
     background-color: var(--activeItem);
     z-index: 0;
+}
+.btn.or {
+    
 }
 .form-control[readonly] {
     background-color: #f3f3f3;
@@ -55,7 +60,10 @@
     border-left: 3px solid #ddd;
     padding-left: 1rem;
 }
-
+.select .css-vj8t7z{
+    background: #f3f3f3!important;
+    border: none!important;
+}
 @media screen and (max-width: 575px) {
     .listWidgets {
         min-width: 100%;

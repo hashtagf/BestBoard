@@ -57,9 +57,9 @@ class WidgetStore {
       console.log(res)
     )
   }
-
   showWidgets(widgets) {
     var listWidgets = widgets.map((widget) => {
+    //console.log(NETPIEMicrogear.topics[payload.datasource][payload.value].value)
       switch (widget.widget.typeWidget) {
         case 'Gauge':
           return <Gauge key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />

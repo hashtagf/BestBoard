@@ -1,20 +1,27 @@
 Arguments: 
-  /usr/bin/node /usr/share/yarn/bin/yarn.js add react-html-parser
+  C:\Program Files\nodejs\node.exe C:\Users\esred\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js dev
 
 PATH: 
-  /home/flame/anaconda3/bin:/home/flame/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\app\esred\product\12.1.0\dbhome_3\bin;C:\app\esred\product\12.1.0\dbhome_2\bin;C:\app\esred\product\12.1.0\dbhome_1\bin;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\instantclient_12_1;%USERPROFILE%\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\PuTTY\;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\MongoDB\Server\3.6\bin;C:\Program Files\CMake\bin;C:\Ruby25-x64\bin;C:\Users\esred\AppData\Local\Microsoft\WindowsApps;C:\Users\esred\AppData\Local\atom\bin;C:\Users\esred\AppData\Local\Microsoft\WindowsApps;C:\Users\esred\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Heroku\bin;C:\Users\esred\AppData\Roaming\npm;C:\Users\esred\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Docker Toolbox
 
 Yarn version: 
-  1.10.1
+  1.9.4
 
 Node version: 
-  8.12.0
+  8.11.2
 
 Platform: 
-  linux x64
+  win32 x64
 
 Trace: 
-  Error: EACCES: permission denied, mkdir '/home/flame/Desktop/BoardFramework/node_modules/dom-serializer/node_modules/entities'
+  SyntaxError: C:\Users\esred\works\BoardFramework\package.json: Unexpected token 
+   in JSON at position 1519
+      at JSON.parse (<anonymous>)
+      at C:\Users\esred\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:1130:59
+      at Generator.next (<anonymous>)
+      at step (C:\Users\esred\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:92:30)
+      at C:\Users\esred\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:103:13
+      at <anonymous>
 
 npm manifest: 
   {
@@ -28,7 +35,9 @@ npm manifest:
     "dependencies": {
       "@fortawesome/fontawesome-svg-core": "^1.2.6",
       "axios": "^0.18.0",
+      "dangerously-set-inner-html": "^2.0.1",
       "date-and-time": "^0.6.2",
+      "fs": "0.0.1-security",
       "google-map-react": "^1.0.9",
       "hammerjs": "^2.0.8",
       "jquery": "^3.3.1",
@@ -50,25 +59,31 @@ npm manifest:
       "react-d3-speedometer": "^0.4.1",
       "react-dom": "^16.2.0",
       "react-grid-layout": "^0.16.6",
+      "react-html-parser": "^2.0.2",
       "react-resize-detector": "^3.1.3",
       "react-router-dom": "^4.3.1",
       "react-select": "^2.1.0",
+      "react-skeleton-loader": "^1.0.3",
       "reactcss": "^1.2.3",
       "recharts": "^1.3.1",
       "socket.io-client": "^2.1.1",
-      "styled-components": "^3.2.3"
+      "styled-components": "^3.2.3",
+      "write-json-file": "^3.0.2"
     },
     "scripts": {
       "start": "react-app-rewired start",
       "build": "react-app-rewired build",
-      "test": "react-app-rewired test --env=jsdom",
+      "test": "react-app-rewired test --,
+      "client": "yarn start",
+      "server": "cd src/JsinDB && node ServerLocal.js"env=jsdom",
       "eject": "react-app-rewired eject"
     },
     "browserslist": [
       ">0.2%",
       "not dead",
       "not ie <= 11",
-      "not op_mini all"
+     ,
+    "proxy": "http://localhost:5000/" "not op_mini all"
     ]
   }
 
@@ -3007,7 +3022,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-1.2.0.tgz#3d31f50191a6749dd1375a7f522e823d42e54eda"
     integrity sha512-jnjyiM6eRyZl2H+W8Q/zLMA481hzi0eszAaBUzIVnmYVDBbnLxVNnfu1HgEBvCbL+71FrxMl3E6lpKH7Ge3OXA==
   
-  domelementtype@1:
+  domelementtype@1, domelementtype@^1.3.0:
     version "1.3.0"
     resolved "https://registry.yarnpkg.com/domelementtype/-/domelementtype-1.3.0.tgz#b17aed82e8ab59e52dd9c19b1756e0fc187204c2"
     integrity sha1-sXrtguirWeUt2cGbF1bg/BhyBMI=
@@ -3024,6 +3039,13 @@ Lockfile:
     dependencies:
       domelementtype "1"
   
+  domhandler@^2.3.0:
+    version "2.4.2"
+    resolved "https://registry.yarnpkg.com/domhandler/-/domhandler-2.4.2.tgz#8805097e933d65e85546f726d60f5eb88b44f803"
+    integrity sha512-JiK04h0Ht5u/80fdLMCEmV4zkNh2BcoMFBmZ/91WtYZ8qVXSKjiw7fXMgFPnHcSZgOo3XdinHvmnDUeMf5R4wA==
+    dependencies:
+      domelementtype "1"
+  
   domutils@1.1:
     version "1.1.6"
     resolved "https://registry.yarnpkg.com/domutils/-/domutils-1.1.6.tgz#bddc3de099b9a2efacc51c623f28f416ecc57485"
@@ -3035,6 +3057,14 @@ Lockfile:
     version "1.5.1"
     resolved "https://registry.yarnpkg.com/domutils/-/domutils-1.5.1.tgz#dcd8488a26f563d61079e48c9f7b7e32373682cf"
     integrity sha1-3NhIiib1Y9YQeeSMn3t+Mjc2gs8=
+    dependencies:
+      dom-serializer "0"
+      domelementtype "1"
+  
+  domutils@^1.5.1:
+    version "1.7.0"
+    resolved "https://registry.yarnpkg.com/domutils/-/domutils-1.7.0.tgz#56ea341e834e06e6748af7a1cb25da67ea9f8c2a"
+    integrity sha512-Lgd2XcJ/NjEw+7tFvfKxOzCYKZsdct5lczQ2ZaQY8Djz7pfAD3Gbp8ySJWtreII/vDlMVmxwa6pHmdxIYgttDg==
     dependencies:
       dom-serializer "0"
       domelementtype "1"
@@ -3181,6 +3211,11 @@ Lockfile:
       memory-fs "^0.4.0"
       object-assign "^4.0.1"
       tapable "^0.2.7"
+  
+  entities@^1.1.1:
+    version "1.1.2"
+    resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
+    integrity sha512-f2LZMYl1Fzu7YSBKg+RoROelpOaNrcGmE9AZubeDfrCEia483oW4MI4VyFd5VNHIgQ/7qm1I0wUHK1eJnn2y2w==
   
   entities@~1.1.1:
     version "1.1.1"
@@ -4433,6 +4468,18 @@ Lockfile:
       lodash "^4.17.3"
       pretty-error "^2.0.2"
       toposort "^1.0.0"
+  
+  htmlparser2@^3.9.0:
+    version "3.10.0"
+    resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-3.10.0.tgz#5f5e422dcf6119c0d983ed36260ce9ded0bee464"
+    integrity sha512-J1nEUGv+MkXS0weHNWVKJJ+UrLfePxRWpN3C9bEi9fLxL2+ggW94DQvgYVXsaT30PGwYRIZKNZXuyMhp3Di4bQ==
+    dependencies:
+      domelementtype "^1.3.0"
+      domhandler "^2.3.0"
+      domutils "^1.5.1"
+      entities "^1.1.1"
+      inherits "^2.0.1"
+      readable-stream "^3.0.6"
   
   htmlparser2@~3.3.0:
     version "3.3.0"
@@ -7492,6 +7539,13 @@ Lockfile:
       react-draggable "3.x"
       react-resizable "1.x"
   
+  react-html-parser@^2.0.2:
+    version "2.0.2"
+    resolved "https://registry.yarnpkg.com/react-html-parser/-/react-html-parser-2.0.2.tgz#6dbe1ddd2cebc1b34ca15215158021db5fc5685e"
+    integrity sha512-XeerLwCVjTs3njZcgCOeDUqLgNIt/t+6Jgi5/qPsO/krUWl76kWKXMeVs2LhY2gwM6X378DkhLjur0zUQdpz0g==
+    dependencies:
+      htmlparser2 "^3.9.0"
+  
   react-input-autosize@^2.2.1:
     version "2.2.1"
     resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-2.2.1.tgz#ec428fa15b1592994fb5f9aa15bb1eb6baf420f8"
@@ -7726,6 +7780,15 @@ Lockfile:
       safe-buffer "~5.1.1"
       string_decoder "~1.1.1"
       util-deprecate "~1.0.1"
+  
+  readable-stream@^3.0.6:
+    version "3.0.6"
+    resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-3.0.6.tgz#351302e4c68b5abd6a2ed55376a7f9a25be3057a"
+    integrity sha512-9E1oLoOWfhSXHGv6QlwXJim7uNzd9EVlWK+21tCU9Ju/kR0/p2AZYPz4qSchgO8PlLIH4FpZYfzwS+rEksZjIg==
+    dependencies:
+      inherits "^2.0.3"
+      string_decoder "^1.1.1"
+      util-deprecate "^1.0.1"
   
   readdirp@^2.0.0:
     version "2.2.1"
@@ -8605,7 +8668,7 @@ Lockfile:
       is-fullwidth-code-point "^2.0.0"
       strip-ansi "^4.0.0"
   
-  string_decoder@^1.0.0, string_decoder@~1.1.1:
+  string_decoder@^1.0.0, string_decoder@^1.1.1, string_decoder@~1.1.1:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
     integrity sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg==
@@ -9198,7 +9261,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
     integrity sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==
   
-  util-deprecate@~1.0.1:
+  util-deprecate@^1.0.1, util-deprecate@~1.0.1:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
     integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=

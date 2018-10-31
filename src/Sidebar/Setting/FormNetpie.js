@@ -179,9 +179,9 @@ class FormSource extends Component {
 class Buttonform extends Component {
   render () {
     if (this.props._id) {
-      return <button type="submit" onClick={this.props.edit} className="btn btn-primary border-0" data-dismiss="modal" aria-label="Close" aria-hidden={true}>Edit</button>
+      return <button type="submit" onClick={this.props.edit} className="btn btn-primary border-0" data-dismiss="modal" aria-label="Close" aria-hidden={true}><i className="fas fa-pen-square"></i> Save</button>
     }
-    return <button type="submit" onClick={this.props.new} className="btn btn-primary border-0" data-dismiss="modal" aria-label="Close" aria-hidden={true}>Save</button>
+    return <button type="submit" onClick={this.props.new} className="btn btn-primary border-0" data-dismiss="modal" aria-label="Close" aria-hidden={true}><i className="fas fa-plus-circle"></i> Save</button>
 
   }
 }

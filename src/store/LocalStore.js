@@ -1,5 +1,4 @@
 import { observable } from 'mobx'
-var fs = require('fs')
 //import socketIOClient from 'socket.io-client'
 
 class LocalStore {
@@ -39,16 +38,7 @@ class LocalStore {
       boardId: id,
       widget: payload
     }
-    // console.log(fs)
-    // fs.writeFile('widgets.json', JSON.stringify(obj), (err) => {
-    //   if (err) {
-    //     console.error(err)
-    //     return
-    //   };
-    //   console.log("File has been created")
-    // })
   }
-
 }
 
 export default new LocalStore()

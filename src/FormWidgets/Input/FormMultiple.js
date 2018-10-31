@@ -1,5 +1,5 @@
 import React from 'react'
-
+import FormTime from './FormTime'
 
 // import reactCSS from 'reactcss'
 // const $ = require("jquery")
@@ -9,7 +9,7 @@ class FormMultiple extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectForm: '0'
+      selectForm: 0
     }
   }
   static defaultProps = {
@@ -17,9 +17,10 @@ class FormMultiple extends React.Component {
     hiddenTitle: true
   };
   handleClick = (e) => {
-    this.setState({
-      selectForm: e.target.value
-    })
+    if (e.target.value) 
+      this.setState({
+        selectForm: parseInt(e.target.value, 10)
+      })
   }
   handlePayload = (e) => {
     var tmp = this.props.forms
@@ -31,42 +32,66 @@ class FormMultiple extends React.Component {
         value: tmp
       }
     }
-    console.log(tmp, index)
     this.props.handlePayload(obj)
   }
-  hideTitle = (e) => {
-
+  deleteForm (index) {
+    //var index =0
+    var forms = this.props.forms
+    forms.splice(index, 1)
+    var obj = {
+      target: {
+        name: 'forms',
+        value: forms
+      }
+    }
+    //(index - 1 >= 0)?index-1:null
+    this.setState({
+      selectForm: forms.length - 1
+    })
+    this.props.handlePayload(obj)
+  }
+  addBtnFunc = (e) => {
+    this.setState({
+      selectForm: this.props.forms.length
+    })
+    this.props.addBtnFunc(e)
   }
   render() {
     const selectForm = this.state.selectForm
+    console.log(selectForm)
     const formsbtn = []
     var buttons = this.props.forms.map((form, index) =>{
       formsbtn.push((form.title)?form.title:index+1)
       return <button key={index}
-        className={(selectForm === index + '') ? 'btn btn-primary' : 'btn'}
+        className={(selectForm === index) ? 'btn btn-primary' : 'btn'}
         type="button" name="selectForm"
         value={index} data-toggle="collapse"
         data-target={"#form" + index}
-        aria-expanded={(selectForm === index + '') ? "true" : "false"}
+        aria-expanded={(selectForm === index) ? "true" : "false"}
         aria-controls={"form" + index} onClick={this.handleClick}>
         {(form.title)?form.title:index+1}
+        {(selectForm === index&&!form.required)?<i className="fas fa-minus-square editbtn del ml-2" onClick={() => this.deleteForm(index)} key={index}></i>:null}
       </button>}
     )
     if (this.props.addBtnFunc) {
-      let addBtn = <button className="btn" onClick={this.props.addBtnFunc}><i className="fas fa-plus-square"></i></button>
+      let addBtn = <button className="btn" onClick={this.addBtnFunc}><i className="fas fa-plus-square"></i></button>
       buttons.push(addBtn)
     }
     var forms = this.props.forms.map((form, index) =>
       <div key={index} id={"#form" + index}
-        className={(selectForm === index + '') ? 'collapse show' : 'collapse'}
+        className={(selectForm === index) ? 'collapse show' : 'collapse'}
         aria-labelledby="headingOne"
         data-parent="#popupForm">
-          {React.Children.map(this.props.children,child => {
-              if (child.type.name === 'InputText') 
-                return React.cloneElement(child, {value: form[child.props.name],callback:this.handlePayload})
-              else if (child.type.name === 'FormMultiple')
-                return React.cloneElement(child, {forms: form,handlePayload:this.handlePayload})
-              else return React.cloneElement(child, {values: form,callback:this.handlePayload})
+          {React.Children.map(this.props.children,(child,index) => {
+              if (form.type === 'time'&&index===0)
+                return <FormTime values={form} callback={this.handlePayload}/>
+              if (form.type !== 'time') {
+                if (child.type.name === 'InputText') 
+                  return React.cloneElement(child, {value: form[child.props.name],callback:this.handlePayload})
+                else if (child.type.name === 'FormMultiple')
+                  return React.cloneElement(child, {forms: form,handlePayload:this.handlePayload})
+                else return React.cloneElement(child, {values: form,callback:this.handlePayload})
+              }
             }
           )}
       </div>
@@ -80,7 +105,7 @@ class FormMultiple extends React.Component {
                 {this.props.title} :
                 </label>
               <div className="col-9">
-                <div className="btn-group" role="group" aria-label="Basic example">
+                <div className="btn-group" role="group" aria-label="Basic example" id="scrollbar-style">
                   {buttons}
                 </div>
               </div>
@@ -89,7 +114,7 @@ class FormMultiple extends React.Component {
 
         }
 
-        <strong className="text-center">Value : {formsbtn[this.state.selectForm]}</strong>
+        <strong>Value : {formsbtn[this.state.selectForm]}</strong>
         {forms}
       </div>
     )

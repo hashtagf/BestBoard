@@ -45,6 +45,9 @@ class Page extends Component {
 
   getBoard = () => {
     let pages = []
+    axios.get('http://172.18.3.180:5000' + '/board').then((res) => {
+      console.log(res)
+    })
     axios.get(Store.server + '/board/').then((res) => {
       res.data.map((board) =>
         pages.push({
@@ -84,6 +87,9 @@ class Page extends Component {
       }
       if (index === -1) {
         axios.post( Store.server + '/board/', payload ).then((res) => {
+          console.log(res)
+        })
+        axios.post( 'http://172.18.3.180:5000' + '/board/', payload ).then((res) => {
           console.log(res)
         })
         LocalStore.insertPage(this.state.inputName)

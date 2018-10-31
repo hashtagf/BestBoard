@@ -11,8 +11,14 @@ class FormText extends React.Component {
     super(props)
     this.state = {
       title: 'Table',
-      columns: [],
-      formsBtn: []
+      columns: [
+        {
+          title: 'time',
+          type: 'time',
+          time: '',
+          url: ''
+        }
+      ],
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
@@ -45,7 +51,14 @@ class FormText extends React.Component {
   reState () {
     this.setState({
       title: 'Table',
-      columns: []
+      columns: [
+        {
+          title: 'time',
+          type: 'time',
+          time: '',
+          url: ''
+        }
+      ]
     })
   }
   handlePayload(e) {
@@ -79,7 +92,6 @@ class FormText extends React.Component {
 
   addColumn = () => {
     let columns = this.state.columns
-    let tmpBtn = this.state.formsBtn
     columns.push({
       title: 'Column ' + columns.length,
       datasource: '',
@@ -87,12 +99,12 @@ class FormText extends React.Component {
       filter: ',',
       filterIndex: 0,
       manual: false,
-      jsValue: ''
+      jsValue: '',
+      type: 'data',
+      unit: ''
     })
-    tmpBtn.push(columns.length)
     this.setState({
       columns: columns,
-      formsBtn: tmpBtn
     })
   }
 
@@ -101,18 +113,16 @@ class FormText extends React.Component {
     return (
       <div className="FormProgressBar container">
         <InputText callback={this.handlePayload} title="Table" name="title" value={payload.title} />
-        <button type="button" className="btn btn-primary btn-block mb-2" onClick={this.addColumn}>Add Colunm</button>
         {
           (payload.columns)?        
 
             <FormMultiple
             handlePayload={this.handlePayload} 
             title={'Columns'}
-            hideTitle={true}
             addBtnFunc={this.addColumn}
-            formsbtn={payload.formsBtn}
             forms={payload.columns}>
               <FormInputBasic/>
+              <InputText title="Unit" name="unit" placeholder="unit"/>
             </FormMultiple>
             :null
         }        
@@ -121,10 +131,5 @@ class FormText extends React.Component {
     )
   }
 }
-            {/* <FormMulti payload={payload} 
-            handlePayload={this.handlePayload} 
-            title={'Columns'}
-            hideTitle={false}
-            formsbtn={payload.formsBtn}
-            forms={payload.columns}/> */}
+
 export default FormText

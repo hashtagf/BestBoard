@@ -97,7 +97,13 @@ class Chart extends React.Component {
     const payload = this.props.payload
     const widgetId = this.props.widgetId
     const data = this.state.data
-    var areaColor = Store.colorSet[Store.colorUse].colors[2]
+    var areaColor = []
+    var start = parseInt(Store.colorSet[Store.colorUse].colors[2].substr(1),16)
+    var stop = (parseInt(Store.colorSet[Store.colorUse].colors[12].substr(1),16))?
+    parseInt(Store.colorSet[Store.colorUse].colors[12].substr(1),16):
+    parseInt(Store.colorSet[Store.colorUse].colors[13].substr(1),16)
+    if (stop < start) start = [stop, stop = start][0];
+    let shade = parseInt((stop - start)/data.length,10)
     for (let i = 0; i < data[0].length; i++) {
       data.map((datas, index) => {
         if(index !== 0) 
@@ -108,7 +114,7 @@ class Chart extends React.Component {
         <div className="item-content card chart shadowcard rounded-0 widgetChart border-0 col-12 h-100" data-id={widgetId}>
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body">
-            <div className="btn-group mb-2" role="group" aria-label="DayMonthYear">
+            <div className="btn-group mb-2" role="group" aria-label="DayMonthYear"  id="scrollbar-style">
               <button type="button"
                 className={this.checkBtnTime('1hour')}
                 value='1hour'
@@ -149,16 +155,19 @@ class Chart extends React.Component {
               <AreaChart data={data[0]}
                 margin={{ top: 0, bottom: 0, left: 0, right: 0 }}
               >
-                {
-                  data.map((data, index) => 
                   <defs>
-                    <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor={areaColor} stopOpacity={0.7} />
-                      <stop offset="95%" stopColor={areaColor} stopOpacity={0} />
+
+                {
+                  data.map((data, index) => {
+                    areaColor.push('#'+(start+shade*index).toString(16))
+                    return <linearGradient id={'color'+index} x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor={areaColor[index]} stopOpacity={0.7} />
+                      <stop offset="95%" stopColor={areaColor[index]} stopOpacity={0} />
                     </linearGradient>
-                  </defs>
-                  )
+                  })
                 }
+                    </defs>
+
                 <XAxis
                   dataKey="timestamp"
                   reversed={true}
@@ -177,9 +186,9 @@ class Chart extends React.Component {
                     name={payload.values[index].value}
                     type={payload.type}
                     dataKey={'value' + index}
-                    stroke={areaColor}
+                    stroke={areaColor[index]}
                     fillOpacity={payload.fillOpacity}
-                    fill={payload.fill} />
+                    fill={'url(#color'+index+')'} />
                   )
                 }
               </AreaChart>

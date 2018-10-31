@@ -99,6 +99,7 @@ class FormInputBasic extends React.Component {
               value={selectOption}
               onChange={this.handleSelected}
               options={topics}
+              className="select"
               placeholder='Topic :: /AppID/topic'
             />
           </div>
@@ -111,12 +112,12 @@ class FormInputBasic extends React.Component {
               </label>
             <div className="col-9">
               
-              <div className="btn-group" role="group" aria-label="Basic example">
+              <div className="btn-group" role="group" aria-label="Basic example" id="scrollbar-style">
                 <button className={(!manual)?'btn btn-primary':'btn'} type="button" name="manual" value={false} data-toggle="collapse" data-target="#collapseAuto" aria-expanded={(!manual)?"true":"false"} aria-controls="collapseAuto" onClick={handleChange}>
                   Automatic 
                 </button>
-                <button type="button" className="btn btn-group" disabled={true}>
-                  or 
+                <button type="button" className="btn or p-1" disabled={true}>
+                  /
                 </button>
                 <button className={(manual)?'btn btn-primary':'btn'} type="button" name="manual" value={true} data-toggle="collapse" data-target="#collapseManual" aria-expanded={(manual)?"true":"false"} aria-controls="collapseManual" onClick={handleChange}>
                   Manual 
@@ -188,7 +189,7 @@ class ButtonIndex extends React.Component {
       return (
         <div className="Index">
           Example Data ( select Index ) : <br />
-          <div className="btn-group btn-group-toggle" >
+          <div className="btn-group btn-group-toggle" id="scrollbar-style">
             {(selectOption.value.split(filter).map((val, index) =>
               <button
                 key={index}
