@@ -3,7 +3,6 @@ import './Pages.css'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Store from '../store/Store'
-import LocalStore from '../store/LocalStore'
 import socketIOClient from 'socket.io-client'
 import ClickOutside from 'react-click-outside'
 import { observer } from 'mobx-react'
@@ -30,24 +29,20 @@ class Page extends Component {
     if (this.state.connect) this.response()
     else this.loadLocal()
   }
-  loadLocal = () => {
-    this.setState({
-      pages: LocalStore.local.pages
-    })
-  }
   response = () => {
     this.getBoard()
     socket.on('update-board', (msg) => {
       console.log('update-board', msg)
       this.getBoard()
     })
+    socket.on('error', function(exception) {
+      console.log('SOCKET ERROR', exception)
+      socket.destroy()
+    })
   }
 
   getBoard = () => {
     let pages = []
-    axios.get('http://172.18.3.180:5000' + '/board').then((res) => {
-      console.log(res)
-    })
     axios.get(Store.server + '/board/').then((res) => {
       res.data.map((board) =>
         pages.push({
@@ -86,19 +81,10 @@ class Page extends Component {
         colorName: 'native'
       }
       if (index === -1) {
-        axios.post( Store.server + '/board/', payload ).then((res) => {
-          console.log(res)
-        })
-        axios.post( 'http://172.18.3.180:5000' + '/board/', payload ).then((res) => {
-          console.log(res)
-        })
-        LocalStore.insertPage(this.state.inputName)
+        axios.post( Store.server + '/board/', payload )
       }
       else {
-        axios.put( Store.server + '/board/' + pageId, payload).then((res) => {
-          console.log(res)
-        })
-        LocalStore.updatePage(index,pageId,this.state.inputName)
+        axios.put( Store.server + '/board/' + pageId, payload)
       }
     }
     this.setState({
@@ -138,10 +124,7 @@ class Page extends Component {
   }
 
   deletePage = (pageId) => {
-    axios.delete( Store.server + '/board/' + pageId).then((res) => {
-      console.log(res)
-    })
-    LocalStore.deletePage(pageId)
+    axios.delete( Store.server + '/board/' + pageId)
   }
 
   handleClickpage = (pageId, pageName, colorName) => {

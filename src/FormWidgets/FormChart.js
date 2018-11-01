@@ -13,6 +13,7 @@ class FormChart extends React.Component {
       feedID: '',
       feedAPI: '',
       values: [
+        {value: ''}
       ],
       type: 'monotone',
       stroke: '#8884d8',
@@ -54,7 +55,9 @@ class FormChart extends React.Component {
       title: 'Chart',
       feedID: '',
       feedAPI: '',
-      values: [],
+      values: [
+        {value: ''}
+      ],
       type: 'monotone',
       stroke: '#8884d8',
       fillOpacity: 1,

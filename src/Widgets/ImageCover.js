@@ -11,14 +11,21 @@ class ImageCover extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      values: []
+      values: [[]],
+      counter: 0
     }
   }
   delWidget() {
     const widgetId = this.props.widgetId
     WidgetStore.deleteWidget(widgetId)
   }
+  change = () => {
+    this.setState({
+        counter: this.state.counter+1
+    });
+  }
   componentWillMount () {
+    setInterval(this.change, 7000)
     const count = this.props.payload.popups.length
     var tmp = this.state.values
     tmp.length = count
@@ -28,39 +35,36 @@ class ImageCover extends React.Component {
     })
   }
   componentDidMount () {
-    const popups = this.props.payload.popups
-    popups.map((popup,index) =>{
-      if (NETPIEMicrogear.statusOnline[popup.datasource]) {
-        const microgear = NETPIEMicrogear.microgear[popup.datasource]
-        microgear.on('message', this.onMessage)
-      } else console.log('error : not Connect datasource !!')
+    const payload = this.props.payload.popups
+    payload.map((popup, x) => {
+      popup.forms.map((value, y) => {
+          let datasource = value.datasource
+          if (NETPIEMicrogear.statusOnline[datasource]) {
+            const microgear = NETPIEMicrogear.microgear[datasource]
+            microgear.on('message', this.onMessage.bind(this,value,x,y))
+          } else console.log('error : not Connect datasource !!')
+          return 0
+      })
       return 0
     })
   }
-  onMessage = (topic, msg) => {
-    var popups = this.props.payload.popups
-    var index = popups.findIndex(function(popup) {
-      return popup.value === topic;
-    });
-    if (index >= 0) {
-      var popup = this.props.payload.popups[index]
-      if (popup.value === topic) {
-        let value = msg + ''
-        if (popup.manual) {
-          try {eval(popup.jsValue)}
-          catch (err){
-            if(err!==null) value = msg+''
-          }
+  onMessage = (payload,x,y,topic, msg) => {
+    if (payload.value === topic) {
+      let value = msg + ''
+      if (payload.manual&&payload.manual!=='false') {
+        try {eval(payload.jsValue)}
+        catch (err){
+          if(err!==null) value = msg + ''
         }
-        else value = value.split(popup.filter)[popup.filterIndex]
-        const stateValue = this.state.values
-        stateValue[index] = value
-        this.setState({
-          values: stateValue
-        })
       }
+      else value = value.split(payload.filter)[payload.filterIndex]
+      var tmp = this.state.values
+      if (!tmp[x]) tmp[x] = []
+      tmp[x][y] = value
+      this.setState({
+        values: tmp
+      })
     }
-
   }
   render() {
     const payload = this.props.payload
@@ -75,11 +79,19 @@ class ImageCover extends React.Component {
     var styles = reactCSS({
       'default': stylesObj
     })
-    var popups = payload.popups.map((popup,index) =>
-      <div className="item rounded-circle btn" key={index} style={styles['item'+index]}>
-        {(popup.icon)?<span><i className={popup.icon}></i><br/></span>:null}
-        {(this.state.values[index])?this.state.values[index]:'Loading'}{payload.unit}
-      </div>
+    var popups = payload.popups.map((popup,index) => {
+        let count = this.state.counter % popup.forms.length
+        let popupValue = popup.forms[count]
+        let popupData = 'Loading'
+        if (this.state.values[index])
+          if (this.state.values[index][count])
+            popupData = this.state.values[index][count] + ' ' + popupValue.unit
+        return <div className="item rounded-circle btn" key={index} style={styles['item'+index]}>
+        <span>
+          {(popupValue.icon)?<i className={popupValue.icon}></i>:null}
+          {popupData}</span>
+        </div>
+      }
     )
     return (
         <div className="item-content ImageCover card shadowcard rounded-0 border-0 col-12 mb-3 h-100" data-id={widgetId}>

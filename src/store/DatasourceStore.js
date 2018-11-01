@@ -4,7 +4,6 @@ import React from 'react'
 import ListDatasource from './ListDatasource'
 import Store from './Store'
 //import NETPIEMicrogear from './Microgear'
-// import LocalStore from './LocalStore'
 class DatasourceStore {
   @observable datasources = null
 
@@ -14,22 +13,18 @@ class DatasourceStore {
     }).then((res) => 
       console.log(res)
     )
-    // LocalStore.insertDataSource(payload)
-    // NETPIEMicrogear.createMicrogear(LocalStore.local.datasources)
   }
 
   updateDatasource (datasourceId, payload) {
     axios.put(Store.server + '/datasource/' + datasourceId, {datasource : payload}).then((res) => 
       console.log(res)
     )
-    // LocalStore.updateDataSource(datasourceId,payload)
   }
 
   deleteDatasource (datasourceId) {
     axios.delete(Store.server + '/datasource/' + datasourceId).then((res) => 
       console.log(res)
     )
-    // LocalStore.local.datasources.splice(datasourceId,1)
   }
 
   listsDatasources () {

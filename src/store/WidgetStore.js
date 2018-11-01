@@ -17,7 +17,6 @@ import Map from '../Widgets/Map'
 import Led from '../Widgets/Led'
 import Html from '../Widgets/Html'
 import Table from '../Widgets/Table'
-import LocalStore from './LocalStore'
 import Store from './Store'
 
 class WidgetStore {
@@ -37,7 +36,6 @@ class WidgetStore {
     }).then((res) => {
       console.log(res)
     })
-    LocalStore.insertWidget(boardId, payload)
   }
 
   updateWidget(widgetId, payload) {

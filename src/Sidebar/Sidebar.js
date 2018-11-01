@@ -3,7 +3,9 @@ import './Sidebar.css'
 import Settingmenu from './Setting/Settingmenu'
 import Pagelist from './Pages'
 import Store from '../store/Store'
-import Logo from '../assets/logo.png'
+import LogoPng from '../assets/logo.png'
+import Logo from '../assets/bestlogo.svg'
+
 const $ = require("jquery")
 
 class Page extends Component {
@@ -33,7 +35,12 @@ class Page extends Component {
     return (
         <nav className="sidebar" id="scrollbar-style" data-spy="scroll">
           <div className="sidebar-header">
-           <a href="/"><img src={Logo} alt="" className="logoSide" /></a>
+          
+          <a href="/">
+            <img src={Logo} alt="" className="logoSide"/>
+            <image className="my-svg-alternate logoSide" src={LogoPng} />
+          </a>
+
           </div>
           <Pagelist />
           <Settingmenu mode={mode} />

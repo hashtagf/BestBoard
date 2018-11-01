@@ -59,7 +59,7 @@ class InputIcons extends React.Component {
             components={ this.Option }
             placeholder='Topic :: Name icons'
           />
-          <small>Search free icon : <a href="https://fontawesome.com/icons?d=gallery&m=free">https://fontawesome.com/icon</a></small>
+          <small>Search free icon : <a target="_blank" href="https://fontawesome.com/icons?d=gallery&m=free">https://fontawesome.com/icon</a></small>
         </div>
         <div className="col-2">
           <i className={'fa-2x ' + selectOption.value}></i>

@@ -3,7 +3,6 @@ import { WidthProvider, Responsive } from "react-grid-layout"
 import '../../node_modules/react-grid-layout/css/styles.css'
 import '../../node_modules/react-resizable/css/styles.css'
 import './Main.css'
-import LocalStore from '../store/LocalStore'
 import Store from '../store/Store'
 import socketIOClient from 'socket.io-client'
 import axios from 'axios'
@@ -31,13 +30,6 @@ class Main extends React.Component {
   }
   componentDidMount() {
     if (this.state.connect) this.response()
-    else this.loadLocal()
-  }
-  loadLocal = () => {
-    this.setState({
-      listWidgets: LocalStore.local.widgets
-    })
-    WidgetStore.showWidgets(LocalStore.local.widgets[Store.currentId])
   }
 
   response = () => {
@@ -46,6 +38,10 @@ class Main extends React.Component {
       if (msg !== 'update-index') {
         this.getWidgets()
       }
+    })
+    socket.on('error', function(exception) {
+      console.log('SOCKET ERROR', exception)
+      socket.destroy()
     })
   }
 

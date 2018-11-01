@@ -21,6 +21,9 @@ class FormMultiple extends React.Component {
       this.setState({
         selectForm: parseInt(e.target.value, 10)
       })
+      if (this.props.selectIndex) 
+        this.props.selectIndex(parseInt(e.target.value, 10))
+      
   }
   handlePayload = (e) => {
     var tmp = this.props.forms
@@ -48,19 +51,24 @@ class FormMultiple extends React.Component {
     this.setState({
       selectForm: forms.length - 1
     })
+    if (this.props.selectIndex) 
+      this.props.selectIndex(forms.length - 1)
     this.props.handlePayload(obj)
   }
   addBtnFunc = (e) => {
+    //console.log(e)
     this.setState({
       selectForm: this.props.forms.length
     })
+    if (this.props.selectIndex) 
+      this.props.selectIndex(this.props.forms.length)
     this.props.addBtnFunc(e)
   }
+
   render() {
     const selectForm = this.state.selectForm
-    console.log(selectForm)
     const formsbtn = []
-    var buttons = this.props.forms.map((form, index) =>{
+    var buttons = this.props.forms.map((form, index) => {
       formsbtn.push((form.title)?form.title:index+1)
       return <button key={index}
         className={(selectForm === index) ? 'btn btn-primary' : 'btn'}
@@ -70,11 +78,15 @@ class FormMultiple extends React.Component {
         aria-expanded={(selectForm === index) ? "true" : "false"}
         aria-controls={"form" + index} onClick={this.handleClick}>
         {(form.title)?form.title:index+1}
-        {(selectForm === index&&!form.required)?<i className="fas fa-minus-square editbtn del ml-2" onClick={() => this.deleteForm(index)} key={index}></i>:null}
+        {(selectForm === index && !form.required)?<i className="fas fa-minus-square editbtn del ml-3" onClick={() => this.deleteForm(index)} key={index}></i>:null}
       </button>}
     )
     if (this.props.addBtnFunc) {
-      let addBtn = <button className="btn" onClick={this.addBtnFunc}><i className="fas fa-plus-square"></i></button>
+      let addBtn = <button className="btn"
+        type='button'
+        onClick={this.addBtnFunc}>
+          <i className="fas fa-plus-square"></i>
+        </button>
       buttons.push(addBtn)
     }
     var forms = this.props.forms.map((form, index) =>
@@ -89,7 +101,7 @@ class FormMultiple extends React.Component {
                 if (child.type.name === 'InputText') 
                   return React.cloneElement(child, {value: form[child.props.name],callback:this.handlePayload})
                 else if (child.type.name === 'FormMultiple')
-                  return React.cloneElement(child, {forms: form,handlePayload:this.handlePayload})
+                  return React.cloneElement(child, {forms: form.forms,handlePayload:this.handlePayload})
                 else return React.cloneElement(child, {values: form,callback:this.handlePayload})
               }
             }

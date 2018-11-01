@@ -18,8 +18,8 @@ class FormImageCover extends React.Component {
     this.state = {
       title: 'ImageCover',
       file: null,
-      selectPoint: 0,
       popups: [],
+      selectIndex: null
     }
     this.handlePayload = this.handlePayload.bind(this)
     this.handleFile = this.handleFile.bind(this)
@@ -55,7 +55,7 @@ class FormImageCover extends React.Component {
     this.setState({
       title: 'ImageCover',
       file: null,
-      popups: [],
+      popups: []
     })
   }
   handlePayload(e) {
@@ -100,12 +100,37 @@ class FormImageCover extends React.Component {
     else
       WidgetStore.createWidget(Store.currentId, payload)
     this.reState()
-    document.getElementById('b64').src = ''
   }
   addPopup = (e) => {
     var tmp = this.state.popups
     tmp.push({
       title: 'Popup'+(tmp.length+1),
+      position: [],
+      forms: [
+        {
+          title: 'value',
+          datasource: '',       
+          body: '',
+          value: '',
+          filter: ',',
+          filterIndex: 0,
+          unit: '',
+          icon: '',
+          jsValue: '',
+          manual: false,
+          required: true
+        }
+      ]
+    })
+    this.setState({
+      popups: tmp
+    })
+  }
+  addValue = (index) => {
+    //console.log(index)
+    var tmp = this.state.popups
+    tmp[this.state.selectIndex].forms.push({
+      title: 'value'+(tmp.length+1),
       datasource: '',       
       body: '',
       value: '',
@@ -114,11 +139,16 @@ class FormImageCover extends React.Component {
       unit: '',
       icon: '',
       jsValue: '',
-      manual: false,
-      position: []
+      manual: false
     })
     this.setState({
       popups: tmp
+    })
+  }
+  selectIndex = (e) => {
+    console.log(e)
+    this.setState({
+      selectIndex: e
     })
   }
   render() {
@@ -162,9 +192,17 @@ class FormImageCover extends React.Component {
             title={'Points'}
             hideTitle={true}
             addBtnFunc={this.addPopup}
+            selectIndex={this.selectIndex}
             forms={payload.popups}>
-              <FormInputBasic/>
-              <InputIcons/>
+              <InputText title="Title" name="title" placeholder="title"/>
+              <FormMultiple
+              title={'Values'}
+              hideTitle={true}
+              addBtnFunc={this.addValue}>
+                <FormInputBasic/>
+                <InputText title="Unit" name="unit" placeholder="unit"/>
+                <InputIcons/>
+              </FormMultiple>
             </FormMultiple>:null
             
         }
@@ -207,7 +245,7 @@ class ImgArea extends React.Component {
   render () {
     const file = this.props.file
     var stylesObj = {}
-    this.props.value.popups.map( (popup,index) =>
+    this.props.value.popups.map((popup,index) =>
       stylesObj['item'+index] = {
         left: popup.position[0],
         top: popup.position[1]

@@ -14,33 +14,34 @@ class FormMap extends React.Component {
     this.state = {
       title: 'Map',
       forms: [
-        [
-          {
-            title: 'Latitude',
-            value: '',
-            datasource: '',
-            body: '',
-            filter: ',',
-            filterIndex: 0,
-            jsValue: '',
-            manual: false,
-            required: true
-          },
-          {
-            title: 'Longitude',
-            value: '',
-            datasource: '',
-            body: '',
-            filter: ',',
-            filterIndex: 0,
-            jsValue: '',
-            manual: false,
-            required: true
-          }
-        ]
-      ],
-      lat : 59.955413,
-      lng: 30.337844
+        {
+          title: 'point1',
+          forms: [
+            {
+              title: 'Latitude',
+              value: '',
+              datasource: '',
+              body: '',
+              filter: ',',
+              filterIndex: 0,
+              jsValue: '',
+              manual: false,
+              required: true
+            },
+            {
+              title: 'Longitude',
+              value: '',
+              datasource: '',
+              body: '',
+              filter: ',',
+              filterIndex: 0,
+              jsValue: '',
+              manual: false,
+              required: true
+            }
+          ]
+        }
+      ]
     }
     this.handlePayload = this.handlePayload.bind(this)
   }
@@ -81,32 +82,34 @@ class FormMap extends React.Component {
   reState () {
     this.setState({
       title: 'Map',
-      file: 'empty',
       forms: [
-        [
-          {
-            title: 'Latitude',
-            value: '',
-            datasource: '',
-            body: '',
-            filter: ',',
-            filterIndex: 0,
-            jsValue: '',
-            manual: false,
-            required: true
-          },
-          {
-            title: 'Longitude',
-            value: '',
-            datasource: '',
-            body: '',
-            filter: ',',
-            filterIndex: 0,
-            jsValue: '',
-            manual: false,
-            required: true
-          }
-        ]
+        {
+          title: 'point1',
+          forms: [
+            {
+              title: 'Latitude',
+              value: '',
+              datasource: '',
+              body: '',
+              filter: ',',
+              filterIndex: 0,
+              jsValue: '',
+              manual: false,
+              required: true
+            },
+            {
+              title: 'Longitude',
+              value: '',
+              datasource: '',
+              body: '',
+              filter: ',',
+              filterIndex: 0,
+              jsValue: '',
+              manual: false,
+              required: true
+            }
+          ]
+        }
       ]
     })
   }
@@ -153,28 +156,33 @@ class FormMap extends React.Component {
   }
   addPopup = (e) => {
     var tmp = this.state.forms
-    tmp.push([
-      {
-        title: 'Latitude',
-        value: '',
-        datasource: '',
-        body: '',
-        filter: ',',
-        filterIndex: 0,
-        jsValue: '',
-        manual: false,
-      },
-      {
-        title: 'Longitude',
-        value: '',
-        datasource: '',
-        body: '',
-        filter: ',',
-        filterIndex: 0,
-        jsValue: '',
-        manual: false,
-      }
-    ])
+    tmp.push({       
+      title: 'point1',
+      forms: [
+        {
+          title: 'Latitude',
+          value: '',
+          datasource: '',
+          body: '',
+          filter: ',',
+          filterIndex: 0,
+          jsValue: '',
+          manual: false,
+          required: true
+        },
+        {
+          title: 'Longitude',
+          value: '',
+          datasource: '',
+          body: '',
+          filter: ',',
+          filterIndex: 0,
+          jsValue: '',
+          manual: false,
+          required: true
+        }
+      ]
+    })
     this.setState({
       forms: tmp,
     })
@@ -195,7 +203,6 @@ class FormMap extends React.Component {
             forms={payload.forms}>
             <FormMultiple
               title={'Position'}
-              formsbtn={['Latitude','Longitude']}
               
             >
               <FormInputBasic hiddenTitle={true}/>

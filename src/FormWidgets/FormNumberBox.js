@@ -19,7 +19,7 @@ class FormNumberBox extends React.Component {
       unit: '',
       icon: '',
       jsValue: '',
-      manual: false,
+      manual: false
     }
     this.handlePayload = this.handlePayload.bind(this)
   }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import DataSourceStore from '../../store/DatasourceStore'
-import LocalStore from '../../store/LocalStore'
 import socketIOClient from 'socket.io-client'
 import axios from 'axios'
 import NETPIEMicrogear from '../../store/Microgear'
@@ -35,14 +34,6 @@ class DataSource extends Component {
       this.getDatasource()
       this.response()
     }
-    else this.loadLocal()
-  }
-  loadLocal = () => {
-    this.setState({
-      datasources: LocalStore.local.datasources
-    })
-    DataSourceStore.datasources = LocalStore.local.datasources
-    NETPIEMicrogear.createMicrogear(LocalStore.local.datasources)
   }
   response = () => {
     socket.on('update-datasource', (msg) => {

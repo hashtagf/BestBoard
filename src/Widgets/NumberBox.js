@@ -81,7 +81,7 @@ class NumberBox extends React.Component {
                 <h1 className="display-4 m-0">{parseFloat(state.value).toFixed(2)}</h1>
               </div>
               <div className="row justify-content-right">
-                <h6 className="m-0">{payload.unit}</h6>
+                <h6 className="m-0 text-right">{payload.unit}</h6>
               </div>
               <div className="row text-right">
                 {(state.previousValue)?

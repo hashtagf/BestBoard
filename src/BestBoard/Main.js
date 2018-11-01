@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './Main.css'
-import LocalStore from '../store/LocalStore'
 import Store from '../store/Store'
 import socketIOClient from 'socket.io-client'
 import Muuri from 'muuri'
@@ -26,13 +25,6 @@ class Main extends Component {
   componentDidMount() {
     if (this.state.connect) this.response()
     else this.loadLocal()
-  }
-  loadLocal = () => {
-    this.setState({
-      listWidgets: LocalStore.local.widgets
-    })
-    WidgetStore.showWidgets(LocalStore.local.widgets[Store.currentId])
-    this.createMuuri()
   }
   response = () => {
     this.getWidgets()

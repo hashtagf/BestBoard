@@ -21,7 +21,7 @@ class First extends Component {
         <img src={Logo} alt="" className="logo"/>
         <image className="my-svg-alternate" src={LogoPng} />
 
-        <div className="jumbotron bg-transparent">
+        <div className="jumbotron bg-transparent mb-0">
           <div className="row">
             <div className="col"></div>
             <div className="col">

@@ -42,45 +42,25 @@ class Map extends React.Component {
   }
 
   componentDidMount () {
-    let source = {}
     const payload = this.props.payload.forms
-    payload.map((point, index) => {
-      point.map((value, index) => {
-          source[value.datasource] = value.datasource
+    payload.map((point, x) => {
+      point.forms.map((value, y) => {
+          let datasource = value.datasource
+          if (NETPIEMicrogear.statusOnline[datasource]) {
+            const microgear = NETPIEMicrogear.microgear[datasource]
+            microgear.on('message', this.onMessage.bind(this, value, x, y))
+          } else console.log('error : not Connect datasource !!')
           return 0
       })
       return 0
     })
-    Object.keys(source).forEach((objectKey) => {
-      if (NETPIEMicrogear.statusOnline[objectKey]) {
-        const microgear = NETPIEMicrogear.microgear[objectKey]
-        microgear.on('message', this.onMessage.bind(this))
-      } else console.log('error : not Connect datasource !!')
-      return 0
-    });
-
   }
 
-  onMessage (topic, msg) {
-    var payload = this.props.payload.forms
-    var i,j
-    var positionObj
-    payload.map((point,x) => {
-      point.map((pos,y) => {
-        if (pos.value === topic) {
-          i = x
-          j = y
-          positionObj = pos
-        }
-        return 0
-      })
-      return 0
-    })
-    payload = positionObj
-    if (payload) {
+  onMessage = (payload,x,y,topic, msg) => {
+    if (payload.value === topic) {
       var name = 'lng'
-      if (j === 0) name = 'lat'
-      
+      if (y === 0) name = 'lat'
+
       let value = msg + ''
       if (payload.manual&&payload.manual!=='false') {
         try {eval(payload.jsValue)}
@@ -90,10 +70,10 @@ class Map extends React.Component {
       }
       else value = value.split(payload.filter)[payload.filterIndex]
       var tmp = this.state.points
-      if (!tmp[i]) tmp[i] = {}
-      tmp[i][name] = value
+      if (!tmp[x]) tmp[x] = {}
+      tmp[x][name] = value
       this.setState({
-        points: tmp,
+        points: tmp
       })
     }
   }
