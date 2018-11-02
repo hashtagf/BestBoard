@@ -71,33 +71,59 @@ class ImageCover extends React.Component {
     const widgetId = this.props.widgetId
     var stylesObj = {}
     payload.popups.map( (popup,index) => {
-      stylesObj['item-position'+index] = {
+      stylesObj['item'+index] = {
         left: popup.position[0],
         top: popup.position[1]
       }
-      if (popup.shadowEff.index) {
-        let eff = popup.shadowEff
-        let val = (this.state.values[index][eff.index])
-        let mid = (eff.max - eff.min)/2
-        let dif = val - mid
-        let opacity = Math.abs(dif) * (1/mid)
-        let color = ((255/(eff.max - eff.min)) * (val-eff.min)<0)?0:(255/(eff.max - eff.min)) * (val-eff.min)
-        stylesObj['item-shadow'+index] = {
-        boxShadow: `1rem 2rem 2rem rgba(${color}, ${color}, ${color}, ${opacity})`
+      if (this.state.values[index]) {
+        if (popup.shadowEff.index) {
+          let eff = popup.shadowEff
+          if (this.state.values[index][eff.index]) {
+            let val = (this.state.values[index][eff.index])
+            let mid = (eff.max - eff.min)/2
+            let dif = val - mid
+            let opacity = Math.abs(dif) * (1/mid)
+            let color = ((255/(eff.max - eff.min)) * (val-eff.min)<0)?0:(255/(eff.max - eff.min)) * (val-eff.min)
+            stylesObj['item'+index]['boxShadow'] = `5px 5px 10rem rgba(${color}, ${color}, ${color}, ${opacity})`
+          }
+        }
+        if (popup.colorEff.index) {
+          let eff = popup.colorEff
+          if (this.state.values[index][eff.index]) {
+            let val = this.state.values[index][eff.index]
+            let rgbStart = [
+              parseInt(eff.colorStart.substr(1, 2),16),
+              parseInt(eff.colorStart.substr(3,2),16),
+              parseInt(eff.colorStart.substr(5,2),16)
+            ]
+            let rgbEnd = [
+              parseInt(eff.colorEnd.substr(1, 2),16),
+              parseInt(eff.colorEnd.substr(3,2),16),
+              parseInt(eff.colorEnd.substr(5,2),16)
+            ]
+            let range = eff.max - eff.min
+            let rgbShade = [
+              (rgbEnd[0]-rgbStart[0])/range,
+              (rgbEnd[1]-rgbStart[1])/range,
+              (rgbEnd[2]-rgbStart[2])/range
+            ]
+            let dif = val-eff.min
+            let color = [
+              parseInt(rgbStart[0]+(rgbShade[0]*dif),10).toString(16),
+              parseInt(rgbStart[1]+(rgbShade[1]*dif),10).toString(16),
+              parseInt(rgbStart[2]+(rgbShade[2]*dif),10).toString(16)
+            ]
+            color.forEach((element,index) => {
+              color[index] = (element.length < 2)?
+                (element.length===0)?'00':'0' + element:element
+            })
+            console.log(color)
+            //if (stop < start) start = [stop, stop = start][0];
+            stylesObj['item'+index]['background'] = `#${color[0]}${color[1]}${color[2]}`
+          }
         }
       }
-      if (popup.colorEff.index) {
-        let eff = popup.colorEff
-        let val = this.state.values[index][eff.index]
-        let start = parseInt(eff.colorStart.substr(1),16)
-        let stop = parseInt(eff.colorEnd.substr(1),16)
-        if (stop < start) start = [stop, stop = start][0];
-        let shade = (stop - start)/(eff.max - eff.min);
-        let color = parseInt((start+shade*(val-eff.min))).toString(16)
-        stylesObj['item-color'+index] = {
-          background: `#${color}`
-        }
-      }
+
       return 0
     })
     var styles = reactCSS({
@@ -110,9 +136,7 @@ class ImageCover extends React.Component {
         if (this.state.values[index])
           if (this.state.values[index][count])
             popupData = this.state.values[index][count] + ' ' + popupValue.unit
-        let styleAr = [`item-position${index}`]
-        if (popup.shadowEff.index) styleAr.push(`item-shadow${index}`)
-        return <div className="item rounded-circle btn" key={index} style={styles[styleAr]}>
+        return <div className="item rounded-circle btn" key={index} style={stylesObj[`item${index}`]}>
           <span>
             {(popupValue.icon)?<i className={popupValue.icon}></i>:null} <br/>
             {popupData}

@@ -34,7 +34,7 @@
     background: transparent;
     box-shadow: none;
 }
-.gridPopup {
+.ImageCover .gridPopup {
     z-index: 10;
 	position:absolute;
 	top: 3rem;
@@ -43,7 +43,7 @@
     height: 80%;
     
 }
-.gridPopup .item {
+.ImageCover .gridPopup .item {
     display: block;
     position: absolute;
     width: 5.5rem;
@@ -52,7 +52,7 @@
     z-index: 1;
     color: var(--textColor);
     padding: 1rem 0px;
-    background: var(--activePresence);
+    /* background: var(--activeItem); */
 }
 .NumberBox .icon {
     font-size: 2.5rem;
@@ -126,5 +126,5 @@ table tbody {
     font-size:1rem;
 }
 .Map .labelmark {
-    
+
 }

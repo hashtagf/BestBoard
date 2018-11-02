@@ -74,6 +74,7 @@ class Main extends React.Component {
         maxW: widget.maxW
       }
       WidgetStore.updatelayout(widget.i, payload)
+      return 0
     })
     this.setState({ layouts })
   }

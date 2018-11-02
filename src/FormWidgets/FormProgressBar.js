@@ -98,9 +98,9 @@ class FormProgress extends React.Component {
       manual: this.state.manual,
       layout: {
         w: 3,
-        h:3,
-        minW: 3,
-        minH: 2,
+        h:5,
+        minW: 2,
+        minH: 5,
         maxW: 6,
         maxH: 6
       }

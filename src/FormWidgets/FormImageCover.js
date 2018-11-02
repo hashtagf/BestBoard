@@ -19,7 +19,7 @@ class FormImageCover extends React.Component {
       title: 'ImageCover',
       file: null,
       popups: [],
-      selectIndex: null
+      selectIndex: 0
     }
     this.handlePayload = this.handlePayload.bind(this)
     this.handleFile = this.handleFile.bind(this)
@@ -225,29 +225,44 @@ class FormImageCover extends React.Component {
   }
 }
 class EffectForm extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      effMode: ''
+    }
+    //this.handleClick = this.handleClick.bind(this)
+  }
   handlePayload = (e) => {
-    var tmp = this.props.values.shadowEff
-    tmp[e.target.name] = (e.target.value==='')?null:e.target.value
+    var effmode = this.state.effMode
+    var tmp = (effmode === 'shadowEff')?this.props.values.shadowEff:this.props.values.colorEff
+    tmp[e.target.name] = (e.target.value === '')?null:e.target.value
     var obj = {
       target: {
-        name: 'shadowEff',
+        name: this.state.effMode,
         value: tmp
       }
     }
     this.props.callback(obj)
   }
+  handleClick = (mode,e) => {
+    this.setState({
+      effMode: mode
+    })
+  }
   render () {
     var values = this.props.values
-    var eff = values.shadowEff
+    var shadoweff = values.shadowEff
+    var coloreff = values.colorEff
     return (
       <div>
-        <details>
+        <details onClick={this.handleClick.bind(this,'shadowEff')}>
           <summary>Effect Shadow</summary>
           <div className="form-row">
             <div className="form-group col-md-4">
-              <label for="inputState">Value Choose</label>
+              <label forHtml="selectShadowIndex">Value Choose</label>
               <select name="index" 
-                value={eff.index}
+                id="selectShadowIndex"
+                value={shadoweff.index}
                 onChange={this.handlePayload}
                 readOnly
                 className="form-control">
@@ -256,12 +271,38 @@ class EffectForm extends React.Component {
               </select>
             </div>
             <div className="form-group col-md-4">
-              <label for="inputCity">Threshold min</label>
-              <input type="number" name="min" className="form-control" value={eff.min} onChange={this.handlePayload}/>
+              <label forHtml="shadowmin">Threshold min</label>
+              <input type="number" name="min" id="shadowmin" className="form-control" value={shadoweff.min} onChange={this.handlePayload}/>
             </div>
             <div className="form-group col-md-4">
-              <label for="inputZip">Threshold max</label>
-              <input type="number" name="max" className="form-control" value={eff.max} onChange={this.handlePayload}/>
+              <label forHtml="shadowmax">Threshold max</label>
+              <input type="number" name="max" id="shadowmax" className="form-control" value={shadoweff.max} onChange={this.handlePayload}/>
+            </div>
+          </div>
+        </details>
+
+        <details onClick={this.handleClick.bind(this,'colorEff')}>
+          <summary>Effect Color</summary>
+          <div className="form-row">
+            <div className="form-group col-md-4">
+              <label forHtml="selectColorIndex">Value Choose</label>
+              <select name="index"
+                value={coloreff.index}
+                onChange={this.handlePayload}
+                readOnly
+                id="selectColorIndex"
+                className="form-control">
+                <option value={''}>disable Eff</option>
+                {values.forms.map((value,index) => <option value={index}>{value.title}</option>)}
+              </select>
+            </div>
+            <div className="form-group col-md-4">
+              <label forHtml="colormin">Threshold min</label>
+              <input type="number" name="min" id="colormin" className="form-control" value={coloreff.min} onChange={this.handlePayload}/>
+            </div>
+            <div className="form-group col-md-4">
+              <label forHtml="colormax">Threshold max</label>
+              <input type="number" name="max" id="colormax" className="form-control" value={coloreff.max} onChange={this.handlePayload}/>
             </div>
           </div>
         </details>
