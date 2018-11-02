@@ -70,12 +70,36 @@ class ImageCover extends React.Component {
     const payload = this.props.payload
     const widgetId = this.props.widgetId
     var stylesObj = {}
-    payload.popups.map( (popup,index) =>
-      stylesObj['item'+index] = {
+    payload.popups.map( (popup,index) => {
+      stylesObj['item-position'+index] = {
         left: popup.position[0],
         top: popup.position[1]
       }
-    )
+      if (popup.shadowEff.index) {
+        let eff = popup.shadowEff
+        let val = (this.state.values[index][eff.index])
+        let mid = (eff.max - eff.min)/2
+        let dif = val - mid
+        let opacity = Math.abs(dif) * (1/mid)
+        let color = ((255/(eff.max - eff.min)) * (val-eff.min)<0)?0:(255/(eff.max - eff.min)) * (val-eff.min)
+        stylesObj['item-shadow'+index] = {
+        boxShadow: `1rem 2rem 2rem rgba(${color}, ${color}, ${color}, ${opacity})`
+        }
+      }
+      if (popup.colorEff.index) {
+        let eff = popup.colorEff
+        let val = this.state.values[index][eff.index]
+        let start = parseInt(eff.colorStart.substr(1),16)
+        let stop = parseInt(eff.colorEnd.substr(1),16)
+        if (stop < start) start = [stop, stop = start][0];
+        let shade = (stop - start)/(eff.max - eff.min);
+        let color = parseInt((start+shade*(val-eff.min))).toString(16)
+        stylesObj['item-color'+index] = {
+          background: `#${color}`
+        }
+      }
+      return 0
+    })
     var styles = reactCSS({
       'default': stylesObj
     })
@@ -86,10 +110,13 @@ class ImageCover extends React.Component {
         if (this.state.values[index])
           if (this.state.values[index][count])
             popupData = this.state.values[index][count] + ' ' + popupValue.unit
-        return <div className="item rounded-circle btn" key={index} style={styles['item'+index]}>
-        <span>
-          {(popupValue.icon)?<i className={popupValue.icon}></i>:null}
-          {popupData}</span>
+        let styleAr = [`item-position${index}`]
+        if (popup.shadowEff.index) styleAr.push(`item-shadow${index}`)
+        return <div className="item rounded-circle btn" key={index} style={styles[styleAr]}>
+          <span>
+            {(popupValue.icon)?<i className={popupValue.icon}></i>:null} <br/>
+            {popupData}
+          </span>
         </div>
       }
     )

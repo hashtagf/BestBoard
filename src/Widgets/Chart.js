@@ -108,6 +108,7 @@ class Chart extends React.Component {
       data.map((datas, index) => {
         if(index !== 0) 
           data[0][i] = Object.assign({['value'+index]: data[index][i]}, data[0][i])
+        return 0
       })
     }
     return (

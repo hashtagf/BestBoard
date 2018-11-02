@@ -16,6 +16,7 @@ class FormMap extends React.Component {
       forms: [
         {
           title: 'point1',
+          url: '',
           forms: [
             {
               title: 'Latitude',
@@ -82,6 +83,7 @@ class FormMap extends React.Component {
   reState () {
     this.setState({
       title: 'Map',
+      url: '',
       forms: [
         {
           title: 'point1',
@@ -158,6 +160,7 @@ class FormMap extends React.Component {
     var tmp = this.state.forms
     tmp.push({       
       title: 'point1',
+      url: '',
       forms: [
         {
           title: 'Latitude',
@@ -201,26 +204,22 @@ class FormMap extends React.Component {
             title={'Points'}
             addBtnFunc={this.addPopup}
             forms={payload.forms}>
+            <InputText
+            callback={this.handlePayload}
+            title="Title"
+            name="title"
+            value={payload.title} />
+            <InputText
+            callback={this.handlePayload}
+            title="URL"
+            name="url"
+            value={payload.url} />
             <FormMultiple
-              title={'Position'}
-              
+              title={'Position'} 
             >
               <FormInputBasic hiddenTitle={true}/>
             </FormMultiple>
           </FormMultiple>
-        {/* <div className="card-body" style={{height: '300px'}}>
-          <GoogleMapReact
-            bootstrapURLKeys={{ key: 'AIzaSyCmONUAkFkKSXNpjjcaihGMVkBZw9vwJzQ' }}
-            defaultCenter={this.props.center}
-            defaultZoom={this.props.zoom}
-          >
-            <AnyReactComponent
-            lat={payload.lat}
-            lng={payload.lng}
-            text={'K'}
-            />
-          </GoogleMapReact> 
-        </div> */}
 
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget} />
       </div>

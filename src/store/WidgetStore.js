@@ -23,9 +23,8 @@ class WidgetStore {
   @observable widgets = []
   // @observable listWidgets = []
 
-  pushWidgets(payload) {
+  pushWidget(payload) {
     this.widgets.push(payload)
-    this.listWidgets = this.showWidgets()
   }
 
   createWidget(boardId, payload) {
@@ -39,13 +38,25 @@ class WidgetStore {
   }
 
   updateWidget(widgetId, payload) {
-    axios.put(Store.server + '/widget/' + widgetId, { widget: payload }).then((res) =>
-      console.log(res)
-    )
+    let index = this.widgets.findIndex((widget) => widget._id + '' === widgetId + '')
+    let widget = this.widgets[index]
+    widget.widget = payload
+    axios.put(Store.server + '/widget/' + widgetId, { 
+      _id: widget._id,
+      boardId: widget.boardId,
+      widget: payload,
+      layout: widget.layout
+    })
   }
 
   updatelayout(widgetId, payload) {
+    let index = this.widgets.findIndex((widget) => widget._id + '' === widgetId + '')
+    let widget = this.widgets[index]
+    widget.layout = payload
     axios.put(Store.server + '/widget/' + widgetId, {
+      _id: widget._id,
+      boardId: widget.boardId,
+      widget: widget.widget,
       layout: payload
     })
   }
@@ -57,7 +68,7 @@ class WidgetStore {
   }
   showWidgets(widgets) {
     var listWidgets = widgets.map((widget) => {
-    //console.log(NETPIEMicrogear.topics[payload.datasource][payload.value].value)
+    this.pushWidget(widget)
       switch (widget.widget.typeWidget) {
         case 'Gauge':
           return <Gauge key={widget._id} payload={widget.widget} widgetId={widget._id} layout={widget.layout} />

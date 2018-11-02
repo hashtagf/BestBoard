@@ -8,7 +8,7 @@ import { toJS } from 'mobx'
 import Store from '../store/Store'
 import { observer } from 'mobx-react'
 
-class First extends Component {
+class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -83,4 +83,4 @@ class ListPage extends React.Component {
     )
   }
 }
-  export default First
+  export default Home

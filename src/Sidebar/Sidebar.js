@@ -8,7 +8,7 @@ import Logo from '../assets/bestlogo.svg'
 
 const $ = require("jquery")
 
-class Page extends Component {
+class SideBar extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -34,7 +34,7 @@ class Page extends Component {
     const mode = this.state.mode
     return (
         <nav className="sidebar" id="scrollbar-style" data-spy="scroll">
-          <div className="sidebar-header">
+          <div className="sidebar-header text-center">
           
           <a href="/">
             <img src={Logo} alt="" className="logoSide"/>
@@ -52,4 +52,4 @@ class Page extends Component {
   }
 }
 
-export default Page
+export default SideBar

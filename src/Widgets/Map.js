@@ -7,8 +7,8 @@ import NETPIEMicrogear from '../store/Microgear'
 import './Widget.css'
 import HeaderCard from "./HeaderCard"
 
-const AnyReactComponent = ({ text }) => <i className="fas fa-map-marker-alt markMap text-primary" alt={text}></i>;
-const YourPosition = ({ text }) => <span><i className="fas fa-male markMap text-primary"></i>{text}</span>;
+const MarkComponent = ({ text,url }) => <a href={url} target="_blank"><i className="fas fa-map-marker-alt markMap text-primary" alt={text}></i></a>;
+const YourPosition = ({ text }) => <span className="labelmark text-dark"><i className="fas fa-male markMap text-primary" alt={text}></i></span>;
 class Map extends React.Component {
   static defaultProps = {
     center: {
@@ -99,7 +99,7 @@ class Map extends React.Component {
     const payload = this.props.payload
     const widgetId = this.props.widgetId
     return (
-        <div className="item-content card border-success shadowcard rounded-0 widgetCard border-0 col-12 h-100" data-id={widgetId}>
+        <div className="item-content Map card border-success shadowcard rounded-0 widgetCard border-0 col-12 h-100" data-id={widgetId}>
           <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId} />
           <div className="card-body googlemap">
             <GoogleMapReact
@@ -109,14 +109,16 @@ class Map extends React.Component {
             >
               {
                 this.state.points.map((point,index) => {
+                  var markDetail = payload.forms[index]
                   if (!point.lat || !point.lng) {
                     return null
                   }
-                  return <AnyReactComponent
+                  return <MarkComponent
                   key={index}
                   lat={point.lat}
                   lng={point.lng}
-                  text={'K'}
+                  text={markDetail.title}
+                  url={markDetail.url}
                 />
                 })
               }

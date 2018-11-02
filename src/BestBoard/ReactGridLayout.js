@@ -46,7 +46,7 @@ class Main extends React.Component {
   }
 
   getWidgets() {
-    axios.get(Store.server + '/widget/' + Store.currentId).then((res) => {
+    axios.get(Store.server + '/widget/board/' + Store.currentId).then((res) => {
       let tmp = WidgetStore.showWidgets(res.data)
       this.setState({
         listWidgets: tmp,
@@ -62,8 +62,8 @@ class Main extends React.Component {
 
   onLayoutChange(layout, layouts) {
     if(Store.mode)
-    layout.map((widget) => 
-      WidgetStore.updatelayout(widget.i,{
+    layout.map((widget, index) => {
+      let payload = {
         x: widget.x,
         y: widget.y,
         h: widget.h,
@@ -72,8 +72,9 @@ class Main extends React.Component {
         minW: widget.minW,
         maxH: widget.maxH,
         maxW: widget.maxW
-      })
-    )
+      }
+      WidgetStore.updatelayout(widget.i, payload)
+    })
     this.setState({ layouts })
   }
 

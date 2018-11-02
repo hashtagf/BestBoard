@@ -28,6 +28,7 @@ class FormInputBasic extends React.Component {
         label: date.format(now, format)+'',
         value: format
       })
+      return 0
     })
     this.setState({
       topics: strTime

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import './Hamburger.css'
 import Store from '../store/Store'
+import { observer } from 'mobx-react'
 
+@observer
 class Hamburger extends Component {
 
   render() {

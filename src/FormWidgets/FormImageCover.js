@@ -120,7 +120,19 @@ class FormImageCover extends React.Component {
           manual: false,
           required: true
         }
-      ]
+      ],
+      shadowEff: {
+        index: null,
+        min: 0,
+        max: 100
+      },
+      colorEff: {
+        index: null,
+        colorStart: '#ff0000',
+        colorEnd: '#0000ff',
+        min: 15,
+        max: 30
+      }
     })
     this.setState({
       popups: tmp
@@ -203,6 +215,7 @@ class FormImageCover extends React.Component {
                 <InputText title="Unit" name="unit" placeholder="unit"/>
                 <InputIcons/>
               </FormMultiple>
+              <EffectForm/>
             </FormMultiple>:null
             
         }
@@ -211,7 +224,51 @@ class FormImageCover extends React.Component {
     )
   }
 }
-
+class EffectForm extends React.Component {
+  handlePayload = (e) => {
+    var tmp = this.props.values.shadowEff
+    tmp[e.target.name] = (e.target.value==='')?null:e.target.value
+    var obj = {
+      target: {
+        name: 'shadowEff',
+        value: tmp
+      }
+    }
+    this.props.callback(obj)
+  }
+  render () {
+    var values = this.props.values
+    var eff = values.shadowEff
+    return (
+      <div>
+        <details>
+          <summary>Effect Shadow</summary>
+          <div className="form-row">
+            <div className="form-group col-md-4">
+              <label for="inputState">Value Choose</label>
+              <select name="index" 
+                value={eff.index}
+                onChange={this.handlePayload}
+                readOnly
+                className="form-control">
+                <option value={''}>disable Eff</option>
+                {values.forms.map((value,index) => <option value={index}>{value.title}</option>)}
+              </select>
+            </div>
+            <div className="form-group col-md-4">
+              <label for="inputCity">Threshold min</label>
+              <input type="number" name="min" className="form-control" value={eff.min} onChange={this.handlePayload}/>
+            </div>
+            <div className="form-group col-md-4">
+              <label for="inputZip">Threshold max</label>
+              <input type="number" name="max" className="form-control" value={eff.max} onChange={this.handlePayload}/>
+            </div>
+          </div>
+        </details>
+      </div>
+    )
+  }
+}
 class ImgArea extends React.Component {  
   drag_start = (event) => {
     var style = window.getComputedStyle(event.target, null);
@@ -222,6 +279,8 @@ class ImgArea extends React.Component {
   drop = (event) => {
     var offset = event.dataTransfer.getData("Text").split(',');
     var dm = document.getElementById(offset[2]);
+
+
     var h = $('#imgcontain').innerHeight();
     var w = $('#imgcontain').innerWidth();
     var x = (event.clientX + parseInt(offset[0],10))/w*100.0 + '%';
@@ -261,8 +320,8 @@ class ImgArea extends React.Component {
     )
     return (
       <div className="row">
-        <div className="col-12">
-          <img src={file} className="img-fluid" id="b64" alt="" />
+        <div className="col-12 text-center">
+          <img src={file} className="img-fluid imgbackground" id="b64" alt="" />
           <div className='gridPopupPreview' id="imgcontain" onDrop={this.drop} onDragOver={this.drag_over}>
             {popups}
           </div>
