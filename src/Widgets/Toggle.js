@@ -21,24 +21,25 @@ class Toggle extends React.Component {
     this.setState({
       checked: checked
     }, this.contactMicrogear)
+    
   }
 
   contactMicrogear () {
     const checked = this.state.checked
     const payload = this.props.payload
     const microgear = NETPIEMicrogear.microgear[payload.datasource]
+    
     if (NETPIEMicrogear.statusOnline[payload.datasource]) {
       switch (payload.type) {
         case 'chat':
           if (checked) return microgear.chat(payload.tpaOn, payload.valueOn)
           else return microgear.chat(payload.tpaOff, payload.valueOff)
         case 'publish':
-          if (checked) return microgear.publish(payload.tpaOn, payload.valueOn)
+          if (checked) return microgear.publish(payload.tpaOn, payload.valueOn + '')
           else return microgear.publish(payload.tpaOff, payload.valueOff)
         default: return console.log('Error')
       }
     } else console.log('error : not Connect datasource !!')
-  
   }
 
   delWidget() {
@@ -52,7 +53,7 @@ class Toggle extends React.Component {
       const microgear = NETPIEMicrogear.microgear[payload.datasource]
       microgear.chat(payload.onCreated, payload.onCreatedValue)
       microgear.on('message', this.onMessage.bind(this))
-    } else console.log('error : not Connect datasource !!')
+    } else console.log('error : not Connect datasource !!!')
   }
 
   onMessage(topic, msg) {
@@ -60,14 +61,14 @@ class Toggle extends React.Component {
     const strMsg = msg + ''
     const value = strMsg
     if (payload.toggleState === topic) {
-      if(payload.toggleValue === value) {
+      if(payload.toggleValue + '' === value) {
         this.setState({
           checked: true
-        }, this.contactMicrogear)
+        })
       } else {
         this.setState({
           checked: false
-        }, this.contactMicrogear)
+        })
       }   
     }
   }
