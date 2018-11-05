@@ -46,13 +46,13 @@
 .ImageCover .gridPopup .item {
     display: block;
     position: absolute;
-    width: 5.5rem;
-    height: 5.5rem;
-    font-size: 1.2rem;
+    width: 5rem;
+    height: 5rem;
+    font-size: 1rem;
     z-index: 1;
     color: var(--textColor);
     padding: 1rem 0px;
-    /* background: var(--activeItem); */
+    background: var(--activeItem);
 }
 .NumberBox .icon {
     font-size: 2.5rem;

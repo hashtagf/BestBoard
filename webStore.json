@@ -19,6 +19,18 @@
       },
       "_id": "1541044110627",
       "id": "1541044110627"
+    },
+    {
+      "datasource": {
+        "typeDatasource": "NETPIE",
+        "name": "NETPIE Microgear",
+        "appID": "l",
+        "key": "l",
+        "secret": "p",
+        "topic": "/#"
+      },
+      "_id": 1541184905136,
+      "id": 1541184905136
     }
   ],
   "widget": [
@@ -86,8 +98,8 @@
               {
                 "title": "humi",
                 "datasource": "1541044110627",
-                "body": "60.10,26.20,9",
-                "value": "/SmartOfficeAt418B/table3",
+                "body": "56.30,26.10,4",
+                "value": "/SmartOfficeAt418B/table4",
                 "filter": ",",
                 "filterIndex": 0,
                 "unit": "%",
@@ -99,8 +111,8 @@
               {
                 "title": "temp",
                 "datasource": "1541044110627",
-                "body": "60.10,26.20,9",
-                "value": "/SmartOfficeAt418B/table3",
+                "body": "56.30,26.10,4",
+                "value": "/SmartOfficeAt418B/table4",
                 "filter": ",",
                 "filterIndex": "1",
                 "unit": "c",
@@ -111,15 +123,15 @@
             ],
             "shadowEff": {
               "index": "0",
-              "min": "40",
-              "max": "60"
+              "min": "55",
+              "max": "100"
             },
             "colorEff": {
               "index": "1",
               "colorStart": "#ff0000",
               "colorEnd": "#0000ff",
-              "min": "19",
-              "max": "25"
+              "min": "25",
+              "max": "35"
             }
           }
         ],

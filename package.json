@@ -51,7 +51,7 @@
     "write-json-file": "^3.0.2"
   },
   "scripts": {
-    "dev": "concurrently \"nodemon src/JsonDB/ServerLocal.js\" \"react-app-rewired start\"",
+    "dev": "concurrently \"node src/JsonDB/ServerLocal.js\" \"react-app-rewired start\"",
     "server": "cd src/JsonDB/ && node ServerLocal.js",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
