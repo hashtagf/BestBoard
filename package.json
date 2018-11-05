@@ -54,8 +54,8 @@
   "scripts": {
     "dev": "concurrently \"node src/JsonDB/ServerLocal.js\" \"react-app-rewired start\"",
     "server": "cd src/JsonDB/ && node ServerLocal.js",
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "start": "concurrently \"node src/JsonDB/ServerLocal.js\" \"react-app-rewired start\"",
+    "build": "react-app-rewired build && node src/JsonDB/ServerLocal.js",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject"
   },

@@ -1,6 +1,6 @@
 import React from 'react'
 import fontAwesomeIcons from '../fontawesomeIcons.json'
-import Creatable,{components} from 'react-select/lib/Creatable'
+import Creatable from 'react-select/lib/Creatable'
 
 class InputIcons extends React.Component {
   constructor(props) {

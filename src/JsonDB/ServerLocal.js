@@ -34,7 +34,6 @@ server.use((req, res, next) => {
     req.body.id = Date.now()
     io.emit('update-' + path[1], 'new')
   } else if (req.method === 'PUT') {
-    console.log(req.params)
     req.body._id = path[2]
     io.emit('update-' + path[1], 'update')
   } else if (req.method === 'DELETE') {
