@@ -27,16 +27,17 @@ class Led extends React.Component {
   }
   onMessage(topic, msg) {
     const payload = this.props.payload
+    
     if (payload.value === topic) {
       let value = msg + ''
-      let valueCondition = payload.valueON
+      let valueCondition = payload.valueON + ''
       if (payload.manual) {
         try {eval(payload.jsValue)}
         catch (err){
           if(err!==null) value = msg+''
         }
       }
-      else value = value.split(payload.filter)[payload.filterIndex]
+      else value = value.split(payload.filter)[payload.filterIndex] + ''
       let flag = false
       switch (payload.expressionON) {
         case '=':flag = value === valueCondition
