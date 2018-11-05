@@ -104,7 +104,7 @@ class FormText extends React.Component {
       <div className="FormProgressBar container">
         <FormInputBasic callback={this.handlePayload} values={payload} />
         <InputText callback={this.handlePayload} title="Start Text" name="startText" value={payload.startText} />
-        <InputText callback={this.handlePayload} title="End Text" name="startText" value={payload.endText} />
+        <InputText callback={this.handlePayload} title="End Text" name="endText" value={payload.endText} />
         <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
       </div>
     )
