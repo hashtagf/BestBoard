@@ -1,6 +1,6 @@
 /* eslint no-eval: 0 */
 import { observable } from 'mobx'
-import MicroGear from 'microgear'
+import MicroGears from 'microgear' 
 
 class NETPIEMicrogear {
 
@@ -12,11 +12,12 @@ class NETPIEMicrogear {
   createMicrogear(datasources) {
     datasources.forEach((datasource, index) => {
       if (datasource.datasource.appID && datasource.datasource.key && datasource.datasource.secret) {
-        this.microgear[datasource._id] = MicroGear.create({
+        this.microgear[datasource._id] = MicroGears.create({
           key: datasource.datasource.key,
           secret: datasource.datasource.secret,
           alias: datasource.datasource.name
-        })
+        })   
+        console.log(this.microgear[datasource._id])  
         if (!this.checkConnect[datasource._id]) {
           this.checkConnect[datasource._id] = true
           this.microgear[datasource._id].connect(datasource.datasource.appID)
@@ -30,7 +31,7 @@ class NETPIEMicrogear {
           eval(datasource.datasource.jsOnconnect)
         })
         this.microgear[datasource._id].on("error", function (err) {
-          console.log("Error: " + err)
+          console.log("Error: " + err, datasource.datasource.name)
         })
         this.microgear[datasource._id].on("closed", function () {
           console.log("Closed")
@@ -42,13 +43,14 @@ class NETPIEMicrogear {
           }
           this.topics[datasource._id][topic] = obj
         })
+        
       }
       else datasources.splice(index, 1)
     })
   }
 
   updateMicrogear(datasourceId, datasource) {
-    this.microgear[datasourceId] = MicroGear.create({
+    this.microgear[datasourceId] = MicroGears.create({
       key: datasource.key,
       secret: datasource.secret,
       alias: datasource.name

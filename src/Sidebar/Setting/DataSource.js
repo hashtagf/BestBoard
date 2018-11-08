@@ -27,8 +27,6 @@ class DataSource extends Component {
       connect: true
     }
   }
-  componentWillMount () {
-  }
   componentDidMount () {
     if (this.state.connect) {
       this.getDatasource()

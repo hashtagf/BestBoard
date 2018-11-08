@@ -14,7 +14,20 @@ import FormMap from './FormMap'
 import FormLed from './FormLed'
 import FormHtml from './FormHtml'
 import FormTable from './FormTable'
-import GaugeImg from '../assets/gauge.jpg'
+import GaugeImg from '../assets/widgets/Gauge.png'
+import ButtonImg from '../assets/widgets/Button.png'
+import ChartImg from '../assets/widgets/Chart.png'
+import CoverImg from '../assets/widgets/Cover.png'
+import HTMLImg from '../assets/widgets/HTML.png'
+import ImageImg from '../assets/widgets/Image.png'
+import LedImg from '../assets/widgets/Led.png'
+import ListImg from '../assets/widgets/List.png'
+import MapImg from '../assets/widgets/Map.png'
+import NumberBoxImg from '../assets/widgets/NumberBox.png'
+import ProgressBarImg from '../assets/widgets/ProgressBar.png'
+import TextImg from '../assets/widgets/Text.png'
+import ToggleImg from '../assets/widgets/Toggle.png'
+import TableImg from '../assets/widgets/Table.png'
 
 import { observer } from 'mobx-react'
 
@@ -102,7 +115,7 @@ class WidgetsList extends React.Component {
       widgets: [
         {
           name: "NumberBox",
-          img: "https://i.stack.imgur.com/k7Nit.png"
+          img: NumberBoxImg
         },
         {
           name: "Gauge",
@@ -110,52 +123,52 @@ class WidgetsList extends React.Component {
         },
         {
           name: "ProgressBar",
-          img: "https://image.opencart.com/cache/583c1e869b365-resize-710x380.jpg"
+          img: ProgressBarImg
         },
         {
           name: "Image",
-          img: "https://i.stack.imgur.com/k7Nit.png"
+          img: ImageImg
         },
         {
           name: "ImageCover",
-          img: "https://i.stack.imgur.com/k7Nit.png"
+          img: CoverImg
         },
         {
           name: "Chart",
-          img: "https://image.opencart.com/cache/583c1e869b365-resize-710x380.jpg"
+          img: ChartImg
         },
         {
           name: "List",
-          img: "https://www.excel-easy.com/examples/images/line-chart/line-chart.png"
+          img: ListImg
         },
         {
           name: "Text",
-          img: "https://www.excel-easy.com/examples/images/line-chart/line-chart.png"
+          img: TextImg
         },
         {
           name: "Button",
-          img: "https://www.excel-easy.com/examples/images/line-chart/line-chart.png"
+          img: ButtonImg
         },
         {
           name: "Toggle",
-          img: "https://i.stack.imgur.com/k7Nit.png"
+          img: ToggleImg
         },
         {
           name: "Map",
-          img: "https://i.stack.imgur.com/k7Nit.png"
+          img: MapImg
         },
         {
           name: "Led",
-          img: "https://i.stack.imgur.com/k7Nit.png"
+          img: LedImg
         }
         ,
         {
           name: "HTML",
-          img: "https://i.stack.imgur.com/k7Nit.png"
+          img: HTMLImg
         },
         {
           name: "Table",
-          img: "https://www.excel-easy.com/examples/images/line-chart/line-chart.png"
+          img: TableImg
         }
       ],
       selectType: "NumberBox"
