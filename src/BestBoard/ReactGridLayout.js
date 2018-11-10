@@ -27,6 +27,7 @@ class Main extends React.Component {
   }
   componentWillMount () {
     Store.currentId = this.props.location.pathname.split('/')[1]
+    Store.setPage()
   }
   componentDidMount() {
     if (this.state.connect) this.response()
@@ -58,7 +59,6 @@ class Main extends React.Component {
   onResize = () => {
     
   }
-
 
   onLayoutChange(layout, layouts) {
     if(Store.mode)

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './Settingmenu.css'
 import DataSource from './DataSource.js'
 import ColorSetting from './ColorSetting.js'
+import AlertSetting from './AlertSetting.js'
 import Store from '../../store/Store'
 
 class Settingmenu extends Component {
@@ -11,6 +12,9 @@ class Settingmenu extends Component {
       <div className={(mode)? 'false': 'd-none'}>
         <ul className="list-unstyled components">
           <DataSource/>
+        </ul>
+        <ul className="list-unstyled components">
+          <AlertSetting/>
         </ul>
         <ul className="list-unstyled components">
           <ColorSetting Store={Store}/>

@@ -32,7 +32,12 @@ class Table extends React.Component {
             if (col.value === topic) {
               let value = msg + ''
               let now = new Date()
-              if (col.manual) eval(col.jsValue)
+              if (col.manual) {
+                try {eval(col.jsValue)}
+                catch (err){
+                  if(err!==null) value = msg+''
+                }
+              }
               else value = value.split(col.filter)[col.filterIndex]
               if (!values[index]) {
                 values[index] = [value]

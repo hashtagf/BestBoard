@@ -46,7 +46,7 @@
 li {
 
 }
-.sidebar ul a:hover {
+.sidebar ul a:hover:not(.no-collaspe) {
     color: var(--textColor);
     background: var(--hoverItem);
 }

@@ -118,7 +118,7 @@ class FormChart extends React.Component {
       <div className="FormChart container">
         <InputText callback={this.handlePayload} title="Title" name="title" value={payload.title} />
         <InputText callback={this.handlePayload} title="Feed ID" name="feedID" value={payload.feedID} />
-        <InputText callback={this.handlePayload} title="Feed API" name="feedAPI" value={payload.feedAPI} />
+        <InputText callback={this.handlePayload} title="Feed API" name="feedAPI" value={payload.feedAPI} type={'password'}/>
 {/*         <InputText callback={this.handlePayload} title="Value" name="value" value={payload.values} placeholder="Value of Feed"/>
  */}    <FormMultiple
           payload={payload} 

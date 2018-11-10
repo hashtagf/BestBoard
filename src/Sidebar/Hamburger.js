@@ -2,15 +2,24 @@ import React, { Component } from 'react'
 import './Hamburger.css'
 import Store from '../store/Store'
 import { observer } from 'mobx-react'
-
+import Tooltip from 'rc-tooltip';
+import 'rc-tooltip/assets/bootstrap.css';
+import NETPIEMicrogear from '../store/Microgear'
 @observer
 class Hamburger extends Component {
-
+  handleClick = (e) => {
+    e.preventDefault();
+    this.props.clickSetting(!Store.mode)
+    /* this.setState({
+      mode: Store.mode
+    }) */
+  }
   render() {
+    let noti = <Notification payload={Store.notiSetting}/>
     return (
       <div>
         <nav className="navbar navbar-default">
-          <div className="container-fluid pl-0">
+          <div className="container-fluid">
             <div className="navbar-header">
               <button type="button" id="sidebarCollapse" className="navbar-btn">
                 <span></span>
@@ -20,12 +29,91 @@ class Hamburger extends Component {
               
             </div>
             <div className="navbar-brand my-auto text-truncate"><strong>{Store.pageName}</strong></div>
-            <div><i className="fas fa-bell"></i></div>
+            <div className="menu-head">
+              <Tooltip placement="bottom" trigger={['hover']} overlay={noti}>
+              <i className="fas fa-bell mr-4"></i>
+              </Tooltip>
+              <Tooltip placement="bottom" trigger={['hover']} overlay={(Store.mode)?'Done':'Setting'}>
+              <i onClick={this.handleClick} className={Store.mode?"fas fa-save text-success":"fas fa-cog"}></i>
+              </Tooltip>
+            </div>
           </div>
         </nav>
       </div>
     )
   }
 }
+class Notification extends Component {
+  constructor (props) {
+    super(props)
+    this.state= {
+      notis: []
+    }
+  }
+  componentDidMount() {
+    const payload = this.props.payload
+    if(payload.forms)
+    payload.forms.forEach((col, index) => {
+        if (NETPIEMicrogear.statusOnline[col.datasource]) {
+          const microgear = NETPIEMicrogear.microgear[col.datasource]
+          microgear.on('message', (topic, msg) => {
+            let values = this.state.values
+            if (col.value === topic) {
+              let value = msg + ''
+              let now = new Date()
+              if (payload.manual) {
+                try {eval(payload.jsValue)}
+                catch (err){
+                  if(err!==null) value = msg+''
+                }
+              }
+              else value = value.split(col.filter)[col.filterIndex]
+              let flag = false
+              let valueCondition = payload.valueAlert + ''
+              switch (payload.expressionAlert) {
+                case '=':flag = value === valueCondition
+                  break
+                case '≠':flag = value !== valueCondition
+                  break
+                case '>':flag = value > valueCondition
+                  break
+                case '<':flag = value < valueCondition
+                  break
+                case '>=':flag = value >= valueCondition
+                  break
+                case '<=':flag = value <= valueCondition
+                  break
+                //if (payload.columns[0].type === 'time')
+              }
+              if (flag) {
+                let temp = this.state.notis
+                let now = new Date()
+                temp.push({
+                  msg: value,
+                  time: now
+                })
+                this.setState({
+                  notis: temp
+                })
+              }
+              
+            }
+          })
+        } else console.log('error : not Connect datasource !!')
+      
+    })
+  }
 
+  render () {
+    let notis = <span>'don\'t have'</span>
+    if (this.state.notis)
+    notis = this.state.notis.map((noti)=>
+      <div className="row">
+        <div className="col-1"><i className="fas fa-save text-success"></i></div>
+        <div>{noti.msg}</div>
+      </div>
+    )
+    return (notis)
+  }
+}
 export default Hamburger

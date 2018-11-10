@@ -68,7 +68,9 @@ class FormMultiple extends React.Component {
   render() {
     const selectForm = this.state.selectForm
     const formsbtn = []
-    var buttons = this.props.forms.map((form, index) => {
+    var buttons = []
+    if (this.props.forms)
+    buttons = this.props.forms.map((form, index) => {
       formsbtn.push((form.title)?form.title:index+1)
       return <button key={index}
         className={(selectForm === index) ? 'btn btn-primary' : 'btn'}
