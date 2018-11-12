@@ -63,6 +63,7 @@ class SettingNotification extends React.Component {
           manual: false,
           expressionAlert: '',
           valueAlert: '',
+          msg: ''
         }
       ]
     }
@@ -94,7 +95,8 @@ class SettingNotification extends React.Component {
         jsValue: '',
         manual: false,
         expressionAlert: '',
-        valueAlert: ''
+        valueAlert: '',
+        msg: ''
       }]
     })
   }
@@ -112,6 +114,7 @@ class SettingNotification extends React.Component {
         manual: false,
         expressionAlert: this.state.expressionAlert,
         valueAlert: this.state.valueAlert,
+        msg: ''
       }
     )
     this.setState({
@@ -120,8 +123,8 @@ class SettingNotification extends React.Component {
   }
   handleSubmit = (e) => {
     e.preventDefault()
-    Store.notiSetting = this.state
-    //Store.updateNoti()
+    //Store.notiSetting = this.state
+    Store.updateNoti(this.state)
     //this.reState()
   }
   render() {
@@ -143,8 +146,9 @@ class SettingNotification extends React.Component {
                 addBtnFunc={this.addPopup}
                 forms={payload.forms}
               >
-                <FormInputBasic callback={this.handlePayload} values={payload} />
-                <FormCondition event="Alert" title={'alert'} handlePayload={this.handlePayload} values={payload}/>
+                <FormInputBasic values={payload} />
+                <FormCondition event="Alert" title={'alert'} values={payload}/>
+                <InputText title="Msg" name="msg" placeholder="too cold!!"/>
               </FormMultiple>
             </div>
             

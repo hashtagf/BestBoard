@@ -10,7 +10,7 @@ class FormCondition extends React.Component {
           <select id="inputState" className="form-control"
             value={props.values['expression' + props.event]} 
             name={'expression' + props.event} 
-            onChange={props.handlePayload}>
+            onChange={props.callback}>
             {(props.event === 'OFF')?<option value="else">else</option>:null}
             <option value="="> = </option>
             <option value="≠"> ≠ </option>
@@ -25,7 +25,7 @@ class FormCondition extends React.Component {
             value={props.values.valueON} 
             name={'value' + props.event} 
             placeholder="Static value" 
-            onChange={props.handlePayload}/>
+            onChange={props.callback}/>
         </div>
       </div>
     )

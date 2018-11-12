@@ -48,7 +48,8 @@ class Page extends Component {
         pages.push({
           id: board._id,
           name: board.boardName,
-          colorName: board.colorName
+          colorName: board.colorName,
+          notiSetting: board.notiSetting
         })
       )
       Store.pages = pages
@@ -78,7 +79,8 @@ class Page extends Component {
     if (this.state.inputName !== '') {
       let payload = {
         boardName: this.state.inputName,
-        colorName: 'native'
+        colorName: 'native',
+        notiSetting: {forms: []}
       }
       if (index === -1) {
         axios.post( Store.server + '/board/', payload )
@@ -127,13 +129,14 @@ class Page extends Component {
     axios.delete( Store.server + '/board/' + pageId)
   }
 
-  handleClickpage = (pageId, pageName, colorName) => {
+  handleClickPage = (pageId, pageName, colorName,notiSetting) => {
     this.setState({
       selectPage: pageId
     })
     Store.currentId = pageId
     Store.pageName = pageName
     Store.setColor(colorName)
+    Store.notiSetting = notiSetting
   }
 
   render () {
@@ -172,7 +175,7 @@ class Page extends Component {
       }
       if (editPage !== index) {
         lspage =
-          <Link to={'/board/' + page.id} onClick={() => this.handleClickpage(page.id, page.name, page.colorName)} key={page.id} className={(this.state.selectPage === page.id) ? 'active' : ''}>
+          <Link to={'/board/' + page.id} onClick={() => this.handleClickPage(page.id, page.name, page.colorName,page.notiSetting)} key={page.id} className={(this.state.selectPage === page.id) ? 'active' : ''}>
             <li>
               <div className="row">
                 <div className="col-10 col-sm-10 text-truncate">

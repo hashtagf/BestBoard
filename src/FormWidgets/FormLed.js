@@ -115,7 +115,7 @@ class FormLed extends React.Component {
     return (
       <div className="FormNumberBox container">
         <FormInputBasic callback={this.handlePayload} values={payload} />
-        <FormCondition event="ON" title={'Light ON'} handlePayload={this.handlePayload} values={payload}/>
+        <FormCondition event="ON" title={'Light ON'} callback={this.handlePayload} values={payload}/>
         {/* <ConditionForm event="OFF" handlePayload={this.handlePayload} values={payload}/> */}
         <InputText callback={this.handlePayload} 
           title="Condition Light OFF" 

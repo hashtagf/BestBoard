@@ -1,16 +1,26 @@
 {
   "board": [
     {
-      "boardName": "Homepage",
-      "colorName": "native",
-      "_id": "1541140034798",
-      "id": 1541140034798
-    },
-    {
-      "boardName": "d",
-      "colorName": "native",
-      "_id": "1541775802987",
-      "id": 1541775802987
+      "boardName": "ll",
+      "_id": "1541846708673",
+      "notiSetting": {
+        "forms": [
+          {
+            "title": "Noti1",
+            "value": "/SmartOfficeAt418B/table2",
+            "datasource": "1541044110627",
+            "body": "77.60,27.40,19",
+            "filter": ",",
+            "filterIndex": 0,
+            "jsValue": "",
+            "manual": false,
+            "expressionAlert": ">",
+            "valueAlert": "70",
+            "msg": "too cold"
+          }
+        ]
+      },
+      "id": 1541846708673
     }
   ],
   "datasource": [
@@ -344,6 +354,46 @@
         "maxW": 12
       },
       "id": 1541797649634
+    },
+    {
+      "_id": "1541852902510",
+      "boardId": "1541846708673",
+      "widget": {
+        "typeWidget": "Gauge",
+        "title": "Gauge",
+        "value": "/SmartOfficeAt418B/table5",
+        "body": "68.10,27.30,16",
+        "unit": "",
+        "minvalue": "0",
+        "setColor": "",
+        "theme": "light",
+        "mode": "gauge",
+        "enableAnimation": true,
+        "datasource": "1541044110627",
+        "filter": ",",
+        "filterIndex": 0,
+        "jsValue": "",
+        "manual": false,
+        "layout": {
+          "w": 3,
+          "h": 7,
+          "minW": 3,
+          "minH": 6,
+          "maxW": 6,
+          "maxH": 10
+        }
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "h": 7,
+        "w": 3,
+        "minH": 6,
+        "minW": 3,
+        "maxH": 10,
+        "maxW": 6
+      },
+      "id": 1541852902510
     }
   ]
 }

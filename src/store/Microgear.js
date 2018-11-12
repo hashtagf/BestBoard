@@ -17,7 +17,6 @@ class NETPIEMicrogear {
           secret: datasource.datasource.secret,
           alias: datasource.datasource.name
         })   
-        console.log(this.microgear[datasource._id])  
         if (!this.checkConnect[datasource._id]) {
           this.checkConnect[datasource._id] = true
           this.microgear[datasource._id].connect(datasource.datasource.appID)

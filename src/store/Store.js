@@ -1,8 +1,10 @@
 import { observable } from 'mobx'
+const axios = require('axios')
 
 class Store {
   @observable currentId = ''
   @observable pageName = ''
+  @observable colorName = ''
   @observable mode = false
   @observable editSource = {}
   @observable colorUse
@@ -55,13 +57,20 @@ class Store {
       });
       if (found) {
         this.pageName = found.name
+        this.colorName = found.colorName
+        this.notiSetting = found.notiSetting
         this.setColor(found.colorName)
       }
     }
   }
   updateNoti = (notiSetting) => {
-    console.log(notiSetting)
-    this.notiSetting = {forms: notiSetting}
+    this.notiSetting = notiSetting
+    axios.put(this.server + '/board/' + this.currentId, {
+      boardName: this.pageName,
+      colorName: this.colorName,
+      _id: this.currentId,
+      notiSetting: notiSetting
+    })
   }
   setColor = (name) => {
     var i = 0

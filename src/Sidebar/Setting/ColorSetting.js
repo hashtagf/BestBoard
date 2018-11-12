@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { observer } from 'mobx-react'
+import Store from '../../store/Store'
 
 @observer
 class ColorSetting extends Component {
@@ -18,7 +19,8 @@ class ColorSetting extends Component {
     axios.put(this.props.Store.server + '/board/' + this.props.Store.currentId, {
       boardName: pages[indexPage].name,
       colorName: name,
-      _id: pages[indexPage].id
+      _id: pages[indexPage].id,
+      notiSetting: Store.notiSetting
     })
     this.props.Store.setColor(name)
     this.setState({
