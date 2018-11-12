@@ -5,10 +5,7 @@
   "homepage": ".",
   "devDependencies": {
     "babel-plugin-styled-components": "^1.5.1",
-    "react-scripts": "1.1.4"
-  },
-  "devServer": {
-    "headers": { "Access-Control-Allow-Origin": "*" }
+    "react-scripts": "^2.1.1"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.6",
@@ -61,10 +58,5 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  }
 }
