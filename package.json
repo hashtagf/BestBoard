@@ -5,16 +5,7 @@
   "homepage": ".",
   "devDependencies": {
     "babel-plugin-styled-components": "^1.5.1",
-<<<<<<< HEAD
     "react-scripts": "^2.1.1"
-=======
-    "react-scripts": "1.1.4"
-  },
-  "devServer": {
-    "headers": {
-      "Access-Control-Allow-Origin": "*"
-    }
->>>>>>> a482d1ba3d416c8f4fa7f5ba3385e7c033f70de6
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.6",
