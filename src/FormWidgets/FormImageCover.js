@@ -40,6 +40,7 @@ class FormImageCover extends React.Component {
 
   componentWillReceiveProps(nextProps){
     let editWidget = nextProps.editWidget
+    console.log(editWidget)
     if (editWidget) {
       Object.keys(editWidget).forEach((objectKey) => {
         if (objectKey !== 'widgetId') {

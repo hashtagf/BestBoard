@@ -7,10 +7,12 @@ class Store {
   @observable editSource = {}
   @observable colorUse
   @observable pages = []
+  @observable notiSetting = {}
   @observable addPage = false
-  @observable server = 'http://172.18.6.7:5582'
+  //@observable server = 'http://172.18.6.7:5582'
   // @observable server = 'http://172.18.3.180:5000'
-  // @observable server = 'http://localhost:5000'
+  @observable server = 'http://localhost:5000'
+  //@observable server = 'http://localhost:5582'
   // @observable server = 'https://bestboard.herokuapp.com'
   //@observable server = 'http://172.18.3.180:5582'  
   @observable editWidget = {
@@ -46,7 +48,7 @@ class Store {
     }
   ]
   setPage = () => {
-    if (this.currentId !== '' && this.pageName === '') {
+    if (this.currentId !== '') {
       var id = this.currentId
       var found = this.pages.find(function(page) {
         return page.id === id
@@ -56,6 +58,10 @@ class Store {
         this.setColor(found.colorName)
       }
     }
+  }
+  updateNoti = (notiSetting) => {
+    console.log(notiSetting)
+    this.notiSetting = {forms: notiSetting}
   }
   setColor = (name) => {
     var i = 0

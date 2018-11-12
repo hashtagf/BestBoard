@@ -5,6 +5,7 @@ import axios from 'axios'
 import './Widget.css'
 import HeaderCard from "./HeaderCard"
 import Store from '../store/Store'
+import { CSVLink, CSVDownload } from "react-csv";
 
 import {
   XAxis,YAxis,
@@ -20,6 +21,7 @@ class Chart extends React.Component {
       data: [
         { key: 0 }
       ],
+      csv: [],
       filterSince: '1hour'
     }
     this.handleFilter = this.handleFilter.bind(this)
@@ -55,6 +57,18 @@ class Chart extends React.Component {
       + '&since=' + filterSince
       + '&filter=' + value.substr(0, value.length -1 )
     ).then((res) => {
+      let csv = []
+      res.data.data.map((data, index) => {
+        data.values.map((val,i) => {
+          if (!csv[i]) {
+            csv.push({
+              'time': moment(val[0]).format('MM-DD-YYYY, H:mm:ss'),
+            })
+          }
+          csv[i][data.attr] = val[1].toFixed(2)
+        })
+        return (0)
+      })
       this.setState({
         data: res.data.data.map((data, index) => {
           let objAttr = data.values.map((val) => {
@@ -70,7 +84,8 @@ class Chart extends React.Component {
             return obj
           })
           return (objAttr)
-        })
+        }),
+        csv: csv
       })
     })
   }
@@ -115,43 +130,58 @@ class Chart extends React.Component {
         <div className="item-content card chart shadowcard rounded-0 widgetChart border-0 col-12 h-100" data-id={widgetId}>
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
           <div className="card-body">
-            <div className="btn-group mb-2" role="group" aria-label="DayMonthYear"  id="scrollbar-style">
-              <button type="button"
-                className={this.checkBtnTime('1hour')}
-                value='1hour'
-                onClick={this.handleFilter}
-              >
-                Last 1 hours
-              </button>
-              <button type="button"
-                className={this.checkBtnTime('8hours')}
-                value='8hours'
-                onClick={this.handleFilter}
-              >
-                Last 8 hours
-              </button>
-              <button type="button"
-                className={this.checkBtnTime('24hours')}
-                value='24hours'
-                onClick={this.handleFilter}
-              >
-                Last 24 Hours
-              </button>
-              <button type="button"
-                className={this.checkBtnTime('3days')}
-                value='3days'
-                onClick={this.handleFilter}
-              >
-                Last 3 Days
-              </button>
-              <button type="button"
-                className={this.checkBtnTime('7days')}
-                value='7days'
-                onClick={this.handleFilter}
-              >
-                Last 7 Days
-              </button>
+            <div className="row">
+            <div className="col">
+              <div className="btn-group mb-2" role="group" aria-label="DayMonthYear"  id="scrollbar-style">
+                <button type="button"
+                  className={this.checkBtnTime('1hour')}
+                  value='1hour'
+                  onClick={this.handleFilter}
+                >
+                  Last 1 hours
+                </button>
+                <button type="button"
+                  className={this.checkBtnTime('8hours')}
+                  value='8hours'
+                  onClick={this.handleFilter}
+                >
+                  Last 8 hours
+                </button>
+                <button type="button"
+                  className={this.checkBtnTime('24hours')}
+                  value='24hours'
+                  onClick={this.handleFilter}
+                >
+                  Last 24 Hours
+                </button>
+                <button type="button"
+                  className={this.checkBtnTime('3days')}
+                  value='3days'
+                  onClick={this.handleFilter}
+                >
+                  Last 3 Days
+                </button>
+                <button type="button"
+                  className={this.checkBtnTime('7days')}
+                  value='7days'
+                  onClick={this.handleFilter}
+                >
+                  Last 7 Days
+                </button>
+              </div>
+
+              {this.state.csv.length>2?<CSVLink
+              filename={"export.csv"}
+              data={this.state.csv}>
+              <span className="download-btn">
+                <i class="fas fa-file-download"></i>
+                <br/><p className="text-download">export</p>
+              </span>
+              </CSVLink>:null}
             </div>
+
+            </div>
+
             <ResponsiveContainer width='100%' aspect={4.0/1.0}>
               <AreaChart data={data[0]}
                 margin={{ top: 0, bottom: 0, left: 0, right: 0 }}

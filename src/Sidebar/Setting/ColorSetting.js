@@ -14,6 +14,7 @@ class ColorSetting extends Component {
   handleClick = (name) => {
     const pages = this.props.Store.pages
     let indexPage = pages.findIndex((page) => page.id === this.props.Store.currentId)
+    console.log(pages,indexPage,pages[indexPage])
     axios.put(this.props.Store.server + '/board/' + this.props.Store.currentId, {
       boardName: pages[indexPage].name,
       colorName: name,
@@ -28,7 +29,7 @@ class ColorSetting extends Component {
   render() {
     return (
         <li>
-          <a> Color </a>
+          <a className="no-collaspe"> Color </a>
           <ul className="list-inline" > {this.props.Store.colorSet.map((colors, i) => (
             <li className="list-inline-item" key={i}
               onClick={this.handleClick.bind(this, colors.name)} >

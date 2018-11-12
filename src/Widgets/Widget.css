@@ -125,6 +125,14 @@ table tbody {
 .chart {
     font-size:1rem;
 }
+.download-btn {
+    color: #bdbdbd;
+    font-size: 1rem;
+    float: right;
+  }
+  .text-download {
+    font-size: 0.5rem;
+  }
 .Map .labelmark {
 
 }

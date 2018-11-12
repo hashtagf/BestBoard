@@ -1,6 +1,9 @@
 import React from 'react'
 
 class InputText extends React.Component {
+  static defaultProps = {
+    type: 'text'
+  };
   render() {
     const handleChange = this.props.callback
     let value = this.props.value
@@ -15,7 +18,7 @@ class InputText extends React.Component {
           <div className="col-9">
             <input
               name={name}
-              type="text"
+              type={this.props.type}
               className="form-control"
               value={value}
               onChange={handleChange}

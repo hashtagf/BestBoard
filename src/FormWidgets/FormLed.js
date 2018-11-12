@@ -3,6 +3,7 @@ import WidgetStore from '../store/WidgetStore'
 import Store from '../store/Store'
 import FormInputBasic from './Input/FormInputBasic'
 import InputText from './Input/InputText'
+import FormCondition from './Input/FormCondition'
 import SummitBtn from './SummitBtn'
 // import fontAwesomeIcons from './fontawesomeIcons.json'
 // import Creatable from 'react-select/lib/Creatable'
@@ -114,7 +115,7 @@ class FormLed extends React.Component {
     return (
       <div className="FormNumberBox container">
         <FormInputBasic callback={this.handlePayload} values={payload} />
-        <ConditionForm event="ON" handlePayload={this.handlePayload} values={payload}/>
+        <FormCondition event="ON" title={'Light ON'} handlePayload={this.handlePayload} values={payload}/>
         {/* <ConditionForm event="OFF" handlePayload={this.handlePayload} values={payload}/> */}
         <InputText callback={this.handlePayload} 
           title="Condition Light OFF" 
@@ -128,35 +129,5 @@ class FormLed extends React.Component {
     )
   }
 }
-class ConditionForm extends React.Component {
-  render () {
-    let props = this.props
-    return (
-      <div className="form-row form-group">
-        <label htmlFor="inputCity col-2 col-form-label">Condition Light {props.event} :</label>
-        <div className="col-3">
-          <select id="inputState" className="form-control"
-            value={props.values.expressionON} 
-            name={'expression' + props.event} 
-            onChange={props.handlePayload}>
-            {(props.event === 'OFF')?<option value="else">else</option>:null}
-            <option value="="> = </option>
-            <option value="≠"> ≠ </option>
-            <option value=">"> {'>'} </option>
-            <option value="<"> {'<'} </option>
-            <option value=">="> >= </option>
-            <option value="<="> {'<='} </option>
-          </select>
-        </div>
-        <div className="col">
-          <input type="text" className="form-control" 
-            value={props.values.valueON} 
-            name={'value' + props.event} 
-            placeholder="Static value" 
-            onChange={props.handlePayload}/>
-        </div>
-      </div>
-    )
-  }
-}
+
 export default FormLed

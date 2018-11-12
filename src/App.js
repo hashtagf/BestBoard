@@ -24,7 +24,7 @@ class App extends Component {
         <div className="wrapper">
           <Sidebar clickSetting={this.clickSetting} />
           <div className="content" id="scrollbar-style">
-            <Hamburger />
+            <Hamburger  clickSetting={this.clickSetting}/>
             <Routing />
           </div>
           <ReactCSSTransitionGroup

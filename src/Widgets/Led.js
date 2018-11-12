@@ -22,9 +22,7 @@ class Led extends React.Component {
       microgear.on('message', this.onMessage.bind(this))
     } else console.log('error : not Connect datasource !!')
   }
-  processJs = () => {
 
-  }
   onMessage(topic, msg) {
     const payload = this.props.payload
     

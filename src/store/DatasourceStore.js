@@ -28,9 +28,11 @@ class DatasourceStore {
   }
 
   listsDatasources () {
+    if (this.datasources)
     return this.datasources.map((datasource) => 
       <ListDatasource key={datasource._id} datasource={datasource}/>
     )
+    return null
   }
 }
 

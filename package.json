@@ -5,7 +5,16 @@
   "homepage": ".",
   "devDependencies": {
     "babel-plugin-styled-components": "^1.5.1",
+<<<<<<< HEAD
     "react-scripts": "^2.1.1"
+=======
+    "react-scripts": "1.1.4"
+  },
+  "devServer": {
+    "headers": {
+      "Access-Control-Allow-Origin": "*"
+    }
+>>>>>>> a482d1ba3d416c8f4fa7f5ba3385e7c033f70de6
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.6",
@@ -27,6 +36,7 @@
     "muuri": "^0.7.1",
     "nodemon": "^1.18.5",
     "rc-progress": "^2.2.6",
+    "rc-tooltip": "^3.7.3",
     "react": "^16.2.0",
     "react-addons-css-transition-group": "^15.6.2",
     "react-app-rewire-mobx": "1.0.8",
@@ -35,6 +45,7 @@
     "react-canvas-gauge": "^1.0.2",
     "react-click-outside": "github:tj/react-click-outside",
     "react-color": "^2.14.1",
+    "react-csv": "^1.0.18",
     "react-d3-speedometer": "^0.4.1",
     "react-dom": "^16.2.0",
     "react-grid-layout": "^0.16.6",

@@ -84,7 +84,7 @@ class ImageCover extends React.Component {
             let dif = val - mid
             let opacity = Math.abs(dif) * (1/mid)
             let color = ((255/(eff.max - eff.min)) * (val-eff.min)<0)?0:(255/(eff.max - eff.min)) * (val-eff.min)
-            stylesObj['item'+index]['boxShadow'] = `5px 5px 5rem rgba(${color}, ${color}, ${color}, ${opacity})`
+            stylesObj['item'+index]['boxShadow'] = `0px 0px 5rem rgba(${color}, ${color}, ${color}, ${opacity})`
           }
         }
         if (popup.colorEff.index) {

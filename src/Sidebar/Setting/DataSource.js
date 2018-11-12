@@ -81,7 +81,7 @@ class DataSource extends Component {
     return (
       <div>
       <li>
-        <a>Datasource</a>
+        <a className="no-collaspe">Datasource</a>
         <ul className="list-unstyled" >
           <ListDataSources datasources={datasources} callback={this.callback}/>
           <li><a className="second" data-toggle="modal" data-target=".ModalEditSource" onClick={this.handleNew}><i className="fas fa-plus-square"></i> new source</a></li>

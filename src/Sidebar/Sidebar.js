@@ -12,7 +12,6 @@ class SideBar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      mode: Store.mode
     }
   }
   componentDidMount() {
@@ -26,12 +25,11 @@ class SideBar extends Component {
   handleClick = (e) => {
     e.preventDefault();
     this.props.clickSetting(!Store.mode)
-    this.setState({
-      mode: Store.mode
-    })
+
   }
   render() {
-    const mode = this.state.mode
+    //const mode = this.state.mode
+    const mode = Store.mode
     return (
         <nav className="sidebar" id="scrollbar-style" data-spy="scroll">
           <div className="sidebar-header text-center">
