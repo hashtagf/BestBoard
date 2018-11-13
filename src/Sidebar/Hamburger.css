@@ -114,7 +114,11 @@
 }
 .menu-head {
   max-width: 5rem;
+  display: inline-flex;
 }
 .menu-head i {
   font-size: 1.1rem;
+}
+.menu-head i.fa-save {
+  color: var(--activeItem);
 }

@@ -10,6 +10,7 @@ import moment from 'moment'
 import axios from 'axios'
 import socketIOClient from 'socket.io-client'
 import DataSourceStore from '../store/DatasourceStore'
+import ClickOutside from 'react-click-outside';
 
 const socket = socketIOClient(Store.server)
 @observer
@@ -61,7 +62,7 @@ class Hamburger extends Component {
             <div className="menu-head">
               {Store.notiSetting.forms?<Notification payload={Store.notiSetting}/>:null}
               <Tooltip placement="bottom" trigger={['hover']} overlay={(Store.mode)?'Done':'Setting'}>
-              <i onClick={this.handleClick} className={Store.mode?"fas fa-save text-success":"fas fa-cog"}></i>
+              <i onClick={this.handleClick} className={Store.mode?"fas fa-save":"fas fa-cog"}></i>
               </Tooltip>
             </div>
           </div>
@@ -75,7 +76,8 @@ class Notification extends Component {
   constructor (props) {
     super(props)
     this.state= {
-      notis: []
+      notis: [],
+      seen: 0
     }
   }
 
@@ -83,7 +85,6 @@ class Notification extends Component {
     const payload = this.props.payload
     if(payload.forms)
     payload.forms.forEach((col, index) => {
-      console.log(col.valueAlert,col.datasource)
         //if (NETPIEMicrogear.statusOnline[col.datasource]) {
         if (true) {
           const microgear = NETPIEMicrogear.microgear[col.datasource]
@@ -125,7 +126,8 @@ class Notification extends Component {
                   time: now
                 })
                 this.setState({
-                  notis: temp
+                  notis: temp,
+                  seen: this.state.seen + 1
                 })
               }
             }
@@ -134,7 +136,11 @@ class Notification extends Component {
       
     })
   }
-
+  handleSeen = ({target}) => {
+    this.setState({
+      seen: 0
+    });   
+  }
   render () {
     //console.log(Store.notiSetting)
     let notis = []
@@ -144,20 +150,24 @@ class Notification extends Component {
       notis.push(
       <div key={index} className="noti">
         {noti.msg}<br/>
-        <p className="text-muted mb-0">{moment(noti.time).fromNow()}</p>
+        <p className={(this.state.notis.length - index <= this.state.seen)?"text-danger mb-0":"text-muted mb-0"}>{moment(noti.time).fromNow()}</p>
       </div>)
       ) 
     }
-    else notis.push(<span>You don't have<br/>any notification</span>)
+    else notis.push(<span key={null}>You don't have<br/>any notification</span>)
     // console.log(notis)
     let notiList = <div className="notiList" id="scrollbar-style">{notis.reverse()}</div>
     return (
-      <Tooltip placement="bottom" trigger={['hover']} overlay={notiList}>
-      <span className=" mr-3">
+      
+      <Tooltip placement="bottom" trigger={['click']} overlay={notiList}>
+      <ClickOutside onClickOutside={this.handleSeen}>
+      <span className="mr-3">
+      
         <i className="fas fa-bell mr-2"></i>
         
-        {(this.state.notis.length>0)?<div className="badge bg-danger">{this.state.notis.length}</div>:null}
-      </span>
+        {(this.state.seen>0)?<div className="badge bg-danger text-white">{this.state.seen}</div>:null}
+        
+      </span></ClickOutside>
       </Tooltip>
     )
   }

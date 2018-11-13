@@ -38,8 +38,8 @@ class SideBar extends Component {
             {/* <img src={Logo} alt="" className="logoSide"/>
             <image className="my-svg-alternate logoSide" src={LogoPng} /> */}
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-           viewBox="0 0 460.8 259.2" enable-background="new 0 0 460.8 259.2" xmlSpace="preserve">
-        <g enable-background="new    " className="svg-fill">
+           viewBox="0 0 460.8 259.2" enableBackground="new 0 0 460.8 259.2" xmlSpace="preserve">
+        <g enableBackground="new    " className="svg-fill">
           <path d="M109.322,140.889c-12.547,0-21.694-8.742-21.694-22.746c0-14.085,8.985-22.746,21.694-22.746
             c12.952,0,20.884,9.228,20.884,20.479c0,1.781,0,2.914-0.162,4.452H93.375c0.486,10.361,7.69,15.785,15.947,15.785
             c7.528,0,12.628-3.967,14.247-9.875h5.99C127.536,134.577,120.412,140.889,109.322,140.889z M93.375,115.715h31.084
@@ -69,7 +69,7 @@ class SideBar extends Component {
             M414.49,100.335c-9.311,0-16.434,6.476-16.434,17.728c0,11.171,7.123,17.889,16.434,17.889c9.066,0,16.434-6.799,16.434-17.808
             C430.923,107.135,423.556,100.335,414.49,100.335z"/>
         </g>
-        <g enable-background="new    " className="svg-fill">
+        <g enableBackground="new    " className="svg-fill">
           <path d="M111.587,179.129c0,7.096-4.258,11.289-11.968,11.289h-6.354v-22.646h6.354
             C107.329,167.774,111.587,172.032,111.587,179.129z M99.619,189.194c6.968,0,10.484-3.84,10.484-10.064
             c0-6.258-3.516-10.129-10.484-10.129h-4.903v20.193H99.619z"/>
@@ -116,16 +116,16 @@ class SideBar extends Component {
           <path d="M357.39,167.774h14.355V169h-6.453v21.418h-1.451V169h-6.451V167.774L357.39,167.774z"/>
         </g>
         <g className="svg-stroke">
-        <path fill="none" stroke-width="5" stroke-miterlimit="10" d="M78.947,120.255
+        <path fill="none" strokeWidth="5" strokeMiterlimit="10" d="M78.947,120.255
           c0,15.64-10.154,24.556-22.677,24.556H44.927c-12.525,0-22.677-8.919-22.677-24.556V98.578c0-15.639,10.152-24.557,22.677-24.557
           H56.27c12.522,0,22.677,8.92,22.677,24.557V120.255z"/>
-        <path fill="none" stroke-width="4" stroke-miterlimit="10" d="M69.569,124.722c0,7.377-5.484,11.478-12.252,11.478
+        <path fill="none" strokeWidth="4" strokeMiterlimit="10" d="M69.569,124.722c0,7.377-5.484,11.478-12.252,11.478
           H43.293c-6.765,0-12.25-4.101-12.25-11.478l0,0c0-7.376,5.485-11.475,12.25-11.475h14.023
           C64.084,113.247,69.569,117.346,69.569,124.722L69.569,124.722z"/>
-        <path fill="none" stroke-width="4" stroke-miterlimit="10" d="M69.569,94.751c0,7.209-5.484,11.175-12.252,11.175
+        <path fill="none" strokeWidth="4" strokeMiterlimit="10" d="M69.569,94.751c0,7.209-5.484,11.175-12.252,11.175
           H43.293c-6.765,0-12.25-3.966-12.25-11.175l0,0c0-7.21,5.485-11.177,12.25-11.177h14.023C64.084,83.574,69.569,87.542,69.569,94.751
           L69.569,94.751z"/>
-        <polyline fill="none" stroke-width="5" stroke-miterlimit="10" points="260.648,129.776 272.867,123.199 
+        <polyline fill="none" strokeWidth="5" strokeMiterlimit="10" points="260.648,129.776 272.867,123.199 
           280.382,126.018 295.419,107.223 "/>
           </g>
         </svg>
