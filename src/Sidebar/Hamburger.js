@@ -1,3 +1,4 @@
+/* eslint no-eval: 0 */
 import React, { Component } from 'react'
 import './Hamburger.css'
 import Store from '../store/Store'
@@ -5,6 +6,9 @@ import { observer } from 'mobx-react'
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';
 import NETPIEMicrogear from '../store/Microgear'
+import moment from 'moment'
+import axios from 'axios'
+
 @observer
 class Hamburger extends Component {
   handleClick = (e) => {
@@ -15,10 +19,6 @@ class Hamburger extends Component {
     }) */
   }
   render() {
-    if (Store.notiSetting.forms) {
-      console.log(Store.notiSetting.forms[0].datasource+'')
-      console.log(NETPIEMicrogear.statusOnline[Store.notiSetting.forms[0].datasource+''])
-    }
     return (
       <div>
         <nav className="navbar navbar-default">
@@ -52,18 +52,44 @@ class Notification extends Component {
       notis: []
     }
   }
+  /* componentWillMount () {
+    if (this.state.connect) {
+      this.getDatasource()
+      this.response()
+    }
+  }
+  response = () => {
+    socket.on('update-datasource', (msg) => {
+      console.log('update-datasorce', msg)
+      this.getDatasource()
+    })
+    socket.on('error', function(exception) {
+      console.log('SOCKET ERROR', exception)
+      socket.destroy()
+    })
+  }
+
+  getDatasource() {
+    axios.get(Store.server + '/datasource/').then((res) => {
+      DataSourceStore.datasources = res.data
+      NETPIEMicrogear.createMicrogear(res.data)
+      this.setState({
+        datasources: res.data
+      })
+    })
+  } */
   componentDidMount() {
     const payload = this.props.payload
     if(payload.forms)
     payload.forms.forEach((col, index) => {
       console.log(col.valueAlert,col.datasource)
-        if (NETPIEMicrogear.statusOnline[col.datasource]) {
+        //if (NETPIEMicrogear.statusOnline[col.datasource]) {
+        if (true) {
           const microgear = NETPIEMicrogear.microgear[col.datasource]
           
           microgear.on('message', (topic, msg) => {
             if (col.value === topic) {
               let value = msg + ''
-              let now = new Date()
               if (col.manual) {
                 try {eval(col.jsValue)}
                 catch (err){
@@ -108,17 +134,23 @@ class Notification extends Component {
 
   render () {
     //console.log(Store.notiSetting)
-    let notis = <span>don't have</span>
-    console.log(this.state.notis)
-    if (this.state.notis.length!==0)
-    notis = this.state.notis.map((noti)=>
-      <div className="row">
-        <div className="col-1"><i className="fas fa-save text-success"></i></div>
-        <div>{noti.msg}{noti.time}</div>
-      </div>
-    )
+    let notis = []
+    
+    if (this.state.notis.length!==0) {
+      this.state.notis.map((noti,index)=>
+      notis.push(
+      <div key={index} className="noti">
+        {noti.msg}<br/>
+        <p className="text-muted mb-0">{moment(noti.time).fromNow()}</p>
+      </div>)
+      )
+      console.log(notis.length)
+    }
+    else notis.push(<span>You don't have<br/>any notification</span>)
+    // console.log(notis)
+    let notiList = <div className="notiList" id="scrollbar-style">{notis.reverse()}</div>
     return (
-      <Tooltip placement="bottom" trigger={['hover']} overlay={notis}>
+      <Tooltip placement="bottom" trigger={['hover']} overlay={notiList}>
         <i className="fas fa-bell mr-4"></i>
       </Tooltip>
     )

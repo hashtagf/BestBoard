@@ -114,5 +114,15 @@ a.article, a.article:hover {
 
 .logoSide {
     width: 12rem;
-    height: auto
+    height: auto;
+}
+.sidebar-header .svg {
+    width: 12rem;
+    height: auto;
+}
+.svg-fill {
+    fill: var(--textColor);
+}
+.svg-stroke {
+    stroke: var(--textColor);
 }

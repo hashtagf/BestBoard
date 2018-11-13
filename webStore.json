@@ -2,6 +2,7 @@
   "board": [
     {
       "boardName": "ll",
+      "colorName": "native",
       "_id": "1541846708673",
       "notiSetting": {
         "forms": [
