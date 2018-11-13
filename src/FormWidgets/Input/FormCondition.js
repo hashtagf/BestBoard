@@ -22,7 +22,7 @@ class FormCondition extends React.Component {
         </div>
         <div className="col">
           <input type="text" className="form-control" 
-            value={props.values.valueON} 
+            value={props.values['value' + props.event]} 
             name={'value' + props.event} 
             placeholder="Static value" 
             onChange={props.callback}/>

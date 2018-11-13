@@ -76,9 +76,9 @@ textarea {
 
 #scrollbar-style::-webkit-scrollbar
 {
-	width: 10px;
+	width: 8px;
   background-color: rgba(245, 245, 245, 0.164);
-  height: 10px;
+  height: 8px;
 }
 
 #scrollbar-style::-webkit-scrollbar-thumb

@@ -32,15 +32,9 @@ class AlertSetting extends Component {
           <a data-toggle="modal" data-target=".ModalNoti" onClick={this.handleOpen}>
               Notification
               <i className="fas fa-cog ml-3"></i>
-            </a>
-          <ul className="list-inline">
-            {(this.state.showModal)?<SettingNotification handleClose={this.handleClose}/>:null}
-            {/* <span className="switch">
-              <input type="checkbox" className="switch switch-lg" id={'switchNoti'} onChange={this.handleChange} checked={checked}/>
-              <label htmlFor={'switchNoti'}></label>
-            </span> */}
-            
-          </ul>
+          </a>
+          {(this.state.showModal)?<SettingNotification handleClose={this.handleClose}/>:null}
+
         </li>
     )
   }
@@ -150,9 +144,10 @@ class SettingNotification extends React.Component {
                 <FormCondition event="Alert" title={'alert'} values={payload}/>
                 <InputText title="Msg" name="msg" placeholder="too cold!!"/>
               </FormMultiple>
+              <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
+
             </div>
             
-              <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
             
           </div>
         </div>

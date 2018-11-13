@@ -8,7 +8,10 @@ import 'rc-tooltip/assets/bootstrap.css';
 import NETPIEMicrogear from '../store/Microgear'
 import moment from 'moment'
 import axios from 'axios'
+import socketIOClient from 'socket.io-client'
+import DataSourceStore from '../store/DatasourceStore'
 
+const socket = socketIOClient(Store.server)
 @observer
 class Hamburger extends Component {
   handleClick = (e) => {
@@ -17,6 +20,29 @@ class Hamburger extends Component {
     /* this.setState({
       mode: Store.mode
     }) */
+  }
+  componentWillMount () {
+    if (true) {
+      this.getDatasource()
+      this.response()
+    }
+  }
+  response = () => {
+    socket.on('update-datasource', (msg) => {
+      console.log('update-datasorce', msg)
+      this.getDatasource()
+    })
+    socket.on('error', function(exception) {
+      console.log('SOCKET ERROR', exception)
+      socket.destroy()
+    })
+  }
+
+  getDatasource() {
+    axios.get(Store.server + '/datasource/').then((res) => {
+      DataSourceStore.datasources = res.data
+      NETPIEMicrogear.createMicrogear(res.data)
+    })
   }
   render() {
     return (
@@ -52,32 +78,7 @@ class Notification extends Component {
       notis: []
     }
   }
-  /* componentWillMount () {
-    if (this.state.connect) {
-      this.getDatasource()
-      this.response()
-    }
-  }
-  response = () => {
-    socket.on('update-datasource', (msg) => {
-      console.log('update-datasorce', msg)
-      this.getDatasource()
-    })
-    socket.on('error', function(exception) {
-      console.log('SOCKET ERROR', exception)
-      socket.destroy()
-    })
-  }
 
-  getDatasource() {
-    axios.get(Store.server + '/datasource/').then((res) => {
-      DataSourceStore.datasources = res.data
-      NETPIEMicrogear.createMicrogear(res.data)
-      this.setState({
-        datasources: res.data
-      })
-    })
-  } */
   componentDidMount() {
     const payload = this.props.payload
     if(payload.forms)
@@ -116,6 +117,8 @@ class Notification extends Component {
               }
               if (flag) {
                 let temp = this.state.notis
+                if (temp.length >= 100) temp.shift()
+
                 let now = new Date()
                 temp.push({
                   msg: col.msg,
@@ -143,15 +146,18 @@ class Notification extends Component {
         {noti.msg}<br/>
         <p className="text-muted mb-0">{moment(noti.time).fromNow()}</p>
       </div>)
-      )
-      console.log(notis.length)
+      ) 
     }
     else notis.push(<span>You don't have<br/>any notification</span>)
     // console.log(notis)
     let notiList = <div className="notiList" id="scrollbar-style">{notis.reverse()}</div>
     return (
       <Tooltip placement="bottom" trigger={['hover']} overlay={notiList}>
-        <i className="fas fa-bell mr-4"></i>
+      <span className=" mr-3">
+        <i className="fas fa-bell mr-2"></i>
+        
+        {(this.state.notis.length>0)?<div className="badge bg-danger">{this.state.notis.length}</div>:null}
+      </span>
       </Tooltip>
     )
   }

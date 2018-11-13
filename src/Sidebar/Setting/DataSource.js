@@ -46,8 +46,8 @@ class DataSource extends Component {
 
   getDatasource() {
     axios.get(Store.server + '/datasource/').then((res) => {
-      DataSourceStore.datasources = res.data
-      NETPIEMicrogear.createMicrogear(res.data)
+      //DataSourceStore.datasources = res.data
+      //NETPIEMicrogear.createMicrogear(res.data)
       this.setState({
         datasources: res.data
       })

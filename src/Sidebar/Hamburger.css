@@ -66,6 +66,8 @@
 .notiList {
   overflow-y: auto;
   max-height: 30vh;
+  margin-right: -10px;
+  padding-right: 10px;
 }
 /* ---------------------------------------------------
     MEDIAQUERIES
@@ -112,4 +114,7 @@
 }
 .menu-head {
   max-width: 5rem;
+}
+.menu-head i {
+  font-size: 1.1rem;
 }
