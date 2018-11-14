@@ -10,7 +10,6 @@ import moment from 'moment'
 import axios from 'axios'
 import socketIOClient from 'socket.io-client'
 import DataSourceStore from '../store/DatasourceStore'
-import ClickOutside from 'react-click-outside';
 
 const socket = socketIOClient(Store.server)
 @observer
@@ -136,10 +135,13 @@ class Notification extends Component {
       
     })
   }
-  handleSeen = ({target}) => {
-    this.setState({
+  handleSeen = () => {
+    setTimeout(() => { 
+      this.setState(() => ({seen: 0}))
+    }, 5000);
+    /* this.setState({
       seen: 0
-    });   
+    });  */  
   }
   render () {
     //console.log(Store.notiSetting)
@@ -159,15 +161,14 @@ class Notification extends Component {
     let notiList = <div className="notiList" id="scrollbar-style">{notis.reverse()}</div>
     return (
       
-      <Tooltip placement="bottom" trigger={['click']} overlay={notiList}>
-      <ClickOutside onClickOutside={this.handleSeen}>
-      <span className="mr-3">
-      
+      <Tooltip placement="bottom" trigger={['click']} 
+        overlay={notiList} 
+        afterVisibleChange={this.handleSeen}>
+
+      <span className="noti-btn">
         <i className="fas fa-bell mr-2"></i>
-        
         {(this.state.seen>0)?<div className="badge bg-danger text-white">{this.state.seen}</div>:null}
-        
-      </span></ClickOutside>
+      </span>
       </Tooltip>
     )
   }

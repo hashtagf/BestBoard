@@ -1,23 +1,23 @@
 {
   "board": [
     {
-      "boardName": "ll",
+      "boardName": "dash",
       "colorName": "galaxy",
       "_id": "1541846708673",
       "notiSetting": {
         "forms": [
           {
-            "title": "Noti1",
+            "title": "Noti0",
             "value": "/SmartOfficeAt418B/table2",
             "datasource": "1541044110627",
-            "body": "77.60,27.40,19",
+            "body": "68.80,24.80,852",
             "filter": ",",
             "filterIndex": 0,
             "jsValue": "",
             "manual": false,
-            "expressionAlert": ">",
-            "valueAlert": "70",
-            "msg": "too cold"
+            "expressionAlert": ">=",
+            "valueAlert": "60",
+            "msg": "too hot"
           }
         ]
       },

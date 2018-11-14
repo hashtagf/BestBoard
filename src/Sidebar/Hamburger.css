@@ -113,7 +113,7 @@
 
 }
 .menu-head {
-  max-width: 5rem;
+  /* max-width: 5rem; */
   display: inline-flex;
 }
 .menu-head i {
@@ -121,4 +121,7 @@
 }
 .menu-head i.fa-save {
   color: var(--activeItem);
+}
+.menu-head .noti-btn {
+  width: 3rem;
 }
