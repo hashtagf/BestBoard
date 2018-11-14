@@ -81,6 +81,7 @@ class FormInputBasic extends React.Component {
             <select className="form-control custom-select selectdefault"
               name="datasource"
               onChange={this.handleChange}
+              onBlur={this.handleChange}
               value={values.datasource}
               readOnly
             >
