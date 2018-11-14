@@ -81,10 +81,10 @@ class FormMultiple extends React.Component {
         aria-controls={"form" + index} onClick={this.handleClick}>
         {(form.title)?form.title:index+1}
         {(selectForm === index && !form.required)?<i className="fas fa-minus-square editbtn del ml-3" onClick={() => this.deleteForm(index)} key={index}></i>:null}
-      </button>}
-    )
+      </button>
+    })
     if (this.props.addBtnFunc) {
-      let addBtn = <button className="btn"
+      let addBtn = <button key="addBtn" className="btn"
         type='button'
         onClick={this.addBtnFunc}>
           <i className="fas fa-plus-square"></i>

@@ -6,6 +6,7 @@ import Store from '../store/Store'
 import socketIOClient from 'socket.io-client'
 import ClickOutside from 'react-click-outside'
 import { observer } from 'mobx-react'
+import Skeleton from 'react-skeleton-loader'
 
 const socket = socketIOClient(Store.server)
 
@@ -19,7 +20,8 @@ class Page extends Component {
       inputName: '',
       editPage: null,
       selectPage: 0,
-      connect: true
+      connect: true,
+      isLoading: true
     }
     this.textInput = React.createRef()
   }
@@ -54,7 +56,8 @@ class Page extends Component {
       )
       Store.pages = pages
       this.setState({
-        pages: pages
+        pages: pages,
+        isLoading: false
       })
       Store.setPage()
     })
@@ -141,7 +144,7 @@ class Page extends Component {
 
   render () {
     let listPage =  []
-    const {pages, editPage} = this.state
+    const {pages, editPage, isLoading} = this.state
     let lspage
 
     let addPage = <a onClick={this.handleClickAdditem} className="second"><i className="fas fa-plus-square"></i> new page</a>
@@ -213,6 +216,7 @@ class Page extends Component {
           <a href="#pageSubmenu" data-toggle="collapse" aria-haspopup="true" aria-expanded="true">Pages</a>
           <ul className="collapse list-unstyled show" id="pageSubmenu">
             {listPage}
+            {isLoading?<li className="ml-4"><Skeleton count={3} borderRadius="4px"/></li>:null}
             <li>{addPage}</li>
           </ul>
         </li>

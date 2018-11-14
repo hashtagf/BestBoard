@@ -7,18 +7,22 @@ import { Link } from 'react-router-dom'
 import { toJS } from 'mobx'
 import Store from '../store/Store'
 import { observer } from 'mobx-react'
+import Login from './Login'
 
 class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      isLogin: Store.user
     }
   }
 
   render() {
+    const { isLogin } = this.state
+    console.log(Store.user)
     return (
       <div className="container text-center">
-        <img src={Logo} alt="" className="logo"/>
+        <img src={Logo} alt="" className="logo" />
         <image className="my-svg-alternate" src={LogoPng} />
 
         <div className="jumbotron bg-transparent mb-0">
@@ -29,7 +33,8 @@ class Home extends Component {
             </div>
             <div className="col"></div>
           </div>
-          <ListPage/>
+          <ListPage />
+          {/* {isLogin ? <button>Logut</button> : <Login />} */}
         </div>
         <div className="row">
           <div className="col"></div>
@@ -51,36 +56,35 @@ class ListPage extends React.Component {
   handleClickAdditem = (e) => {
     Store.addPage = true
   }
-  handleClickpage (pageId,pageName,colorName) {
+  handleClickpage(pageId, pageName, colorName) {
     Store.currentId = pageId
     Store.pageName = pageName
     Store.setColor(colorName)
   }
   render() {
-    
+
     let pages = toJS(Store.pages);
     var listPage = pages.map((page, index) => {
       //page = Object.values(page)
       return (
-          <Link to={'/' + page.id} onClick={() => this.handleClickpage(page.id, page.name, page.colorName)} key={page.id}>
-            <div className="rounded-circle pagecircle">
-              <span className="text-white">{page.name}</span>
-            </div>
-          </Link>
+        <Link to={'/' + page.id} onClick={() => this.handleClickpage(page.id, page.name, page.colorName)} key={page.id}>
+          <div className="rounded-circle pagecircle">
+            <span className="text-white">{page.name}</span>
+          </div>
+        </Link>
       )
-      
+
     })
     return (
       <div className="row d-flex justify-content-center">
-          {listPage}
-          <a onClick={this.handleClickAdditem}>
+        {listPage}
+        <a onClick={this.handleClickAdditem}>
           <div className="rounded-circle pagecircle addpage" >
             <span className="align-middle">+</span>
           </div>
-          </a>
-
+        </a>
       </div>
     )
   }
 }
-  export default Home
+export default Home

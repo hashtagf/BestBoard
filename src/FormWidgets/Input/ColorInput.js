@@ -80,7 +80,7 @@ class ColorInput extends React.Component {
             type="checkbox" 
             name="colorAuto"
             onClick={this.handleAuto}
-            id="exampleRadios1" value="auto" checked={(this.props.color==='auto')?true:false}/>
+            id="exampleRadios1" value="auto" defaultChecked={(this.props.color==='auto')?true:false}/>
           <label className="form-check-label" htmlFor="exampleRadios1">
             Auto
           </label>
