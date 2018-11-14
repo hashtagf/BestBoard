@@ -174,7 +174,7 @@ class Chart extends React.Component {
               filename={"export.csv"}
               data={this.state.csv}>
               <span className="download-btn">
-                <i class="fas fa-file-download"></i>
+                <i className="fas fa-file-download"></i>
                 <br/><p className="text-download">export</p>
               </span>
               </CSVLink>:null}
@@ -191,7 +191,7 @@ class Chart extends React.Component {
                 {
                   data.map((data, index) => {
                     areaColor.push('#'+(start+shade*index).toString(16))
-                    return <linearGradient id={'color'+index} x1="0" y1="0" x2="0" y2="1">
+                    return <linearGradient key={index} id={'color'+index} x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor={areaColor[index]} stopOpacity={0.7} />
                       <stop offset="95%" stopColor={areaColor[index]} stopOpacity={0} />
                     </linearGradient>

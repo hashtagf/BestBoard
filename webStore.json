@@ -1,27 +1,36 @@
 {
   "board": [
     {
-      "boardName": "dash",
-      "colorName": "galaxy",
+      "boardName": "ll",
+      "colorName": "native",
       "_id": "1541846708673",
       "notiSetting": {
         "forms": [
           {
-            "title": "Noti0",
-            "value": "/SmartOfficeAt418B/table2",
+            "title": "Noti1",
+            "value": "/SmartOfficeAt418B/table5",
             "datasource": "1541044110627",
-            "body": "68.80,24.80,852",
+            "body": "60.20,25.00,878",
             "filter": ",",
-            "filterIndex": 0,
+            "filterIndex": "1",
             "jsValue": "",
             "manual": false,
-            "expressionAlert": ">=",
-            "valueAlert": "60",
-            "msg": "too hot"
+            "expressionAlert": "<",
+            "valueAlert": "30",
+            "msg": "Table 5 : too cold!!"
           }
         ]
       },
       "id": 1541846708673
+    },
+    {
+      "boardName": "123",
+      "colorName": "native",
+      "notiSetting": {
+        "forms": []
+      },
+      "_id": 1542161120556,
+      "id": 1542161120556
     }
   ],
   "datasource": [
@@ -395,6 +404,49 @@
         "maxW": 6
       },
       "id": 1541852902510
+    },
+    {
+      "_id": "1542163582395",
+      "boardId": "1541846708673",
+      "widget": {
+        "typeWidget": "Chart",
+        "title": "Chart",
+        "feedID": "418BSensors",
+        "feedAPI": "fYftUD5DPM2KX7OWRwfSoP2i9upFrL3u",
+        "values": [
+          {
+            "value": "Temp_Table_1"
+          },
+          {
+            "value": "Temp_Table_2"
+          }
+        ],
+        "type": "monotone",
+        "stroke": "#8884d8",
+        "fillOpacity": 1,
+        "fill": "url(#color)",
+        "jsValue": "",
+        "manual": "",
+        "layout": {
+          "w": 6,
+          "h": 6,
+          "minW": 6,
+          "minH": 6,
+          "maxW": 12,
+          "maxH": 100
+        }
+      },
+      "layout": {
+        "x": 0,
+        "y": 7,
+        "h": 10,
+        "w": 6,
+        "minH": 6,
+        "minW": 6,
+        "maxH": 100,
+        "maxW": 12
+      },
+      "id": 1542163582395
     }
   ]
 }

@@ -113,6 +113,7 @@ class Notification extends Component {
                   break
                 case '<=':flag = value <= valueCondition
                   break
+                default : console.log('Error expression')
                 //if (payload.columns[0].type === 'time')
               }
               if (flag) {

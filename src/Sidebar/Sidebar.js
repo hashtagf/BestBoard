@@ -3,8 +3,8 @@ import './Sidebar.css'
 import Settingmenu from './Setting/Settingmenu'
 import Pagelist from './Pages'
 import Store from '../store/Store'
-import LogoPng from '../assets/logo.png'
-import Logo from '../assets/bestlogo.svg'
+// import LogoPng from '../assets/logo.png'
+// import Logo from '../assets/bestlogo.svg'
 
 const $ = require("jquery")
 

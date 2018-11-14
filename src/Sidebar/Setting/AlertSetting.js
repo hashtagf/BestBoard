@@ -124,7 +124,7 @@ class SettingNotification extends React.Component {
   render() {
     let payload = this.state
     return (
-      <div className="modal fade ModalNoti" data-backdrop="true" tabIndex="-1" id="scrollbar-style" role="dialog" aria-show="true" >
+      <div className="modal fade ModalNoti" data-backdrop="true" tabIndex="-1" id="scrollbar-style" role="dialog" ariaShow="true" >
         <div className="modal-dialog modal-lg">
           <div className="modal-content text-dark shadowcard createwidget">
             <div className="modal-header">
