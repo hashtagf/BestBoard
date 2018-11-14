@@ -5,7 +5,7 @@ import axios from 'axios'
 import './Widget.css'
 import HeaderCard from "./HeaderCard"
 import Store from '../store/Store'
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv"
 
 import {
   XAxis,YAxis,
