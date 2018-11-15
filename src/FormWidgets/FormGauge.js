@@ -101,7 +101,7 @@ class FormGauge extends React.Component {
       layout: {
         w: 3,
         h:7,
-        minW: 3,
+        minW: 2,
         minH: 6,
         maxW: 6,
         maxH: 10
