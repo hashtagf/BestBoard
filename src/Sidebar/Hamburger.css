@@ -117,11 +117,11 @@
   display: inline-flex;
 }
 .menu-head i {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 .menu-head i.fa-save {
   color: var(--activeItem);
 }
 .menu-head .noti-btn {
-  min-width: 2.5rem;
+  min-width: 2.7rem;
 }

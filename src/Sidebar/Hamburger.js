@@ -59,7 +59,7 @@ class Hamburger extends Component {
               
             </div>
             <div className="navbar-brand my-auto text-truncate"><strong>{Store.pageName}</strong></div>
-            <div className="menu-head">
+            <div className="menu-head text-right">
               {Store.notiSetting.forms?<Notification payload={Store.notiSetting}/>:null}
               <Tooltip placement="bottom" trigger={['hover']} overlay={(Store.mode)?'Done':'Setting'}>
               <span className="noti-btn">
@@ -180,7 +180,6 @@ class Notification extends Component {
       ) 
     }
     else notis.push(<span key={null}>You don't have<br/>any notification</span>)
-    console.log(notis)
     let notiList = <div className="notiList" id="scrollbar-style">{notis.reverse()}</div>
     return (
 
@@ -190,9 +189,10 @@ class Notification extends Component {
           afterVisibleChange={this.handleSeen}>
         
         <span className="noti-btn">
-          <ToastContainer/>
-          <i className="fas fa-bell mr-1"></i>
+          <span className="text-left"><ToastContainer/></span>
           {(this.state.seen>0)?<div className="badge bg-danger text-white">{this.state.seen}</div>:null}
+          <i className="fas fa-bell ml-1"></i>
+
         </span>
         </Tooltip>
 
