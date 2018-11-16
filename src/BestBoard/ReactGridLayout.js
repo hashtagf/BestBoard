@@ -9,6 +9,7 @@ import axios from 'axios'
 import WidgetStore from '../store/WidgetStore'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import ReactResizeDetector from 'react-resize-detector'
+import Skeleton from 'react-skeleton-loader'
 
 const socket = socketIOClient(Store.server)
 const ResponsiveGridLayout = WidthProvider(Responsive)
@@ -21,10 +22,11 @@ class Main extends React.Component {
       widgets: [],
       listWidgets: [],
       connect: true,
-      layouts: JSON.parse(JSON.stringify(originalLayouts))
+      layouts: JSON.parse(JSON.stringify(originalLayouts)),
+      isLoading: true
     }
   }
-  componentWillMount () {
+  componentWillMount() {
     Store.currentId = this.props.location.pathname.split('/')[1]
     Store.setPage()
   }
@@ -39,7 +41,7 @@ class Main extends React.Component {
         this.getWidgets()
       }
     })
-    socket.on('error', function(exception) {
+    socket.on('error', function (exception) {
       console.log('SOCKET ERROR', exception)
       socket.destroy()
     })
@@ -50,31 +52,32 @@ class Main extends React.Component {
       let tmp = WidgetStore.showWidgets(res.data)
       this.setState({
         listWidgets: tmp,
-        widgets: res.data
+        widgets: res.data,
+        isLoading: false
       })
     })
   }
 
   onResize = () => {
-    
+
   }
 
   onLayoutChange(layout, layouts) {
-    if(Store.mode)
-    layout.map((widget, index) => {
-      let payload = {
-        x: widget.x,
-        y: widget.y,
-        h: widget.h,
-        w: widget.w,
-        minH: widget.minH,
-        minW: widget.minW,
-        maxH: widget.maxH,
-        maxW: widget.maxW
-      }
-      WidgetStore.updatelayout(widget.i, payload)
-      return 0
-    })
+    if (Store.mode)
+      layout.map((widget, index) => {
+        let payload = {
+          x: widget.x,
+          y: widget.y,
+          h: widget.h,
+          w: widget.w,
+          minH: widget.minH,
+          minW: widget.minW,
+          maxH: widget.maxH,
+          maxW: widget.maxW
+        }
+        WidgetStore.updatelayout(widget.i, payload)
+        return 0
+      })
     this.setState({ layouts })
   }
 
@@ -85,8 +88,8 @@ class Main extends React.Component {
       return (
         <div key={widget.key}
           data-grid={{
-            x: (widget.props.layout.x !== undefined)?widget.props.layout.x:position % 12,
-            y: (widget.props.layout.y !== undefined)?widget.props.layout.y:Infinity,
+            x: (widget.props.layout.x !== undefined) ? widget.props.layout.x : position % 12,
+            y: (widget.props.layout.y !== undefined) ? widget.props.layout.y : Infinity,
             w: widget.props.layout.w,
             h: widget.props.layout.h,
             minW: widget.props.layout.minW,
@@ -99,12 +102,21 @@ class Main extends React.Component {
         </div>
       )
     })
-    // function calculateWH(widthPx, heightPx, colWidth, rowHeight, margin) {
-    //   let w = Math.ceil((widthPx - margin[0]) / (colWidth + margin[0]));
-    //   let h = Math.ceil((heightPx - margin[1]) / (rowHeight + margin[1]));
-    //   return [w, h];
-    // };
-      return (
+    if (isLoading) return (
+      <div className="row">
+        <div className="col-4">
+          <Skeleton count={4} width="100%" height="200px" color={'#2e3946'} borderRadius="4px"/>
+        </div>
+        <div className="col-4">
+          <Skeleton count={4} width="100%" height="200px" color={'#2e3946'} borderRadius="4px"/>
+        </div>
+        <div className="col-4">
+          <Skeleton count={4} width="100%" height="200px" color={'#2e3946'} borderRadius="4px"/>
+        </div>
+      </div>
+    ) 
+    else 
+    return (
       <div className="board">
         <ReactResizeDetector handleWidth skipOnMount refreshRate={10} onResize={this.onResize} />
         <ReactCSSTransitionGroup
