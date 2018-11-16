@@ -23,7 +23,7 @@ class Home extends Component {
     return (
       <div className="container text-center">
         <img src={Logo} alt="" className="logo" />
-        <image className="my-svg-alternate" src={LogoPng} />
+        {/* <image className="my-svg-alternate" src={LogoPng} /> */}
 
         <div className="jumbotron bg-transparent mb-0">
           <div className="row">
@@ -56,10 +56,11 @@ class ListPage extends React.Component {
   handleClickAdditem = (e) => {
     Store.addPage = true
   }
-  handleClickpage(pageId, pageName, colorName) {
+  handleClickpage(pageId, pageName, colorName,notiSetting) {
     Store.currentId = pageId
     Store.pageName = pageName
     Store.setColor(colorName)
+    Store.notiSetting = notiSetting
   }
   render() {
 
@@ -67,7 +68,7 @@ class ListPage extends React.Component {
     var listPage = pages.map((page, index) => {
       //page = Object.values(page)
       return (
-        <Link to={'/' + page.id} onClick={() => this.handleClickpage(page.id, page.name, page.colorName)} key={page.id}>
+        <Link to={'/' + page.id} onClick={() => this.handleClickpage(page.id, page.name, page.colorName, page.notiSetting)} key={page.id}>
           <div className="rounded-circle pagecircle">
             <span className="text-white">{page.name}</span>
           </div>

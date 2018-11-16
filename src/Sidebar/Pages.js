@@ -216,7 +216,7 @@ class Page extends Component {
           <a href="#pageSubmenu" data-toggle="collapse" aria-haspopup="true" aria-expanded="true">Pages</a>
           <ul className="collapse list-unstyled show" id="pageSubmenu">
             {listPage}
-            {isLoading?<li className="ml-4"><Skeleton count={3} borderRadius="4px"/></li>:null}
+            {isLoading?<li className="ml-4"><Skeleton count={3} color={'#2e3946'} borderRadius="4px"/></li>:null}
             <li>{addPage}</li>
           </ul>
         </li>

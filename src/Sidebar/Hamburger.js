@@ -10,7 +10,8 @@ import moment from 'moment'
 import axios from 'axios'
 import socketIOClient from 'socket.io-client'
 import DataSourceStore from '../store/DatasourceStore'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const socket = socketIOClient(Store.server)
 @observer
 class Hamburger extends Component {
@@ -47,7 +48,7 @@ class Hamburger extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-default">
+        <nav className="navbar navbar-default pr-0">
           <div className="container-fluid">
             <div className="navbar-header">
               <button type="button" id="sidebarCollapse" className="navbar-btn">
@@ -61,7 +62,9 @@ class Hamburger extends Component {
             <div className="menu-head">
               {Store.notiSetting.forms?<Notification payload={Store.notiSetting}/>:null}
               <Tooltip placement="bottom" trigger={['hover']} overlay={(Store.mode)?'Done':'Setting'}>
-              <i onClick={this.handleClick} className={Store.mode?"fas fa-save":"fas fa-cog"}></i>
+              <span className="noti-btn">
+                <i onClick={this.handleClick} className={Store.mode?"fas fa-save":"fas fa-cog"}></i>
+              </span>
               </Tooltip>
             </div>
           </div>
@@ -79,9 +82,26 @@ class Notification extends Component {
       seen: 0
     }
   }
-
+  notifylabel = (type,text) =>{
+    var objStyle = {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      /* bodyClassName: css({
+        color: 'white',
+        fontSize: '6rem'
+      }), */
+      autoClose: 7000
+    }
+    switch (type) {
+      case "success": toast.success(text, objStyle);break;
+      case "warn": toast.warn(text, objStyle);break;
+      case "error": toast.error(text, objStyle);break;
+      case "info": toast.info(text, objStyle);break;
+      default : toast.default(text, objStyle)
+    }
+  }
   componentDidMount() {
     const payload = this.props.payload
+    console.log(payload)
     if(payload.forms)
     payload.forms.forEach((col, index) => {
         //if (NETPIEMicrogear.statusOnline[col.datasource]) {
@@ -89,6 +109,7 @@ class Notification extends Component {
           const microgear = NETPIEMicrogear.microgear[col.datasource]
           
           microgear.on('message', (topic, msg) => {
+            
             if (col.value === topic) {
               let value = msg + ''
               if (col.manual) {
@@ -125,6 +146,7 @@ class Notification extends Component {
                   msg: col.msg,
                   time: now
                 })
+                this.notifylabel('warn', col.msg);
                 this.setState({
                   notis: temp,
                   seen: this.state.seen + 1
@@ -158,19 +180,23 @@ class Notification extends Component {
       ) 
     }
     else notis.push(<span key={null}>You don't have<br/>any notification</span>)
-    // console.log(notis)
+    console.log(notis)
     let notiList = <div className="notiList" id="scrollbar-style">{notis.reverse()}</div>
     return (
-      
-      <Tooltip placement="bottom" trigger={['click']} 
-        overlay={notiList} 
-        afterVisibleChange={this.handleSeen}>
 
-      <span className="noti-btn">
-        <i className="fas fa-bell mr-2"></i>
-        {(this.state.seen>0)?<div className="badge bg-danger text-white">{this.state.seen}</div>:null}
-      </span>
-      </Tooltip>
+        
+        <Tooltip placement="bottom" trigger={['click']} 
+          overlay={notiList} 
+          afterVisibleChange={this.handleSeen}>
+        
+        <span className="noti-btn">
+          <ToastContainer/>
+          <i className="fas fa-bell mr-1"></i>
+          {(this.state.seen>0)?<div className="badge bg-danger text-white">{this.state.seen}</div>:null}
+        </span>
+        </Tooltip>
+
+
     )
   }
 }
