@@ -91,7 +91,9 @@ class FormMultiple extends React.Component {
         </button>
       buttons.push(addBtn)
     }
-    var forms = this.props.forms.map((form, index) =>
+    var forms = null
+    if (this.props.forms)
+    forms = this.props.forms.map((form, index) =>
       <div key={index} id={"#form" + index}
         className={(selectForm === index) ? 'collapse show' : 'collapse'}
         aria-labelledby="headingOne"
