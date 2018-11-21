@@ -6,13 +6,15 @@ const middlewares = jsonServer.defaults()
 var http = require('http')
 var io = require('socket.io')
 var serverIO = http.createServer(server)
+let webStore = require('./webStore.json')
 
 // Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares)
 
 // Add custom routes before JSON Server router
 server.get('/echo', (req, res) => {
-  res.jsonp(req.query)
+  console.log(router.db)
+  res.jsonp(router.db)
 })
 
 io = io(serverIO)
@@ -37,6 +39,7 @@ server.use((req, res, next) => {
     req.body._id = path[2]
     io.emit('update-' + path[1], 'update')
   } else if (req.method === 'DELETE') {
+    req.body.id = ''
     io.emit('update-' + path[1], 'delete')
   }
   // Continue to JSON Server router
@@ -49,7 +52,7 @@ server.use(
   })
 )
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 6000
 // Use default router
 server.use(router)
 serverIO.listen(port, () => {
