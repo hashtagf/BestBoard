@@ -216,10 +216,9 @@ class Chart extends React.Component {
                 </span>
               </CSVLink> : null}
             </div>
-
           </div>
 
-          <ResponsiveContainer width='100%' aspect={4.0 / 1.0}>
+          <ResponsiveContainer width='100%' height={250}>
             <AreaChart data={dataToChart}
               margin={{ top: 0, bottom: 0, left: 0, right: 0 }}
             >
