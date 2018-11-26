@@ -129,8 +129,8 @@ class FormImageCover extends React.Component {
       },
       colorEff: {
         index: null,
-        colorStart: '#ff0000',
-        colorEnd: '#0000ff',
+        colorStart: '#3ca5e6',
+        colorEnd: '#f03232',
         min: 15,
         max: 30
       }
