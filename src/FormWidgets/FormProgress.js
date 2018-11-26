@@ -10,7 +10,7 @@ class FormProgress extends React.Component {
     super(props)
     this.state = {
       title: 'Progress',
-      value: 0,
+      value: '',
       unit: '',
       minvalue: '0',
       // maxvalue: '100',

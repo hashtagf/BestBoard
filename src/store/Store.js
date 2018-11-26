@@ -7,7 +7,7 @@ class Store {
   @observable colorName = ''
   @observable mode = false
   @observable editSource = {}
-  @observable colorUse
+  @observable colorUse = 0
   @observable pages = []
   @observable user = false
   @observable notiSetting = {
@@ -16,7 +16,7 @@ class Store {
   @observable addPage = false
   //@observable server = 'http://172.18.6.7:5582'
   // @observable server = 'http://172.18.3.180:5000'
-  // @observable server = 'http://localhost:5000'
+  //@observable server = 'http://localhost:5000'
   //@observable server = 'http://localhost:5582'
   @observable server = 'https://apimongos.herokuapp.com'
   //@observable server = 'http://172.18.3.180:5582'  
@@ -29,7 +29,7 @@ class Store {
     },
     {
       name: 'clean',
-      colors: ['#f5f5f5', '#F8F8FA', '#FF8669', '#FFFFFF', '#ececec', '#f5f5f5', '#ffffff', '#ffffff', '#cfcfcf', '#383F45', '#383F45', '#4c555e', '#FF8669', '#FF8669', '0 0rem 1rem rgba(0,0,0,.05)']
+      colors: ['#f5f5f5', '#F8F8FA', '#FF8669', '#FFFFFF', '#ececec', '#f5f5f5', '#ffffff', '#ffffff', '#cfcfcf', '#383F45', '#383F45', '#4c555e', '#fdd24e', '#FF8669', '0 0rem 1rem rgba(0,0,0,.05)']
     },
     {
       name: 'farm',

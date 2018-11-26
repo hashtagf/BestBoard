@@ -104,14 +104,14 @@ class Main extends React.Component {
     })
     if (isLoading) return (
       <div className="row">
-        <div className="col-4">
-          <Skeleton count={4} width="100%" height="200px" color={'#2e3946'} borderRadius="4px"/>
+        <div className="col-12 col-md-4">
+          <Skeleton count={2} width="100%" height="300px" color={Store.colorSet[Store.colorUse].colors[6]} borderRadius="4px"/>
         </div>
-        <div className="col-4">
-          <Skeleton count={4} width="100%" height="200px" color={'#2e3946'} borderRadius="4px"/>
+        <div className="col-12 col-md-4">
+          <Skeleton count={2} width="100%" height="300px" color={Store.colorSet[Store.colorUse].colors[6]} borderRadius="4px"/>
         </div>
-        <div className="col-4">
-          <Skeleton count={4} width="100%" height="200px" color={'#2e3946'} borderRadius="4px"/>
+        <div className="col-12 col-md-4">
+          <Skeleton count={2} width="100%" height="300px" color={Store.colorSet[Store.colorUse].colors[6]} borderRadius="4px"/>
         </div>
       </div>
     ) 

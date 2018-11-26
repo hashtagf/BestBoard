@@ -10,7 +10,7 @@ class FormGauge extends React.Component {
     super(props)
     this.state = {
       title: 'Gauge',
-      value: 0,
+      value: '',
       unit: '',
       minvalue: '0',
       //maxvalue: '100',
@@ -56,7 +56,7 @@ class FormGauge extends React.Component {
   reState () {
     this.setState({
       title: 'Gauge',
-      value: 0,
+      value: '',
       unit: '',
       minvalue: '0',
       // maxvalue: '100',

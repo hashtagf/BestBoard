@@ -52,7 +52,7 @@ server.use(
   })
 )
 
-const port = process.env.PORT || 6000
+const port = process.env.PORT || 5000
 // Use default router
 server.use(router)
 serverIO.listen(port, () => {

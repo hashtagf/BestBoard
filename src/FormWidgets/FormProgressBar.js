@@ -11,7 +11,7 @@ class FormProgress extends React.Component {
     super(props)
     this.state = {
       title: 'Progress Bar',
-      value: 0,
+      value: '',
       unit: '',
       strokeWidth: '8',
       trailWidth: '8',
@@ -56,7 +56,7 @@ class FormProgress extends React.Component {
   reState() {
     this.setState({
       title: 'Progress Bar',
-      value: 0,
+      value: '',
       unit: '',
       strokeWidth: '8',
       trailWidth: '8',

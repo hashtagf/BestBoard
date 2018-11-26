@@ -119,6 +119,9 @@ table tbody {
 .ImageCover .card-body {
     height: 80%;
 }
+.ImageCover .item {
+    color: white;
+}
 .ImageCover img {
     /* height: 100%; */
 }
