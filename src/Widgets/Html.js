@@ -16,7 +16,7 @@ class HTML extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.initHtml()
   }
 
@@ -66,7 +66,7 @@ class HTML extends React.Component {
     const payload = this.props.payload
     const widgetId = this.props.widgetId
     const { body } = this.state
-    // console.log(html)
+    console.log(body)
     return (
       <div className="shadowcard item-content card rounded-0 widgetCard col-12 h-100 border-0" data-id={widgetId}>
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId} />

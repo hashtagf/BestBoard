@@ -80,7 +80,7 @@ class Chart extends React.Component {
               let obj = []
               if (index === 0) {
                 obj = {
-                  'timestamp': val[0],
+                  'timestamp':  moment(val[0]).format('MM-DD-YYYY, H:mm'),
                   ['value' + index]: val[1]
                 }
               } else {
@@ -108,7 +108,7 @@ class Chart extends React.Component {
               csv[i][data.metadata.name] = data.desired.value
               if (index === 0)
                 return ({
-                  'timestamp': data.timestamp,
+                  'timestamp': moment(data.timestamp).format('MM-DD-YYYY, H:mm'),
                   ['value' + index]: parseFloat(data.desired.value)
                 })
               else
@@ -159,10 +159,10 @@ class Chart extends React.Component {
 
     for (let i = 0; i < data[0].length; i++) {
       data.map((datas, index) => {
-        dataToChart[i] = Object.assign({ ['value' + index]: data[index][i] }, data[0][i])
-        return 0
+        data[0][i] = Object.assign({ ['value' + index]: data[index][i] }, data[0][i])
       })
     }
+    console.log(data[0])
     return (
       <div className="item-content card chart shadowcard rounded-0 widgetChart border-0 col-12 h-100" data-id={widgetId}>
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId} />
@@ -219,7 +219,7 @@ class Chart extends React.Component {
           </div>
 
           <ResponsiveContainer width='100%' height={250}>
-            <AreaChart data={dataToChart}
+            <AreaChart data={ data[0]}
               margin={{ top: 0, bottom: 0, left: 0, right: 0 }}
             >
               <defs>
