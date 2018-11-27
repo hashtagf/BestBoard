@@ -81,7 +81,7 @@ class Chart extends React.Component {
               if (index === 0) {
                 obj = {
                   'timestamp':  moment(val[0]).format('MM-DD-YYYY, H:mm'),
-                  ['value' + index]: val[1]
+                  ['value' + index]: val[1].toFixed(2)
                 }
               } else {
                 obj = val[1]
@@ -105,15 +105,15 @@ class Chart extends React.Component {
                   'time': moment(data.timestamp).format('MM-DD-YYYY, H:mm:ss'),
                 })
               }
-              csv[i][data.metadata.name] = data.desired.value
+              csv[i][data.metadata.name] = data.desired.value.toFixed(2)
               if (index === 0)
                 return ({
                   'timestamp': moment(data.timestamp).format('MM-DD-YYYY, H:mm'),
-                  ['value' + index]: parseFloat(data.desired.value)
+                  ['value' + index]: parseFloat(data.desired.value).toFixed(2)
                 })
               else
                 return (
-                  parseFloat(data.desired.value)
+                  parseFloat(data.desired.value).toFixed(2)
                 )
             })
             this.setState({
@@ -148,7 +148,6 @@ class Chart extends React.Component {
     const payload = this.props.payload
     const widgetId = this.props.widgetId
     const data = this.state.data
-    let dataToChart = []
     var areaColor = []
     var start = parseInt(Store.colorSet[Store.colorUse].colors[2].substr(1), 16)
     var stop = (parseInt(Store.colorSet[Store.colorUse].colors[12].substr(1), 16)) ?
