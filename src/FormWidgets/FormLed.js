@@ -20,7 +20,7 @@ class FormLed extends React.Component {
       filterIndex: 0,
       jsValue: '',
       manual: false,
-      expressionON: '',
+      expressionON: '=',
       expressionOFF: 'else',
       valueON: '',
       valueOFF: ''
@@ -64,7 +64,7 @@ class FormLed extends React.Component {
       filterIndex: 0,
       jsValue: '',
       manual: false,
-      expressionON: '',
+      expressionON: '=',
       expressionOFF: 'else',
       valueON: '',
       valueOFF: ''

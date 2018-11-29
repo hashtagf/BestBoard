@@ -3,6 +3,8 @@ import './Sidebar.css'
 import Settingmenu from './Setting/Settingmenu'
 import Pagelist from './Pages'
 import Store from '../store/Store'
+import Tooltip from 'rc-tooltip';
+
 // import LogoPng from '../assets/logo.png'
 // import Logo from '../assets/bestlogo.svg'
 
@@ -135,7 +137,11 @@ class SideBar extends Component {
           <Pagelist />
           <Settingmenu mode={mode} />
           <ul className="list-unstyled CTAs">
-            <li><a className="article btn" onClick={this.handleClick}>{(mode) ? 'Done' : 'Setting'}</a></li>
+            <Tooltip placement="left" trigger={['hover']} overlay={(mode) ? 'Done' : 'Setting'}>
+              <li>
+                <a className="article btn" onClick={this.handleClick}>{(mode) ? 'Done' : 'Setting'}</a>
+              </li>
+            </Tooltip>
           </ul>
         </nav>
     )

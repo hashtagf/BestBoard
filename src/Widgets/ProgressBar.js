@@ -52,7 +52,7 @@ class ProgressBar extends React.Component {
     var strokeColor = payload.strokeColor
     var trailColor = payload.trailColor
     if (payload.strokeColor === 'auto') strokeColor = Store.colorSet[Store.colorUse].colors[2]
-    if (payload.trailColor === 'auto') strokeColor = Store.colorSet[Store.colorUse].colors[0]
+    if (payload.trailColor === 'auto') strokeColor = Store.colorSet[Store.colorUse].colors[4]
     return (
         <div className="item-content card shadowcard rounded-0 widgetCard border-0  ProgressBar col-12 h-100"  data-id={widgetId}>
         <HeaderCard title={payload.title} payload={payload} del={this.delWidget.bind(this)} widgetId={widgetId}/>
