@@ -16,7 +16,7 @@ const socket = socketIOClient(Store.server)
 @observer
 class Hamburger extends Component {
   handleClick = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     this.props.clickSetting(!Store.mode)
     /* this.setState({
       mode: Store.mode
@@ -101,7 +101,6 @@ class Notification extends Component {
   }
   componentDidMount() {
     const payload = this.props.payload
-    console.log(payload)
     if(payload.forms)
     payload.forms.forEach((col, index) => {
         //if (NETPIEMicrogear.statusOnline[col.datasource]) {

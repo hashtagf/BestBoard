@@ -16,7 +16,6 @@ class Home extends Component {
   }
 
   render() {
-    console.log(Store.user)
     return (
       <div className="container text-center">
         <img src={Logo} alt="" className="logo" />

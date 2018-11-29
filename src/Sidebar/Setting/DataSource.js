@@ -27,7 +27,7 @@ class DataSource extends Component {
       connect: true
     }
   }
-  componentDidMount () {
+  componentWillMount () {
     if (this.state.connect) {
       this.getDatasource()
       this.response()
@@ -46,8 +46,8 @@ class DataSource extends Component {
 
   getDatasource() {
     axios.get(Store.server + '/datasource/' + Store.user.id).then((res) => {
-      //DataSourceStore.datasources = res.data
-      //NETPIEMicrogear.createMicrogear(res.data)
+      // DataSourceStore.datasources = res.data
+      // NETPIEMicrogear.createMicrogear(res.data)
       this.setState({
         datasources: res.data
       })
