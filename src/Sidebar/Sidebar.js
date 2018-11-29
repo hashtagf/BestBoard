@@ -29,6 +29,14 @@ class SideBar extends Component {
     this.props.clickSetting(!Store.mode)
 
   }
+
+  handleLogut = () => {
+    Store.isLogin = false
+    localStorage.setItem('token', null)
+    window.location.reload()
+    console.log('Logout')
+  }
+
   render() {
     //const mode = this.state.mode
     const mode = Store.mode
@@ -142,6 +150,20 @@ class SideBar extends Component {
                 <a className="article btn" onClick={this.handleClick}>{(mode) ? 'Done' : 'Setting'}</a>
               </li>
             </Tooltip>
+              {Store.isLogin?
+              <li>
+                <div className="LogoutForm">
+                  <div className="buttonLogout">
+                    <button type="button"
+                      className="float-right btn btn-lg btn-danger border-0"
+                      onClick={this.handleLogut}
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              </li>:null}
+              
           </ul>
         </nav>
     )

@@ -40,7 +40,7 @@ class Hamburger extends Component {
   }
 
   getDatasource() {
-    axios.get(Store.server + '/datasource/').then((res) => {
+    axios.get(Store.server + '/datasource/' + Store.user.id).then((res) => {
       DataSourceStore.datasources = res.data
       NETPIEMicrogear.createMicrogear(res.data)
     })

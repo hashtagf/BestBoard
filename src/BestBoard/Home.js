@@ -2,12 +2,10 @@ import React, { Component } from 'react'
 import './Main.css'
 //import Logo from './logo.png'
 import Logo from '../assets/bestlogo.svg'
-import LogoPng from '../assets/logo.png'
 import { Link } from 'react-router-dom'
 import { toJS } from 'mobx'
 import Store from '../store/Store'
 import { observer } from 'mobx-react'
-import Login from './Login'
 
 class Home extends Component {
   constructor(props) {
@@ -18,7 +16,6 @@ class Home extends Component {
   }
 
   render() {
-    const { isLogin } = this.state
     console.log(Store.user)
     return (
       <div className="container text-center">

@@ -45,7 +45,7 @@ class Page extends Component {
 
   getBoard = () => {
     let pages = []
-    axios.get(Store.server + '/board/').then((res) => {
+    axios.get(Store.server + '/board/' + Store.user.id).then((res) => {
       res.data.map((board) =>
         pages.push({
           id: board._id,
@@ -83,7 +83,8 @@ class Page extends Component {
       let payload = {
         boardName: this.state.inputName,
         colorName: 'native',
-        notiSetting: {forms: []}
+        notiSetting: {forms: []},
+        userId: Store.user.id
       }
       if (index === -1) {
         axios.post( Store.server + '/board/', payload )

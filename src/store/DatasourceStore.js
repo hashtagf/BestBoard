@@ -9,7 +9,8 @@ class DatasourceStore {
 
   createDatasource (payload) {
     axios.post(Store.server + '/datasource/', {
-      datasource: payload
+      datasource: payload,
+      userId: Store.user.id
     }).then((res) => 
       console.log(res)
     )
