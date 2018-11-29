@@ -81,10 +81,10 @@ class Chart extends React.Component {
               if (index === 0) {
                 obj = {
                   'timestamp':  moment(val[0]).format('MM-DD-YYYY, H:mm'),
-                  ['value' + index]: val[1].toFixed(2)
+                  ['value' + index]: parseFloat(val[1].toFixed(2))
                 }
               } else {
-                obj = val[1]
+                obj = parseFloat(val[1].toFixed(2))
               }
               return obj
             })

@@ -144,7 +144,7 @@ class SettingNotification extends React.Component {
                 <FormCondition event="Alert" title={'alert'} values={payload}/>
                 <InputText title="Msg" name="msg" placeholder="too cold!!"/>
               </FormMultiple>
-              <SummitBtn handleSubmit={this.handleSubmit} editWidget={this.props.editWidget}/>
+              <SummitBtn handleSubmit={this.handleSubmit} editWidget={"b"}/>
 
             </div>
             

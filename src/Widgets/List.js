@@ -112,7 +112,7 @@ class List extends React.Component {
           </div>
           <div className="col-9">
             <div className="row">
-              <strong>{payload.text + ' '}</strong> {payload.value}{' ' + payload.unit}
+              <strong className="mr-2">{payload.text + ' '}</strong> {payload.value}{' ' + payload.unit}
             </div>
             <div className="row">
               <small>{this.showTime(payload.timestamp)}</small>

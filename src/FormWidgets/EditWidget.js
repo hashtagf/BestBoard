@@ -27,7 +27,7 @@ import NumberBoxImg from '../assets/widgets/NumberBox.png'
 import ProgressBarImg from '../assets/widgets/ProgressBar.png'
 import TextImg from '../assets/widgets/Text.png'
 import ToggleImg from '../assets/widgets/Toggle.png'
-import TableImg from '../assets/widgets/Table.png'
+import TableImg from '../assets/widgets/Table.jpg'
 
 import { observer } from 'mobx-react'
 
