@@ -50,6 +50,7 @@ class Login extends React.Component {
       pass: password
     }
     axios.post(Store.server + '/login', payload).then(res => {
+      console.log(res.data)
       Store.user = res.data.authData
       localStorage.setItem('token', res.data.token)
       if (res.data.token !== null) {
@@ -58,8 +59,8 @@ class Login extends React.Component {
           isLogin: true
         })
       }
+      window.location.reload()
     })
-    window.location.reload()
   }
 
   render() {
