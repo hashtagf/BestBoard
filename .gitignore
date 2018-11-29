@@ -3,6 +3,8 @@
 # dependencies
 /node_modules
 /webStore.json
+/package-lock.json
+/yarn.lock
 
 # testing
 #/coverage

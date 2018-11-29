@@ -16,7 +16,6 @@ class Login extends React.Component {
 
   componentDidMount() {
     const token = localStorage.getItem('token')
-    console.log(token)
     axios.get(Store.server + '/login/' + token).then(res => {
       Store.user = res.data.payload.authData
       if (Store.user.user != null) {
