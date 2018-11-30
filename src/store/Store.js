@@ -15,17 +15,10 @@ class Store {
   }
   @observable addPage = false
   //@observable server = 'http://172.18.6.7:5582'
-<<<<<<< HEAD
   // @observable server = 'http://172.18.3.180:5000'
   @observable server = 'http://localhost:5000'
   //@observable server = 'http://localhost:5582'
   // @observable server = 'https://apimongos.herokuapp.com'
-=======
-  //@observable server = 'http://172.18.3.180:5000'
-  //@observable server = 'http://localhost:5000'
-  @observable server = 'http://localhost:5582'
-  //@observable server = 'https://apimongos.herokuapp.com'
->>>>>>> abb43f61ecfe2fbf36621df28358b33820b647ea
   //@observable server = 'http://172.18.3.180:5582'  
   @observable editWidget = {
   }

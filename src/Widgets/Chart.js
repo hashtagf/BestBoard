@@ -52,7 +52,7 @@ class Chart extends React.Component {
       default: granularity = '15seconds'
     }
     const payload = this.props.payload
-    if (payload.feedID != '') {
+    if (payload.feedID !== '') {
       const netpieAPI = 'https://api.netpie.io/feed/'
       let value = ''
       payload.values.map((val) => value += val.value + ',')
@@ -71,6 +71,7 @@ class Chart extends React.Component {
               })
             }
             csv[i][data.attr] = val[1].toFixed(2)
+            return (0)
           })
           return (0)
         })
@@ -97,7 +98,7 @@ class Chart extends React.Component {
       let obj = []
       let csv = []
       payload.values.map((val, index) =>
-        axios.get(Store.server + '/sensor/' + val.value + '/' + cased + '=' + parseInt(filterSince))
+        axios.get(Store.server + '/sensor/' + val.value + '/' + cased + '=' + parseInt(filterSince, 10))
           .then(res => {
             obj[index] = res.data.map((data, i) => {
               if (!csv[i]) {
@@ -157,9 +158,9 @@ class Chart extends React.Component {
     let shade = parseInt((stop - start) / data.length, 10)
 
     for (let i = 0; i < data[0].length; i++) {
-      data.map((datas, index) => {
+      data.map((datas, index) => 
         data[0][i] = Object.assign({ ['value' + index]: data[index][i] }, data[0][i])
-      })
+      )
     }
     console.log(data[0])
     return (
