@@ -14,7 +14,7 @@ class ColorSetting extends Component {
 
   handleClick = (name) => {
     const pages = this.props.Store.pages
-    let indexPage = pages.findIndex((page) => page.id === this.props.Store.currentId)
+    let indexPage = pages.findIndex((page) => page.id + '' === this.props.Store.currentId + '')
     console.log(pages,indexPage,pages[indexPage])
     axios.put(this.props.Store.server + '/board/' + this.props.Store.currentId, {
       boardName: pages[indexPage].name,
