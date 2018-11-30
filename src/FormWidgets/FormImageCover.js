@@ -265,7 +265,7 @@ class EffectForm extends React.Component {
                 id="selectShadowIndex"
                 value={shadoweff.index}
                 onChange={this.handlePayload}
-                readOnly
+                // readOnly
                 className="form-control">
                 <option value={''}>disable Eff</option>
                 {values.forms.map((value,index) => <option key={index} value={index}>{value.title}</option>)}
@@ -294,7 +294,7 @@ class EffectForm extends React.Component {
                 id="selectColorIndex"
                 className="form-control">
                 <option value={''}>disable Eff</option>
-                {values.forms.map((value,index) => <option value={index}>{value.title}</option>)}
+                {values.forms.map((value,index) => <option key={index} value={index}>{value.title}</option>)}
               </select>
             </div>
             <div className="form-group col-md-4">
