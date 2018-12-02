@@ -89,7 +89,6 @@ class DataSource extends Component {
       </li>
       <EditSource values={this.state.editSource} />
       </div>
-
     )
   }
 }

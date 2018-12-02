@@ -211,7 +211,9 @@ class FormImageCover extends React.Component {
               <FormMultiple
               title={'Values'}
               hideTitle={true}
-              addBtnFunc={this.addValue}>
+              addBtnFunc={this.addValue}
+              forms={payload.popups}
+              >
                 <FormInputBasic/>
                 <InputText title="Unit" name="unit" placeholder="unit"/>
                 <InputIcons/>
@@ -263,12 +265,12 @@ class EffectForm extends React.Component {
               <label htmlFor="selectShadowIndex">Value Choose</label>
               <select name="index" 
                 id="selectShadowIndex"
-                value={shadoweff.index}
+                // value={shadoweff.index}
                 onChange={this.handlePayload}
-                readOnly
+                // readOnly
                 className="form-control">
                 <option value={''}>disable Eff</option>
-                {values.forms.map((value,index) => <option value={index}>{value.title}</option>)}
+                {values.forms.map((value,index) => <option key={index} value={index}>{value.title}</option>)}
               </select>
             </div>
             <div className="form-group col-md-4">
@@ -288,13 +290,13 @@ class EffectForm extends React.Component {
             <div className="form-group col-md-4">
               <label htmlFor="selectColorIndex">Value Choose</label>
               <select name="index"
-                value={coloreff.index}
+                // value={coloreff.index}
                 onChange={this.handlePayload}
-                readOnly
+                // readOnly
                 id="selectColorIndex"
                 className="form-control">
                 <option value={''}>disable Eff</option>
-                {values.forms.map((value,index) => <option value={index}>{value.title}</option>)}
+                {values.forms.map((value,index) => <option key={index} value={index}>{value.title}</option>)}
               </select>
             </div>
             <div className="form-group col-md-4">
