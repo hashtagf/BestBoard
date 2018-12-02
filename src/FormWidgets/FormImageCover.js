@@ -211,7 +211,9 @@ class FormImageCover extends React.Component {
               <FormMultiple
               title={'Values'}
               hideTitle={true}
-              addBtnFunc={this.addValue}>
+              addBtnFunc={this.addValue}
+              forms={payload.popups.forms}
+              >
                 <FormInputBasic/>
                 <InputText title="Unit" name="unit" placeholder="unit"/>
                 <InputIcons/>

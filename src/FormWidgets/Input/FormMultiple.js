@@ -15,7 +15,12 @@ class FormMultiple extends React.Component {
   static defaultProps = {
     hiddenIcon: true,
     hiddenTitle: true
-  };
+  }
+
+  componentWillReceiveProps () {
+
+  }
+
   handleClick = (e) => {
     if (e.target.value) 
       this.setState({
@@ -68,6 +73,7 @@ class FormMultiple extends React.Component {
     const selectForm = this.state.selectForm
     const formsbtn = []
     var buttons = []
+    console.log(this.props.forms)
     if (this.props.forms)
     buttons = this.props.forms.map((form, index) => {
       formsbtn.push((form.title)?form.title:index+1)
