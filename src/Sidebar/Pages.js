@@ -25,8 +25,6 @@ class Page extends Component {
     }
     this.textInput = React.createRef()
   }
-  componentWillMount () {
-  }
   componentDidMount() {
     if (this.state.connect) this.response()
     else this.loadLocal()
@@ -144,6 +142,7 @@ class Page extends Component {
   }
 
   render () {
+    this.getBoard()
     let listPage =  []
     const {pages, editPage, isLoading} = this.state
     let lspage

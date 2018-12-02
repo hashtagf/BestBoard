@@ -260,7 +260,7 @@ class EffectForm extends React.Component {
           <summary>Effect Shadow</summary>
           <div className="form-row">
             <div className="form-group col-md-4">
-              <label forHtml="selectShadowIndex">Value Choose</label>
+              <label htmlFor="selectShadowIndex">Value Choose</label>
               <select name="index" 
                 id="selectShadowIndex"
                 value={shadoweff.index}
@@ -272,11 +272,11 @@ class EffectForm extends React.Component {
               </select>
             </div>
             <div className="form-group col-md-4">
-              <label forHtml="shadowmin">Threshold min</label>
+              <label htmlFor="shadowmin">Threshold min</label>
               <input type="number" name="min" id="shadowmin" className="form-control" value={shadoweff.min} onChange={this.handlePayload}/>
             </div>
             <div className="form-group col-md-4">
-              <label forHtml="shadowmax">Threshold max</label>
+              <label htmlFor="shadowmax">Threshold max</label>
               <input type="number" name="max" id="shadowmax" className="form-control" value={shadoweff.max} onChange={this.handlePayload}/>
             </div>
           </div>
@@ -286,7 +286,7 @@ class EffectForm extends React.Component {
           <summary>Effect Color</summary>
           <div className="form-row">
             <div className="form-group col-md-4">
-              <label forHtml="selectColorIndex">Value Choose</label>
+              <label htmlFor="selectColorIndex">Value Choose</label>
               <select name="index"
                 value={coloreff.index}
                 onChange={this.handlePayload}
@@ -298,11 +298,11 @@ class EffectForm extends React.Component {
               </select>
             </div>
             <div className="form-group col-md-4">
-              <label forHtml="colormin">Threshold min</label>
+              <label htmlFor="colormin">Threshold min</label>
               <input type="number" name="min" id="colormin" className="form-control" value={coloreff.min} onChange={this.handlePayload}/>
             </div>
             <div className="form-group col-md-4">
-              <label forHtml="colormax">Threshold max</label>
+              <label htmlFor="colormax">Threshold max</label>
               <input type="number" name="max" id="colormax" className="form-control" value={coloreff.max} onChange={this.handlePayload}/>
             </div>
           </div>

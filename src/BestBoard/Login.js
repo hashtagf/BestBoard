@@ -14,7 +14,7 @@ class Login extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const token = localStorage.getItem('token')
     axios.get(Store.server + '/login/' + token).then(res => {
       Store.user = res.data.payload.authData
@@ -58,7 +58,6 @@ class Login extends React.Component {
           isLogin: true
         })
       }
-      window.location.reload()
     })
   }
 
@@ -93,7 +92,7 @@ class LoginForm extends React.Component {
     return (
       <div className="LoginForm mb-5">
         <div className="headLogin mb-5">
-          <h2>Login</h2>
+          <h3>Login</h3>
         </div>
         <div className="form-group row">
           <label htmlFor="username" className="col-3 col-form-label">Username : </label>
@@ -155,7 +154,7 @@ class Register extends React.Component {
     return (
       <div className="Register mt-5">
         <div className="headLogin mb-5">
-          <h2>Sign Up Bestboard</h2>
+          <h3>Sign Up Bestboard</h3>
         </div>
         <div className="form-group row">
           <label htmlFor="username" className="col-3 col-form-label">Username : </label>

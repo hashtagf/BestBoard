@@ -3,8 +3,8 @@ import './Sidebar.css'
 import Settingmenu from './Setting/Settingmenu'
 import Pagelist from './Pages'
 import Store from '../store/Store'
-import Tooltip from 'rc-tooltip';
-
+import Tooltip from 'rc-tooltip'
+import { Link } from 'react-router-dom'
 // import LogoPng from '../assets/logo.png'
 // import Logo from '../assets/bestlogo.svg'
 
@@ -31,10 +31,9 @@ class SideBar extends Component {
   }
 
   handleLogut = () => {
-    Store.isLogin = false
     localStorage.setItem('token', null)
-    window.location.reload()
     console.log('Logout')
+    window.location.replace('/')
   }
 
   render() {
@@ -44,7 +43,7 @@ class SideBar extends Component {
         <nav className="sidebar" id="scrollbar-style" data-spy="scroll">
           <div className="sidebar-header text-center">
           
-          <a href="/">
+          <Link to="/">
             {/* <img src={Logo} alt="" className="logoSide"/>
             <image className="my-svg-alternate logoSide" src={LogoPng} /> */}
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -139,7 +138,7 @@ class SideBar extends Component {
           280.382,126.018 295.419,107.223 "/>
           </g>
         </svg>
-          </a>
+          </Link>
 
           </div>
           <Pagelist />
