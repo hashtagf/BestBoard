@@ -17,18 +17,13 @@ class FormMultiple extends React.Component {
     hiddenTitle: true
   }
 
-  componentWillReceiveProps () {
-
-  }
-
   handleClick = (e) => {
     if (e.target.value) 
       this.setState({
         selectForm: parseInt(e.target.value, 10)
       })
-      if (this.props.selectIndex) 
-        this.props.selectIndex(parseInt(e.target.value, 10))
-      
+    if (this.props.selectIndex) 
+      this.props.selectIndex(parseInt(e.target.value, 10))  
   }
   handlePayload = (e) => {
     var tmp = this.props.forms
@@ -61,6 +56,7 @@ class FormMultiple extends React.Component {
     this.props.handlePayload(obj)
   }
   addBtnFunc = (e) => {
+    console.log(this.props.forms)
     this.setState({
       selectForm: this.props.forms.length
     })
@@ -73,7 +69,6 @@ class FormMultiple extends React.Component {
     const selectForm = this.state.selectForm
     const formsbtn = []
     var buttons = []
-    console.log(this.props.forms)
     if (this.props.forms)
     buttons = this.props.forms.map((form, index) => {
       formsbtn.push((form.title)?form.title:index+1)
@@ -132,7 +127,6 @@ class FormMultiple extends React.Component {
               </div>
             </div>
             : null
-
         }
 
         <strong>Value : {formsbtn[this.state.selectForm]}</strong>

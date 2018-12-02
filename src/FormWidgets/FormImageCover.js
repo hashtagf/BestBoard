@@ -24,7 +24,7 @@ class FormImageCover extends React.Component {
     this.handlePayload = this.handlePayload.bind(this)
     this.handleFile = this.handleFile.bind(this)
   }
-  componentDidMount() {
+  componentWillMount() {
     let editWidget = this.props.editWidget
     if (editWidget) {
       Object.keys(editWidget).forEach((objectKey) => {
@@ -159,7 +159,6 @@ class FormImageCover extends React.Component {
     })
   }
   selectIndex = (e) => {
-    console.log(e)
     this.setState({
       selectIndex: e
     })
@@ -212,6 +211,7 @@ class FormImageCover extends React.Component {
               title={'Values'}
               hideTitle={true}
               addBtnFunc={this.addValue}
+              selectIndex={0}
               forms={payload.popups.forms}
               >
                 <FormInputBasic/>
@@ -265,7 +265,7 @@ class EffectForm extends React.Component {
               <label htmlFor="selectShadowIndex">Value Choose</label>
               <select name="index" 
                 id="selectShadowIndex"
-                value={shadoweff.index}
+                // value={shadoweff.index}
                 onChange={this.handlePayload}
                 // readOnly
                 className="form-control">
@@ -290,9 +290,9 @@ class EffectForm extends React.Component {
             <div className="form-group col-md-4">
               <label htmlFor="selectColorIndex">Value Choose</label>
               <select name="index"
-                value={coloreff.index}
+                // value={coloreff.index}
                 onChange={this.handlePayload}
-                readOnly
+                // readOnly
                 id="selectColorIndex"
                 className="form-control">
                 <option value={''}>disable Eff</option>
