@@ -56,12 +56,11 @@ class FormMultiple extends React.Component {
     this.props.handlePayload(obj)
   }
   addBtnFunc = (e) => {
-    console.log(this.props.forms)
     this.setState({
-      selectForm: this.props.forms.length
+      selectForm: (this.props.forms?this.props.forms.length:0)
     })
     if (this.props.selectIndex) 
-      this.props.selectIndex(this.props.forms.length)
+      this.props.selectIndex((this.props.forms?this.props.forms.length:0))
     this.props.addBtnFunc(e)
   }
 

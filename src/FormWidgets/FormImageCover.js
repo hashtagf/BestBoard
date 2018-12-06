@@ -109,7 +109,7 @@ class FormImageCover extends React.Component {
       position: [],
       forms: [
         {
-          title: 'value',
+          title: 'value1',
           datasource: '',       
           body: '',
           value: '',
@@ -140,10 +140,10 @@ class FormImageCover extends React.Component {
     })
   }
   addValue = (index) => {
-    //console.log(index)
     var tmp = this.state.popups
+    console.log(tmp)
     tmp[this.state.selectIndex].forms.push({
-      title: 'value'+(tmp.length+1),
+      title: 'value' + (tmp[this.state.selectIndex].forms.length + 1),
       datasource: '',       
       body: '',
       value: '',
@@ -211,8 +211,6 @@ class FormImageCover extends React.Component {
               title={'Values'}
               hideTitle={true}
               addBtnFunc={this.addValue}
-              selectIndex={0}
-              forms={payload.popups.forms}
               >
                 <FormInputBasic/>
                 <InputText title="Unit" name="unit" placeholder="unit"/>
