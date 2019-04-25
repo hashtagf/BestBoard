@@ -18,8 +18,8 @@ class Store {
   //@observable server = 'http://172.18.6.7:5582'
   // @observable server = 'http://172.18.3.180:5000'
   // @observable server = 'http://localhost:5000'
-  // @observable server = 'http://localhost:5582'
-  @observable server = 'http://apibestboard-env.hwp3xmmpxb.us-east-2.elasticbeanstalk.com'
+  @observable server = 'http://localhost:5582'
+  // @observable server = 'http://apibestboard-env.hwp3xmmpxb.us-east-2.elasticbeanstalk.com'
   // @observable server = 'https://apimongos.herokuapp.com'
   //@observable server = 'http://172.18.3.180:5582'  
   @observable editWidget = {
@@ -57,7 +57,7 @@ class Store {
   setPage = () => {
     if (this.currentId !== '') {
       var id = this.currentId
-      var found = this.pages.find(function(page) {
+      var found = this.pages.find(function (page) {
         return page.id === id
       });
       if (found) {
